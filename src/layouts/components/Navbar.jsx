@@ -2,7 +2,7 @@ import React from "react";
 
 const Navbar = () => {
   return (
-    <div id="header" className="header navbar-default">
+    <div id="header" className="header navbar-default navbar-head">
       <div className="navbar-header">
         <a href="index.html" className="navbar-brand">
           <span className="navbar-logo">
