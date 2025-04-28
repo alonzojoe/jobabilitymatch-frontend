@@ -1,7 +1,18 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import ProtectedRoutes from "@/middleware/ProtectedRoutes";
+import AppLayout from "./layouts/AppLayout";
+
 function App() {
   return (
     <>
-      <h1>React App</h1>
+      <BrowserRouter>
+        <Routes>
+          <Route element={<ProtectedRoutes />}>
+            <Route path="home" element={<AppLayout />}>
+            </Route>
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }
