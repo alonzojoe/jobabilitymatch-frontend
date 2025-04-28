@@ -5,3 +5,11 @@
 .navbar-head {
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2) !important;
 }
+
+.panel.panel-inverse {
+  border-radius: .7rem !important;
+}
+
+.panel.panel-inverse .panel-heading {
+  border-radius: .7rem .7rem 0 0 !important;
+}
