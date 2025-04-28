@@ -55,7 +55,9 @@ const Navbar = () => {
             <div className="image image-icon bg-black text-grey-darker">
               <i className="fa fa-user"></i>
             </div>
-            <span className="d-none d-md-inline">Adam Schwartz</span>{" "}
+            <span className="d-none d-md-inline font-weight-bold">
+              JOENELL ALONZO
+            </span>{" "}
             <b className="caret"></b>
           </a>
           <div className="dropdown-menu dropdown-menu-right">
