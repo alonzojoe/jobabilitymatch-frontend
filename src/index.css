@@ -126,3 +126,82 @@
     padding: 0.5rem;
   }
 }
+
+.search-container {
+  background: #fff;
+  margin: 10px 10rem;
+  padding: 10px;
+  border-radius: 1rem;
+  border: 0.5px solid #DBDADE;
+  box-shadow: 6px 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+@media screen and (max-width: 767px) {
+  .search-container {
+
+    margin: 10px 4rem;
+  }
+
+  .modal-container {
+    visibility: visible !important;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .search-container {
+
+    margin: 10px 1rem;
+  }
+
+  .nav-item.nav-username {
+    display: none;
+  }
+}
+
+
+form {
+  display: block;
+  margin-top: 0em;
+  unicode-bidi: isolate;
+}
+
+.fs-1 {
+  font-size: 2.5rem !important;
+}
+
+.fs-2 {
+  font-size: 2rem !important;
+}
+
+.fs-3 {
+  font-size: 1.75rem !important;
+}
+
+.fs-4 {
+  font-size: 1.5rem !important;
+}
+
+.fs-5 {
+  font-size: 1.25rem !important;
+}
+
+.fs-6 {
+  font-size: 1rem !important;
+}
+
+.fs-7 {
+  font-size: 0.875rem !important;
+}
+
+.shadow-none {
+  box-shadow: none !important;
+}
+
+.btn {
+  border-radius: .375rem !important;
+}
+
+.message-input::placeholder {
+  color: rgba(0, 0, 0, 0.4);
+  opacity: 0.7;
+}

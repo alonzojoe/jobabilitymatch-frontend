@@ -1,10 +1,17 @@
 import React from "react";
-import SearchBanner from "@/pages/Feed/components/SearchBanner";
+import SearchInput from "@/pages/Feed/components/SearchInput";
 
 const Feed = () => {
+  React.useEffect(() => {
+    document.body.style.backgroundColor = "#F8F7FA";
+    return () => {
+      document.body.style.backgroundColor = "";
+    };
+  }, []);
+
   return (
     <>
-      <SearchBanner />
+      <SearchInput />
       {Array.from({ length: 3 }).map((_, index) => (
         <PageContent key={index} />
       ))}
