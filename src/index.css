@@ -205,3 +205,12 @@ form {
   color: rgba(0, 0, 0, 0.4);
   opacity: 0.7;
 }
+
+.rec-container {
+  border-bottom: 2px solid #DBDADE;
+}
+
+.rec-text {
+  display: inline-block;
+  border-bottom: 3px solid #319FE8 !important;
+}
