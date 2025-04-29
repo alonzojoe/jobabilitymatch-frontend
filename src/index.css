@@ -240,3 +240,8 @@ form {
 .text-decoration-underline {
   text-decoration: underline !important;
 }
+
+/* .selected-job {
+    height: fit-content;
+    overflow-y: auto;
+} */
