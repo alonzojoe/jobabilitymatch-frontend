@@ -147,6 +147,14 @@
   }
 }
 
+@media (max-width: 767.98px) {
+  .page-without-sidebar .header .navbar-brand {
+    -webkit-box-pack: center !important;
+    -ms-flex-pack: center !important;
+    justify-content: start;
+  }
+}
+
 @media screen and (max-width: 576px) {
   .search-container {
 
