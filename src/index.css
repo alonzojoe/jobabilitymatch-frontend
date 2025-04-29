@@ -61,3 +61,68 @@
   color: #fff !important;
   background: #01004C;
 }
+
+.pace {
+  display: none !important;
+}
+
+.feed-container {
+  background: #F8F7FA !important;
+}
+
+@media screen and (max-width: 767px) {
+  .profile-auth {
+    display: none !important;
+  }
+}
+
+.header .navbar-toggle.profile {
+  padding: 0 !important;
+  margin-right: 0 !important;
+}
+
+.header .navbar-nav {
+  padding-right: 0;
+}
+
+
+.container-xxl {
+  width: 100%;
+  max-width: 1440px;
+  margin: auto;
+  padding: 1rem;
+}
+
+
+@media (max-width: 1200px) {
+
+
+  .container-xxl {
+    max-width: 1140px;
+  }
+}
+
+@media (max-width: 992px) {
+
+
+  .container-xxl {
+    max-width: 960px;
+  }
+}
+
+@media (max-width: 768px) {
+
+
+  .container-xxl {
+    max-width: 720px;
+  }
+}
+
+@media (max-width: 576px) {
+
+
+  .container-xxl {
+    max-width: 100%;
+    padding: 0.5rem;
+  }
+}
