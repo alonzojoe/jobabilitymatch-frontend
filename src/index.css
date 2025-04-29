@@ -13,3 +13,31 @@
 .panel.panel-inverse .panel-heading {
   border-radius: .7rem .7rem 0 0 !important;
 }
+
+.gap-1 {
+  gap: 0.25rem;
+}
+
+
+.gap-2 {
+  gap: 0.5rem;
+}
+
+
+.gap-3 {
+  gap: 1rem;
+}
+
+
+.gap-4 {
+  gap: 1.5rem;
+}
+
+
+.gap-5 {
+  gap: 3rem;
+}
+
+.pe-none {
+  pointer-events: none !important;
+}
