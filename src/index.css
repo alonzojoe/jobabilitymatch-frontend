@@ -13,3 +13,204 @@
 .panel.panel-inverse .panel-heading {
   border-radius: .7rem .7rem 0 0 !important;
 }
+
+.gap-1 {
+  gap: 0.25rem;
+}
+
+
+.gap-2 {
+  gap: 0.5rem;
+}
+
+
+.gap-3 {
+  gap: 1rem;
+}
+
+
+.gap-4 {
+  gap: 1.5rem;
+}
+
+
+.gap-5 {
+  gap: 3rem;
+}
+
+.pe-none {
+  pointer-events: none !important;
+}
+
+
+.sidebar {
+  background: #FFFFFF;
+}
+
+.nav-header {
+  color: #000000 !important;
+}
+
+.sidebar-items a {
+  color: #000000 !important;
+}
+
+.sidebar .nav>li.active>a {
+  position: relative;
+  z-index: 10;
+  color: #fff !important;
+  background: #01004C;
+}
+
+.pace {
+  display: none !important;
+}
+
+.feed-container {
+  background: #F8F7FA !important;
+}
+
+@media screen and (max-width: 767px) {
+  .profile-auth {
+    display: none !important;
+  }
+}
+
+.header .navbar-toggle.profile {
+  padding: 0 !important;
+  margin-right: 0 !important;
+}
+
+.header .navbar-nav {
+  padding-right: 0;
+}
+
+
+.container-xxl {
+  width: 100%;
+  max-width: 1440px;
+  margin: auto;
+  padding: 1rem;
+}
+
+
+@media (max-width: 1200px) {
+
+
+  .container-xxl {
+    max-width: 1140px;
+  }
+}
+
+@media (max-width: 992px) {
+
+
+  .container-xxl {
+    max-width: 960px;
+  }
+}
+
+@media (max-width: 768px) {
+
+
+  .container-xxl {
+    max-width: 720px;
+  }
+}
+
+@media (max-width: 576px) {
+
+
+  .container-xxl {
+    max-width: 100%;
+    padding: 0.5rem;
+  }
+}
+
+.search-container {
+  background: #fff;
+  margin: 10px 10rem;
+  padding: 10px;
+  border-radius: 1rem;
+  border: 0.5px solid #DBDADE;
+  box-shadow: 6px 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+@media screen and (max-width: 767px) {
+  .search-container {
+
+    margin: 10px 4rem;
+  }
+
+  .modal-container {
+    visibility: visible !important;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .search-container {
+
+    margin: 10px 1rem;
+  }
+
+  .nav-item.nav-username {
+    display: none;
+  }
+}
+
+
+form {
+  display: block;
+  margin-top: 0em;
+  unicode-bidi: isolate;
+}
+
+.fs-1 {
+  font-size: 2.5rem !important;
+}
+
+.fs-2 {
+  font-size: 2rem !important;
+}
+
+.fs-3 {
+  font-size: 1.75rem !important;
+}
+
+.fs-4 {
+  font-size: 1.5rem !important;
+}
+
+.fs-5 {
+  font-size: 1.25rem !important;
+}
+
+.fs-6 {
+  font-size: 1rem !important;
+}
+
+.fs-7 {
+  font-size: 0.875rem !important;
+}
+
+.shadow-none {
+  box-shadow: none !important;
+}
+
+.btn {
+  border-radius: .375rem !important;
+}
+
+.message-input::placeholder {
+  color: rgba(0, 0, 0, 0.4);
+  opacity: 0.7;
+}
+
+.rec-container {
+  border-bottom: 2px solid #DBDADE;
+}
+
+.rec-text {
+  display: inline-block;
+  border-bottom: 3px solid #319FE8 !important;
+}

@@ -13,6 +13,7 @@ export const MENUS = [
     path: "/",
     // icon: AiFillDashboard,
     icon: "ion-ios-speedometer",
+    color: "bg-danger",
     type: "admin",
   },
   {
@@ -21,6 +22,7 @@ export const MENUS = [
     path: "/users",
     // icon: FaUsers,
     icon: "ion-ios-person-add",
+    color: "bg-primary",
     type: "admin",
   },
   {
@@ -29,6 +31,7 @@ export const MENUS = [
     path: "/companies",
     // icon: PiBuildingsFill,
     icon: "ion-ios-business",
+    color: "bg-success",
     type: "admin",
   },
   {
@@ -37,6 +40,7 @@ export const MENUS = [
     path: "/roles",
     // icon: FaCogs,
     icon: "ion-ios-settings",
+    color: "bg-info",
     type: "admin",
   },
   {
@@ -44,6 +48,7 @@ export const MENUS = [
     name: "Disability Types",
     path: "/disability-types",
     // icon: FaPersonWalkingWithCane,
+    color: "bg-dark",
     icon: "ion-ios-cog",
     type: "admin",
   },
@@ -53,6 +58,7 @@ export const MENUS = [
     path: "/company-dashboard",
     // icon: AiFillDashboard,
     icon: "ion-ios-speedometer",
+    color: "bg-danger",
     type: "company",
   },
   {
@@ -61,6 +67,7 @@ export const MENUS = [
     path: "/job-postings",
     // icon: MdOutlinePostAdd,
     icon: "ion-ios-create",
+    color: "bg-primary",
     type: "company",
   },
   {
@@ -69,6 +76,7 @@ export const MENUS = [
     path: "/applicants",
     // icon: FaUsersLine,
     icon: "ion-ios-walk",
+    color: "bg-secondary",
     type: "company",
   },
 ];

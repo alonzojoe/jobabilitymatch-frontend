@@ -1,14 +1,24 @@
 import React from "react";
+import MainLogo from "@/assets/images/logo-main.png";
+import MainText from "@/assets/images/logo-text.png";
+import Avatar from "@/assets/images/avatar.jpeg";
 
 const Navbar = () => {
   return (
     <div id="header" className="header navbar-default navbar-head">
       <div className="navbar-header">
         <a href="index.html" className="navbar-brand">
-          <span className="navbar-logo">
-            <i className="ion-ios-cloud"></i>
+          <span className="navbar-logo d-flex align-items-center gap-2">
+            {/* <i className="ion-ios-cloud"></i> */}
+            <img src={MainLogo} width="31" height="25" />
+            <img
+              src={MainText}
+              style={{
+                height: "auto",
+                width: "120px",
+              }}
+            />
           </span>
-          <b className="mr-1">Color</b> Admin
         </a>
         <button
           type="button"
@@ -24,20 +34,6 @@ const Navbar = () => {
 
       {/* BEGIN header-nav */}
       <ul className="navbar-nav navbar-right">
-        <li className="navbar-form">
-          <form action="" method="POST" name="search_form">
-            <div className="form-group">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Enter keyword"
-              />
-              <button type="submit" className="btn btn-search">
-                <i className="ion-ios-search"></i>
-              </button>
-            </div>
-          </form>
-        </li>
         <li className="dropdown">
           <a href="#" data-toggle="dropdown" className="dropdown-toggle icon">
             <i className="ion-ios-notifications"></i>
@@ -52,6 +48,10 @@ const Navbar = () => {
         </li>
         <li className="dropdown navbar-user">
           <a href="#" className="dropdown-toggle" data-toggle="dropdown">
+            {/* <div className="bg-black text-grey-darker">
+             
+              <img src={Avatar} className="rounded-circle border" />
+            </div> */}
             <div className="image image-icon bg-black text-grey-darker">
               <i className="fa fa-user"></i>
             </div>
@@ -61,17 +61,14 @@ const Navbar = () => {
             <b className="caret"></b>
           </a>
           <div className="dropdown-menu dropdown-menu-right">
-            <a href="javascript:;" className="dropdown-item">
-              Edit Profile
-            </a>
-            <a href="javascript:;" className="dropdown-item">
-              <span className="badge badge-danger pull-right">0</span> Inbox
-            </a>
-            <a href="javascript:;" className="dropdown-item">
-              Calendar
-            </a>
-            <a href="javascript:;" className="dropdown-item">
-              Setting
+            {/* <span className="dropdown-item d-flex">
+              <h3 className="label label-inverse">Administrator</h3>
+            </span> */}
+            <span className="dropdown-item label label-inverse ml-3 pe-none">
+              Administrator
+            </span>
+            <a href="javascript:;" className="dropdown-item mt-1">
+              Update Profile
             </a>
             <div className="dropdown-divider"></div>
             <a href="javascript:;" className="dropdown-item">

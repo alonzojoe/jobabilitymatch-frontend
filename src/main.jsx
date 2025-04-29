@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 
 //css
 import "@/assets/css/apple/app.min.css";
+
 import "@/assets/plugins/ionicons/css/ionicons.min.css";
 import "@/index.css";
 
