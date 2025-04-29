@@ -222,3 +222,21 @@ form {
   display: inline-block;
   border-bottom: 3px solid #319FE8 !important;
 }
+
+.card.border-theme {
+  border-color: #3389D6 !important;
+}
+
+.card {
+  border: 1.5px solid rgba(34, 34, 34, .15) !important;
+  border-radius: .375rem !important;
+  box-shadow: 0 .25rem 1.125rem rgba(75, 70, 92, .1) !important;
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+.text-decoration-underline {
+  text-decoration: underline !important;
+}
