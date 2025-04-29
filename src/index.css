@@ -41,3 +41,23 @@
 .pe-none {
   pointer-events: none !important;
 }
+
+
+.sidebar {
+  background: #FFFFFF;
+}
+
+.nav-header {
+  color: #000000 !important;
+}
+
+.sidebar-items a {
+  color: #000000 !important;
+}
+
+.sidebar .nav>li.active>a {
+  position: relative;
+  z-index: 10;
+  color: #fff !important;
+  background: #01004C;
+}

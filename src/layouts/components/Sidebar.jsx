@@ -15,10 +15,23 @@ const Sidebar = () => {
             {menus.map((menu) => (
               <NavItem key={menu.id} menu={menu} />
             ))}
-            <li>
+            <li className="sidebar-items">
               <a href="index.html">
-                <i className="ion-ios-power"></i>
+                <i className="ion-ios-power bg-pink"></i>
                 <span>Logout</span>
+              </a>
+            </li>
+            <li>
+              <a
+                href="javascript:;"
+                className="sidebar-minify-btn"
+                data-click="sidebar-minify"
+              >
+                <i
+                  className="ion-ios-arrow-back bg-info"
+                  style={{ color: "#2C3436" }}
+                ></i>
+                <span>Collapse</span>
               </a>
             </li>
           </ul>
@@ -35,9 +48,9 @@ const NavItem = (props) => {
   const { menu } = props;
 
   return (
-    <li className={menu.id === 1 ? "active" : ""}>
+    <li className={`sidebar-items ${menu.id === 1 ? "active" : ""}`}>
       <Link href="index.html">
-        <i className={menu.icon}></i>
+        <i className={`${menu.icon} ${menu.color}`}></i>
         <span>{menu.name}</span>
       </Link>
     </li>
