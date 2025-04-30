@@ -10,7 +10,7 @@ export const MENUS = [
   {
     id: 1,
     name: "Dashboard",
-    path: "/",
+    path: "/home",
     // icon: AiFillDashboard,
     icon: "ion-ios-speedometer",
     color: "bg-danger",
@@ -19,7 +19,7 @@ export const MENUS = [
   {
     id: 2,
     name: "Users",
-    path: "/users",
+    path: "/home/users",
     // icon: FaUsers,
     icon: "ion-ios-person-add",
     color: "bg-primary",
@@ -28,7 +28,7 @@ export const MENUS = [
   {
     id: 3,
     name: "Companies",
-    path: "/companies",
+    path: "/home/companies",
     // icon: PiBuildingsFill,
     icon: "ion-ios-business",
     color: "bg-success",
@@ -37,7 +37,7 @@ export const MENUS = [
   {
     id: 4,
     name: "Roles",
-    path: "/roles",
+    path: "/home/roles",
     // icon: FaCogs,
     icon: "ion-ios-settings",
     color: "bg-info",
@@ -46,7 +46,7 @@ export const MENUS = [
   {
     id: 5,
     name: "Disability Types",
-    path: "/disability-types",
+    path: "/home/disability-types",
     // icon: FaPersonWalkingWithCane,
     color: "bg-dark",
     icon: "ion-ios-cog",
@@ -55,7 +55,7 @@ export const MENUS = [
   {
     id: 6,
     name: "Dashboard",
-    path: "/company-dashboard",
+    path: "/home/company-dashboard",
     // icon: AiFillDashboard,
     icon: "ion-ios-speedometer",
     color: "bg-danger",
@@ -64,7 +64,7 @@ export const MENUS = [
   {
     id: 7,
     name: "Job Postings",
-    path: "/job-postings",
+    path: "/home/job-postings",
     // icon: MdOutlinePostAdd,
     icon: "ion-ios-create",
     color: "bg-primary",
@@ -73,7 +73,7 @@ export const MENUS = [
   {
     id: 8,
     name: "Applicants",
-    path: "/applicants",
+    path: "/home/applicants",
     // icon: FaUsersLine,
     icon: "ion-ios-walk",
     color: "bg-secondary",
