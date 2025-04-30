@@ -59,7 +59,7 @@ export const MENUS = [
     // icon: AiFillDashboard,
     icon: "ion-ios-speedometer",
     color: "bg-danger",
-    type: "company",
+    type: "employer",
   },
   {
     id: 7,
@@ -68,7 +68,7 @@ export const MENUS = [
     // icon: MdOutlinePostAdd,
     icon: "ion-ios-create",
     color: "bg-primary",
-    type: "company",
+    type: "employer",
   },
   {
     id: 8,
@@ -77,7 +77,7 @@ export const MENUS = [
     // icon: FaUsersLine,
     icon: "ion-ios-walk",
     color: "bg-secondary",
-    type: "company",
+    type: "employer",
   },
 ];
 
