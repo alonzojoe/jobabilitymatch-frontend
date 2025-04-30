@@ -5,6 +5,7 @@ import Dashboard from "@/pages/Dashboard/Dashboard";
 import FeedLayout from "@/layouts/FeedLayout";
 import Feed from "@/pages/Feed/Feed";
 import DisabilityTypes from "@/pages/DisabilityTypes/DisabilityTypes";
+import Users from "@/pages/Users/Users"
 function App() {
   return (
     <>
@@ -16,6 +17,7 @@ function App() {
           <Route element={<ProtectedRoutes />}>
             <Route path="home" element={<AppLayout />}>
               <Route index element={<Dashboard />} />
+              <Route path="users" element={<Users />} />
               <Route path="disability-types" element={<DisabilityTypes />} />
             </Route>
           </Route>

@@ -5,6 +5,7 @@ import { LuRefreshCcw } from "react-icons/lu";
 import { FaPlus } from "react-icons/fa";
 import useToggle from "@/hooks/useToggle";
 import ModalSm from "@/components/UI/ModalSm";
+import Pagination from "@/components/UI/Pagination";
 
 const DisabilityTypes = () => {
   const [showModal, toggleShowModal] = useToggle(false);
@@ -137,51 +138,7 @@ const DisabilityTypes = () => {
                   </tr>
                 </tbody>
               </table>
-              <div className="mt-2 pagination-container m-0 p-3 d-flex justify-content-between align-items-center">
-                <div className="fs-7">Total Pages: 0</div>
-                <div className="fs-7">
-                  Page <span>0 of 0</span>
-                </div>
-                <div>
-                  <ul className="pagination" style={{ marginBottom: "0" }}>
-                    <li className="paginate_button page-item previous disabled">
-                      <a href="#" className="page-link">
-                        Previous
-                      </a>
-                    </li>
-                    <li className="paginate_button page-item active">
-                      <a href="#" className="page-link">
-                        1
-                      </a>
-                    </li>
-                    <li className="paginate_button page-item">
-                      <a href="#" className="page-link">
-                        2
-                      </a>
-                    </li>
-                    <li className="paginate_button page-item">
-                      <a href="#" className="page-link">
-                        3
-                      </a>
-                    </li>
-                    <li className="paginate_button page-item">
-                      <a href="#" className="page-link">
-                        4
-                      </a>
-                    </li>
-                    <li className="paginate_button page-item">
-                      <a href="#" className="page-link">
-                        5
-                      </a>
-                    </li>
-                    <li className="paginate_button page-item next">
-                      <a href="#" className="page-link">
-                        Next
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
+              <Pagination />
             </div>
           </div>
         </div>
