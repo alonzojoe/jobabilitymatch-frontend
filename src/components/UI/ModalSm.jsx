@@ -1,5 +1,5 @@
 import { createPortal } from "react-dom";
-const MiniModal = ({ title, client, children, onClose }) => {
+const ModalSm = ({ title, client, children, onClose }) => {
   return createPortal(
     <div className="cst-modal2">
       <div className="cst-modal-body5 bg-white rounded position-relative">
@@ -42,4 +42,4 @@ const MiniModal = ({ title, client, children, onClose }) => {
   );
 };
 
-export default MiniModal;
+export default ModalSm;
