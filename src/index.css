@@ -253,3 +253,27 @@ form {
 .label.label-custom.text-gr {
   color: #139655 !important;
 }
+
+.btn-custom {
+  color: #fff;
+  background-color: #01004C;
+  border-color: #01004C;
+  -webkit-box-shadow: 0;
+  box-shadow: 0;
+}
+
+.btn-custom:hover {
+  color: #fff;
+  background-color: #00003A;
+  border-color: #00003A;
+}
+
+.btn-outline-custom {
+  color: #00003A;
+  border-color: #00003A;
+}
+
+.btn-outline-custom:hover {
+  color: #fff;
+  background: #00003A;
+}
