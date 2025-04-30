@@ -1,4 +1,4 @@
-import React from "react";
+import { Link } from "react-router-dom";
 import MainLogo from "@/assets/images/logo-main.png";
 import MainText from "@/assets/images/logo-text.png";
 import Avatar from "@/assets/images/avatar.jpeg";
@@ -7,7 +7,7 @@ const Navbar = () => {
   return (
     <div id="header" className="header navbar-default navbar-head">
       <div className="navbar-header">
-        <a href="index.html" className="navbar-brand">
+        <Link to="/home" className="navbar-brand">
           <span className="navbar-logo d-flex align-items-center gap-2">
             {/* <i className="ion-ios-cloud"></i> */}
             <img src={MainLogo} width="31" height="25" />
@@ -19,7 +19,7 @@ const Navbar = () => {
               }}
             />
           </span>
-        </a>
+        </Link>
         <button
           type="button"
           className="navbar-toggle"
@@ -56,7 +56,7 @@ const Navbar = () => {
               <i className="fa fa-user"></i>
             </div>
             <span className="d-none d-md-inline font-weight-bold">
-              JOENELL ALONZO
+              ADMINISTRATOR
             </span>{" "}
             <b className="caret"></b>
           </a>

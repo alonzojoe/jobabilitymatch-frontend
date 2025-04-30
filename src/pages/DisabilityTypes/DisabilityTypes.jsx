@@ -1,9 +1,99 @@
 import PageHeader from "@/components/General/PageHeader";
 import Panel from "@/components/UI/Panel";
+import { FaSearch, FaRegSave, FaTrashAlt, FaEdit } from "react-icons/fa";
+import { LuRefreshCcw } from "react-icons/lu";
+import { FaPlus } from "react-icons/fa";
+import useToggle from "@/hooks/useToggle";
+import ModalSm from "@/components/UI/ModalSm";
+
 const DisabilityTypes = () => {
+  const [showModal, toggleShowModal] = useToggle(false);
   return (
     <>
+      {showModal && (
+        <ModalSm onClose={() => toggleShowModal(false)}>
+          <>
+            <PageHeader title="Disability Type Details" />
+            <form className="mb-3">
+              <div className="mb-3 fv-plugins-icon-container">
+                <label
+                  htmlFor="email"
+                  className="form-label font-weight-bold fs-6"
+                >
+                  Disability Type
+                </label>
+                <input name="d-type" type="text" className="form-control" />
+                <div className="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback"></div>
+              </div>
+
+              <div className="mb-3"></div>
+
+              <button
+                type="button"
+                className="btn btn-custom w-100 font-weight-bold fs-7 d-flex align-items-center justify-content-center gap-1"
+              >
+                <FaRegSave className="fs-5" /> Save
+              </button>
+
+              <input type="hidden" data-has-listeners="true" />
+            </form>
+          </>
+        </ModalSm>
+      )}
       <PageHeader title="Disability Types" />
+      <Panel title="Search">
+        <form className="pd-2">
+          <div className="row mb-3">
+            <div className="col-sm-12 col-md-6 col-lg-4">
+              <div>
+                <label className="form-label fs-6 mb-2 fw-semibold">
+                  Disability Type
+                </label>
+                <input
+                  type="text"
+                  name="name"
+                  className="form-control form-control-sm custom-font"
+                  // value={form.name}
+                  // onChange={updateParams}
+                />
+              </div>
+            </div>
+            <div className="col-sm-12 col-md-6 col-lg-3">
+              <div
+                className="d-flex gap-2 align-items-center"
+                style={{
+                  marginTop: "1.7rem",
+                }}
+              >
+                <button
+                  className="btn btn-custom d-flex align-items-center gap-1"
+                  type="submit"
+                >
+                  <FaSearch className="fs-6" /> Search
+                </button>
+                <button
+                  className="btn btn-pink"
+                  // onClick={() => {
+                  //   notif.custom(`data has been inserted`);
+                  // }}
+                  // onClick={handleRefresh}
+                  type="button"
+                >
+                  <LuRefreshCcw className="fs-6" /> Refresh
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </Panel>
+      <div className="my-2 d-flex align-items-center justify-content-end">
+        <button
+          className="btn btn-primary btn-md d-flex align-items-center gap-1"
+          onClick={() => toggleShowModal(true)}
+        >
+          <FaPlus className="fs-6" /> Add New
+        </button>
+      </div>
       <Panel>
         <div className="row">
           <div className="col-12">
@@ -11,23 +101,39 @@ const DisabilityTypes = () => {
               <table className="table table-striped table-bordered table-td-valign-middle dataTable no-footer dtr-inline collapsed">
                 <thead>
                   <tr>
-                    <th className="text-center font-weight-bold">ID</th>
-                    <th className="text-center font-weight-bold">
+                    <th className="text-center font-weight-bold" width="20%">
+                      ID
+                    </th>
+                    <th className="text-center font-weight-bold" width="50%">
                       Disablity Type
                     </th>
-                    <th className="text-center font-weight-bold">Option</th>
+                    <th className="text-center font-weight-bold" width="30%">
+                      Option
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td className="text-center">1.</td>
-                    <td className="text-center">Hearing Impairment</td>
-                    <td className="text-center">Win 95+</td>
-                  </tr>
-                  <tr>
                     <td className="text-center">2.</td>
                     <td className="text-center">Hearing Impairment</td>
-                    <td className="text-center">Win 95+</td>
+                    <td className="text-center">
+                      <div className="d-flex justify-content-center align-items-center gap-2">
+                        <button
+                          className="btn btn-warning"
+                          // onClick={}
+                          type="button"
+                        >
+                          <FaEdit className="fs-6" /> Update
+                        </button>
+                        <button
+                          className="btn btn-danger"
+                          // onClick={}
+                          type="button"
+                        >
+                          <FaTrashAlt className="fs-6" /> Delete
+                        </button>
+                      </div>
+                    </td>
                   </tr>
                 </tbody>
               </table>

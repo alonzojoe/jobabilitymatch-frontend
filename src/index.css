@@ -571,3 +571,7 @@ form {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 }
+
+.panel {
+  margin-bottom: 0 !important;
+}
