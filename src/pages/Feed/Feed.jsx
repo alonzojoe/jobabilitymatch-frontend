@@ -3,6 +3,10 @@ import SearchInput from "@/pages/Feed/components/SearchInput";
 import { jobPostings } from "@/constants";
 import Card from "@/components/UI/Card";
 import { FaRegBookmark, FaBookmark } from "react-icons/fa6";
+import Modal from "@/components/UI/Modal";
+import MiniModal from "@/components/UI/ModalSm";
+import MainLogo from "@/assets/images/logo-main.png";
+import MainText from "@/assets/images/logo-text.png";
 
 const Feed = () => {
   const [selectedJob, setSelectedJob] = useState(null);
@@ -22,6 +26,73 @@ const Feed = () => {
 
   return (
     <>
+      <MiniModal>
+        <>
+          <div className="d-flex align-items-center justify-content-center gap-2 mb-2">
+            {/* <img src={MainLogo} width="36" height="30" alt="app-logo" /> */}
+            <img
+              src={MainText}
+              alt="app-text"
+              style={{
+                height: "auto",
+                width: "160px",
+              }}
+            />
+          </div>
+          <h3 class="mb-2 font-weight-bold">
+            Welcome! Sign in to get started.
+          </h3>
+          <p class="mb-2 text-secondary fs-6">
+            Please sign-in to your account.
+          </p>
+          <form className="mb-3">
+            <div className="mb-3 fv-plugins-icon-container">
+              <label htmlFor="email" className="form-label fs-6">
+                Email
+              </label>
+              <input
+                name="email"
+                type="email"
+                className="form-control"
+                id="email"
+                data-has-listeners="true"
+              />
+              <div className="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback"></div>
+            </div>
+
+            <div className="mb-3 fv-plugins-icon-container">
+              <label htmlFor="password" className="form-label fs-6">
+                Password
+              </label>
+              <input
+                name="password"
+                type="password"
+                className="form-control"
+                id="password"
+                data-has-listeners="true"
+              />
+              <div className="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback"></div>
+            </div>
+
+            <div className="mb-4"></div>
+
+            <button
+              type="submit"
+              className="btn btn-custom d-grid w-100 waves-effect waves-light"
+            >
+              Sign in
+            </button>
+
+            <input type="hidden" data-has-listeners="true" />
+          </form>
+          <div className="text-center">
+            <span className="fs-6 text-secondary">New on our platform?</span>
+            <div className="cursor-pointer text-primary fs-6">
+              <span>Create an account</span>
+            </div>
+          </div>
+        </>
+      </MiniModal>
       <SearchInput />
       <div className="d-flex align-items-center gap-3 justify-content-center rec-container">
         <h3 className="fw-bold mb-0 pb-2 rec-text cursor-pointer">

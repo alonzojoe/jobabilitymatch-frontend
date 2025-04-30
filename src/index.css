@@ -528,3 +528,28 @@ form {
   color: #fff;
   background: #00003A;
 }
+
+
+.pd-1 {
+  padding: 0.25rem !important;
+}
+
+
+.pd-2 {
+  padding: 0.5rem !important;
+}
+
+
+.pd-3 {
+  padding: 1rem !important;
+}
+
+
+.pd-4 {
+  padding: 1.5rem !important;
+}
+
+
+.pd-5 {
+  padding: 3rem !important;
+}

@@ -20,18 +20,21 @@ const MiniModal = ({ title, client, children, onClose }) => {
             aria-hidden="true"
           ></i>
         </span>
-        <div className="position-relative border border-primary rounded p-2 m-2 mt-4">
-          <div
-            className="position-absolute bg-primary text-white px-2 rounded"
-            style={{
-              top: "-13px",
-              left: "5px",
-            }}
-          >
-            {title}
-          </div>
+        <div className="position-relative  rounded p-2 m-2 mt-4">
+          {title && (
+            <div
+              className="position-absolute bg-primary text-white px-2 rounded"
+              style={{
+                top: "-1px",
+                left: "5px",
+                zIndex: "10",
+              }}
+            >
+              {title}
+            </div>
+          )}
           {client}
-          <div>{children}</div>
+          <div className="pd-4">{children}</div>
         </div>
       </div>
     </div>,
