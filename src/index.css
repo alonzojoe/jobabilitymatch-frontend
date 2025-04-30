@@ -245,3 +245,11 @@ form {
     height: fit-content;
     overflow-y: auto;
 } */
+
+.label.label-custom {
+  background: #D5FAE8;
+}
+
+.label.label-custom.text-gr {
+  color: #139655 !important;
+}

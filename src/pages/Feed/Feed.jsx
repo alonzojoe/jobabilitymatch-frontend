@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import SearchInput from "@/pages/Feed/components/SearchInput";
 import { jobPostings } from "@/constants";
 import Card from "@/components/UI/Card";
+import { FaRegBookmark, FaBookmark } from "react-icons/fa6";
 
 const Feed = () => {
   const [selectedJob, setSelectedJob] = useState(null);
@@ -55,7 +56,7 @@ const Feed = () => {
                       {job.title}
                     </h3>
                     <span className="fs-3">
-                      <i class="ti ti-heart"></i>
+                      <FaRegBookmark />
                     </span>
                   </div>
                   <span className="d-block d-flex align-items-center gap-1 fs-6">
@@ -67,7 +68,7 @@ const Feed = () => {
                     {job.location}
                   </span>
                   <h5 className="my-4">
-                    <span className="label label-primary fs-6">
+                    <span className="label label-custom text-gr fs-6">
                       Vacant Position/s: {job.vacantPositions}
                     </span>
                   </h5>
@@ -108,7 +109,7 @@ const Feed = () => {
                       {selectedJob.location}
                     </span>
                     <h5 className="my-4">
-                      <span className="label label-primary fs-6">
+                      <span className="label label-custom text-gr fs-6">
                         Vacant Position/s: {selectedJob.vacantPositions}
                       </span>
                     </h5>
@@ -121,7 +122,7 @@ const Feed = () => {
                       ))}
                       <div className="description mt-2">
                         <hr />
-                        <strong>Job Description:</strong>
+                        <strong>Job Description: </strong>
                         {selectedJob.description}
                       </div>
                     </div>
