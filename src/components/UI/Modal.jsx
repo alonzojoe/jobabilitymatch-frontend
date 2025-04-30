@@ -25,8 +25,9 @@ const Modal = ({ title = "", client, children, onClose }) => {
             <div
               className="position-absolute bg-primary text-white px-2 rounded"
               style={{
-                top: "-13px",
+                top: "-1px",
                 left: "5px",
+                zIndex: "10",
               }}
             >
               {title}
