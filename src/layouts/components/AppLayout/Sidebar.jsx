@@ -1,9 +1,10 @@
 import { MENUS } from "@/constants";
 import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const Sidebar = () => {
   const user_type = "admin";
-
+  const { pathname } = useLocation();
   const menus = MENUS.filter((menu) => menu.type === user_type);
 
   return (
@@ -13,12 +14,12 @@ const Sidebar = () => {
           <ul className="nav mt-3">
             <li className="nav-header">Navigation</li>
             {menus.map((menu) => (
-              <NavItem key={menu.id} menu={menu} />
+              <NavItem key={menu.id} menu={menu} current={pathname} />
             ))}
             <li className="sidebar-items">
               <a href="index.html">
                 <i className="ion-ios-power bg-pink"></i>
-                <span>Logout</span>
+                <span>Logout {JSON.stringify(pathname)}</span>
               </a>
             </li>
             <li>
@@ -45,11 +46,11 @@ const Sidebar = () => {
 export default Sidebar;
 
 const NavItem = (props) => {
-  const { menu } = props;
+  const { menu, current } = props;
 
   return (
-    <li className={`sidebar-items ${menu.id === 1 ? "active" : ""}`}>
-      <Link href="index.html">
+    <li className={`sidebar-items ${menu.path === current ? "active" : ""}`}>
+      <Link to={menu.path}>
         <i className={`${menu.icon} ${menu.color}`}></i>
         <span>{menu.name}</span>
       </Link>
