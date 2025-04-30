@@ -325,6 +325,11 @@
   .profile-auth {
     display: none !important;
   }
+
+  .pagination-container {
+    flex-direction: column;
+    gap: .8rem;
+  }
 }
 
 .header .navbar-toggle.profile {
@@ -560,4 +565,9 @@ form {
 
 .cst-modal-body2 {
   border-radius: .375rem !important;
+}
+
+.table-responsive {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
