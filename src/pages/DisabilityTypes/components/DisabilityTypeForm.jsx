@@ -10,20 +10,22 @@ import api from "@/services/api";
 
 const notify = new ToastMessage();
 
-const AddDisabilityType = ({ onClose, onRefresh }) => {
+const DisabilityTypeForm = ({ onClose, onRefresh, selected }) => {
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting: isLoading },
-  } = useForm({ resolver: zodResolver(disabilitySchema) });
+  } = useForm({
+    resolver: zodResolver(disabilitySchema),
+    defaultValues: {
+      name: selected?.name ?? "",
+    },
+  });
 
   const handleSave = async (data) => {
     console.log("data", data);
     try {
-      await api.post(`/disability/create`, {
-        name: data.name,
-      });
-      notify.notif("success", "Disability type added successfully!");
+      selected ? await update(data) : await save(data);
       onClose();
       onRefresh();
     } catch (error) {
@@ -36,6 +38,20 @@ const AddDisabilityType = ({ onClose, onRefresh }) => {
         notify.notif("error", `Something went wrong.`);
       }
     }
+  };
+
+  const save = async (data) => {
+    await api.post(`/disability/create`, {
+      name: data.name,
+    });
+    notify.notif("success", "Disability type added successfully!");
+  };
+
+  const update = async (data) => {
+    await api.put(`/disability/update/${selected.id}`, {
+      name: data.name,
+    });
+    notify.notif("success", "Disability type updated successfully!");
   };
 
   return (
@@ -82,4 +98,4 @@ const AddDisabilityType = ({ onClose, onRefresh }) => {
   );
 };
 
-export default AddDisabilityType;
+export default DisabilityTypeForm;

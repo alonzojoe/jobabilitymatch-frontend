@@ -635,3 +635,15 @@ div:where(.swal2-container) {
 .custom-font {
   font-size: 16px !important;
 }
+
+.fw-semibold {
+  font-weight: 600 !important;
+}
+
+.fw-bold {
+  font-weight: bold;
+}
+
+.fw-bolder {
+  font-weight: bolder;
+}
