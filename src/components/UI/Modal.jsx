@@ -20,7 +20,7 @@ const Modal = ({ title = "", client, children, onClose }) => {
             aria-hidden="true"
           ></i>
         </span>
-        <div className="position-relative border border-primary rounded p-2 m-2 mt-4">
+        <div className="position-relative rounded p-2 m-2 mt-4">
           {title && (
             <div
               className="position-absolute bg-primary text-white px-2 rounded"

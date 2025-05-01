@@ -1,5 +1,38 @@
 import moment from "moment";
 import api from "@/services/api";
+import Swal from "sweetalert2";
+
+export class ToastMessage {
+  notif(icon, title) {
+    const Toast = Swal.mixin({
+      toast: true,
+      position: "top-end",
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.onmouseenter = Swal.stopTimer;
+        toast.onmouseleave = Swal.resumeTimer;
+      },
+    });
+    Toast.fire({
+      icon,
+      title,
+    });
+  }
+}
+
+export class ConfirmDialog {
+  confirm(icon, title, text) {
+    return Swal.fire({
+      icon,
+      title,
+      text,
+      showCancelButton: true,
+      confirmButtonText: "Yes",
+    });
+  }
+}
 
 export const formatDateTime = (cdate) => {
   return moment(cdate).format("lll");

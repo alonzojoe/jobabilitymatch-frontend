@@ -5,15 +5,26 @@ import Avatar from "@/assets/images/avatar.jpeg";
 import useToggle from "@/hooks/useToggle";
 import Login from "@/components/Auth/Login";
 import Registry from "@/components/Auth/Registry";
+import useFetch from "@/hooks/useFetch";
 
 const Header = () => {
   const authenticated = false;
   const [showLogin, toggleLogin] = useToggle(false);
   const [showRegistry, toggleRegistry] = useToggle(false);
+
+  const { data: roles } = useFetch(`/role/all`, null);
+  const { data: disabilityTypes } = useFetch(`/disability/all`, null);
+
   return (
     <>
       {showLogin && <Login onClose={() => toggleLogin(false)} />}
-      {showRegistry && <Registry onClose={() => toggleRegistry(false)} />}
+      {showRegistry && (
+        <Registry
+          onClose={() => toggleRegistry(false)}
+          roles={roles?.data}
+          disabilityTypes={disabilityTypes?.data}
+        />
+      )}
       <div id="header" className="header navbar-default navbar-head">
         <div className="navbar-header">
           <a href="index.html" className="navbar-brand">

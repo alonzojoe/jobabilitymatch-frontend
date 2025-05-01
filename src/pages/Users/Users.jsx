@@ -1,4 +1,4 @@
-import PageHeader from "@/components/General/PageHeader";
+import PageHeader from "@/components/Global/PageHeader";
 import Panel from "@/components/UI/Panel";
 import { FaSearch, FaRegSave, FaTrashAlt, FaEdit } from "react-icons/fa";
 import { LuRefreshCcw } from "react-icons/lu";
