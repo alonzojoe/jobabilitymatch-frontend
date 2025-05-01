@@ -183,6 +183,7 @@ const PwdForm = ({ role, roles, disabilityTypes, onClose }) => {
                     {...register("phone")}
                     type="text"
                     className="form-control"
+                    maxLength={11}
                   />
                   <div className="mt-1 font-weight-bold text-validation">
                     {errors.phone?.message}
@@ -360,10 +361,15 @@ const PwdForm = ({ role, roles, disabilityTypes, onClose }) => {
 
         <button
           type="submit"
-          className="btn btn-custom d-grid w-100 waves-effect waves-light"
+          className="btn btn-custom d-grid w-100 waves-effect waves-light d-flex align-items-center justify-content-center gap-1"
           disabled={isLoading}
         >
-          Sign in
+          {isLoading ? "Signing up" : "Sign Up"}
+          {isLoading && (
+            <div className="spinner-border text-white" role="status">
+              <span className="visually-hidden"></span>
+            </div>
+          )}
         </button>
 
         <input type="hidden" data-has-listeners="true" />

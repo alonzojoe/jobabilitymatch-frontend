@@ -87,7 +87,12 @@ const DisabilityTypeForm = ({ onClose, onRefresh, selected }) => {
             className="btn btn-custom w-100 font-weight-bold fs-7 d-flex align-items-center justify-content-center gap-1"
             disabled={isLoading}
           >
-            <FaRegSave className="fs-5" /> Save
+            <FaRegSave className="fs-5" /> {isLoading ? "Saving" : "Save"}
+            {isLoading && (
+              <div className="spinner-border text-white" role="status">
+                <span className="visually-hidden"></span>
+              </div>
+            )}
           </button>
 
           <input type="hidden" data-has-listeners="true" />

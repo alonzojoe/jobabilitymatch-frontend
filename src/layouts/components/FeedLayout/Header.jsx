@@ -1,4 +1,3 @@
-import React from "react";
 import MainLogo from "@/assets/images/logo-main.png";
 import MainText from "@/assets/images/logo-text.png";
 import Avatar from "@/assets/images/avatar.jpeg";
@@ -15,9 +14,16 @@ const Header = () => {
   const { data: roles } = useFetch(`/role/all`, null);
   const { data: disabilityTypes } = useFetch(`/disability/all`, null);
 
+  const createAccount = () => {
+    toggleLogin(false);
+    toggleRegistry(true);
+  };
+
   return (
     <>
-      {showLogin && <Login onClose={() => toggleLogin(false)} />}
+      {showLogin && (
+        <Login onClose={() => toggleLogin(false)} onCreate={createAccount} />
+      )}
       {showRegistry && (
         <Registry
           onClose={() => toggleRegistry(false)}

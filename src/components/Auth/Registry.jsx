@@ -8,7 +8,6 @@ import PwdForm from "@/components/Form/PwdForm";
 
 const Registry = ({ onClose, roles, disabilityTypes }) => {
   const [type, setType] = useState(1);
-
   console.log("roles", roles);
   console.log("disablity", disabilityTypes);
   return (

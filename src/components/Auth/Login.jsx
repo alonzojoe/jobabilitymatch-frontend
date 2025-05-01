@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { authSchema } from "@/schema/index";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-const Login = ({ onClose }) => {
+const Login = ({ onClose, onCreate }) => {
   const {
     register,
     handleSubmit,
@@ -15,6 +15,7 @@ const Login = ({ onClose }) => {
 
   const handleSignIn = async (data) => {
     console.log(data);
+    await new Promise((res) => setTimeout(res, 2000));
   };
 
   return (
@@ -77,17 +78,22 @@ const Login = ({ onClose }) => {
 
           <button
             type="submit"
-            className="btn btn-custom d-grid w-100 waves-effect waves-light"
+            className="btn btn-custom d-grid w-100 waves-effect waves-light d-flex align-items-center justify-content-center gap-1"
             disabled={isLoading}
           >
-            Sign in
+            <span>{isLoading ? "Signing in" : "Sign in"}</span>
+            {isLoading && (
+              <div className="spinner-border text-white" role="status">
+                <span className="visually-hidden"></span>
+              </div>
+            )}
           </button>
 
           <input type="hidden" data-has-listeners="true" />
         </form>
         <div className="text-center">
           <span className="fs-6 text-secondary">New on our platform?</span>
-          <div className="cursor-pointer text-primary fs-6">
+          <div className="cursor-pointer text-primary fs-6" onClick={onCreate}>
             <span>Create an account</span>
           </div>
         </div>
