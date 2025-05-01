@@ -61,10 +61,11 @@ const PwdForm = ({ role, roles, disabilityTypes, onClose }) => {
 
   const filteredRoles = roles?.filter((r) => r.id !== 1) ?? [];
 
-  const mappedDisabilities = disabilityTypes.map((d) => ({
-    value: d.id,
-    label: d.name,
-  }));
+  const mappedDisabilities =
+    disabilityTypes?.map((d) => ({
+      value: d.id,
+      label: d.name,
+    })) ?? [];
   return (
     <div>
       <form
