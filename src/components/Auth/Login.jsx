@@ -1,47 +1,84 @@
 import ModalSm from "@/components/UI/ModalSm";
 import AuthHeader from "@/components/Auth/AuthHeader";
+import { useForm } from "react-hook-form";
+import { authSchema } from "@/schema/index";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 const Login = ({ onClose }) => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting: isLoading },
+  } = useForm({
+    resolver: zodResolver(authSchema),
+  });
+
+  const handleSignIn = async (data) => {
+    console.log(data);
+  };
+
   return (
     <ModalSm onClose={onClose}>
       <>
         <AuthHeader />
-        <h3 class="mb-2 font-weight-bold">Welcome! Sign in to get started.</h3>
-        <p class="mb-2 text-secondary fs-6">Please sign-in to your account.</p>
-        <form className="mb-3">
-          <div className="mb-3 fv-plugins-icon-container">
+        <h3 className="mb-2 font-weight-bold">
+          Welcome! Sign in to get started.
+        </h3>
+        <p className="mb-2 text-secondary fs-6">
+          Please sign-in to your account.
+        </p>
+        <form
+          className="mb-3"
+          onSubmit={handleSubmit((data) => handleSignIn(data))}
+        >
+          <div
+            className={`mb-3 fv-plugins-icon-container ${
+              errors?.email ? "group-invalid" : ""
+            }`}
+          >
             <label htmlFor="email" className="form-label fs-6">
               Email
             </label>
             <input
+              {...register("email")}
               name="email"
               type="email"
               className="form-control"
               id="email"
               data-has-listeners="true"
             />
-            <div className="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback"></div>
+            <div className="mt-1 font-weight-bold text-validation">
+              {errors.email?.message}
+            </div>
           </div>
 
-          <div className="mb-3 fv-plugins-icon-container">
+          <div
+            className={`mb-3 fv-plugins-icon-container ${
+              errors?.password ? "group-invalid" : ""
+            }`}
+          >
             <label htmlFor="password" className="form-label fs-6">
               Password
             </label>
             <input
+              {...register("password")}
               name="password"
               type="password"
               className="form-control"
               id="password"
               data-has-listeners="true"
             />
-            <div className="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback"></div>
+            <div className="mt-1 font-weight-bold text-validation">
+              {errors.password?.message}
+            </div>
           </div>
 
           <div className="mb-4"></div>
 
           <button
-            type="button"
+            type="submit"
             className="btn btn-custom d-grid w-100 waves-effect waves-light"
+            disabled={isLoading}
           >
             Sign in
           </button>
