@@ -651,3 +651,8 @@ div:where(.swal2-container) {
 /* body {
   background: #F8F7FA !important;
 } */
+
+.group-invalid>.react-select-container.css-b62m3t-container>.react-select__control.css-13cymwt-control {
+  border-color: red !important;
+  background-color: #fdeded !important;
+}

@@ -6,16 +6,18 @@ import { FaRegBuilding } from "react-icons/fa";
 import { FaRegUserCircle } from "react-icons/fa";
 import PwdForm from "@/components/Form/PwdForm";
 
-const Registry = ({ onClose }) => {
+const Registry = ({ onClose, roles, disabilityTypes }) => {
   const [type, setType] = useState(1);
 
+  console.log("roles", roles);
+  console.log("disablity", disabilityTypes);
   return (
     <>
       {type === 1 ? (
         <ModalSm onClose={onClose}>
           <>
             <AuthHeader />
-            <h3 class="mt-2 mb-3 font-weight-bold text-center">
+            <h3 className="mt-2 mb-3 font-weight-bold text-center">
               Please Select
             </h3>
             <div className="row">
@@ -44,7 +46,11 @@ const Registry = ({ onClose }) => {
         <Modal onClose={() => setType(1)}>
           <>
             <AuthHeader />
-            <PwdForm />
+            <PwdForm
+              role={type}
+              roles={roles}
+              disabilityTypes={disabilityTypes}
+            />
           </>
         </Modal>
       )}
