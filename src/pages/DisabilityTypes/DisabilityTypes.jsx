@@ -102,22 +102,33 @@ const DisabilityTypes = () => {
               <table className="table table-striped table-bordered table-td-valign-middle dataTable no-footer dtr-inline collapsed">
                 <thead>
                   <tr>
-                    <th className="text-center font-weight-bold" width="20%">
+                    <th
+                      className="text-center font-weight-bold fs-7"
+                      width="20%"
+                    >
                       ID
                     </th>
-                    <th className="text-center font-weight-bold" width="50%">
+                    <th
+                      className="text-center font-weight-bold fs-7"
+                      width="50%"
+                    >
                       Disablity Type
                     </th>
-                    <th className="text-center font-weight-bold" width="30%">
+                    <th
+                      className="text-center font-weight-bold fs-7"
+                      width="30%"
+                    >
                       Option
                     </th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td className="text-center">2.</td>
-                    <td className="text-center">Hearing Impairment</td>
-                    <td className="text-center">
+                    <td className="text-center font-weight-bold">2.</td>
+                    <td className="text-center font-weight-bold">
+                      Hearing Impairment
+                    </td>
+                    <td className="text-center font-weight-bold">
                       <div className="d-flex justify-content-center align-items-center gap-2">
                         <button
                           className="btn btn-warning"
