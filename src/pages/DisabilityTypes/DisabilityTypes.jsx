@@ -2,7 +2,7 @@ import useToggle from "@/hooks/useToggle";
 import { useState } from "react";
 import useFetch from "@/hooks/useFetch";
 import api from "@/services/api";
-import PageHeader from "@/components/General/PageHeader";
+import PageHeader from "@/components/Global/PageHeader";
 import Panel from "@/components/UI/Panel";
 import DisabilityTypeForm from "@/pages/DisabilityTypes/components/DisabilityTypeForm";
 import SearchDisability from "@/pages/DisabilityTypes/components/SearchDisability";

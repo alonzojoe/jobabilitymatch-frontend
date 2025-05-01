@@ -2,7 +2,7 @@ import useToggle from "@/hooks/useToggle";
 import { useState } from "react";
 import useFetch from "@/hooks/useFetch";
 import api from "@/services/api";
-import PageHeader from "@/components/General/PageHeader";
+import PageHeader from "@/components/Global/PageHeader";
 import Panel from "@/components/UI/Panel";
 import RoleForm from "@/pages/Roles/components/RoleForm";
 import SearchRole from "@/pages/Roles/components/SearchRole";

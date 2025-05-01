@@ -1,6 +1,6 @@
 import React from "react";
 import ModalSm from "@/components/UI/ModalSm";
-import PageHeader from "@/components/General/PageHeader";
+import PageHeader from "@/components/Global/PageHeader";
 import { FaRegSave } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";

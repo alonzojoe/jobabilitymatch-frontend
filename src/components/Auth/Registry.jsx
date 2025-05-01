@@ -4,6 +4,7 @@ import ModalSm from "@/components/UI/ModalSm";
 import AuthHeader from "@/components/Auth/AuthHeader";
 import { FaRegBuilding } from "react-icons/fa";
 import { FaRegUserCircle } from "react-icons/fa";
+import PwdForm from "@/components/Form/PwdForm";
 
 const Registry = ({ onClose }) => {
   const [type, setType] = useState(1);
@@ -19,13 +20,19 @@ const Registry = ({ onClose }) => {
             </h3>
             <div className="row">
               <div className="col-12 mb-3">
-                <div className="btn btn-custom w-100 d-flex align-items-center justify-content-center gap-2">
+                <div
+                  className="btn btn-custom w-100 d-flex align-items-center justify-content-center gap-2"
+                  onClick={() => setType(2)}
+                >
                   <FaRegUserCircle className="fs-2" />
-                  <span className="fs-2">USER</span>
+                  <span className="fs-2">PWD</span>
                 </div>
               </div>
               <div className="col-12 mb-3">
-                <div className="btn btn-pink w-100 d-flex align-items-center justify-content-center gap-1">
+                <div
+                  className="btn btn-pink w-100 d-flex align-items-center justify-content-center gap-1"
+                  onClick={() => setType(3)}
+                >
                   <FaRegBuilding className="fs-2" />
                   <span className="fs-2">EMPLOYER</span>
                 </div>
@@ -37,6 +44,7 @@ const Registry = ({ onClose }) => {
         <Modal onClose={() => setType(1)}>
           <>
             <AuthHeader />
+            <PwdForm />
           </>
         </Modal>
       )}
