@@ -6,6 +6,7 @@ import "@/assets/css/apple/app.min.css";
 
 import "@/assets/plugins/ionicons/css/ionicons.min.css";
 import "sweetalert2/dist/sweetalert2.min.css";
+import "@/assets/css/spinner/spinner.css";
 import "@/index.css";
 
 //js

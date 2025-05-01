@@ -1,100 +1,58 @@
 import PageHeader from "@/components/General/PageHeader";
 import Panel from "@/components/UI/Panel";
-import { FaSearch, FaRegSave, FaTrashAlt, FaEdit } from "react-icons/fa";
+import { FaSearch, FaTrashAlt, FaEdit } from "react-icons/fa";
 import { LuRefreshCcw } from "react-icons/lu";
 import { FaPlus } from "react-icons/fa";
 import useToggle from "@/hooks/useToggle";
-import ModalSm from "@/components/UI/ModalSm";
 import Pagination from "@/components/UI/Pagination";
+import { useState } from "react";
+import AddDisabilityType from "@/pages/DisabilityTypes/components/AddDisabilityType";
+import useFetch from "@/hooks/useFetch";
+import { EmptyRow, ErrorRow, LoadingRow } from "@/components/Data/TableData";
+import SearchDisability from "@/pages/DisabilityTypes/components/SearchDisability";
+
+const initialParams = {
+  name: "",
+  page: 1,
+  rand: 0.1,
+};
 
 const DisabilityTypes = () => {
   const [showModal, toggleShowModal] = useToggle(false);
+  const [params, setParams] = useState(initialParams);
+
+  const {
+    data: disabilityTypes,
+    loading,
+    error,
+  } = useFetch(`/disability`, params);
+
+  const handleRefresh = () => {
+    console.log("page refresh");
+    setParams({ ...initialParams, rand: Math.floor(Math.random() * 100) }); // Random whole number (0-999)
+  };
+
+  const handlePageChange = (page) => {
+    setParams((prev) => ({
+      ...prev,
+      page,
+    }));
+  };
+
+  const handleSearch = (name) => {
+    setParams((prev) => ({ ...prev, name }));
+  };
+
   return (
     <>
       {showModal && (
-        <ModalSm onClose={() => toggleShowModal(false)}>
-          <>
-            <PageHeader title="Disability Type Details" />
-            <form className="mb-3">
-              <div className="mb-3 fv-plugins-icon-container">
-                <label
-                  htmlFor="email"
-                  className="form-label font-weight-bold fs-6"
-                >
-                  Disability Type
-                </label>
-                <input name="d-type" type="text" className="form-control" />
-                <div className="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback"></div>
-              </div>
-
-              <div className="mb-3"></div>
-
-              <button
-                type="button"
-                className="btn btn-custom w-100 font-weight-bold fs-7 d-flex align-items-center justify-content-center gap-1"
-              >
-                <FaRegSave className="fs-5" /> Save
-              </button>
-
-              <input type="hidden" data-has-listeners="true" />
-            </form>
-          </>
-        </ModalSm>
+        <AddDisabilityType
+          onClose={() => toggleShowModal(false)}
+          onRefresh={handleRefresh}
+        />
       )}
       <PageHeader title="Disability Types" />
-      <Panel title="Search">
-        <form className="pd-2">
-          <div className="row mb-3">
-            <div className="col-sm-12 col-md-6 col-lg-4">
-              <div>
-                <label className="form-label fs-6 mb-2 fw-semibold">
-                  Disability Type
-                </label>
-                <input
-                  type="text"
-                  name="name"
-                  className="form-control form-control-sm custom-font"
-                  // value={form.name}
-                  // onChange={updateParams}
-                />
-              </div>
-            </div>
-            <div className="col-sm-12 col-md-6 col-lg-3">
-              <div
-                className="d-flex gap-2 align-items-center"
-                style={{
-                  marginTop: "1.7rem",
-                }}
-              >
-                <button
-                  className="btn btn-custom d-flex align-items-center gap-1"
-                  type="submit"
-                >
-                  <FaSearch className="fs-6" /> Search
-                </button>
-                <button
-                  className="btn btn-pink"
-                  // onClick={() => {
-                  //   notif.custom(`data has been inserted`);
-                  // }}
-                  // onClick={handleRefresh}
-                  type="button"
-                >
-                  <LuRefreshCcw className="fs-6" /> Refresh
-                </button>
-              </div>
-            </div>
-          </div>
-        </form>
-      </Panel>
-      <div className="my-2 d-flex align-items-center justify-content-end">
-        <button
-          className="btn btn-primary btn-md d-flex align-items-center gap-1"
-          onClick={() => toggleShowModal(true)}
-        >
-          <FaPlus className="fs-6" /> Add New
-        </button>
-      </div>
+      <SearchDisability onSearch={handleSearch} onRefresh={handleRefresh} />
       <Panel>
         <div className="row">
           <div className="col-12">
@@ -123,33 +81,46 @@ const DisabilityTypes = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td className="text-center font-weight-bold">2.</td>
-                    <td className="text-center font-weight-bold">
-                      Hearing Impairment
-                    </td>
-                    <td className="text-center font-weight-bold">
-                      <div className="d-flex justify-content-center align-items-center gap-2">
-                        <button
-                          className="btn btn-warning"
-                          // onClick={}
-                          type="button"
-                        >
-                          <FaEdit className="fs-6" /> Update
-                        </button>
-                        <button
-                          className="btn btn-danger"
-                          // onClick={}
-                          type="button"
-                        >
-                          <FaTrashAlt className="fs-6" /> Delete
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
+                  {loading && <LoadingRow colSpan={7} />}
+                  {error && <ErrorRow colSpan={7} />}
+                  {!loading &&
+                    !error &&
+                    disabilityTypes?.data?.length === 0 && (
+                      <EmptyRow colSpan={7} />
+                    )}
+                  {!loading &&
+                    !error &&
+                    disabilityTypes?.data?.length > 0 &&
+                    disabilityTypes.data.map((d) => (
+                      <tr key={d.id}>
+                        <td className="text-center font-weight-bold fs-7">
+                          {d.id}
+                        </td>
+                        <td className="text-center font-weight-bold fs-7">
+                          {d.name}
+                        </td>
+                        <td className="text-center font-weight-bold fs-7">
+                          <div className="d-flex justify-content-center align-items-center gap-2">
+                            <button className="btn btn-warning" type="button">
+                              <FaEdit className="fs-6" /> Update
+                            </button>
+                            <button className="btn btn-danger" type="button">
+                              <FaTrashAlt className="fs-6" /> Delete
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
                 </tbody>
               </table>
-              <Pagination />
+              {!loading && disabilityTypes?.data?.length > 0 && (
+                <Pagination
+                  totalRecords={disabilityTypes.total_items}
+                  currentPage={params.page}
+                  totalPages={disabilityTypes.total_pages}
+                  onPageChange={handlePageChange}
+                />
+              )}
             </div>
           </div>
         </div>

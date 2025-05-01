@@ -24,7 +24,7 @@
   width: 100vw;
   top: 0;
   left: 0;
-  z-index: 100000;
+  z-index: 9999;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -574,4 +574,64 @@ form {
 
 .panel {
   margin-bottom: 0 !important;
+}
+
+
+.text-validation {
+  color: #ff0026;
+}
+
+.group-invalid>label {
+  color: #ff0026 !important;
+}
+
+.group-invalid>input,
+.group-invalid>textarea,
+.group-invalid>TextArea,
+.group-invalid>.ts-wrapper,
+.group-invalid>select {
+  animation: shake 0.4s 1;
+  border-color: #ff0026 !important;
+  background-color: #fdeded !important;
+}
+
+@keyframes shake {
+
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  30% {
+    transform: translateX(-1px);
+  }
+
+  50% {
+    transform: translateX(2px);
+  }
+
+  70% {
+    transform: translateX(-1px);
+  }
+
+  80% {
+    transform: translateX(2px);
+  }
+}
+
+/* .swal2-toast {
+  z-index: 10000 !important;
+
+} */
+
+/* .swal2-popup.swal2-toast.swal2-icon-error.swal2-show {
+  z-index: 10000 !important;
+} */
+
+div:where(.swal2-container) {
+  z-index: 10000 !important;
+}
+
+.custom-font {
+  font-size: 16px !important;
 }
