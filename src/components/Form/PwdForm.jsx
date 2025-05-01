@@ -1,4 +1,11 @@
 import PageHeader from "@/components/Global/PageHeader";
+import Select from "react-select";
+
+const options = [
+  { value: "chocolate", label: "Chocolate" },
+  { value: "strawberry", label: "Strawberry" },
+  { value: "vanilla", label: "Vanilla" },
+];
 const PwdForm = () => {
   return (
     <div>
@@ -84,6 +91,15 @@ const PwdForm = () => {
                     PWD ID No.
                   </label>
                   <input name="mname" type="text" className="form-control" />
+                  <div className="mt-1 font-weight-bold text-validation"></div>
+                </div>
+              </div>
+              <div className="col-sm-12 mb-2">
+                <div className="mb-2 fv-plugins-icon-container">
+                  <label htmlFor="disabilityTypes" className="form-label fs-6">
+                    Disability Type/s
+                  </label>
+                  <Select isMulti name="disabilityTypes" options={options} />
                   <div className="mt-1 font-weight-bold text-validation"></div>
                 </div>
               </div>
