@@ -5,7 +5,8 @@ import Dashboard from "@/pages/Dashboard/Dashboard";
 import FeedLayout from "@/layouts/FeedLayout";
 import Feed from "@/pages/Feed/Feed";
 import DisabilityTypes from "@/pages/DisabilityTypes/DisabilityTypes";
-import Users from "@/pages/Users/Users"
+import Users from "@/pages/Users/Users";
+import Roles from "@/pages/Roles/Roles";
 function App() {
   return (
     <>
@@ -18,6 +19,7 @@ function App() {
             <Route path="home" element={<AppLayout />}>
               <Route index element={<Dashboard />} />
               <Route path="users" element={<Users />} />
+              <Route path="roles" element={<Roles />} />
               <Route path="disability-types" element={<DisabilityTypes />} />
             </Route>
           </Route>

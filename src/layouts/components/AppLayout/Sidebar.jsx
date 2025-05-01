@@ -19,7 +19,7 @@ const Sidebar = () => {
             <li className="sidebar-items">
               <a href="index.html">
                 <i className="ion-ios-power bg-pink"></i>
-                <span>Logout {JSON.stringify(pathname)}</span>
+                <span>Logout</span>
               </a>
             </li>
             <li>

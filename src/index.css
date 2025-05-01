@@ -647,3 +647,7 @@ div:where(.swal2-container) {
 .fw-bolder {
   font-weight: bolder;
 }
+
+/* body {
+  background: #F8F7FA !important;
+} */

@@ -4,19 +4,19 @@ import PageHeader from "@/components/General/PageHeader";
 import { FaRegSave } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { disabilitySchema } from "@/schema";
+import { roleSchema } from "@/schema";
 import { ToastMessage } from "@/libs/utils";
 import api from "@/services/api";
 
 const notify = new ToastMessage();
 
-const DisabilityTypeForm = ({ onClose, onRefresh, selected }) => {
+const RoleForm = ({ onClose, onRefresh, selected }) => {
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting: isLoading },
   } = useForm({
-    resolver: zodResolver(disabilitySchema),
+    resolver: zodResolver(roleSchema),
     defaultValues: {
       name: selected?.name ?? "",
     },
@@ -31,7 +31,7 @@ const DisabilityTypeForm = ({ onClose, onRefresh, selected }) => {
     } catch (error) {
       console.log(error);
       if (error?.response?.data?.error) {
-        const msgc = `Disability type has already been added`;
+        const msgc = `Role has already been added`;
         notify.notif("error", `${msgc}`);
       } else {
         notify.notif("error", `Something went wrong.`);
@@ -40,23 +40,23 @@ const DisabilityTypeForm = ({ onClose, onRefresh, selected }) => {
   };
 
   const save = async (data) => {
-    await api.post(`/disability/create`, {
+    await api.post(`/role/create`, {
       name: data.name,
     });
-    notify.notif("success", "Disability type added successfully!");
+    notify.notif("success", "Role added successfully!");
   };
 
   const update = async (data) => {
-    await api.put(`/disability/update/${selected.id}`, {
+    await api.patch(`/role/update/${selected.id}`, {
       name: data.name,
     });
-    notify.notif("success", "Disability type updated successfully!");
+    notify.notif("success", "Role updated successfully!");
   };
 
   return (
     <ModalSm onClose={onClose}>
       <>
-        <PageHeader title="Disability Type Details" />
+        <PageHeader title="Role Details" />
         <form
           className="mb-3"
           onSubmit={handleSubmit((data) => handleSave(data))}
@@ -67,7 +67,7 @@ const DisabilityTypeForm = ({ onClose, onRefresh, selected }) => {
             }`}
           >
             <label htmlFor="name" className="form-label font-weight-bold fs-6">
-              Disability Type
+              Role
             </label>
             <input
               {...register("name")}
@@ -97,4 +97,4 @@ const DisabilityTypeForm = ({ onClose, onRefresh, selected }) => {
   );
 };
 
-export default DisabilityTypeForm;
+export default RoleForm;

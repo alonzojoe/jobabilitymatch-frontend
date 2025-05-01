@@ -34,7 +34,7 @@ const DisabilityTypes = () => {
 
   const handleRefresh = () => {
     console.log("page refresh");
-    setParams({ ...initialParams, rand: Math.floor(Math.random() * 100) }); // Random whole number (0-999)
+    setParams({ ...initialParams, rand: Math.floor(Math.random() * 100) });
   };
 
   const handlePageChange = (page) => {
