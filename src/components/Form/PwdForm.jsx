@@ -4,13 +4,12 @@ import Select from "react-select";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { pwdSchema } from "@/schema";
+import { ToastMessage } from "@/libs/utils";
+import api from "@/services/api";
 
-const options = [
-  { value: "chocolate", label: "Chocolate" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" },
-];
-const PwdForm = ({ role, roles, disabilityTypes }) => {
+const notify = new ToastMessage();
+
+const PwdForm = ({ role, roles, disabilityTypes, onClose }) => {
   const [selectedDisabilities, setSelectedDisabilities] = useState([]);
   const [error, setError] = useState("");
 
@@ -35,6 +34,22 @@ const PwdForm = ({ role, roles, disabilityTypes }) => {
       ...data,
       disability_type_ids: selectedDisabilities.map((d) => d.id),
     };
+
+    try {
+      await api.post("/auth/register", {
+        ...user,
+      });
+      notify.notif("success", "Account created successfully");
+      onClose();
+    } catch (error) {
+      console.log(error);
+      if (error?.response?.data?.errors?.email) {
+        const msg = error?.response?.data?.errors?.email[0];
+        notify.notif("error", `${msg}`);
+      } else {
+        notify.notif("error", `Something went wrong.`);
+      }
+    }
 
     console.log(user);
   };

@@ -50,6 +50,7 @@ const Registry = ({ onClose, roles, disabilityTypes }) => {
               role={type}
               roles={roles}
               disabilityTypes={disabilityTypes}
+              onClose={onClose}
             />
           </>
         </Modal>
