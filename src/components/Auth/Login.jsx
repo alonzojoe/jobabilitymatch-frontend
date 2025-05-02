@@ -32,7 +32,11 @@ const Login = ({ onClose, onCreate }) => {
       setLocalStorage("auth-token", token);
       setLocalStorage("auth-user", user);
 
-      window.location.href = "/home";
+      if (user?.role?.id === 2) {
+        location.reload();
+      } else {
+        window.location.href = "/home";
+      }
     } catch (error) {
       console.log(error?.message);
       notify.notif("error", "Invalid email or password");

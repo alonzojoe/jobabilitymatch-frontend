@@ -1,5 +1,6 @@
 import AuthContext from "@/store/auth/auth-context";
 import { useState } from "react";
+
 const AuthProvider = ({ children }) => {
   const [authUser, setAuthUser] = useState(null);
 
@@ -9,14 +10,14 @@ const AuthProvider = ({ children }) => {
     }
   };
 
+  const clearAuthUser = () => {
+    setAuthUser(null);
+  };
+
   const authData = {
     authUser,
     storeAuthUser,
     clearAuthUser,
-  };
-
-  const clearAuthUser = () => {
-    setAuthUser(null);
   };
 
   return (

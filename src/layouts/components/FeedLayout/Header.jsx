@@ -1,3 +1,5 @@
+import { useEffect, useContext } from "react";
+import AuthContext from "@/store/auth/auth-context";
 import MainLogo from "@/assets/images/logo-main.png";
 import MainText from "@/assets/images/logo-text.png";
 import Avatar from "@/assets/images/avatar.jpeg";
@@ -5,14 +7,21 @@ import useToggle from "@/hooks/useToggle";
 import Login from "@/components/Auth/Login";
 import Registry from "@/components/Auth/Registry";
 import useFetch from "@/hooks/useFetch";
+import { getLocalStorage } from "@/libs/utils";
 
 const Header = () => {
-  const authenticated = false;
   const [showLogin, toggleLogin] = useToggle(false);
   const [showRegistry, toggleRegistry] = useToggle(false);
-
   const { data: roles } = useFetch(`/role/all`, null);
   const { data: disabilityTypes } = useFetch(`/disability/all`, null);
+
+  const { authUser, storeAuthUser } = useContext(AuthContext);
+
+  useEffect(() => {
+    const authUser = getLocalStorage("auth-user");
+    storeAuthUser(authUser);
+    console.log("auth-user", authUser);
+  }, [storeAuthUser]);
 
   const createAccount = () => {
     toggleLogin(false);
@@ -47,7 +56,7 @@ const Header = () => {
             </span>
           </a>
           <div className="navbar-toggle profile">
-            {authenticated ? (
+            {authUser ? (
               <ul
                 className="navbar-nav navbar-right"
                 style={{
@@ -84,7 +93,7 @@ const Header = () => {
                       <i className="fa fa-user"></i>
                     </div>
                     <span className="d-none d-md-inline font-weight-bold">
-                      JOENELL ALONZO
+                      {`${authUser?.firstname} ${authUser.lastname}`}
                     </span>{" "}
                     <b className="caret"></b>
                   </a>
@@ -93,7 +102,7 @@ const Header = () => {
               <h3 className="label label-inverse">Administrator</h3>
             </span> */}
                     <span className="dropdown-item label label-inverse ml-3 pe-none">
-                      Administrator
+                      {authUser?.role?.name}
                     </span>
                     <a href="javascript:;" className="dropdown-item mt-1">
                       Update Profile
@@ -139,7 +148,7 @@ const Header = () => {
         {/* END navbar-header */}
 
         {/* BEGIN header-nav */}
-        {authenticated ? (
+        {authUser ? (
           <ul className="navbar-nav navbar-right profile-auth">
             <li className="dropdown">
               <a
@@ -167,7 +176,7 @@ const Header = () => {
                   <i className="fa fa-user"></i>
                 </div>
                 <span className="d-none d-md-inline font-weight-bold">
-                  JOENELL ALONZO
+                  {`${authUser?.firstname} ${authUser.lastname}`}
                 </span>{" "}
                 <b className="caret"></b>
               </a>
@@ -176,7 +185,7 @@ const Header = () => {
               <h3 className="label label-inverse">Administrator</h3>
             </span> */}
                 <span className="dropdown-item label label-inverse ml-3 pe-none">
-                  Administrator
+                  {authUser?.role?.name}
                 </span>
                 <a href="javascript:;" className="dropdown-item mt-1">
                   Update Profile
