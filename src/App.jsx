@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ProtectedRoutes from "@/middleware/ProtectedRoutes";
 import AppLayout from "@/layouts/AppLayout";
@@ -7,9 +8,23 @@ import Feed from "@/pages/Feed/Feed";
 import DisabilityTypes from "@/pages/DisabilityTypes/DisabilityTypes";
 import Users from "@/pages/Users/Users";
 import Roles from "@/pages/Roles/Roles";
+import { Toaster } from "react-hot-toast";
 function App() {
+  useEffect(() => {
+
+    document.body.classList.remove("pace-done");
+
+
+    document.body.removeAttribute("data-new-gr-c-s-check-loaded");
+    document.body.removeAttribute("data-gr-ext-installed");
+
+    const paceElements = document.querySelectorAll(".pace");
+    paceElements.forEach((el) => el.remove());
+  }, []);
+
   return (
     <>
+      <Toaster />
       <BrowserRouter>
         <Routes>
           <Route path="" element={<FeedLayout />}>
