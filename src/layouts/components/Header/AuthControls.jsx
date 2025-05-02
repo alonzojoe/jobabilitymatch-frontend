@@ -1,10 +1,11 @@
-import React from "react";
+const AuthControls = ({ onSignIn, onSignUp, type }) => {
+  const navClass = type === "lg" ? "profile-auth" : "";
+  const mtClass = type === "lg" ? "mt-2" : "mt-0";
 
-const AuthControls = ({ onSignIn, onSignUp }) => {
   return (
-    <ul className="navbar-nav navbar-right">
+    <ul className={`navbar-nav navbar-right ${navClass}`}>
       <li>
-        <div className="d-flex align-items-center gap-2 mt-0">
+        <div className={`d-flex align-items-center gap-2 ${mtClass}`}>
           <button className="btn btn-custom btn-md" onClick={onSignIn}>
             Sign In
           </button>

@@ -9,8 +9,8 @@ import Registry from "@/components/Auth/Registry";
 import AuthUser from "@/layouts/components/Header/AuthUser";
 import useFetch from "@/hooks/useFetch";
 import useAuthSetup from "@/hooks/useAuthSetup";
+import AuthControls from "@/layouts/components/Header/AuthControls";
 import { logout } from "@/libs/utils";
-import AuthControls from "../Header/AuthControls";
 const Header = () => {
   const [showLogin, toggleLogin] = useToggle(false);
   const [showRegistry, toggleRegistry] = useToggle(false);
@@ -118,6 +118,7 @@ const Header = () => {
               </ul>
             ) : (
               <AuthControls
+                type={`md`}
                 onSignIn={() => toggleLogin(true)}
                 onSignUp={() => toggleRegistry(true)}
               />
@@ -131,6 +132,7 @@ const Header = () => {
           <AuthUser authUser={authUser} />
         ) : (
           <AuthControls
+            type={`lg`}
             onSignIn={() => toggleLogin(true)}
             onSignUp={() => toggleRegistry(true)}
           />
