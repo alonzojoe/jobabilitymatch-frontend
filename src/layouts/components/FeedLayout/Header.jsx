@@ -7,8 +7,7 @@ import useToggle from "@/hooks/useToggle";
 import Login from "@/components/Auth/Login";
 import Registry from "@/components/Auth/Registry";
 import useFetch from "@/hooks/useFetch";
-import { getLocalStorage } from "@/libs/utils";
-
+import { getLocalStorage, logout } from "@/libs/utils";
 const Header = () => {
   const [showLogin, toggleLogin] = useToggle(false);
   const [showRegistry, toggleRegistry] = useToggle(false);
@@ -108,7 +107,11 @@ const Header = () => {
                       Update Profile
                     </a>
                     <div className="dropdown-divider"></div>
-                    <a href="javascript:;" className="dropdown-item">
+                    <a
+                      href="javascript:;"
+                      className="dropdown-item"
+                      onClick={logout}
+                    >
                       Log Out
                     </a>
                   </div>
@@ -191,7 +194,11 @@ const Header = () => {
                   Update Profile
                 </a>
                 <div className="dropdown-divider"></div>
-                <a href="javascript:;" className="dropdown-item">
+                <a
+                  href="javascript:;"
+                  className="dropdown-item"
+                  onClick={logout}
+                >
                   Log Out
                 </a>
               </div>
