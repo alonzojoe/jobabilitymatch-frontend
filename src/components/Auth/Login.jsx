@@ -1,8 +1,13 @@
+import api from "@/services/api";
+import { setLocalStorage } from "@/libs/utils";
 import ModalSm from "@/components/UI/ModalSm";
 import AuthHeader from "@/components/Auth/AuthHeader";
 import { useForm } from "react-hook-form";
 import { authSchema } from "@/schema/index";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { ToastMessage } from "@/libs/utils";
+
+const notify = new ToastMessage();
 
 const Login = ({ onClose, onCreate }) => {
   const {
@@ -13,9 +18,29 @@ const Login = ({ onClose, onCreate }) => {
     resolver: zodResolver(authSchema),
   });
 
-  const handleSignIn = async (data) => {
-    console.log(data);
-    await new Promise((res) => setTimeout(res, 2000));
+  const handleSignIn = async (formData) => {
+    console.log(formData);
+    const { email, password } = formData;
+    try {
+      const res = await api.post("/auth/login", {
+        email,
+        password,
+      });
+
+      const { token } = res.data.authorization;
+      const { user } = res.data;
+      setLocalStorage("auth-token", token);
+      setLocalStorage("auth-user", user);
+
+      window.location.href = "/home";
+    } catch (error) {
+      console.log(error?.message);
+      notify.notif("error", "Invalid email or password");
+      // toast.error("Invalid email or password", {
+      //   duration: 3000,
+      //   position: "top-right",
+      // });
+    }
   };
 
   return (

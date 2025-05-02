@@ -661,3 +661,11 @@ div:where(.swal2-container) {
   width: 1.1rem;
   height: 1.1rem;
 }
+
+.swal2-confirm.swal2-styled {
+  outline: none !important;
+}
+
+#_rht_toaster {
+  z-index: 10000 !important;
+}
