@@ -1,5 +1,5 @@
 import React from "react";
-import ModalSm from "@/components/UI/ModalSm";
+import Modal from "@/components/UI/Modal";
 import PageHeader from "@/components/Global/PageHeader";
 import { FaRegSave } from "react-icons/fa";
 import { useForm } from "react-hook-form";
@@ -10,7 +10,7 @@ import api from "@/services/api";
 
 const notify = new ToastMessage();
 
-const DisabilityTypeForm = ({ onClose, onRefresh, selected }) => {
+const JobPostingForm = ({ onClose, onRefresh, selected }) => {
   const {
     register,
     handleSubmit,
@@ -54,11 +54,11 @@ const DisabilityTypeForm = ({ onClose, onRefresh, selected }) => {
   };
 
   return (
-    <ModalSm onClose={onClose}>
+    <Modal onClose={onClose}>
       <>
-        <PageHeader title="Disability Type Details" />
+        <PageHeader title="Job Posting Details" />
         <form
-          className="mb-3"
+          className="mt-3 mb-3"
           onSubmit={handleSubmit((data) => handleSave(data))}
         >
           <div
@@ -98,8 +98,8 @@ const DisabilityTypeForm = ({ onClose, onRefresh, selected }) => {
           <input type="hidden" data-has-listeners="true" />
         </form>
       </>
-    </ModalSm>
+    </Modal>
   );
 };
 
-export default DisabilityTypeForm;
+export default JobPostingForm;

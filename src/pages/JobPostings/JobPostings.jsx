@@ -4,7 +4,7 @@ import useFetch from "@/hooks/useFetch";
 import api from "@/services/api";
 import PageHeader from "@/components/Global/PageHeader";
 import Panel from "@/components/UI/Panel";
-import DisabilityTypeForm from "@/pages/JobPostings/components/DisabilityTypeForm";
+import JobPostingForm from "@/pages/JobPostings/components/JobPostingForm";
 import SearchJobPosting from "@/pages/JobPostings/components/SearchJobPosting";
 import JobPostingList from "@/pages/JobPostings/components/JobPostingList";
 import Pagination from "@/components/UI/Pagination";
@@ -77,8 +77,8 @@ const JobPostings = () => {
 
   return (
     <>
-      {/* {showModal && (
-        <DisabilityTypeForm
+      {showModal && (
+        <JobPostingForm
           selected={selected}
           onClose={() => {
             toggleShowModal(false);
@@ -86,7 +86,7 @@ const JobPostings = () => {
           }}
           onRefresh={handleRefresh}
         />
-      )} */}
+      )}
       <PageHeader title="Job Postings" />
       <SearchJobPosting onSearch={handleSearch} onRefresh={handleRefresh} />
       <div className="my-2 d-flex align-items-center justify-content-end">
