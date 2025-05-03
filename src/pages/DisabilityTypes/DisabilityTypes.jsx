@@ -6,10 +6,9 @@ import PageHeader from "@/components/Global/PageHeader";
 import Panel from "@/components/UI/Panel";
 import DisabilityTypeForm from "@/pages/DisabilityTypes/components/DisabilityTypeForm";
 import SearchDisability from "@/pages/DisabilityTypes/components/SearchDisability";
+import DisabilityTypeList from "@/pages/DisabilityTypes/components/DisabilityTypeList";
 import Pagination from "@/components/UI/Pagination";
-import { EmptyRow, ErrorRow, LoadingRow } from "@/components/Data/TableData";
 import { ConfirmDialog, ToastMessage } from "@/libs/utils";
-import { FaTrashAlt, FaEdit } from "react-icons/fa";
 import { FaPlus } from "react-icons/fa";
 
 const initialParams = {
@@ -100,70 +99,13 @@ const DisabilityTypes = () => {
         <div className="row">
           <div className="col-12">
             <div className="table-responsive">
-              <table className="table table-striped table-bordered table-td-valign-middle dataTable no-footer dtr-inline collapsed">
-                <thead>
-                  <tr>
-                    <th
-                      className="text-center font-weight-bold fs-7"
-                      width="20%"
-                    >
-                      ID
-                    </th>
-                    <th
-                      className="text-center font-weight-bold fs-7"
-                      width="50%"
-                    >
-                      Disablity Type
-                    </th>
-                    <th
-                      className="text-center font-weight-bold fs-7"
-                      width="30%"
-                    >
-                      Option
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {loading && <LoadingRow colSpan={7} />}
-                  {error && <ErrorRow colSpan={7} />}
-                  {!loading &&
-                    !error &&
-                    disabilityTypes?.data?.length === 0 && (
-                      <EmptyRow colSpan={7} />
-                    )}
-                  {!loading &&
-                    !error &&
-                    disabilityTypes?.data?.length > 0 &&
-                    disabilityTypes.data.map((d) => (
-                      <tr key={d.id}>
-                        <td className="text-center font-weight-bold fs-7">
-                          {d.id}
-                        </td>
-                        <td className="text-center font-weight-bold fs-7">
-                          {d.name}
-                        </td>
-                        <td className="text-center font-weight-bold fs-7">
-                          <div className="d-flex justify-content-center align-items-center gap-2">
-                            <button
-                              className="btn btn-warning"
-                              type="button"
-                              onClick={() => handleUpdate(d)}
-                            >
-                              <FaEdit className="fs-6" /> Update
-                            </button>
-                            <button
-                              className="btn btn-danger"
-                              type="button"
-                              onClick={() => handleDelete(d.id)}
-                            >
-                              <FaTrashAlt className="fs-6" /> Delete
-                            </button>
-                          </div>
-                        </td>
-                      </tr>
-                    ))}
-                </tbody>
-              </table>
+              <DisabilityTypeList
+                loading={loading}
+                error={error}
+                disabilityTypes={disabilityTypes}
+                onUpdate={handleUpdate}
+                onDelete={handleDelete}
+              />
               {!loading && disabilityTypes?.data?.length > 0 && (
                 <Pagination
                   totalRecords={disabilityTypes.total_items}
