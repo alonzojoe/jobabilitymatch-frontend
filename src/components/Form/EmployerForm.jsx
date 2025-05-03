@@ -25,26 +25,29 @@ const EmployerForm = ({ onClose }) => {
 
   const handleSave = async (data) => {
     console.log("data", data);
-    // const user = {
-    //   ...data,
-    //   disability_type_ids: selectedDisabilities.map((d) => d.id),
-    // };
+    const employer = {
+      ...data,
+      role_id: 3,
+    };
 
-    // try {
-    //   await api.post("/auth/register", {
-    //     ...user,
-    //   });
-    //   notify.notif("success", "Account created successfully");
-    //   onClose();
-    // } catch (error) {
-    //   console.log(error);
-    //   if (error?.response?.data?.errors?.email) {
-    //     const msg = error?.response?.data?.errors?.email[0];
-    //     notify.notif("error", `${msg}`);
-    //   } else {
-    //     notify.notif("error", `Something went wrong.`);
-    //   }
-    // }
+    try {
+      await api.post("/auth/register", {
+        ...employer,
+      });
+      notify.notif("success", "Account created successfully");
+      onClose();
+    } catch (error) {
+      console.log("error", error);
+      if (error?.response?.data?.errors?.company) {
+        const msg = error?.response?.data?.errors?.company[0];
+        notify.notif("error", `${msg}`);
+      } else if (error?.response?.data?.errors?.email) {
+        const msg = error?.response?.data?.errors?.email[0];
+        notify.notif("error", `${msg}`);
+      } else {
+        notify.notif("error", `Something went wrong.`);
+      }
+    }
 
     // console.log(user);
   };
@@ -73,6 +76,7 @@ const EmployerForm = ({ onClose }) => {
                     {...register("company")}
                     type="text"
                     className="form-control text-uppercase"
+                    maxLength={100}
                   />
                   <div className="mt-1 font-weight-bold text-validation">
                     {errors.company?.message}
@@ -113,6 +117,7 @@ const EmployerForm = ({ onClose }) => {
                     {...register("lastname")}
                     type="text"
                     className="form-control text-uppercase"
+                    maxLength={50}
                   />
                   <div className="mt-1 font-weight-bold text-validation">
                     {errors.lastname?.message}
@@ -133,6 +138,7 @@ const EmployerForm = ({ onClose }) => {
                     {...register("firstname")}
                     type="text"
                     className="form-control text-uppercase"
+                    maxLength={50}
                   />
                   <div className="mt-1 font-weight-bold text-validation">
                     {errors.firstname?.message}
@@ -149,6 +155,7 @@ const EmployerForm = ({ onClose }) => {
                     {...register("middlename")}
                     type="text"
                     className="form-control text-uppercase"
+                    maxLength={50}
                   />
                 </div>
               </div>
