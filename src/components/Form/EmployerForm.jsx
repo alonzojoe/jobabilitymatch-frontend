@@ -34,7 +34,7 @@ const EmployerForm = ({ onClose }) => {
       await api.post("/auth/register", {
         ...employer,
       });
-      notify.notif("success", "Account created successfully");
+      notify.notif("success", "Employer Account created successfully");
       onClose();
     } catch (error) {
       console.log("error", error);

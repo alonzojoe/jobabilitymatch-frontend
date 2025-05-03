@@ -1,9 +1,11 @@
 import React from "react";
 import { logout } from "@/libs/utils";
 
-const AuthUser = ({ authUser }) => {
+const AuthUser = ({ withClass = true, authUser }) => {
+  const ulClass = withClass ? "profile-auth" : "";
+
   return (
-    <ul className="navbar-nav navbar-right profile-auth">
+    <ul className={`navbar-nav navbar-right ${ulClass}`}>
       <li className="dropdown">
         <a href="#" data-toggle="dropdown" className="dropdown-toggle icon">
           <i className="ion-ios-notifications"></i>
@@ -26,7 +28,7 @@ const AuthUser = ({ authUser }) => {
             <i className="fa fa-user"></i>
           </div>
           <span className="d-none d-md-inline font-weight-bold">
-            {`${authUser?.firstname} ${authUser.lastname}`}
+            {`${authUser?.firstname} ${authUser?.lastname}`}
           </span>{" "}
           <b className="caret"></b>
         </a>

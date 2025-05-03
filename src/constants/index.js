@@ -14,7 +14,7 @@ export const MENUS = [
     // icon: AiFillDashboard,
     icon: "ion-ios-speedometer",
     color: "bg-danger",
-    type: "admin",
+    type: 1,
   },
   {
     id: 2,
@@ -23,7 +23,7 @@ export const MENUS = [
     // icon: FaUsers,
     icon: "ion-ios-person-add",
     color: "bg-primary",
-    type: "admin",
+    type: 1,
   },
   {
     id: 3,
@@ -32,7 +32,7 @@ export const MENUS = [
     // icon: PiBuildingsFill,
     icon: "ion-ios-business",
     color: "bg-success",
-    type: "admin",
+    type: 1,
   },
   {
     id: 4,
@@ -41,7 +41,7 @@ export const MENUS = [
     // icon: FaCogs,
     icon: "ion-ios-settings",
     color: "bg-info",
-    type: "admin",
+    type: 1,
   },
   {
     id: 5,
@@ -50,7 +50,7 @@ export const MENUS = [
     // icon: FaPersonWalkingWithCane,
     color: "bg-dark",
     icon: "ion-ios-cog",
-    type: "admin",
+    type: 1,
   },
   {
     id: 6,
@@ -59,7 +59,7 @@ export const MENUS = [
     // icon: AiFillDashboard,
     icon: "ion-ios-speedometer",
     color: "bg-danger",
-    type: "employer",
+    type: 3,
   },
   {
     id: 7,
@@ -68,7 +68,7 @@ export const MENUS = [
     // icon: MdOutlinePostAdd,
     icon: "ion-ios-create",
     color: "bg-primary",
-    type: "employer",
+    type: 3,
   },
   {
     id: 8,
@@ -77,7 +77,7 @@ export const MENUS = [
     // icon: FaUsersLine,
     icon: "ion-ios-walk",
     color: "bg-secondary",
-    type: "employer",
+    type: 3,
   },
 ];
 
