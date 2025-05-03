@@ -59,3 +59,8 @@ export const handlePhoneInput = (event) => {
   const { value } = event.target;
   event.target.value = value.replace(/\D/g, "").slice(0, 10);
 };
+
+export const handlePwdIdNo = (event) => {
+  const { value } = event.target;
+  event.target.value = value.replace(/[^0-9-]/g, "").slice(0, 30);
+};

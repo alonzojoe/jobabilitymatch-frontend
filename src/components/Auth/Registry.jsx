@@ -2,9 +2,10 @@ import { useState } from "react";
 import Modal from "@/components/UI/Modal";
 import ModalSm from "@/components/UI/ModalSm";
 import AuthHeader from "@/components/Auth/AuthHeader";
+import PwdForm from "@/components/Form/PwdForm";
+import EmployerForm from "@/components/Form/EmployerForm";
 import { FaRegBuilding } from "react-icons/fa";
 import { FaRegUserCircle } from "react-icons/fa";
-import PwdForm from "@/components/Form/PwdForm";
 
 const Registry = ({ onClose, roles, disabilityTypes }) => {
   const [type, setType] = useState(1);
@@ -45,12 +46,16 @@ const Registry = ({ onClose, roles, disabilityTypes }) => {
         <Modal onClose={() => setType(1)}>
           <>
             <AuthHeader />
-            <PwdForm
-              role={type}
-              roles={roles}
-              disabilityTypes={disabilityTypes}
-              onClose={onClose}
-            />
+            {type === 2 ? (
+              <PwdForm
+                role={type}
+                roles={roles}
+                disabilityTypes={disabilityTypes}
+                onClose={onClose}
+              />
+            ) : (
+              <EmployerForm onClose={onClose} />
+            )}
           </>
         </Modal>
       )}
