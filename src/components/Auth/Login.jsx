@@ -3,7 +3,7 @@ import { setLocalStorage } from "@/libs/utils";
 import ModalSm from "@/components/UI/ModalSm";
 import AuthHeader from "@/components/Auth/AuthHeader";
 import { useForm } from "react-hook-form";
-import { authSchema } from "@/schema/index";
+import { authSchema } from "@/schemas/index";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ToastMessage } from "@/libs/utils";
 

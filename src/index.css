@@ -669,3 +669,11 @@ div:where(.swal2-container) {
 #_rht_toaster {
   z-index: 10000 !important;
 }
+
+.text-uppercase {
+  text-transform: uppercase !important;
+}
+
+.text-capitalize {
+  text-transform: capitalize !important;
+}

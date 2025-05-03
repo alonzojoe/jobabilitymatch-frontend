@@ -4,7 +4,7 @@ import PageHeader from "@/components/Global/PageHeader";
 import { FaRegSave } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { roleSchema } from "@/schema";
+import { roleSchema } from "@/schemas";
 import { ToastMessage } from "@/libs/utils";
 import api from "@/services/api";
 

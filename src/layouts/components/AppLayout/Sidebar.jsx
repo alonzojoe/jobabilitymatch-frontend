@@ -1,11 +1,12 @@
 import { MENUS } from "@/constants";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import { logout } from "@/libs/utils";
 
-const Sidebar = () => {
-  const user_type = "admin";
+const Sidebar = ({ authUser }) => {
+  console.log("authUser sidebar", authUser);
   const { pathname } = useLocation();
-  const menus = MENUS.filter((menu) => menu.type === user_type);
+  const menus = MENUS.filter((menu) => menu.type === authUser?.role_id);
 
   return (
     <>
@@ -17,7 +18,7 @@ const Sidebar = () => {
               <NavItem key={menu.id} menu={menu} current={pathname} />
             ))}
             <li className="sidebar-items">
-              <a href="index.html">
+              <a href="javascript:;" onClick={logout}>
                 <i className="ion-ios-power bg-pink"></i>
                 <span>Logout</span>
               </a>

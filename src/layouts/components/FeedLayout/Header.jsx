@@ -11,6 +11,7 @@ import useFetch from "@/hooks/useFetch";
 import useAuthSetup from "@/hooks/useAuthSetup";
 import AuthControls from "@/layouts/components/Header/AuthControls";
 import { logout } from "@/libs/utils";
+import { Link } from "react-router-dom";
 const Header = () => {
   const [showLogin, toggleLogin] = useToggle(false);
   const [showRegistry, toggleRegistry] = useToggle(false);
@@ -40,9 +41,8 @@ const Header = () => {
       )}
       <div id="header" className="header navbar-default navbar-head">
         <div className="navbar-header">
-          <a href="index.html" className="navbar-brand">
+          <Link to="/" className="navbar-brand">
             <span className="navbar-logo d-flex align-items-center gap-2">
-              {/* <i className="ion-ios-cloud"></i> */}
               <img src={MainLogo} width="31" height="25" />
               <img
                 src={MainText}
@@ -52,7 +52,7 @@ const Header = () => {
                 }}
               />
             </span>
-          </a>
+          </Link>
           <div className="navbar-toggle profile">
             {authUser ? (
               <ul

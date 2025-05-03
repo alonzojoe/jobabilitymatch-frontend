@@ -3,8 +3,8 @@ import PageHeader from "@/components/Global/PageHeader";
 import Select from "react-select";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { pwdSchema } from "@/schema";
-import { ToastMessage } from "@/libs/utils";
+import { pwdSchema } from "@/schemas";
+import { ToastMessage, handlePhoneInput, handlePwdIdNo } from "@/libs/utils";
 import api from "@/services/api";
 
 const notify = new ToastMessage();
@@ -84,12 +84,13 @@ const PwdForm = ({ role, roles, disabilityTypes, onClose }) => {
                   }`}
                 >
                   <label htmlFor="lastname" className="form-label fs-6">
-                    Last Name
+                    Last Name <span className="text-danger">*</span>
                   </label>
                   <input
                     {...register("lastname")}
                     type="text"
-                    className="form-control"
+                    className="form-control text-uppercase"
+                    maxLength={50}
                   />
                   <div className="mt-1 font-weight-bold text-validation">
                     {errors.lastname?.message}
@@ -104,12 +105,13 @@ const PwdForm = ({ role, roles, disabilityTypes, onClose }) => {
                   }`}
                 >
                   <label htmlFor="firstname" className="form-label fs-6">
-                    First Name
+                    First Name <span className="text-danger">*</span>
                   </label>
                   <input
                     {...register("firstname")}
                     type="text"
-                    className="form-control"
+                    className="form-control text-uppercase"
+                    maxLength={50}
                   />
                   <div className="mt-1 font-weight-bold text-validation">
                     {errors.firstname?.message}
@@ -125,7 +127,8 @@ const PwdForm = ({ role, roles, disabilityTypes, onClose }) => {
                   <input
                     {...register("middlename")}
                     type="text"
-                    className="form-control"
+                    className="form-control text-uppercase"
+                    maxLength={50}
                   />
                 </div>
               </div>
@@ -137,7 +140,7 @@ const PwdForm = ({ role, roles, disabilityTypes, onClose }) => {
                   }`}
                 >
                   <label htmlFor="birthdate" className="form-label fs-6">
-                    Birthdate
+                    Birthdate <span className="text-danger">*</span>
                   </label>
                   <input
                     {...register("birthdate")}
@@ -157,7 +160,7 @@ const PwdForm = ({ role, roles, disabilityTypes, onClose }) => {
                   }`}
                 >
                   <label htmlFor="gender" className="form-label fs-6">
-                    Gender
+                    Gender <span className="text-danger">*</span>
                   </label>
                   <select {...register("gender")} className="form-control">
                     <option value="">Please Select</option>
@@ -177,13 +180,14 @@ const PwdForm = ({ role, roles, disabilityTypes, onClose }) => {
                   }`}
                 >
                   <label htmlFor="phone" className="form-label fs-6">
-                    Phone
+                    Phone <span className="text-danger">*</span>
                   </label>
                   <input
                     {...register("phone")}
                     type="text"
                     className="form-control"
                     maxLength={11}
+                    onChange={handlePhoneInput}
                   />
                   <div className="mt-1 font-weight-bold text-validation">
                     {errors.phone?.message}
@@ -198,12 +202,14 @@ const PwdForm = ({ role, roles, disabilityTypes, onClose }) => {
                   }`}
                 >
                   <label htmlFor="pwd_id_no" className="form-label fs-6">
-                    PWD ID No.
+                    PWD ID No. <span className="text-danger">*</span>
                   </label>
                   <input
                     {...register("pwd_id_no")}
                     type="text"
                     className="form-control"
+                    maxLength={30}
+                    onChange={handlePwdIdNo}
                   />
                   <div className="mt-1 font-weight-bold text-validation">
                     {errors.pwd_id_no?.message}
@@ -250,7 +256,7 @@ const PwdForm = ({ role, roles, disabilityTypes, onClose }) => {
                     htmlFor="disability_type_ids"
                     className="form-label fs-6"
                   >
-                    Disability Type/s
+                    Disability Type/s <span className="text-danger">*</span>
                   </label>
 
                   <Select
@@ -276,11 +282,11 @@ const PwdForm = ({ role, roles, disabilityTypes, onClose }) => {
                   }`}
                 >
                   <label htmlFor="address" className="form-label fs-6">
-                    Address
+                    Address <span className="text-danger">*</span>
                   </label>
                   <textarea
                     {...register("address")}
-                    className="form-control"
+                    className="form-control text-uppercase"
                     rows={2}
                   ></textarea>
                   <div className="mt-1 font-weight-bold text-validation">
@@ -301,7 +307,7 @@ const PwdForm = ({ role, roles, disabilityTypes, onClose }) => {
                   }`}
                 >
                   <label htmlFor="email" className="form-label fs-6">
-                    Email
+                    Email <span className="text-danger">*</span>
                   </label>
                   <input
                     {...register("email")}
@@ -321,7 +327,7 @@ const PwdForm = ({ role, roles, disabilityTypes, onClose }) => {
                   }`}
                 >
                   <label htmlFor="password" className="form-label fs-6">
-                    Password
+                    Password <span className="text-danger">*</span>
                   </label>
                   <input
                     {...register("password")}
@@ -341,7 +347,7 @@ const PwdForm = ({ role, roles, disabilityTypes, onClose }) => {
                   }`}
                 >
                   <label htmlFor="confirmPassword" className="form-label fs-6">
-                    Confirm Password
+                    Confirm Password <span className="text-danger">*</span>
                   </label>
                   <input
                     {...register("confirmPassword")}

@@ -8,12 +8,11 @@ import Feed from "@/pages/Feed/Feed";
 import DisabilityTypes from "@/pages/DisabilityTypes/DisabilityTypes";
 import Users from "@/pages/Users/Users";
 import Roles from "@/pages/Roles/Roles";
+import JobPostings from "@/pages/JobPostings/JobPostings";
 import { Toaster } from "react-hot-toast";
 function App() {
   useEffect(() => {
-
     document.body.classList.remove("pace-done");
-
 
     document.body.removeAttribute("data-new-gr-c-s-check-loaded");
     document.body.removeAttribute("data-gr-ext-installed");
@@ -36,6 +35,7 @@ function App() {
               <Route path="users" element={<Users />} />
               <Route path="roles" element={<Roles />} />
               <Route path="disability-types" element={<DisabilityTypes />} />
+              <Route path="job-postings" element={<JobPostings />} />
             </Route>
           </Route>
         </Routes>
