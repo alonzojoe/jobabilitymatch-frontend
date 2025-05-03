@@ -119,3 +119,11 @@ export const employerSchema = z
     message: "Passwords must match",
     path: ["confirmPassword"],
   });
+
+export const postingSchema = z.object({
+  title: z.string().trim().nonempty({ message: "Job title is required" }),
+  vacant_positions: z
+    .string()
+    .trim()
+    .nonempty({ message: "Vacant Position/s is required" }),
+});

@@ -32,6 +32,7 @@ const JobPostings = () => {
     loading,
     error,
   } = useFetch(`/posting/list`, { ...params, company_id: 1 });
+  const { data: disabilityTypes } = useFetch(`/disability/all`, null);
 
   const handleRefresh = () => {
     console.log("page refresh");
@@ -85,6 +86,7 @@ const JobPostings = () => {
             setSelected(null);
           }}
           onRefresh={handleRefresh}
+          disabilityTypes={disabilityTypes?.data}
         />
       )}
       <PageHeader title="Job Postings" />

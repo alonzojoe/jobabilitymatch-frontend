@@ -1,28 +1,58 @@
-import React from "react";
+import { useState, useCallback } from "react";
 import Modal from "@/components/UI/Modal";
 import PageHeader from "@/components/Global/PageHeader";
+import { createEditor } from "slate";
+import { Slate, Editable, withReact } from "slate-react";
+import Select from "react-select";
 import { FaRegSave } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { disabilitySchema } from "@/schemas";
-import { ToastMessage } from "@/libs/utils";
+import { postingSchema } from "@/schemas";
+import { ToastMessage, handlePhoneInput } from "@/libs/utils";
 import api from "@/services/api";
 
 const notify = new ToastMessage();
 
-const JobPostingForm = ({ onClose, onRefresh, selected }) => {
+const JobPostingForm = ({ onClose, onRefresh, selected, disabilityTypes }) => {
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting: isLoading },
   } = useForm({
-    resolver: zodResolver(disabilitySchema),
-    defaultValues: {
-      name: selected?.name ?? "",
-    },
+    resolver: zodResolver(postingSchema),
+    // defaultValues: {
+    //   name: selected?.name ?? "",
+    // },
   });
 
+  const [selectedDisabilities, setSelectedDisabilities] = useState([]);
+  const [description, setDescription] = useState("");
+  const [error, setError] = useState("");
+
+  const handleChange = (selectedOptions) => {
+    setSelectedDisabilities(selectedOptions || []);
+    setError("");
+  };
+
+  const handleEditorChange = (content, editor) => {
+    setDescription(content);
+  };
+
+  const [editor] = useState(() => withReact(createEditor()));
+  const [value, setValue] = useState([
+    { type: "paragraph", children: [{ text: "Start typing..." }] },
+  ]);
+
+  const handleChangeE = (newValue) => {
+    setValue(newValue);
+  };
+
   const handleSave = async (data) => {
+    if (selectedDisabilities.length === 0) {
+      setError("Please select at least one disability type.");
+      return;
+    }
+
     console.log("data", data);
     try {
       selected ? await update(data) : await save(data);
@@ -53,6 +83,12 @@ const JobPostingForm = ({ onClose, onRefresh, selected }) => {
     notify.notif("success", "Disability type updated successfully!");
   };
 
+  const mappedDisabilities =
+    disabilityTypes?.map((d) => ({
+      value: d.id,
+      label: d.name,
+    })) ?? [];
+
   return (
     <Modal onClose={onClose}>
       <>
@@ -61,26 +97,107 @@ const JobPostingForm = ({ onClose, onRefresh, selected }) => {
           className="mt-3 mb-3"
           onSubmit={handleSubmit((data) => handleSave(data))}
         >
-          <div
-            className={`mb-3 fv-plugins-icon-container ${
-              errors.name ? "group-invalid" : ""
-            }`}
-          >
-            <label htmlFor="name" className="form-label font-weight-bold fs-6">
-              Disability Type
-            </label>
-            <input
-              {...register("name")}
-              name="name"
-              type="text"
-              className="form-control"
-            />
-            <div className="mt-1 font-weight-bold text-validation">
-              {errors.name?.message}
+          <div className="row mt-4">
+            <div className="col-sm-12 col-md-6 col-lg-8 mb-2">
+              <div
+                className={`mb-2 fv-plugins-icon-container ${
+                  errors.title ? "group-invalid" : ""
+                }`}
+              >
+                <label
+                  htmlFor="title"
+                  className="form-label font-weight-bold fs-6"
+                >
+                  Job Title <span className="text-danger">*</span>
+                </label>
+                <input
+                  {...register("title")}
+                  type="text"
+                  className="form-control text-uppercase"
+                  maxLength={50}
+                />
+                <div className="mt-1 font-weight-bold text-validation">
+                  {errors.title?.message}
+                </div>
+              </div>
+            </div>
+
+            <div className="col-sm-12 col-md-6 col-lg-4 mb-2">
+              <div
+                className={`mb-2 fv-plugins-icon-container ${
+                  errors.vacant_positions ? "group-invalid" : ""
+                }`}
+              >
+                <label
+                  htmlFor="vacant_positions"
+                  className="form-label font-weight-bold fs-6"
+                >
+                  Vacant Position/s <span className="text-danger">*</span>
+                </label>
+                <input
+                  {...register("vacant_positions")}
+                  type="text"
+                  className="form-control"
+                  maxLength={11}
+                />
+                <div className="mt-1 font-weight-bold text-validation">
+                  {errors.vacant_positions?.message}
+                </div>
+              </div>
+            </div>
+
+            <div className="col-sm-12 mb-2">
+              <div
+                className={`mb-2 fv-plugins-icon-container ${
+                  error ? "group-invalid" : ""
+                }`}
+              >
+                <label
+                  htmlFor="disability_type_ids"
+                  className="form-label font-weight-bold fs-6"
+                >
+                  Disability Type/s <span className="text-danger">*</span>
+                </label>
+
+                <Select
+                  isMulti
+                  name="disability_type_ids"
+                  value={selectedDisabilities}
+                  onChange={handleChange}
+                  options={mappedDisabilities}
+                  className="react-select-container"
+                  classNamePrefix="react-select"
+                />
+
+                <div className="mt-1 font-weight-bold text-validation">
+                  {error}
+                </div>
+              </div>
+            </div>
+
+            <div className="col-sm-12 col-md-6 col-lg-8 mb-2">
+              <div
+                className={`mb-2 fv-plugins-icon-container ${
+                  errors.title ? "group-invalid" : ""
+                }`}
+              >
+                <label
+                  htmlFor="title"
+                  className="form-label font-weight-bold fs-6"
+                >
+                  Job Description <span className="text-danger">*</span>
+                </label>
+                <Slate editor={editor} value={value} onChange={handleChangeE}>
+                  <Editable placeholder="Enter text..." />
+                </Slate>
+                <div className="mt-1 font-weight-bold text-validation">
+                  {errors.title?.message}
+                </div>
+              </div>
             </div>
           </div>
 
-          <div className="mb-3"></div>
+          <div className="mb-0"></div>
 
           <button
             type="submit"
