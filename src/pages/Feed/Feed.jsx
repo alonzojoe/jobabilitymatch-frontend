@@ -1,17 +1,24 @@
 import React, { useState } from "react";
 import SearchInput from "@/pages/Feed/components/SearchInput";
-import { jobPostings } from "@/constants";
+// import { jobPostings } from "@/constants";
 import Card from "@/components/UI/Card";
 import { FaRegBookmark, FaBookmark } from "react-icons/fa6";
 import Modal from "@/components/UI/Modal";
-import MiniModal from "@/components/UI/ModalSm";
-import MainLogo from "@/assets/images/logo-main.png";
-import MainText from "@/assets/images/logo-text.png";
 import useToggle from "@/hooks/useToggle";
+import useFetch from "@/hooks/useFetch";
+
+const initialParams = {
+  searchQuery: "",
+  page: 1,
+  rand: 0,
+};
 
 const Feed = () => {
   const [selectedJob, setSelectedJob] = useState(null);
   const [modal, toggleModal] = useToggle(false);
+  const [params, setParams] = useState(initialParams);
+
+  const { data: jobPostings, loading, error } = useFetch(`/posting`, params);
 
   React.useEffect(() => {
     document.body.style.backgroundColor = "#F8F7FA";
@@ -46,48 +53,52 @@ const Feed = () => {
               paddingRight: "1rem",
             }}
           >
-            {jobPostings.map((job) => (
-              <Card
-                key={job.id}
-                title="Test"
-                active={job.id === selectedJob?.id}
-              >
-                <div
-                  className="cursor-pointer"
-                  onClick={() => viewDetails(job)}
+            {!loading &&
+              jobPostings?.data?.map((job) => (
+                <Card
+                  key={job.id}
+                  title="Test"
+                  active={job.id === selectedJob?.id}
                 >
-                  <div className="d-flex align-items-center justify-content-between">
-                    <h3 className="fs-4 font-weight-bold text-dark">
-                      {job.title}
-                    </h3>
-                    <span className="fs-3">
-                      <FaRegBookmark />
-                    </span>
-                  </div>
-                  <span className="d-block d-flex align-items-center gap-1 fs-6">
-                    <i className="ti ti-buildings"></i>
-                    {job.company}
-                  </span>
-                  <span className="d-block d-flex align-items-center gap-1 fs-6">
-                    <i className="ti ti-map-pin"></i>
-                    {job.location}
-                  </span>
-                  <h5 className="my-4">
-                    <span className="label label-custom text-gr fs-6">
-                      Vacant Position/s: {job.vacantPositions}
-                    </span>
-                  </h5>
-                  <div className="d-flex flex-wrap gap-2 fs-6">
-                    <span className="me-2">Applicable for:</span>
-                    {job.applicableFor.map((disability, idx) => (
-                      <span key={idx} className="label label-secondary">
-                        {disability}
+                  <div
+                    className="cursor-pointer"
+                    onClick={() => viewDetails(job)}
+                  >
+                    <div className="d-flex align-items-center justify-content-between">
+                      <h3 className="fs-4 font-weight-bold text-dark text-capitalize">
+                        {job.title}
+                      </h3>
+                      <span className="fs-3">
+                        <FaRegBookmark />
                       </span>
-                    ))}
+                    </div>
+                    <span className="d-block d-flex align-items-center gap-1 fs-6 text-capitalize">
+                      <i className="ti ti-buildings"></i>
+                      {job?.company?.name}
+                    </span>
+                    <span className="d-block d-flex align-items-center gap-1 fs-6 text-capitalize">
+                      <i className="ti ti-map-pin"></i>
+                      {job?.company?.address}
+                    </span>
+                    <h5 className="my-4">
+                      <span className="label label-custom text-gr fs-6">
+                        Vacant Position/s: {job.vacant_positions}
+                      </span>
+                    </h5>
+                    <div className="d-flex flex-wrap gap-2 fs-6">
+                      <span className="me-2">Applicable for:</span>
+                      {job?.disability_types.map((disability) => (
+                        <span
+                          key={disability.id}
+                          className="label label-secondary"
+                        >
+                          {disability.name}
+                        </span>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              </Card>
-            ))}
+                </Card>
+              ))}
           </div>
           <div className="col-md-6 col-lg-6 d-none d-md-block">
             <Card title="Job Details">
@@ -102,33 +113,40 @@ const Feed = () => {
                         className="fs-3 font-weight-bold cursor-pointer text-danger"
                         onClick={() => setSelectedJob(null)}
                       >
-                        <i class="ti ti-x"></i>
+                        <i className="ti ti-x"></i>
                       </span>
                     </div>
                     <span className="d-block d-flex align-items-center gap-1 fs-6">
                       <i className="ti ti-buildings"></i>
-                      {selectedJob.company}
+                      {selectedJob?.company?.name}
                     </span>
-                    <span className="d-block d-flex align-items-center gap-1 fs-6">
+                    <span className="d-block d-flex align-items-center gap-1 fs-6 text-capitalize">
                       <i className="ti ti-map-pin"></i>
-                      {selectedJob.location}
+                      {selectedJob?.company?.address}
                     </span>
                     <h5 className="my-4">
                       <span className="label label-custom text-gr fs-6">
-                        Vacant Position/s: {selectedJob.vacantPositions}
+                        Vacant Position/s: {selectedJob.vacant_positions}
                       </span>
                     </h5>
                     <div className="d-flex flex-wrap gap-2 fs-6">
                       <span className="me-2">Applicable for:</span>
-                      {selectedJob.applicableFor.map((disability, idx) => (
-                        <span key={idx} className="label label-secondary">
-                          {disability}
+                      {selectedJob?.disability_types.map((disability) => (
+                        <span
+                          key={disability.id}
+                          className="label label-secondary"
+                        >
+                          {disability.name}
                         </span>
                       ))}
                       <div className="description mt-2">
                         <hr />
                         <strong>Job Description: </strong>
-                        {selectedJob.description}
+                        <div
+                          dangerouslySetInnerHTML={{
+                            __html: selectedJob.description,
+                          }}
+                        />
                       </div>
                     </div>
                   </>
