@@ -9,6 +9,6 @@ export default defineConfig({
     },
   },
   optimizeDeps: {
-    exclude: ["@tinymce/tinymce-react"],
+    exclude: [],
   },
 });
