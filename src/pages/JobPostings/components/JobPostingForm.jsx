@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Modal from "@/components/UI/Modal";
 import PageHeader from "@/components/Global/PageHeader";
 import Select from "react-select";
-import ReactQuill from "react-quill-new";
+import JobDescriptionEditor from "@/pages/JobPostings/components/JobDescriptionEditor";
 import { FaRegSave } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -27,26 +27,46 @@ const JobPostingForm = ({ onClose, onRefresh, selected, disabilityTypes }) => {
   console.log("Job Posting Form re-render");
 
   const [selectedDisabilities, setSelectedDisabilities] = useState([]);
-  const [description, setDescription] = useState("");
-  const [error, setError] = useState("");
+
+  const [error, setError] = useState({
+    select: "",
+    description: "",
+  });
+
+  const editorRef = useRef();
 
   const handleChange = (selectedOptions) => {
     setSelectedDisabilities(selectedOptions || []);
-    setError("");
-  };
-
-  const handleEditorChange = (content, editor) => {
-    console.log("content", content);
-    setDescription(content);
+    setError((prev) => ({
+      ...prev,
+      select: "",
+    }));
   };
 
   const handleSave = async (data) => {
     if (selectedDisabilities.length === 0) {
-      setError("Please select at least one disability type.");
+      setError((prev) => ({
+        ...prev,
+        select: "Please select at least one disability type.",
+      }));
       return;
     }
 
-    console.log("data", data);
+    if (editorRef.current?.getDescription() === "<p><br></p>") {
+      setError((prev) => ({
+        ...prev,
+        description: "Job description is required.",
+      }));
+      return;
+    }
+
+    console.log("data", {
+      ...data,
+      company_id: 1,
+      description: editorRef.current?.getDescription(),
+      disability_type_ids: selectedDisabilities.map((data) => data.value),
+    });
+    return;
     try {
       selected ? await update(data) : await save(data);
       onClose();
@@ -142,7 +162,7 @@ const JobPostingForm = ({ onClose, onRefresh, selected, disabilityTypes }) => {
             <div className="col-sm-12 mb-2">
               <div
                 className={`mb-2 fv-plugins-icon-container ${
-                  error ? "group-invalid" : ""
+                  error.select ? "group-invalid" : ""
                 }`}
               >
                 <label
@@ -163,33 +183,13 @@ const JobPostingForm = ({ onClose, onRefresh, selected, disabilityTypes }) => {
                 />
 
                 <div className="mt-1 font-weight-bold text-validation">
-                  {error}
+                  {error.select}
                 </div>
               </div>
             </div>
 
             <div className="col-12 mb-2">
-              <div
-                className={`mb-2 fv-plugins-icon-container ${
-                  errors.title ? "group-invalid" : ""
-                }`}
-              >
-                <label
-                  htmlFor="title"
-                  className="form-label font-weight-bold fs-6"
-                >
-                  Job Description <span className="text-danger">*</span>
-                </label>
-                <ReactQuill
-                  theme="snow"
-                  value={description}
-                  onChange={handleEditorChange}
-                  style={{ height: "200px", width: "100%" }}
-                />
-                <div className="mt-5 font-weight-bold text-validation">
-                  {errors.title?.message}
-                </div>
-              </div>
+              <JobDescriptionEditor ref={editorRef} error={error} />
             </div>
           </div>
 
