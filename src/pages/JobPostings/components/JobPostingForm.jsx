@@ -1,4 +1,5 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useContext } from "react";
+import AuthContext from "@/store/auth/auth-context";
 import Modal from "@/components/UI/Modal";
 import PageHeader from "@/components/Global/PageHeader";
 import Select from "react-select";
@@ -24,7 +25,9 @@ const JobPostingForm = ({ onClose, onRefresh, selected, disabilityTypes }) => {
     // },
   });
 
-  console.log("Job Posting Form re-render");
+  const { authUser } = useContext(AuthContext);
+
+  console.log("auhtuser", authUser);
 
   const [selectedDisabilities, setSelectedDisabilities] = useState([]);
 
@@ -60,33 +63,30 @@ const JobPostingForm = ({ onClose, onRefresh, selected, disabilityTypes }) => {
       return;
     }
 
-    console.log("data", {
+    const formData = {
       ...data,
-      company_id: 1,
+      company_id: authUser.company.id,
       description: editorRef.current?.getDescription(),
       disability_type_ids: selectedDisabilities.map((data) => data.value),
-    });
-    return;
+    };
+
     try {
-      selected ? await update(data) : await save(data);
+      // selected ? await update(data) :
+      await save(formData);
       onClose();
       onRefresh();
     } catch (error) {
-      console.log(error);
-      if (error?.response?.data?.error) {
-        const msgc = `Disability type has already been added`;
-        notify.notif("error", `${msgc}`);
-      } else {
-        notify.notif("error", `Something went wrong.`);
-      }
+      notify.notif("error", `Something went wrong.`);
     }
   };
 
   const save = async (data) => {
-    await api.post(`/disability/create`, {
-      name: data.name,
+    console.log("pass", data);
+    // return;
+    await api.post(`/posting/create`, {
+      ...data,
     });
-    notify.notif("success", "Disability type added successfully!");
+    notify.notif("success", "Job posting created successfully!");
   };
 
   const update = async (data) => {
