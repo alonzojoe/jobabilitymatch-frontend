@@ -12,7 +12,8 @@ import "@/index.css";
 //js
 import "@/assets/js/app.min.js";
 import "@/assets/js/theme/apple.js";
-import 'react-quill-new/dist/quill.snow.css';
+import "react-quill-new/dist/quill.snow.css";
+import "react-loading-skeleton/dist/skeleton.css";
 import "sweetalert2/dist/sweetalert2.min.css";
 
 import App from "./App.jsx";

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import SearchInput from "@/pages/Feed/components/SearchInput";
 // import { jobPostings } from "@/constants";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import Card from "@/components/UI/Card";
 import { FaRegBookmark, FaBookmark } from "react-icons/fa6";
 import Modal from "@/components/UI/Modal";
@@ -34,6 +35,12 @@ const Feed = () => {
 
   return (
     <>
+      <SkeletonTheme baseColor="#8C8E8F" highlightColor="#D2D3D3">
+        <p>
+          <Skeleton count={3} height={30} style={{ flex: 1 }} />
+        </p>
+      </SkeletonTheme>
+      <Skeleton customHighlightBackground="linear-gradient(90deg, var(--base-color) 40%, var(--highlight-color) 50%, var(--base-color) 60%)" />
       <SearchInput />
       <div className="d-flex align-items-center gap-3 justify-content-center rec-container">
         <h3 className="fw-bold mb-0 pb-2 rec-text cursor-pointer">
