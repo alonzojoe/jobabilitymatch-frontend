@@ -1,24 +1,22 @@
 import { createPortal } from "react-dom";
+import { IoIosCloseCircle } from "react-icons/io";
+
 const ModalSm = ({ title, client, children, onClose }) => {
   return createPortal(
     <div className="cst-modal2">
       <div className="cst-modal-body5 bg-white rounded position-relative">
         <span
           onClick={onClose}
-          className="position-absolute cst-close"
+          className="position-absolute"
           style={{
             fontSize: "20px",
-            top: "-7px",
-            right: "9.5px",
+            top: "3px",
+            right: "5.5px",
             zIndex: "1000",
             fontWeight: "bold",
           }}
         >
-          <i
-            className="fa fa-times fw-bolder"
-            style={{ fontSize: "600" }}
-            aria-hidden="true"
-          ></i>
+          <IoIosCloseCircle className="fw-bolder text-pink cst-close fs-2" />
         </span>
         <div className="position-relative rounded p-2 m-2 mt-4">
           {title && (
