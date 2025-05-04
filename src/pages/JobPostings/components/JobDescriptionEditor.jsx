@@ -1,8 +1,8 @@
 import { useState, forwardRef, useImperativeHandle } from "react";
 import ReactQuill from "react-quill-new";
 
-const JobDescriptionEditor = forwardRef(({ error }, ref) => {
-  const [description, setDescription] = useState("");
+const JobDescriptionEditor = forwardRef(({ error, jdDescription }, ref) => {
+  const [description, setDescription] = useState(() => jdDescription ?? "");
 
   useImperativeHandle(ref, () => ({
     getDescription: () => description,

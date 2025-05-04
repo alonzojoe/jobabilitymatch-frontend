@@ -50,9 +50,17 @@ const JobPostings = () => {
     setParams((prev) => ({ ...prev, ...params }));
   };
 
-  const handleUpdate = (disability) => {
-    console.log("update", disability);
-    setSelected(disability);
+  const handleUpdate = (jobDescription) => {
+    console.log("update", jobDescription);
+    const formattedJd = {
+      ...jobDescription,
+      disability_types:
+        jobDescription.disability_types.map((d) => ({
+          value: d.id,
+          label: d.name,
+        })) ?? [],
+    };
+    setSelected(formattedJd);
     toggleShowModal(true);
   };
 
@@ -61,13 +69,13 @@ const JobPostings = () => {
       .confirm(
         "question",
         "Confirmation",
-        "Are you sure to delete this disability type?"
+        "Are you sure to delete this Job posting?"
       )
       .then(async (result) => {
         if (result.isConfirmed) {
-          notify.notif("success", "Disability type deleted successfully!");
+          notify.notif("success", "Job posting deleted successfully!");
           try {
-            await api.patch(`/disability/destroy/${id}`);
+            await api.patch(`/posting/destroy/${id}`);
             handleRefresh();
           } catch (error) {
             notify.notif("error", `Something went wrong: ${error?.message}`);
@@ -96,7 +104,7 @@ const JobPostings = () => {
           className="btn btn-primary btn-md d-flex align-items-center gap-1"
           onClick={() => toggleShowModal(true)}
         >
-          <FaPlus className="fs-6" /> Add New
+          <FaPlus className="fs-6" /> Create New
         </button>
       </div>
       <Panel>

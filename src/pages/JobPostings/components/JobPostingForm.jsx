@@ -20,16 +20,19 @@ const JobPostingForm = ({ onClose, onRefresh, selected, disabilityTypes }) => {
     formState: { errors, isSubmitting: isLoading },
   } = useForm({
     resolver: zodResolver(postingSchema),
-    // defaultValues: {
-    //   name: selected?.name ?? "",
-    // },
+    defaultValues: {
+      title: selected?.title ?? "",
+      vacant_positions: selected?.vacant_positions?.toString() ?? "",
+    },
   });
 
   const { authUser } = useContext(AuthContext);
 
   console.log("auhtuser", authUser);
 
-  const [selectedDisabilities, setSelectedDisabilities] = useState([]);
+  const [selectedDisabilities, setSelectedDisabilities] = useState(
+    () => selected?.disability_types ?? []
+  );
 
   const [error, setError] = useState({
     select: "",
@@ -71,8 +74,8 @@ const JobPostingForm = ({ onClose, onRefresh, selected, disabilityTypes }) => {
     };
 
     try {
-      // selected ? await update(data) :
-      await save(formData);
+      selected ? await update(formData) : await save(formData);
+
       onClose();
       onRefresh();
     } catch (error) {
@@ -90,10 +93,10 @@ const JobPostingForm = ({ onClose, onRefresh, selected, disabilityTypes }) => {
   };
 
   const update = async (data) => {
-    await api.put(`/disability/update/${selected.id}`, {
-      name: data.name,
+    await api.put(`/posting/update/${selected.id}`, {
+      ...data,
     });
-    notify.notif("success", "Disability type updated successfully!");
+    notify.notif("success", "Job posting updated successfully!");
   };
 
   const mappedDisabilities =
@@ -189,7 +192,11 @@ const JobPostingForm = ({ onClose, onRefresh, selected, disabilityTypes }) => {
             </div>
 
             <div className="col-12 mb-2">
-              <JobDescriptionEditor ref={editorRef} error={error} />
+              <JobDescriptionEditor
+                ref={editorRef}
+                error={error}
+                jdDescription={selected?.description}
+              />
             </div>
           </div>
 
