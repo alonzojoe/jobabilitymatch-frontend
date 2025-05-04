@@ -1,9 +1,8 @@
-import { useState, useCallback } from "react";
+import { useState } from "react";
 import Modal from "@/components/UI/Modal";
 import PageHeader from "@/components/Global/PageHeader";
-import { createEditor } from "slate";
-import { Slate, Editable, withReact } from "slate-react";
 import Select from "react-select";
+import ReactQuill from "react-quill-new";
 import { FaRegSave } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -25,6 +24,8 @@ const JobPostingForm = ({ onClose, onRefresh, selected, disabilityTypes }) => {
     // },
   });
 
+  console.log("Job Posting Form re-render");
+
   const [selectedDisabilities, setSelectedDisabilities] = useState([]);
   const [description, setDescription] = useState("");
   const [error, setError] = useState("");
@@ -35,16 +36,8 @@ const JobPostingForm = ({ onClose, onRefresh, selected, disabilityTypes }) => {
   };
 
   const handleEditorChange = (content, editor) => {
+    console.log("content", content);
     setDescription(content);
-  };
-
-  const [editor] = useState(() => withReact(createEditor()));
-  const [value, setValue] = useState([
-    { type: "paragraph", children: [{ text: "Start typing..." }] },
-  ]);
-
-  const handleChangeE = (newValue) => {
-    setValue(newValue);
   };
 
   const handleSave = async (data) => {
@@ -175,7 +168,7 @@ const JobPostingForm = ({ onClose, onRefresh, selected, disabilityTypes }) => {
               </div>
             </div>
 
-            <div className="col-sm-12 col-md-6 col-lg-8 mb-2">
+            <div className="col-12 mb-2">
               <div
                 className={`mb-2 fv-plugins-icon-container ${
                   errors.title ? "group-invalid" : ""
@@ -187,17 +180,20 @@ const JobPostingForm = ({ onClose, onRefresh, selected, disabilityTypes }) => {
                 >
                   Job Description <span className="text-danger">*</span>
                 </label>
-                <Slate editor={editor} value={value} onChange={handleChangeE}>
-                  <Editable placeholder="Enter text..." />
-                </Slate>
-                <div className="mt-1 font-weight-bold text-validation">
+                <ReactQuill
+                  theme="snow"
+                  value={description}
+                  onChange={handleEditorChange}
+                  style={{ height: "200px", width: "100%" }}
+                />
+                <div className="mt-5 font-weight-bold text-validation">
                   {errors.title?.message}
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="mb-0"></div>
+          <div className="mt-0 mb-0"></div>
 
           <button
             type="submit"
