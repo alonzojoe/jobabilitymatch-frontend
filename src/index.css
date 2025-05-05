@@ -752,3 +752,10 @@ div:where(.swal2-container) {
 .d-inline-block {
   display: inline-block !important;
 }
+
+
+.sekeleton-class {
+  flex: 1;
+  margin-bottom: 0.8rem;
+  border-radius: '.375rem';
+}
