@@ -32,8 +32,9 @@ const PwdForm = ({ role, roles, disabilityTypes, onClose }) => {
 
     const user = {
       ...data,
-      disability_type_ids: selectedDisabilities.map((d) => d.id),
+      disability_type_ids: selectedDisabilities.map((d) => d.value),
     };
+    console.log("user", user);
 
     try {
       await api.post("/auth/register", {

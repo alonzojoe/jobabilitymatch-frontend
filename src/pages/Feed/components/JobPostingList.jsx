@@ -10,6 +10,7 @@ const JobPostingList = ({
   selectedJob,
   query,
 }) => {
+  console.log("receive", jobPostings);
   if (loading) return <SkeletonCard count={10} />;
   if (!loading && error)
     return (

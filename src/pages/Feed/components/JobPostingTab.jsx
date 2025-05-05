@@ -6,7 +6,7 @@ const JobPostingTab = ({ onSelect, onRefresh, authUser }) => {
 
   useEffect(() => {
     if (authUser) {
-      setTab(2);
+      handleSwitchTab(`/posting/recommended/${authUser.id}`, 2);
     }
   }, [authUser]);
 

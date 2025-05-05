@@ -20,10 +20,18 @@ const Feed = () => {
   const { authUser } = useContext(AuthContext);
   console.log("feed", authUser);
 
-  const [params, setParams] = useState(() => ({
-    ...initialParams,
-    endpoint: authUser?.id ? `/posting/recommended/${authUser.id}` : "/posting",
-  }));
+  const [params, setParams] = useState(initialParams);
+
+  // useEffect(() => {
+  //   if (authUser) {
+  //     setParams(() => ({
+  //       ...initialParams,
+  //       endpoint: authUser.id
+  //         ? `/posting/recommended/${authUser.id}`
+  //         : "/posting",
+  //     }));
+  //   }
+  // }, [authUser]);
 
   const {
     data: jobPostings,
@@ -54,7 +62,13 @@ const Feed = () => {
   };
 
   const handleRefresh = () => {
-    setParams({ ...initialParams, rand: Math.floor(Math.random() * 100) });
+    setParams({
+      ...initialParams,
+      rand: Math.floor(Math.random() * 100),
+      endpoint: authUser.id
+        ? `/posting/recommended/${authUser.id}`
+        : "/posting",
+    });
   };
 
   const handlePageChange = (page) => {

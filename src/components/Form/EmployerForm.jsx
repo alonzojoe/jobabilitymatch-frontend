@@ -10,8 +10,6 @@ import api from "@/services/api";
 const notify = new ToastMessage();
 
 const EmployerForm = ({ onClose }) => {
-  const [selectedDisabilities, setSelectedDisabilities] = useState([]);
-
   const {
     register,
     handleSubmit,
