@@ -1,9 +1,15 @@
 import { createPortal } from "react-dom";
 import { IoIosCloseCircle } from "react-icons/io";
 
-const Modal = ({ title = "", client, children, onClose }) => {
+const Modal = ({
+  title = "",
+  client,
+  children,
+  onClose,
+  isJobModal = false,
+}) => {
   return createPortal(
-    <div className="cst-modal2">
+    <div className={`cst-modal2 ${isJobModal ? "selected-job-modal" : ""}`}>
       <div className="cst-modal-body2 bg-white rounded position-relative">
         <span
           onClick={onClose}

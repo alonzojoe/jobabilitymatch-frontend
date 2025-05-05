@@ -237,6 +237,10 @@
   }
 }
 
+.selected-job-modal {
+  visibility: hidden !important;
+}
+
 @media screen and (max-width: 767px) {
   .cst-modal-body5 {
     width: 90vw;
@@ -244,6 +248,10 @@
 
   .cst-modal-body2 {
     width: 90vw;
+  }
+
+  .selected-job-modal {
+    visibility: visible !important;
   }
 }
 

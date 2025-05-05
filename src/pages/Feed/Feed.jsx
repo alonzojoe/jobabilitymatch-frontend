@@ -1,12 +1,9 @@
 import React, { useState } from "react";
 import SearchInput from "@/pages/Feed/components/SearchInput";
-// import { jobPostings } from "@/constants";
-import Card from "@/components/UI/Card";
-import { FaRegBookmark, FaBookmark } from "react-icons/fa6";
 import Modal from "@/components/UI/Modal";
-import useToggle from "@/hooks/useToggle";
 import useFetch from "@/hooks/useFetch";
 import JobPostingList from "@/pages/Feed/components/JobPostingList";
+import JobDetails from "./components/JobDetails";
 
 const initialParams = {
   searchQuery: "",
@@ -16,7 +13,6 @@ const initialParams = {
 
 const Feed = () => {
   const [selectedJob, setSelectedJob] = useState(null);
-  const [modal, toggleModal] = useToggle(false);
   const [params, setParams] = useState(initialParams);
 
   const {
@@ -34,11 +30,15 @@ const Feed = () => {
 
   const viewDetails = (job) => {
     setSelectedJob(job);
-    // toggleModal(true);
   };
 
   return (
     <>
+      {selectedJob && (
+        <Modal isJobModal={true} onClose={() => setSelectedJob(null)}>
+          <JobDetails selectedJob={selectedJob} onSetJob={setSelectedJob} />
+        </Modal>
+      )}
       <SearchInput />
       <div className="d-flex align-items-center gap-3 justify-content-center rec-container">
         <h3 className="fw-bold mb-0 pb-2 rec-text cursor-pointer">
@@ -73,62 +73,7 @@ const Feed = () => {
               paddingRight: "1rem",
             }}
           >
-            <Card title="Job Details">
-              <div className="selected-job">
-                {selectedJob ? (
-                  <>
-                    <div className="d-flex align-items-center justify-content-between">
-                      <h3 className="fs-4 font-weight-bold text-dark">
-                        {selectedJob.title}
-                      </h3>
-                      <span
-                        className="fs-3 font-weight-bold cursor-pointer text-danger"
-                        onClick={() => setSelectedJob(null)}
-                      >
-                        <i className="ti ti-x"></i>
-                      </span>
-                    </div>
-                    <span className="d-block d-flex align-items-center gap-1 fs-6">
-                      <i className="ti ti-buildings"></i>
-                      {selectedJob?.company?.name}
-                    </span>
-                    <span className="d-block d-flex align-items-center gap-1 fs-6 text-capitalize">
-                      <i className="ti ti-map-pin"></i>
-                      {selectedJob?.company?.address}
-                    </span>
-                    <h5 className="my-4">
-                      <span className="label label-custom text-gr fs-6">
-                        Vacant Position/s: {selectedJob.vacant_positions}
-                      </span>
-                    </h5>
-                    <div className="d-flex flex-wrap gap-2 fs-6">
-                      <span className="me-2">Applicable for:</span>
-                      {selectedJob?.disability_types.map((disability) => (
-                        <span
-                          key={disability.id}
-                          className="label label-secondary"
-                        >
-                          {disability.name}
-                        </span>
-                      ))}
-                      <div className="description mt-2">
-                        <hr />
-                        <strong>Job Description: </strong>
-                        <div
-                          dangerouslySetInnerHTML={{
-                            __html: selectedJob.description,
-                          }}
-                        />
-                      </div>
-                    </div>
-                  </>
-                ) : (
-                  <p className="fw-bold h4 text-center mt-3">
-                    Select a job to see details here.
-                  </p>
-                )}
-              </div>
-            </Card>
+            <JobDetails selectedJob={selectedJob} onSetJob={setSelectedJob} />
           </div>
         </div>
       </div>
