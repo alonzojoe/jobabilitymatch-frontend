@@ -3,12 +3,14 @@ import SearchInput from "@/pages/Feed/components/SearchInput";
 import Modal from "@/components/UI/Modal";
 import useFetch from "@/hooks/useFetch";
 import JobPostingList from "@/pages/Feed/components/JobPostingList";
-import JobDetails from "./components/JobDetails";
+import JobDetails from "@/pages/Feed/components/JobDetails";
+import JobPostingTab from "@/pages/Feed/components/JobPostingTab";
 
 const initialParams = {
   searchQuery: "",
   page: 1,
   rand: 0,
+  endpoint: "/posting",
 };
 
 const Feed = () => {
@@ -19,7 +21,7 @@ const Feed = () => {
     data: jobPostings,
     loading,
     error,
-  } = useFetch(`/posting`, params, 2000);
+  } = useFetch(params.endpoint, params, 2000);
 
   React.useEffect(() => {
     document.body.style.backgroundColor = "#F8F7FA";
@@ -34,6 +36,13 @@ const Feed = () => {
 
   const handleSearch = (query) => {
     setParams((prev) => ({ ...prev, searchQuery: query }));
+  };
+
+  const handleSelect = (endpoint) => {
+    setParams({
+      ...initialParams,
+      endpoint,
+    });
   };
 
   const handleRefresh = () => {
@@ -53,14 +62,7 @@ const Feed = () => {
         </Modal>
       )}
       <SearchInput onSearch={handleSearch} />
-      <div className="d-flex align-items-center gap-3 justify-content-center rec-container">
-        <h3 className="fw-bold mb-0 pb-2 rec-text cursor-pointer">
-          Recent Jobs Postings
-        </h3>
-        <h3 className="fw-bold mb-0 pb-2 rec-text cursor-pointer">
-          Job Recommendations
-        </h3>
-      </div>
+      <JobPostingTab onSelect={handleSelect} />
       <div className="mt-5">
         <div className="row">
           <div

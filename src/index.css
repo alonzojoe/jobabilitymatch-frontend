@@ -400,10 +400,15 @@
   box-shadow: 6px 6px 15px rgba(0, 0, 0, 0.3);
 }
 
+@media screen and (max-width: 1024px) {
+  .search-container {
+    margin: 10px 4rem;
+  }
+}
+
 @media screen and (max-width: 767px) {
   .search-container {
-
-    margin: 10px 4rem;
+    margin: 10px 3rem;
   }
 
   .modal-container {
@@ -484,11 +489,16 @@ form {
 
 .rec-text {
   display: inline-block;
-  border-bottom: 3px solid #319FE8 !important;
+  border-bottom: 3px solid #F8F7FA !important;
 }
 
+.rec-text.active {
+  border-bottom: 3px solid #1A1A6E !important;
+}
+
+
 .card.border-theme {
-  border-color: #3389D6 !important;
+  border-color: #1A1A6E !important;
 }
 
 .card {
