@@ -759,3 +759,7 @@ div:where(.swal2-container) {
   margin-bottom: 0.8rem;
   border-radius: '.375rem';
 }
+
+.text-custom {
+  color: #01004C;
+}

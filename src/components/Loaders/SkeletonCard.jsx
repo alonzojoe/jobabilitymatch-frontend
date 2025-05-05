@@ -1,4 +1,6 @@
-const SekeletonCard = ({ count = 1 }) => {
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+
+const SkeletonCard = ({ count = 1 }) => {
   return (
     <SkeletonTheme baseColor="#E8EAED" highlightColor="#D2D5DB">
       <p>
@@ -8,4 +10,4 @@ const SekeletonCard = ({ count = 1 }) => {
   );
 };
 
-export default SekeletonCard;
+export default SkeletonCard;

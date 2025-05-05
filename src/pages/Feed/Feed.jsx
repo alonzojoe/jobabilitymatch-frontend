@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import SearchInput from "@/pages/Feed/components/SearchInput";
 // import { jobPostings } from "@/constants";
-import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import Card from "@/components/UI/Card";
 import { FaRegBookmark, FaBookmark } from "react-icons/fa6";
 import Modal from "@/components/UI/Modal";
 import useToggle from "@/hooks/useToggle";
 import useFetch from "@/hooks/useFetch";
+import JobPostingList from "@/pages/Feed/components/JobPostingList";
 
 const initialParams = {
   searchQuery: "",
@@ -19,7 +19,11 @@ const Feed = () => {
   const [modal, toggleModal] = useToggle(false);
   const [params, setParams] = useState(initialParams);
 
-  const { data: jobPostings, loading, error } = useFetch(`/posting`, params);
+  const {
+    data: jobPostings,
+    loading,
+    error,
+  } = useFetch(`/posting`, params, 2000);
 
   React.useEffect(() => {
     document.body.style.backgroundColor = "#F8F7FA";
@@ -54,54 +58,21 @@ const Feed = () => {
               paddingRight: "1rem",
             }}
           >
-            {!loading &&
-              jobPostings?.data?.map((job) => (
-                <Card
-                  key={job.id}
-                  title="Test"
-                  active={job.id === selectedJob?.id}
-                >
-                  <div
-                    className="cursor-pointer"
-                    onClick={() => viewDetails(job)}
-                  >
-                    <div className="d-flex align-items-center justify-content-between">
-                      <h3 className="fs-4 font-weight-bold text-dark text-capitalize">
-                        {job.title}
-                      </h3>
-                      <span className="fs-3">
-                        <FaRegBookmark />
-                      </span>
-                    </div>
-                    <span className="d-block d-flex align-items-center gap-1 fs-6 text-capitalize">
-                      <i className="ti ti-buildings"></i>
-                      {job?.company?.name}
-                    </span>
-                    <span className="d-block d-flex align-items-center gap-1 fs-6 text-capitalize">
-                      <i className="ti ti-map-pin"></i>
-                      {job?.company?.address}
-                    </span>
-                    <h5 className="my-4">
-                      <span className="label label-custom text-gr fs-6">
-                        Vacant Position/s: {job.vacant_positions}
-                      </span>
-                    </h5>
-                    <div className="d-flex flex-wrap gap-2 fs-6">
-                      <span className="me-2">Applicable for:</span>
-                      {job?.disability_types.map((disability) => (
-                        <span
-                          key={disability.id}
-                          className="label label-secondary"
-                        >
-                          {disability.name}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </Card>
-              ))}
+            <JobPostingList
+              loading={loading}
+              selectedJob={selectedJob}
+              jobPostings={jobPostings}
+              onView={viewDetails}
+            />
           </div>
-          <div className="col-md-6 col-lg-6 d-none d-md-block">
+          <div
+            className="col-md-6 col-lg-6 d-none d-md-block"
+            style={{
+              maxHeight: "80vh",
+              overflowY: "auto",
+              paddingRight: "1rem",
+            }}
+          >
             <Card title="Job Details">
               <div className="selected-job">
                 {selectedJob ? (
