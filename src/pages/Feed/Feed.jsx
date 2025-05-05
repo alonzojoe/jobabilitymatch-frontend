@@ -36,7 +36,11 @@ const Feed = () => {
     <>
       {selectedJob && (
         <Modal isJobModal={true} onClose={() => setSelectedJob(null)}>
-          <JobDetails selectedJob={selectedJob} onSetJob={setSelectedJob} />
+          <JobDetails
+            loading={loading}
+            selectedJob={selectedJob}
+            onSetJob={setSelectedJob}
+          />
         </Modal>
       )}
       <SearchInput />
@@ -59,6 +63,7 @@ const Feed = () => {
             }}
           >
             <JobPostingList
+              error={error}
               loading={loading}
               selectedJob={selectedJob}
               jobPostings={jobPostings}
@@ -73,7 +78,11 @@ const Feed = () => {
               paddingRight: "1rem",
             }}
           >
-            <JobDetails selectedJob={selectedJob} onSetJob={setSelectedJob} />
+            <JobDetails
+              loading={loading}
+              selectedJob={selectedJob}
+              onSetJob={setSelectedJob}
+            />
           </div>
         </div>
       </div>

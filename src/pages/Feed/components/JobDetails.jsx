@@ -1,7 +1,9 @@
 import Card from "@/components/UI/Card";
 import { FaRegBookmark, FaBookmark } from "react-icons/fa6";
+import SkeletonCard from "@/components/Loaders/SkeletonCard";
 
-const JobDetails = ({ selectedJob, onSetJob }) => {
+const JobDetails = ({ loading, selectedJob, onSetJob }) => {
+  if (loading) return <SkeletonCard height="112px" />;
   return (
     <Card title="Job Details">
       <div className="selected-job">

@@ -2,8 +2,20 @@ import SkeletonCard from "@/components/Loaders/SkeletonCard";
 import Card from "@/components/UI/Card";
 import { FaRegBookmark, FaBookmark } from "react-icons/fa6";
 
-const JobPostingList = ({ loading, jobPostings, onView, selectedJob }) => {
+const JobPostingList = ({
+  error,
+  loading,
+  jobPostings,
+  onView,
+  selectedJob,
+}) => {
   if (loading) return <SkeletonCard count={10} />;
+  if (!loading && error)
+    return (
+      <div className="text-center text-danger fs-5 fw-semibold">
+        Something went wrong.
+      </div>
+    );
   if (!loading && jobPostings?.data?.length === 0)
     return (
       <div className="text-center text-custom fs-5 fw-semibold">
