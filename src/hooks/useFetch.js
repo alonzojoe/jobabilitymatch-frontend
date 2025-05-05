@@ -1,7 +1,7 @@
 import api from "@/services/api";
 import { useState, useEffect } from "react";
 
-const useFetch = (endpoint, params = {}) => {
+const useFetch = (endpoint, params = {}, timeout = 0) => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -21,7 +21,7 @@ const useFetch = (endpoint, params = {}) => {
       }
     };
 
-    fetchData();
+    setTimeout(() => fetchData(), timeout);
   }, [endpoint, JSON.stringify(params)]);
 
   return { data, loading, error };

@@ -5,6 +5,7 @@ const Pagination = ({
   totalPages,
   onPageChange,
   totalRecords,
+  showInfo = true,
 }) => {
   const visiblePages = 5;
   const startPage = Math.max(1, currentPage - Math.floor(visiblePages / 2));
@@ -17,14 +18,19 @@ const Pagination = ({
 
   return (
     <div className="mt-2 pagination-container m-0 p-3 d-flex justify-content-between align-items-center">
-      <div className="fs-7">Total Records: {totalRecords}</div>
-      <div className="fs-7">
-        Page{" "}
-        <span>
-          {" "}
-          {currentPage} of {totalPages}
-        </span>
-      </div>
+      {showInfo && (
+        <>
+          <div className="fs-7">Total Records: {totalRecords}</div>
+          <div className="fs-7">
+            Page{" "}
+            <span>
+              {" "}
+              {currentPage} of {totalPages}
+            </span>
+          </div>
+        </>
+      )}
+
       <div>
         <ul className="pagination" style={{ marginBottom: "0" }}>
           <li
