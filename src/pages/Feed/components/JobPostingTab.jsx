@@ -1,11 +1,14 @@
-import { useState } from "react";
-import { useContext } from "react";
-import AuthContext from "@/store/auth/auth-context";
+import { useEffect, useState } from "react";
 import { IoIosRefreshCircle } from "react-icons/io";
 
-const JobPostingTab = ({ onSelect, onRefresh }) => {
-  const [tab, setTab] = useState(1);
-  const { authUser } = useContext(AuthContext);
+const JobPostingTab = ({ onSelect, onRefresh, authUser }) => {
+  const [tab, setTab] = useState(() => (authUser ? 2 : 1));
+
+  useEffect(() => {
+    if (authUser) {
+      setTab(2);
+    }
+  }, [authUser]);
 
   const handleSwitchTab = (endpoint, selected) => {
     setTab(selected);
@@ -23,16 +26,18 @@ const JobPostingTab = ({ onSelect, onRefresh }) => {
         >
           Recent Jobs Postings
         </h3>
-        <h3
-          className={`fw-bold mb-0 pb-2 text-center rec-text cursor-pointer ${
-            tab === 2 ? "active" : ""
-          }`}
-          onClick={() =>
-            handleSwitchTab(`/posting/recommended/${authUser?.id}`, 2)
-          }
-        >
-          Job Recommendations
-        </h3>
+        {authUser && (
+          <h3
+            className={`fw-bold mb-0 pb-2 text-center rec-text cursor-pointer ${
+              tab === 2 ? "active" : ""
+            }`}
+            onClick={() =>
+              handleSwitchTab(`/posting/recommended/${authUser?.id}`, 2)
+            }
+          >
+            Job Recommendations
+          </h3>
+        )}
       </div>
       <div className="d-flex justify-content-end mt-2">
         <IoIosRefreshCircle

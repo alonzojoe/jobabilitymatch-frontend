@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import AuthContext from "@/store/auth/auth-context";
 import SearchInput from "@/pages/Feed/components/SearchInput";
 import Modal from "@/components/UI/Modal";
 import useFetch from "@/hooks/useFetch";
@@ -16,7 +17,13 @@ const initialParams = {
 
 const Feed = () => {
   const [selectedJob, setSelectedJob] = useState(null);
-  const [params, setParams] = useState(initialParams);
+  const { authUser } = useContext(AuthContext);
+  console.log("feed", authUser);
+
+  const [params, setParams] = useState(() => ({
+    ...initialParams,
+    endpoint: authUser?.id ? `/posting/recommended/${authUser.id}` : "/posting",
+  }));
 
   const {
     data: jobPostings,
@@ -69,7 +76,11 @@ const Feed = () => {
         </Modal>
       )}
       <SearchInput onSearch={handleSearch} />
-      <JobPostingTab onSelect={handleSelect} onRefresh={handleRefresh} />
+      <JobPostingTab
+        authUser={authUser}
+        onSelect={handleSelect}
+        onRefresh={handleRefresh}
+      />
       <div className="mt-2">
         <div className="row">
           <div
