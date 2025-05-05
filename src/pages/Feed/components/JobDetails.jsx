@@ -1,5 +1,6 @@
 import Card from "@/components/UI/Card";
 import { FaRegBookmark, FaBookmark } from "react-icons/fa6";
+import { MdSend } from "react-icons/md";
 import SkeletonCard from "@/components/Loaders/SkeletonCard";
 
 const JobDetails = ({ loading, selectedJob, onSetJob }) => {
@@ -31,7 +32,9 @@ const JobDetails = ({ loading, selectedJob, onSetJob }) => {
             <h5 className="my-4">
               <div className="d-flex align-items-center justify-content-between">
                 <div className="d-flex gap-2">
-                  <button className="btn btn-custom btn-lg">Apply now</button>
+                  <button className="btn btn-custom btn-lg d-flex align-items-center gap-1">
+                    <MdSend className="fs-6" /> Apply now
+                  </button>
                   <button className="btn btn-secondary btn-lg">
                     <span className="">
                       <FaRegBookmark />

@@ -485,6 +485,10 @@ form {
 
 .rec-container {
   border-bottom: 2px solid #DBDADE;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: center;
 }
 
 .rec-text {
@@ -665,6 +669,12 @@ form {
   background-color: #fdeded !important;
 }
 
+@media screen and (max-width: 550px) {
+  .rec-container {
+    flex-direction: column;
+  }
+}
+
 @keyframes shake {
 
   0%,
@@ -763,6 +773,10 @@ div:where(.swal2-container) {
   background: #01004C;
 }
 
+.bg-custom:hover {
+  background: #1A1A6E;
+}
+
 .rounded-custom {
   border-radius: .375rem;
 }
@@ -780,4 +794,11 @@ div:where(.swal2-container) {
 
 .text-custom {
   color: #01004C;
+}
+
+.cst-refresh:hover {
+  color: #1A1A6E;
+  cursor: pointer;
+  transition: 1s;
+  transform: scale(1.1);
 }

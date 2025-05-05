@@ -47,7 +47,6 @@ const Feed = () => {
   };
 
   const handleRefresh = () => {
-    console.log("page refresh");
     setParams({ ...initialParams, rand: Math.floor(Math.random() * 100) });
   };
 
@@ -70,8 +69,8 @@ const Feed = () => {
         </Modal>
       )}
       <SearchInput onSearch={handleSearch} />
-      <JobPostingTab onSelect={handleSelect} />
-      <div className="mt-5">
+      <JobPostingTab onSelect={handleSelect} onRefresh={handleRefresh} />
+      <div className="mt-2">
         <div className="row">
           <div
             className="col-md-6 col-sm-12"
