@@ -5,6 +5,7 @@ import useFetch from "@/hooks/useFetch";
 import JobPostingList from "@/pages/Feed/components/JobPostingList";
 import JobDetails from "@/pages/Feed/components/JobDetails";
 import JobPostingTab from "@/pages/Feed/components/JobPostingTab";
+import Pagination from "@/components/UI/Pagination";
 
 const initialParams = {
   searchQuery: "",
@@ -48,6 +49,13 @@ const Feed = () => {
   const handleRefresh = () => {
     console.log("page refresh");
     setParams({ ...initialParams, rand: Math.floor(Math.random() * 100) });
+  };
+
+  const handlePageChange = (page) => {
+    setParams((prev) => ({
+      ...prev,
+      page,
+    }));
   };
 
   return (
@@ -96,6 +104,17 @@ const Feed = () => {
               onSetJob={setSelectedJob}
             />
           </div>
+        </div>
+        <div className="mt-2">
+          {!loading && jobPostings?.data?.length > 0 && (
+            <Pagination
+              showInfo={false}
+              totalRecords={jobPostings.total_items}
+              currentPage={params.page}
+              totalPages={jobPostings.total_pages}
+              onPageChange={handlePageChange}
+            />
+          )}
         </div>
       </div>
     </>

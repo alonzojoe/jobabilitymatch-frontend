@@ -24,7 +24,7 @@ const SearchInput = ({ onSearch }) => {
         <div className="message-actions d-flex align-items-center">
           <button
             type="submit"
-            className="btn btn-primary gap-1 d-flex align-items-center send-msg-btn waves-effect font-weight-normal fs-5"
+            className="btn btn-custom gap-1 d-flex align-items-center send-msg-btn waves-effect font-weight-normal fs-5"
           >
             <i className="fa fa-search fa-fw me-md-1 me-0"></i>
             <span className="align-middle d-md-inline-block d-none">
