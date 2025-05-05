@@ -32,6 +32,15 @@ const Feed = () => {
     setSelectedJob(job);
   };
 
+  const handleSearch = (query) => {
+    setParams((prev) => ({ ...prev, searchQuery: query }));
+  };
+
+  const handleRefresh = () => {
+    console.log("page refresh");
+    setParams({ ...initialParams, rand: Math.floor(Math.random() * 100) });
+  };
+
   return (
     <>
       {selectedJob && (
@@ -43,7 +52,7 @@ const Feed = () => {
           />
         </Modal>
       )}
-      <SearchInput />
+      <SearchInput onSearch={handleSearch} />
       <div className="d-flex align-items-center gap-3 justify-content-center rec-container">
         <h3 className="fw-bold mb-0 pb-2 rec-text cursor-pointer">
           Recent Jobs Postings
@@ -68,6 +77,7 @@ const Feed = () => {
               selectedJob={selectedJob}
               jobPostings={jobPostings}
               onView={viewDetails}
+              query={params.searchQuery}
             />
           </div>
           <div

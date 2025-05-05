@@ -8,6 +8,7 @@ const JobPostingList = ({
   jobPostings,
   onView,
   selectedJob,
+  query,
 }) => {
   if (loading) return <SkeletonCard count={10} />;
   if (!loading && error)
@@ -19,7 +20,9 @@ const JobPostingList = ({
   if (!loading && jobPostings?.data?.length === 0)
     return (
       <div className="text-center text-custom fs-5 fw-semibold">
-        No job postings yet. Please try again later.
+        {query
+          ? "No job postings found. Try searching by job title, keyword, or company."
+          : "No job postings yet. Please try again later."}
       </div>
     );
   return (
