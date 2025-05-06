@@ -1,16 +1,21 @@
 import { useContext } from "react";
 import AuthContext from "@/store/auth/auth-context";
+import JobApplicationContext from "@/store/jobapplication/jobapplication-context";
 import Card from "@/components/UI/Card";
 import SkeletonCard from "@/components/Loaders/SkeletonCard";
 import { ConfirmDialog, ToastMessage } from "@/libs/utils";
 import { FaRegBookmark, FaBookmark } from "react-icons/fa6";
-import { MdSend } from "react-icons/md";
+import { MdSend, MdOutlineCheck } from "react-icons/md";
 import api from "@/services/api";
 
 const dialog = new ConfirmDialog();
 const notify = new ToastMessage();
 const JobDetails = ({ loading, selectedJob, onSetJob }) => {
   const { authUser } = useContext(AuthContext);
+  const { applications, refresh } = useContext(JobApplicationContext);
+
+  const hasApplied =
+    applications.some((a) => a.job_posting_id === selectedJob?.id) || false;
 
   const handleApply = (job) => {
     const data = { user_id: authUser.id, job_posting_id: job.id };
@@ -25,8 +30,8 @@ const JobDetails = ({ loading, selectedJob, onSetJob }) => {
         if (result.isConfirmed) {
           try {
             await api.post(`/applicant/create`, data);
-            // handleRefresh();
             notify.notif("success", "Application sent successfully!");
+            refresh();
           } catch (error) {
             notify.notif("error", `Something went wrong: ${error?.message}`);
           }
@@ -40,6 +45,7 @@ const JobDetails = ({ loading, selectedJob, onSetJob }) => {
       <div className="selected-job">
         {selectedJob ? (
           <>
+            {/* {JSON.stringify(applications)} */}
             <div className="d-flex align-items-center justify-content-between">
               <h3 className="fs-4 font-weight-bold text-dark">
                 {selectedJob.title}
@@ -66,8 +72,10 @@ const JobDetails = ({ loading, selectedJob, onSetJob }) => {
                     <button
                       className="btn btn-custom btn-lg d-flex align-items-center gap-1"
                       onClick={() => handleApply(selectedJob)}
+                      disabled={hasApplied}
                     >
-                      <MdSend className="fs-6" /> Apply now
+                      {hasApplied ? <MdOutlineCheck className="fs-6" /> : <MdSend className="fs-6" />}
+                      {hasApplied ? "Applied" : "Apply now"}
                     </button>
                     <button className="btn btn-secondary btn-lg">
                       <span className="">

@@ -9,6 +9,7 @@ import DisabilityTypes from "@/pages/DisabilityTypes/DisabilityTypes";
 import Users from "@/pages/Users/Users";
 import Roles from "@/pages/Roles/Roles";
 import JobPostings from "@/pages/JobPostings/JobPostings";
+import JobApplicationProvider from "@/store/jobapplication/jobapplication-provider";
 import { Toaster } from "react-hot-toast";
 function App() {
   useEffect(() => {
@@ -27,7 +28,14 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="" element={<FeedLayout />}>
-            <Route path="" element={<Feed />} />
+            <Route
+              path=""
+              element={
+                <JobApplicationProvider>
+                  <Feed />{" "}
+                </JobApplicationProvider>
+              }
+            />
           </Route>
           <Route element={<ProtectedRoutes />}>
             <Route path="home" element={<AppLayout />}>

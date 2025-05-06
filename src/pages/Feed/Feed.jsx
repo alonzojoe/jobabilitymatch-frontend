@@ -1,5 +1,4 @@
-import React, { useState, useContext } from "react";
-import AuthContext from "@/store/auth/auth-context";
+import React, { useState } from "react";
 import SearchInput from "@/pages/Feed/components/SearchInput";
 import Modal from "@/components/UI/Modal";
 import useFetch from "@/hooks/useFetch";
