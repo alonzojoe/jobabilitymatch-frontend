@@ -34,12 +34,12 @@ const JobApplicationProvider = ({ children }) => {
         ? current
         : [...current, jobDetails]
     );
-    notify.notif("success", "Job posting saved.");
+    notify.notif("success", "Job posting bookmarked.");
   };
 
   const removeBookmark = (jobId) => {
     setBookMarks((current) => current.filter((job) => job.id !== jobId));
-    notify.notif("success", "Job posting removed.");
+    notify.notif("success", "Job posting bookmark removed.");
   };
 
   const appData = {

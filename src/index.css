@@ -810,5 +810,12 @@ div:where(.swal2-container) {
 .fade.show {
   opacity: 1;
   transition: opacity 0.3s ease-in-out;
+}
 
+.btn-circle {
+  border-radius: 50% !important;
+}
+
+.panel.panel-inverse>.panel-heading {
+  background: #01004C !important;
 }

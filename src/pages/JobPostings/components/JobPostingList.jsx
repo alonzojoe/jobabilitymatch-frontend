@@ -4,6 +4,7 @@ import { LoadingRow, ErrorRow, EmptyRow } from "@/components/Data/TableData";
 import { FaTrashAlt, FaEdit, FaEye } from "react-icons/fa";
 import Modal from "@/components/UI/Modal";
 import PageHeader from "@/components/Global/PageHeader";
+import api from "@/services/api";
 
 const JobPostingList = ({
   loading,
@@ -11,11 +12,25 @@ const JobPostingList = ({
   jobPostings,
   onUpdate,
   onDelete,
+  onRefresh,
 }) => {
   const [viewData, setViewData] = useState(null);
 
   const handleClose = () => {
     setViewData(null);
+  };
+
+  const changeStatus = async (e) => {
+    const { id, value } = e.target;
+    console.log(id, value);
+    try {
+      await api.patch(`/posting/status/${id}`, {
+        active: value,
+      });
+      onRefresh();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -28,6 +43,7 @@ const JobPostingList = ({
           </>
         </Modal>
       )}
+
       <table className="table table-striped table-bordered table-td-valign-middle dataTable no-footer dtr-inline collapsed">
         <thead>
           <tr>
@@ -68,9 +84,19 @@ const JobPostingList = ({
                 </td>
                 <td className="text-center font-weight-bold fs-7">
                   {d.vacant_positions}
-                </td> 
-                <td className="text-center font-weight-bold fs-7">
-                  {d.active}
+                </td>
+                <td className="text-center ">
+                  {/* {d.active} */}
+
+                  <select
+                    className="form-control fs-7 font-weight-bold"
+                    onChange={changeStatus}
+                    id={d.id}
+                    defaultValue={d.active}
+                  >
+                    <option value={1}>Active</option>
+                    <option value={2}>Inactive</option>
+                  </select>
                 </td>
                 <td className="text-center font-weight-bold fs-7">
                   {moment(d.created_at).format("lll")}
