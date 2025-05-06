@@ -106,7 +106,6 @@ const JobDetails = ({ loading, selectedJob, onSetJob }) => {
                     </button>
                   </div>
                 )}
-
                 {selectedJob.active === 1 && (
                   <span className="label label-custom text-gr fs-6">
                     Vacant Position/s: {selectedJob.vacant_positions}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import SearchInput from "@/pages/Feed/components/SearchInput";
 import Modal from "@/components/UI/Modal";
 import useFetch from "@/hooks/useFetch";
@@ -20,9 +20,8 @@ const initialParams = {
 console.log("getLcalStrage", authUser);
 const Feed = () => {
   const [selectedJob, setSelectedJob] = useState(null);
-  console.log("getfeed", authUser);
-
   const [params, setParams] = useState(initialParams);
+  const jobDetailsTabRef = useRef();
 
   const {
     data: jobPostings,
@@ -56,7 +55,10 @@ const Feed = () => {
     setParams({
       ...initialParams,
       rand: Math.floor(Math.random() * 100),
-      endpoint: isPWD() ? `/posting/recommended/${authUser.id}` : "/posting",
+      endpoint:
+        jobDetailsTabRef.current?.getCurrentTab() === 2
+          ? `/posting/recommended/${authUser.id}`
+          : "/posting",
     });
   };
 
@@ -78,8 +80,10 @@ const Feed = () => {
           />
         </Modal>
       )}
+
       <SearchInput onSearch={handleSearch} />
       <JobPostingTab
+        ref={jobDetailsTabRef}
         authUser={authUser}
         onSelect={handleSelect}
         onRefresh={handleRefresh}
