@@ -64,3 +64,9 @@ export const handlePwdIdNo = (event) => {
   const { value } = event.target;
   event.target.value = value.replace(/[^0-9-]/g, "").slice(0, 30);
 };
+
+const authUser = getLocalStorage("auth-user");
+
+export const isPWD = () => {
+  return authUser && authUser.id && authUser.role_id == 2;
+};

@@ -32,7 +32,7 @@ const JobPostingTab = ({ onSelect, onRefresh, authUser }) => {
               tab === 2 ? "active" : ""
             }`}
             onClick={() =>
-              handleSwitchTab(`/posting/recommended/${authUser?.id}`, 2)
+              handleSwitchTab(`/posting/recommended/${authUser.id}`, 2)
             }
           >
             Job Recommendations
