@@ -5,20 +5,17 @@ const getLocalStorage = (key, initialValue) => {
 
   if (storedItem) return JSON.parse(storedItem);
 
-    return typeof initialValue === 'function' ? initialValue() : initialValue
-
+  return typeof initialValue === "function" ? initialValue() : initialValue;
 };
 
 const useLocalStorage = (key, initialValue) => {
-    const [value, setValue] = useState(() => getLocalStorage(key, initialValue))
+  const [value, setValue] = useState(() => getLocalStorage(key, initialValue));
 
+  useEffect(() => {
+    localStorage.setItem(key, JSON.stringify(value));
+  }, [key, value]);
 
-    useEffect(() => {
-
-    }, [key, value])
-
-
-    return [value, setValue]
+  return [value, setValue];
 };
 
 export default useLocalStorage;

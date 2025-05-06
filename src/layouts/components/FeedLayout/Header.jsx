@@ -7,16 +7,13 @@ import useToggle from "@/hooks/useToggle";
 import Login from "@/components/Auth/Login";
 import Registry from "@/components/Auth/Registry";
 import AuthUser from "@/layouts/components/Header/AuthUser";
-import useFetch from "@/hooks/useFetch";
 import useAuthSetup from "@/hooks/useAuthSetup";
 import AuthControls from "@/layouts/components/Header/AuthControls";
 import { logout } from "@/libs/utils";
 import { Link } from "react-router-dom";
-const Header = () => {
+const Header = ({ roles, disabilityTypes }) => {
   const [showLogin, toggleLogin] = useToggle(false);
   const [showRegistry, toggleRegistry] = useToggle(false);
-  const { data: roles } = useFetch(`/role/all`, null);
-  const { data: disabilityTypes } = useFetch(`/disability/all`, null);
 
   const { authUser } = useContext(AuthContext);
 

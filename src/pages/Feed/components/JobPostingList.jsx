@@ -1,3 +1,5 @@
+import { useContext } from "react";
+import JobApplicationContext from "@/store/jobapplication/jobapplication-context";
 import SkeletonCard from "@/components/Loaders/SkeletonCard";
 import Card from "@/components/UI/Card";
 import { FaRegBookmark, FaBookmark } from "react-icons/fa6";
@@ -10,7 +12,16 @@ const JobPostingList = ({
   selectedJob,
   query,
 }) => {
-  console.log("receive", jobPostings);
+  const { bookmarks, addBookmark, removeBookmark } = useContext(
+    JobApplicationContext
+  );
+
+  bookmarks, addBookmark, removeBookmark, console.log("receive", jobPostings);
+
+  const hasBookMark = (job) => {
+    return bookmarks?.some((b) => b.id === job?.id) || false;
+  };
+
   if (loading) return <SkeletonCard count={10} />;
   if (!loading && error)
     return (
@@ -35,8 +46,13 @@ const JobPostingList = ({
               <h3 className="fs-4 font-weight-bold text-dark text-capitalize">
                 {job.title}
               </h3>
-              <span className="fs-3">
-                <FaRegBookmark />
+              <span
+                className="fs-3"
+                onClick={() =>
+                  hasBookMark(job) ? removeBookmark(job.id) : addBookmark(job)
+                }
+              >
+                {hasBookMark(job) ? <FaBookmark /> : <FaRegBookmark />}
               </span>
             </div>
             <span className="d-block d-flex align-items-center gap-1 fs-6 text-capitalize">
@@ -48,9 +64,15 @@ const JobPostingList = ({
               {job?.company?.address}
             </span>
             <h5 className="my-4">
-              <span className="label label-custom text-gr fs-6">
-                Vacant Position/s: {job.vacant_positions}
-              </span>
+              {job?.active === 2 ? (
+                <span className="label label-blood text-bl fs-6">
+                  No longer accepting applicants
+                </span>
+              ) : (
+                <span className="label label-custom text-gr fs-6">
+                  Vacant Position/s: {job.vacant_positions}
+                </span>
+              )}
             </h5>
             <div className="d-flex flex-wrap gap-2 fs-6">
               <span className="me-2">Applicable for:</span>

@@ -1,5 +1,4 @@
-import React, { useState, useContext } from "react";
-import AuthContext from "@/store/auth/auth-context";
+import React, { useState, useRef } from "react";
 import SearchInput from "@/pages/Feed/components/SearchInput";
 import Modal from "@/components/UI/Modal";
 import useFetch from "@/hooks/useFetch";
@@ -7,31 +6,22 @@ import JobPostingList from "@/pages/Feed/components/JobPostingList";
 import JobDetails from "@/pages/Feed/components/JobDetails";
 import JobPostingTab from "@/pages/Feed/components/JobPostingTab";
 import Pagination from "@/components/UI/Pagination";
+import { getLocalStorage, isPWD } from "@/libs/utils";
+
+const authUser = getLocalStorage("auth-user");
 
 const initialParams = {
   searchQuery: "",
   page: 1,
   rand: 0,
-  endpoint: "/posting",
+  endpoint: isPWD() ? `/posting/recommended/${authUser.id}` : "/posting",
 };
 
+console.log("getLcalStrage", authUser);
 const Feed = () => {
   const [selectedJob, setSelectedJob] = useState(null);
-  const { authUser } = useContext(AuthContext);
-  console.log("feed", authUser);
-
   const [params, setParams] = useState(initialParams);
-
-  // useEffect(() => {
-  //   if (authUser) {
-  //     setParams(() => ({
-  //       ...initialParams,
-  //       endpoint: authUser.id
-  //         ? `/posting/recommended/${authUser.id}`
-  //         : "/posting",
-  //     }));
-  //   }
-  // }, [authUser]);
+  const jobDetailsTabRef = useRef();
 
   const {
     data: jobPostings,
@@ -65,9 +55,10 @@ const Feed = () => {
     setParams({
       ...initialParams,
       rand: Math.floor(Math.random() * 100),
-      endpoint: authUser.id
-        ? `/posting/recommended/${authUser.id}`
-        : "/posting",
+      endpoint:
+        jobDetailsTabRef.current?.getCurrentTab() === 2
+          ? `/posting/recommended/${authUser.id}`
+          : "/posting",
     });
   };
 
@@ -89,8 +80,10 @@ const Feed = () => {
           />
         </Modal>
       )}
+
       <SearchInput onSearch={handleSearch} />
       <JobPostingTab
+        ref={jobDetailsTabRef}
         authUser={authUser}
         onSelect={handleSelect}
         onRefresh={handleRefresh}

@@ -1,8 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, forwardRef, useImperativeHandle } from "react";
 import { IoIosRefreshCircle } from "react-icons/io";
 
-const JobPostingTab = ({ onSelect, onRefresh, authUser }) => {
+const JobPostingTab = forwardRef(({ onSelect, onRefresh, authUser }, ref) => {
   const [tab, setTab] = useState(() => (authUser ? 2 : 1));
+
+  useImperativeHandle(ref, () => ({
+    getCurrentTab: () => tab,
+  }));
 
   useEffect(() => {
     if (authUser) {
@@ -32,7 +36,7 @@ const JobPostingTab = ({ onSelect, onRefresh, authUser }) => {
               tab === 2 ? "active" : ""
             }`}
             onClick={() =>
-              handleSwitchTab(`/posting/recommended/${authUser?.id}`, 2)
+              handleSwitchTab(`/posting/recommended/${authUser.id}`, 2)
             }
           >
             Job Recommendations
@@ -47,6 +51,6 @@ const JobPostingTab = ({ onSelect, onRefresh, authUser }) => {
       </div>
     </>
   );
-};
+});
 
 export default JobPostingTab;

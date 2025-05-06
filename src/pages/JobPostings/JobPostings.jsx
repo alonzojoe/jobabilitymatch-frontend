@@ -121,6 +121,7 @@ const JobPostings = () => {
                 jobPostings={jobPostings}
                 onUpdate={handleUpdate}
                 onDelete={handleDelete}
+                onRefresh={handleRefresh}
               />
               {!loading && jobPostings?.data?.length > 0 && (
                 <Pagination
