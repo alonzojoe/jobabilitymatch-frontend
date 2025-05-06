@@ -21,7 +21,6 @@ const initialParams = {
 console.log("getLcalStrage", authUser);
 const Feed = () => {
   const [selectedJob, setSelectedJob] = useState(null);
-  // const { authUser } = useContext(AuthContext);
   console.log("getfeed", authUser);
 
   const [params, setParams] = useState(initialParams);

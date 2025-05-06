@@ -4,6 +4,7 @@ import { IoIosRefreshCircle } from "react-icons/io";
 const JobPostingTab = ({ onSelect, onRefresh, authUser }) => {
   const [tab, setTab] = useState(() => (authUser ? 2 : 1));
 
+  console.log("component props authUser", authUser);
   useEffect(() => {
     if (authUser) {
       handleSwitchTab(`/posting/recommended/${authUser.id}`, 2);

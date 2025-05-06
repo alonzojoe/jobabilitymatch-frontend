@@ -1,9 +1,39 @@
+import { useContext } from "react";
+import AuthContext from "@/store/auth/auth-context";
 import Card from "@/components/UI/Card";
+import SkeletonCard from "@/components/Loaders/SkeletonCard";
+import { ConfirmDialog, ToastMessage } from "@/libs/utils";
 import { FaRegBookmark, FaBookmark } from "react-icons/fa6";
 import { MdSend } from "react-icons/md";
-import SkeletonCard from "@/components/Loaders/SkeletonCard";
+import api from "@/services/api";
 
+const dialog = new ConfirmDialog();
+const notify = new ToastMessage();
 const JobDetails = ({ loading, selectedJob, onSetJob }) => {
+  const { authUser } = useContext(AuthContext);
+
+  const handleApply = (job) => {
+    const data = { user_id: authUser.id, job_posting_id: job.id };
+
+    dialog
+      .confirm(
+        "question",
+        "Confirmation",
+        "Are you sure you want to apply? Your profile will be sent to the employer."
+      )
+      .then(async (result) => {
+        if (result.isConfirmed) {
+          try {
+            await api.post(`/applicant/create`, data);
+            // handleRefresh();
+            notify.notif("success", "Application sent successfully!");
+          } catch (error) {
+            notify.notif("error", `Something went wrong: ${error?.message}`);
+          }
+        }
+      });
+  };
+
   if (loading) return <SkeletonCard height="112px" />;
   return (
     <Card title="Job Details">
@@ -31,16 +61,21 @@ const JobDetails = ({ loading, selectedJob, onSetJob }) => {
             </span>
             <h5 className="my-4">
               <div className="d-flex align-items-center justify-content-between">
-                <div className="d-flex gap-2">
-                  <button className="btn btn-custom btn-lg d-flex align-items-center gap-1">
-                    <MdSend className="fs-6" /> Apply now
-                  </button>
-                  <button className="btn btn-secondary btn-lg">
-                    <span className="">
-                      <FaRegBookmark />
-                    </span>
-                  </button>
-                </div>
+                {authUser && authUser.role_id == 2 && (
+                  <div className="d-flex gap-2">
+                    <button
+                      className="btn btn-custom btn-lg d-flex align-items-center gap-1"
+                      onClick={() => handleApply(selectedJob)}
+                    >
+                      <MdSend className="fs-6" /> Apply now
+                    </button>
+                    <button className="btn btn-secondary btn-lg">
+                      <span className="">
+                        <FaRegBookmark />
+                      </span>
+                    </button>
+                  </div>
+                )}
 
                 <span className="label label-custom text-gr fs-6">
                   Vacant Position/s: {selectedJob.vacant_positions}
