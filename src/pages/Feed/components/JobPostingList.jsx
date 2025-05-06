@@ -64,9 +64,15 @@ const JobPostingList = ({
               {job?.company?.address}
             </span>
             <h5 className="my-4">
-              <span className="label label-custom text-gr fs-6">
-                Vacant Position/s: {job.vacant_positions}
-              </span>
+              {job?.active === 2 ? (
+                <span className="label label-blood text-bl fs-6">
+                  No longer accepting applicants
+                </span>
+              ) : (
+                <span className="label label-custom text-gr fs-6">
+                  Vacant Position/s: {job.vacant_positions}
+                </span>
+              )}
             </h5>
             <div className="d-flex flex-wrap gap-2 fs-6">
               <span className="me-2">Applicable for:</span>

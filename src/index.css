@@ -819,3 +819,11 @@ div:where(.swal2-container) {
 .panel.panel-inverse>.panel-heading {
   background: #01004C !important;
 }
+
+.label-blood {
+  background: #FFE0E3;
+}
+
+.text-bl {
+  color: #FF4757;
+}

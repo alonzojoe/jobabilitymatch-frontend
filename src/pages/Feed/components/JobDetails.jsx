@@ -20,6 +20,9 @@ const JobDetails = ({ loading, selectedJob, onSetJob }) => {
 
   const hasBookMark = bookmarks?.some((b) => b.id === selectedJob?.id) || false;
 
+  const isAppliable =
+    selectedJob?.active === 1 && authUser && authUser.role_id == 2;
+
   const handleApply = (job) => {
     const data = { user_id: authUser.id, job_posting_id: job.id };
 
@@ -70,7 +73,12 @@ const JobDetails = ({ loading, selectedJob, onSetJob }) => {
             </span>
             <h5 className="my-4">
               <div className="d-flex align-items-center justify-content-between">
-                {authUser && authUser.role_id == 2 && (
+                {selectedJob.active === 2 && (
+                  <span className="label label-blood text-bl fs-6">
+                    No longer accepting applicants
+                  </span>
+                )}
+                {isAppliable && (
                   <div className="d-flex gap-2">
                     <button
                       className="btn btn-custom btn-lg d-flex align-items-center gap-1"
@@ -99,9 +107,11 @@ const JobDetails = ({ loading, selectedJob, onSetJob }) => {
                   </div>
                 )}
 
-                <span className="label label-custom text-gr fs-6">
-                  Vacant Position/s: {selectedJob.vacant_positions}
-                </span>
+                {selectedJob.active === 1 && (
+                  <span className="label label-custom text-gr fs-6">
+                    Vacant Position/s: {selectedJob.vacant_positions}
+                  </span>
+                )}
               </div>
             </h5>
             <div className="d-flex flex-wrap gap-2 fs-6">
