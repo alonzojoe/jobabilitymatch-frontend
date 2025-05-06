@@ -52,6 +52,7 @@ export const logout = () => {
   api.post("/auth/logout");
   localStorage.removeItem("auth-token");
   localStorage.removeItem("auth-user");
+  localStorage.removeItem("user-bookmark");
   window.location.href = "/";
 };
 

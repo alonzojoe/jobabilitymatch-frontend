@@ -12,10 +12,13 @@ const dialog = new ConfirmDialog();
 const notify = new ToastMessage();
 const JobDetails = ({ loading, selectedJob, onSetJob }) => {
   const { authUser } = useContext(AuthContext);
-  const { applications, refresh } = useContext(JobApplicationContext);
+  const { applications, refresh, bookmarks, addBookmark, removeBookmark } =
+    useContext(JobApplicationContext);
 
   const hasApplied =
-    applications.some((a) => a.job_posting_id === selectedJob?.id) || false;
+    applications?.some((a) => a.job_posting_id === selectedJob?.id) || false;
+
+  const hasBookMark = bookmarks?.some((b) => b.id === selectedJob?.id) || false;
 
   const handleApply = (job) => {
     const data = { user_id: authUser.id, job_posting_id: job.id };
@@ -74,12 +77,23 @@ const JobDetails = ({ loading, selectedJob, onSetJob }) => {
                       onClick={() => handleApply(selectedJob)}
                       disabled={hasApplied}
                     >
-                      {hasApplied ? <MdOutlineCheck className="fs-6" /> : <MdSend className="fs-6" />}
+                      {hasApplied ? (
+                        <MdOutlineCheck className="fs-6" />
+                      ) : (
+                        <MdSend className="fs-6" />
+                      )}
                       {hasApplied ? "Applied" : "Apply now"}
                     </button>
-                    <button className="btn btn-secondary btn-lg">
+                    <button
+                      className="btn btn-secondary btn-lg"
+                      onClick={() =>
+                        hasBookMark
+                          ? removeBookmark(selectedJob?.id)
+                          : addBookmark(selectedJob)
+                      }
+                    >
                       <span className="">
-                        <FaRegBookmark />
+                        {hasBookMark ? <FaBookmark /> : <FaRegBookmark />}
                       </span>
                     </button>
                   </div>

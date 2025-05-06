@@ -1,12 +1,15 @@
 import { useState, useEffect } from "react";
+import useLocalStorage from "@/hooks/useLocalStorage";
 import api from "@/services/api";
+import { getLocalStorage, ToastMessage } from "@/libs/utils";
 import JobApplicationContext from "@/store/jobapplication/jobapplication-context";
-import { getLocalStorage } from "@/libs/utils";
+
+const notify = new ToastMessage();
 
 const JobApplicationProvider = ({ children }) => {
   const [applications, setApplications] = useState([]);
   const [authUser, setAuthUser] = useState(getLocalStorage("auth-user"));
-
+  const [bookmarks, setBookMarks] = useLocalStorage("user-bookmark", []);
   const getApplications = async () => {
     if (!authUser?.id) return;
     try {
@@ -25,9 +28,26 @@ const JobApplicationProvider = ({ children }) => {
     await getApplications();
   };
 
+  const addBookmark = (jobDetails) => {
+    setBookMarks((current) =>
+      current.some((job) => job.id === jobDetails.id)
+        ? current
+        : [...current, jobDetails]
+    );
+    notify.notif("success", "Job posting saved.");
+  };
+
+  const removeBookmark = (jobId) => {
+    setBookMarks((current) => current.filter((job) => job.id !== jobId));
+    notify.notif("success", "Job posting removed.");
+  };
+
   const appData = {
     applications,
     refresh,
+    bookmarks,
+    addBookmark,
+    removeBookmark,
   };
 
   return (
