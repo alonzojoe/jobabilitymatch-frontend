@@ -72,7 +72,11 @@ const Feed = () => {
   return (
     <>
       {selectedJob && (
-        <Modal isJobModal={true} onClose={() => setSelectedJob(null)}>
+        <Modal
+          isJobModal={true}
+          onClose={() => setSelectedJob(null)}
+          isHidden={true}
+        >
           <JobDetails
             loading={loading}
             selectedJob={selectedJob}
@@ -81,7 +85,7 @@ const Feed = () => {
         </Modal>
       )}
 
-      <SearchInput onSearch={handleSearch} />
+      <SearchInput onSearch={handleSearch} onReset={setSelectedJob} />
       <JobPostingTab
         ref={jobDetailsTabRef}
         authUser={authUser}

@@ -1,11 +1,12 @@
 import { useState } from "react";
 
-const SearchInput = ({ onSearch }) => {
+const SearchInput = ({ onSearch, onReset }) => {
   const [query, serchQuery] = useState("");
 
   const handleSearch = (e) => {
     e.preventDefault();
     if (query === "") return;
+    onReset();
     onSearch(query);
   };
 

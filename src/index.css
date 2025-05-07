@@ -827,3 +827,10 @@ div:where(.swal2-container) {
 .text-bl {
   color: #FF4757;
 }
+
+.flicker-screen {
+  height: 100dvh;
+  width: 100%;
+  background: #FFFFFF;
+  overflow: hidden;
+}
