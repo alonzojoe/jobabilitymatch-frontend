@@ -12,6 +12,8 @@ import JobPostings from "@/pages/JobPostings/JobPostings";
 import JobApplicationProvider from "@/store/jobapplication/jobapplication-provider";
 import Unauthorized from "@/pages/Unauthorized/Unauthorized";
 import NotFound from "@/pages/NotFound/NotFound";
+import Applicants from "@/pages/Applicants/Applicants";
+
 import { Toaster } from "react-hot-toast";
 function App() {
   useEffect(() => {
@@ -46,6 +48,7 @@ function App() {
               <Route path="roles" element={<Roles />} />
               <Route path="disability-types" element={<DisabilityTypes />} />
               <Route path="job-postings" element={<JobPostings />} />
+              <Route path="applicants" element={<Applicants />} />
             </Route>
           </Route>
           <Route path="unauthorized" element={<Unauthorized />} />

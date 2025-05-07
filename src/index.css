@@ -860,3 +860,7 @@ div:where(.swal2-container) {
     width: 300px;
   }
 }
+
+.bcolor-custom {
+  border-color: #01004C;
+}

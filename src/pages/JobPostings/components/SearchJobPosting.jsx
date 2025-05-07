@@ -68,8 +68,8 @@ const SearchJobPosting = ({ onSearch, onRefresh }) => {
                 onChange={handleChange}
               >
                 <option value={0}>Please Select</option>
-                <option value={1}>Open</option>
-                <option value={2}>Close</option>
+                <option value={1}>Active</option>
+                <option value={2}>Inactive</option>
               </select>
             </div>
           </div>
