@@ -1,14 +1,11 @@
-import useToggle from "@/hooks/useToggle";
 import { useState, useContext } from "react";
 import AuthContext from "@/store/auth/auth-context";
 import useFetch from "@/hooks/useFetch";
-import api from "@/services/api";
 import PageHeader from "@/components/Global/PageHeader";
 import Panel from "@/components/UI/Panel";
 import SearchJobPosting from "@/pages/JobPostings/components/SearchJobPosting";
 import JobPostingApplicants from "@/pages/Applicants/components/JobPostingApplicants";
 import Pagination from "@/components/UI/Pagination";
-import { ConfirmDialog, ToastMessage } from "@/libs/utils";
 
 const initialParams = {
   title: "",
@@ -18,13 +15,8 @@ const initialParams = {
   rand: 0.1,
 };
 
-const dialog = new ConfirmDialog();
-const notify = new ToastMessage();
-
 const Applicants = () => {
-  const [showModal, toggleShowModal] = useToggle(false);
   const [params, setParams] = useState(initialParams);
-  const [selected, setSelected] = useState(null);
   const { authUser } = useContext(AuthContext);
   const {
     data: jobPostings,
@@ -34,7 +26,6 @@ const Applicants = () => {
     ...params,
     company_id: authUser?.company?.id,
   });
-  const { data: disabilityTypes } = useFetch(`/disability/all`, null);
 
   const handleRefresh = () => {
     console.log("page refresh");

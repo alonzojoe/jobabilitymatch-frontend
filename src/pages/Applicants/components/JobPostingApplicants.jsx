@@ -33,7 +33,9 @@ const JobPostingApplicants = ({ loading, error, jobPostings }) => {
           </>
         </Modal>
       )}
-      {jobData && <ViewApplicants job={jobData} />}
+      {jobData && (
+        <ViewApplicants job={jobData} onClose={() => setJobData(null)} />
+      )}
       <table className="table table-striped table-bordered table-td-valign-middle dataTable no-footer dtr-inline collapsed">
         <thead>
           <tr>
