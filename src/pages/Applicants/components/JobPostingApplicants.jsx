@@ -1,41 +1,26 @@
 import { useState } from "react";
 import moment from "moment";
 import { LoadingRow, ErrorRow, EmptyRow } from "@/components/Data/TableData";
-import { FaTrashAlt, FaEdit, FaEye } from "react-icons/fa";
+import { FaWalking } from "react-icons/fa";
 import Modal from "@/components/UI/Modal";
 import PageHeader from "@/components/Global/PageHeader";
-import api from "@/services/api";
+
 import { ToastMessage } from "@/libs/utils";
+import ViewApplicants from "./ViewApplicants";
 
 const notify = new ToastMessage();
 
-const JobPostingList = ({
-  loading,
-  error,
-  jobPostings,
-  onUpdate,
-  onDelete,
-  onRefresh,
-}) => {
+const initialParams = { id: 0, rand: 1 };
+const JobPostingApplicants = ({ loading, error, jobPostings }) => {
   const [viewData, setViewData] = useState(null);
+  const [jobData, setJobData] = useState(null);
 
   const handleClose = () => {
     setViewData(null);
   };
 
-  const changeStatus = async (e) => {
-    const { id, value } = e.target;
-    console.log(id, value);
-    try {
-      await api.patch(`/posting/status/${id}`, {
-        active: value,
-      });
-      const msg = value == 1 ? "active" : "inactive";
-      notify.notif("success", `Job posting set to ${msg}`);
-      onRefresh();
-    } catch (error) {
-      console.log(error);
-    }
+  const viewApplicants = (job) => {
+    setJobData(job);
   };
 
   return (
@@ -48,21 +33,21 @@ const JobPostingList = ({
           </>
         </Modal>
       )}
-
+      {jobData && (
+        <ViewApplicants job={jobData} onClose={() => setJobData(null)} />
+      )}
       <table className="table table-striped table-bordered table-td-valign-middle dataTable no-footer dtr-inline collapsed">
         <thead>
           <tr>
             <th className="text-center font-weight-bold fs-7">ID</th>
             <th className="text-center font-weight-bold fs-7">Job Title</th>
-            <th className="text-center font-weight-bold fs-7">
-              Job Description
-            </th>
+
             <th className="text-center font-weight-bold fs-7">
               Vacant Position/s
             </th>
             <th className="text-center font-weight-bold fs-7">Status</th>
             <th className="text-center font-weight-bold fs-7">Date Posted</th>
-            <th className="text-center font-weight-bold fs-7">Options</th>
+            <th className="text-center font-weight-bold fs-7">Applicants</th>
           </tr>
         </thead>
         <tbody>
@@ -77,52 +62,39 @@ const JobPostingList = ({
             jobPostings.data.map((d) => (
               <tr key={d.id}>
                 <td className="text-center font-weight-bold fs-7">{d.id}</td>
-                <td className="text-center font-weight-bold fs-7">{d.title}</td>
                 <td className="text-center font-weight-bold fs-7">
-                  <button
-                    className="btn btn-purple"
-                    type="button"
+                  <span
+                    className="cursor-pointer text-primary"
                     onClick={() => setViewData(d.description)}
                   >
-                    <FaEye className="fs-6" /> View
-                  </button>
+                    {d.title}
+                  </span>
                 </td>
                 <td className="text-center font-weight-bold fs-7">
                   {d.vacant_positions}
                 </td>
                 <td className="text-center ">
-                  {/* {d.active} */}
-
-                  <select
-                    className="form-control fs-7 font-weight-bold"
-                    onChange={changeStatus}
-                    id={d.id}
-                    defaultValue={d.active}
-                  >
-                    <option value={1}>Active</option>
-                    <option value={2}>Inactive</option>
-                  </select>
+                  {d.active === 1 ? (
+                    <span className="label label-custom text-gr fs-6">
+                      Active
+                    </span>
+                  ) : (
+                    <span className="label label-blood text-bl fs-6">
+                      Inactive
+                    </span>
+                  )}
                 </td>
                 <td className="text-center font-weight-bold fs-7">
                   {moment(d.created_at).format("lll")}
                 </td>
                 <td className="text-center font-weight-bold fs-7">
-                  <div className="d-flex justify-content-center align-items-center gap-2">
-                    <button
-                      className="btn btn-warning"
-                      type="button"
-                      onClick={() => onUpdate(d)}
-                    >
-                      <FaEdit className="fs-6" /> Update
-                    </button>
-                    <button
-                      className="btn btn-danger"
-                      type="button"
-                      onClick={() => onDelete(d.id)}
-                    >
-                      <FaTrashAlt className="fs-6" /> Delete
-                    </button>
-                  </div>
+                  <button
+                    className="btn btn-warning"
+                    type="button"
+                    onClick={() => viewApplicants(d)}
+                  >
+                    <FaWalking className="fs-6" /> View Applicants
+                  </button>
                 </td>
               </tr>
             ))}
@@ -132,4 +104,4 @@ const JobPostingList = ({
   );
 };
 
-export default JobPostingList;
+export default JobPostingApplicants;

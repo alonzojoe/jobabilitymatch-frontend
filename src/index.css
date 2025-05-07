@@ -827,3 +827,40 @@ div:where(.swal2-container) {
 .text-bl {
   color: #FF4757;
 }
+
+.flicker-screen {
+  height: 100dvh;
+  width: 100%;
+  background: #FFFFFF;
+  overflow: hidden;
+}
+
+.error-page-container {
+  height: 100dvh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.responsive-img {
+  width: 500px;
+  height: auto;
+}
+
+@media screen and (max-width: 767px) {
+  .responsive-img {
+    width: 450px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .responsive-img {
+    width: 300px;
+  }
+}
+
+.bcolor-custom {
+  border-color: #01004C;
+}

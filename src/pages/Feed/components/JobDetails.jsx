@@ -5,6 +5,7 @@ import Card from "@/components/UI/Card";
 import SkeletonCard from "@/components/Loaders/SkeletonCard";
 import { ConfirmDialog, ToastMessage } from "@/libs/utils";
 import { FaRegBookmark, FaBookmark } from "react-icons/fa6";
+import { IoIosCloseCircle } from "react-icons/io";
 import { MdSend, MdOutlineCheck } from "react-icons/md";
 import api from "@/services/api";
 
@@ -48,20 +49,27 @@ const JobDetails = ({ loading, selectedJob, onSetJob }) => {
   if (loading) return <SkeletonCard height="112px" />;
   return (
     <Card title="Job Details">
-      <div className="selected-job">
+      <div className="selected-job position-relative">
         {selectedJob ? (
           <>
             {/* {JSON.stringify(applications)} */}
+            <span
+              onClick={() => onSetJob(null)}
+              className="position-absolute"
+              style={{
+                fontSize: "20px",
+                top: "-20px",
+                right: "-18px",
+                zIndex: "1000",
+                fontWeight: "bold",
+              }}
+            >
+              <IoIosCloseCircle className="fw-bolder text-pink cst-close fs-2" />
+            </span>
             <div className="d-flex align-items-center justify-content-between">
               <h3 className="fs-4 font-weight-bold text-dark">
                 {selectedJob.title}
               </h3>
-              <span
-                className="fs-3 font-weight-bold cursor-pointer text-danger"
-                onClick={() => onSetJob(null)}
-              >
-                <i className="ti ti-x"></i>
-              </span>
             </div>
             <span className="d-block d-flex align-items-center gap-1 fs-6">
               <i className="ti ti-buildings"></i>

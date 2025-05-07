@@ -1,21 +1,17 @@
 import { useState } from "react";
-import Panel from "@/components/UI/Panel";
+import Card from "@/components/UI/Card";
 import { FaSearch } from "react-icons/fa";
 import { LuRefreshCcw } from "react-icons/lu";
 
-const initialState = {
-  title: "",
-  description: "",
-  active: 0,
+const initialParams = {
+  lastname: "",
+  firstname: "",
+  middlename: "",
+  email: "",
 };
 
-const SearchJobPosting = ({ onSearch, onRefresh }) => {
-  const [params, setParams] = useState(initialState);
-
-  const handleSearch = (e) => {
-    e.preventDefault();
-    onSearch(params);
-  };
+const SearchApplicants = ({ onSearch, onRefresh }) => {
+  const [params, setParams] = useState(initialParams);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -26,54 +22,70 @@ const SearchJobPosting = ({ onSearch, onRefresh }) => {
     }));
   };
 
+  const handleSearch = (e) => {
+    e.preventDefault();
+    onSearch(params);
+  };
+
   return (
-    <Panel title="Search">
-      <form className="pd-2" onSubmit={handleSearch}>
-        <div className="row mb-3">
-          <div className="col-sm-12 col-md-6 col-lg-4">
+    <Card>
+      <form className="pd-0" onSubmit={handleSearch}>
+        <div className="row mb-0">
+          <div className="col-sm-12 col-md-6 col-lg-4 mb-2">
             <div>
               <label className="form-label fs-6 mb-2 fw-semibold">
-                Job Title
+                Last Name
               </label>
               <input
                 type="text"
-                name="title"
+                name="lastname"
                 className="form-control form-control-sm custom-font"
-                value={params.title}
+                value={params.lastname}
                 onChange={handleChange}
               />
             </div>
           </div>
-          <div className="col-sm-12 col-md-6 col-lg-4">
+          <div className="col-sm-12 col-md-6 col-lg-4 mb-2">
             <div>
               <label className="form-label fs-6 mb-2 fw-semibold">
-                Job Description
+                First Name
               </label>
               <input
                 type="text"
-                name="description"
+                name="firstname"
                 className="form-control form-control-sm custom-font"
-                value={params.description}
+                value={params.firstname}
                 onChange={handleChange}
               />
             </div>
           </div>
-          <div className="col-sm-12 col-md-6 col-lg-4">
+          <div className="col-sm-12 col-md-6 col-lg-4 mb-2">
             <div>
-              <label className="form-label fs-6 mb-2 fw-semibold">Status</label>
-              <select
-                name="active"
-                className="form-control"
-                value={params.active}
+              <label className="form-label fs-6 mb-2 fw-semibold">
+                Middle Name
+              </label>
+              <input
+                type="text"
+                name="middlename"
+                className="form-control form-control-sm custom-font"
+                value={params.middlename}
                 onChange={handleChange}
-              >
-                <option value={0}>Please Select</option>
-                <option value={1}>Active</option>
-                <option value={2}>Inactive</option>
-              </select>
+              />
             </div>
           </div>
-          <div className="col-sm-12 col-md-6 col-lg-4">
+          <div className="col-sm-12 col-md-6 col-lg-4 mb-2">
+            <div>
+              <label className="form-label fs-6 mb-2 fw-semibold">Email</label>
+              <input
+                type="text"
+                name="email"
+                className="form-control form-control-sm custom-font"
+                value={params.email}
+                onChange={handleChange}
+              />
+            </div>
+          </div>
+          <div className="col-sm-12 col-md-6 col-lg-4 mb-2">
             <div
               className="d-flex gap-2 align-items-center"
               style={{
@@ -89,7 +101,7 @@ const SearchJobPosting = ({ onSearch, onRefresh }) => {
               <button
                 className="btn btn-pink"
                 onClick={() => {
-                  setParams(initialState);
+                  setParams(initialParams);
                   onRefresh();
                 }}
                 type="button"
@@ -100,8 +112,8 @@ const SearchJobPosting = ({ onSearch, onRefresh }) => {
           </div>
         </div>
       </form>
-    </Panel>
+    </Card>
   );
 };
 
-export default SearchJobPosting;
+export default SearchApplicants;
