@@ -10,6 +10,8 @@ import Users from "@/pages/Users/Users";
 import Roles from "@/pages/Roles/Roles";
 import JobPostings from "@/pages/JobPostings/JobPostings";
 import JobApplicationProvider from "@/store/jobapplication/jobapplication-provider";
+import Unauthorized from "@/pages/Unauthorized/Unauthorized";
+import NotFound from "@/pages/NotFound/NotFound";
 import { Toaster } from "react-hot-toast";
 function App() {
   useEffect(() => {
@@ -27,7 +29,7 @@ function App() {
       <Toaster />
       <BrowserRouter>
         <Routes>
-          <Route path="" element={<FeedLayout />}>
+          <Route path="/" element={<FeedLayout />}>
             <Route
               path=""
               element={
@@ -46,6 +48,8 @@ function App() {
               <Route path="job-postings" element={<JobPostings />} />
             </Route>
           </Route>
+          <Route path="unauthorized" element={<Unauthorized />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </>
