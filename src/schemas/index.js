@@ -127,3 +127,33 @@ export const postingSchema = z.object({
     .trim()
     .nonempty({ message: "Vacant Position/s is required" }),
 });
+
+export const changePassSchema = z
+  .object({
+    email: z
+      .string()
+      .trim()
+      .nonempty({ message: "Email is required" })
+      .email({ message: "Please enter a valid email" }),
+    oldpassword: z
+      .string()
+      .trim()
+      .nonempty({ message: "Password is required" })
+      .min(6, { message: "Old password must be at least 6 characters long" }),
+    newpassword: z
+      .string()
+      .trim()
+      .nonempty({ message: "New password is required" })
+      .min(6, { message: "New password must be at least 6 characters long" }),
+    confirmPassword: z
+      .string()
+      .trim()
+      .nonempty({ message: "Confirm new password is required" })
+      .min(6, {
+        message: "Confirm new password must be at least 6 characters long",
+      }),
+  })
+  .refine((val) => val.newpassword === val.confirmPassword, {
+    message: "Passwords must match",
+    path: ["confirmPassword"],
+  });
