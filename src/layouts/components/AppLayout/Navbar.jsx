@@ -5,9 +5,43 @@ import MainText from "@/assets/images/logo-text.png";
 import Avatar from "@/assets/images/avatar.jpeg";
 import useToggle from "@/hooks/useToggle";
 import ChangePassword from "@/components/Auth/ChangePassword";
+import UpdateEmployer from "@/components/Form/UpdateEmployer";
+import UpdatePwd from "@/components/Form/UpdatePwd";
+import UpdateUser from "@/components/Form/UpdateUser";
 
 const Navbar = ({ authUser }) => {
   const [changePass, toggleChangePass] = useToggle(false);
+  const [updateProfile, toggleUpdateProfile] = useToggle(false);
+
+  const renderUpdateComponent = () => {
+    if (updateProfile) {
+      switch (authUser?.role_id) {
+        case 3:
+          return (
+            <UpdateEmployer
+              authUser={authUser}
+              onClose={() => toggleUpdateProfile(false)}
+            />
+          );
+        case 2:
+          return (
+            <UpdatePwd
+              authUser={authUser}
+              onClose={() => toggleUpdateProfile(false)}
+            />
+          );
+        case 1:
+        default:
+          return (
+            <UpdateUser
+              authUser={authUser}
+              onClose={() => toggleUpdateProfile(false)}
+            />
+          );
+      }
+    }
+  };
+
   return (
     <>
       {changePass && (
@@ -16,6 +50,7 @@ const Navbar = ({ authUser }) => {
           onClose={() => toggleChangePass(false)}
         />
       )}
+      {renderUpdateComponent()}
       <div id="header" className="header navbar-default navbar-head">
         <div className="navbar-header">
           <Link to="/home" className="navbar-brand">
@@ -77,7 +112,11 @@ const Navbar = ({ authUser }) => {
               <span className="dropdown-item label label-inverse ml-3 pe-none">
                 {authUser?.role?.name}
               </span>
-              <a href="javascript:;" className="dropdown-item mt-1">
+              <a
+                href="javascript:;"
+                className="dropdown-item mt-1"
+                onClick={() => toggleUpdateProfile(true)}
+              >
                 Update Profile
               </a>
               <a

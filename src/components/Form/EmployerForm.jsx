@@ -1,15 +1,14 @@
-import { useState } from "react";
 import PageHeader from "@/components/Global/PageHeader";
 import Select from "react-select";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { employerSchema } from "@/schemas";
-import { ToastMessage, handlePhoneInput } from "@/libs/utils";
+import { ToastMessage, handlePhoneInput, setLocalStorage } from "@/libs/utils";
 import api from "@/services/api";
 
 const notify = new ToastMessage();
 
-const EmployerForm = ({ onClose }) => {
+const EmployerForm = ({ employer = null, onClose }) => {
   const {
     register,
     handleSubmit,
@@ -18,6 +17,19 @@ const EmployerForm = ({ onClose }) => {
     resolver: zodResolver(employerSchema),
     defaultValues: {
       role_id: 3,
+      id: employer?.id ?? 0,
+      firstname: employer?.firstname ?? "",
+      lastname: employer?.lastname ?? "",
+      middlename: employer?.middlename ?? "",
+      birthdate: employer?.birthdate ?? "",
+      gender: employer?.gender ?? "",
+      address: employer?.address ?? "",
+      phone: employer?.phone ?? "",
+      company: employer?.company ?? "",
+      company_address: employer?.company_address ?? "",
+      email: employer?.email ?? "",
+      password: employer?.password ?? "",
+      confirmPassword: employer?.confirmPassword ?? "",
     },
   });
 
@@ -29,10 +41,9 @@ const EmployerForm = ({ onClose }) => {
     };
 
     try {
-      await api.post("/auth/register", {
-        ...employer,
-      });
-      notify.notif("success", "Employer Account created successfully");
+      employer ? await update(employer) : save(employer);
+      const msg = employer ? "updated" : "created";
+      notify.notif("success", `Employer Account ${msg} successfully`);
       onClose();
     } catch (error) {
       console.log("error", error);
@@ -50,6 +61,33 @@ const EmployerForm = ({ onClose }) => {
     // console.log(user);
   };
 
+  const save = async (data) => {
+    await api.post("/auth/register", {
+      ...data,
+    });
+  };
+
+  const update = async (data) => {
+    await api.patch(`/user/employer/${employer?.id}`, {
+      ...data,
+      company_id: employer?.company_id,
+    });
+    await updatedUser();
+  };
+
+  const updatedUser = async () => {
+    try {
+      const res = await api.post("/auth/me");
+      const { user } = res.data;
+      setLocalStorage("auth-user", user);
+      console.log("res auth me", user);
+    } catch (error) {
+      console.log("error", error?.message);
+    } finally {
+      window.location.reload();
+    }
+  };
+
   return (
     <div>
       <form
@@ -57,7 +95,11 @@ const EmployerForm = ({ onClose }) => {
         onSubmit={handleSubmit((data) => handleSave(data))}
       >
         <div className="row">
-          <div className="col-sm-12 col-md-6 col-lg-8">
+          <div
+            className={`col-sm-12 col-md-6 ${
+              employer ? "col-lg-12" : "col-lg-8"
+            }`}
+          >
             <PageHeader title="Employer Information" />
 
             <div className="row mt-4">
@@ -242,70 +284,75 @@ const EmployerForm = ({ onClose }) => {
             </div>
           </div>
 
-          <div className="col-sm-12 col-md-6 col-lg-4">
-            <PageHeader title="Login Credentials" />
-            <div className="row mt-4">
-              <div className="col-12 mb-2">
-                <div
-                  className={`mb-2 fv-plugins-icon-container ${
-                    errors.email ? "group-invalid" : ""
-                  }`}
-                >
-                  <label htmlFor="email" className="form-label fs-6">
-                    Email <span className="text-danger">*</span>
-                  </label>
-                  <input
-                    {...register("email")}
-                    type="text"
-                    className="form-control"
-                  />
-                  <div className="mt-1 font-weight-bold text-validation">
-                    {errors.email?.message}
+          {!employer && (
+            <div className="col-sm-12 col-md-6 col-lg-4">
+              <PageHeader title="Login Credentials" />
+              <div className="row mt-4">
+                <div className="col-12 mb-2">
+                  <div
+                    className={`mb-2 fv-plugins-icon-container ${
+                      errors.email ? "group-invalid" : ""
+                    }`}
+                  >
+                    <label htmlFor="email" className="form-label fs-6">
+                      Email <span className="text-danger">*</span>
+                    </label>
+                    <input
+                      {...register("email")}
+                      type="text"
+                      className="form-control"
+                    />
+                    <div className="mt-1 font-weight-bold text-validation">
+                      {errors.email?.message}
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <div className="col-12 mb-2">
-                <div
-                  className={`mb-2 fv-plugins-icon-container ${
-                    errors.password ? "group-invalid" : ""
-                  }`}
-                >
-                  <label htmlFor="password" className="form-label fs-6">
-                    Password <span className="text-danger">*</span>
-                  </label>
-                  <input
-                    {...register("password")}
-                    type="password"
-                    className="form-control"
-                  />
-                  <div className="mt-1 font-weight-bold text-validation">
-                    {errors.password?.message}
+                <div className="col-12 mb-2">
+                  <div
+                    className={`mb-2 fv-plugins-icon-container ${
+                      errors.password ? "group-invalid" : ""
+                    }`}
+                  >
+                    <label htmlFor="password" className="form-label fs-6">
+                      Password <span className="text-danger">*</span>
+                    </label>
+                    <input
+                      {...register("password")}
+                      type="password"
+                      className="form-control"
+                    />
+                    <div className="mt-1 font-weight-bold text-validation">
+                      {errors.password?.message}
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <div className="col-12 mb-2">
-                <div
-                  className={`mb-2 fv-plugins-icon-container ${
-                    errors.confirmPassword ? "group-invalid" : ""
-                  }`}
-                >
-                  <label htmlFor="confirmPassword" className="form-label fs-6">
-                    Confirm Password <span className="text-danger">*</span>
-                  </label>
-                  <input
-                    {...register("confirmPassword")}
-                    type="password"
-                    className="form-control"
-                  />
-                  <div className="mt-1 font-weight-bold text-validation">
-                    {errors.confirmPassword?.message}
+                <div className="col-12 mb-2">
+                  <div
+                    className={`mb-2 fv-plugins-icon-container ${
+                      errors.confirmPassword ? "group-invalid" : ""
+                    }`}
+                  >
+                    <label
+                      htmlFor="confirmPassword"
+                      className="form-label fs-6"
+                    >
+                      Confirm Password <span className="text-danger">*</span>
+                    </label>
+                    <input
+                      {...register("confirmPassword")}
+                      type="password"
+                      className="form-control"
+                    />
+                    <div className="mt-1 font-weight-bold text-validation">
+                      {errors.confirmPassword?.message}
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
+          )}
         </div>
 
         <div className="mb-4"></div>
@@ -315,7 +362,7 @@ const EmployerForm = ({ onClose }) => {
           className="btn btn-custom d-grid w-100 waves-effect waves-light d-flex align-items-center justify-content-center gap-1"
           disabled={isLoading}
         >
-          {isLoading ? "Signing up" : "Sign Up"}
+          {employer ? "Update" : "Sign Up"}
           {isLoading && (
             <div className="spinner-border text-white" role="status">
               <span className="visually-hidden"></span>
