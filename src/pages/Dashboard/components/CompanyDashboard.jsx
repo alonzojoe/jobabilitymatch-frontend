@@ -174,7 +174,9 @@ const CompanyDashboard = () => {
         <div className="col-sm-12 col-xl-6 col-md-6">
           <Panel title="Bar Chart Analytics">
             <div className="d-flex align-items-center justify-content-center">
-              <div className="chart-container">
+              <div
+                style={{ width: "400px", height: "400px", margin: "0 auto" }}
+              >
                 <Bar
                   options={options}
                   data={barChartData}
@@ -187,8 +189,10 @@ const CompanyDashboard = () => {
         <div className="col-sm-12 col-xl-6 col-md-6">
           <Panel title="Pie Chart Analytics">
             <div className="d-flex align-items-center justify-content-center">
-              <div className="chart-container">
-                <Pie data={pieChartData} className="pie-chart" />
+              <div
+                style={{ width: "400px", height: "400px", margin: "0 auto" }}
+              >
+                <Pie data={pieChartData} />
               </div>
             </div>
           </Panel>
