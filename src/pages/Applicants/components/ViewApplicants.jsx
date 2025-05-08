@@ -111,7 +111,7 @@ const ViewApplicants = ({ onClose, job }) => {
                       defaultValue={d.status}
                     >
                       <option value={`Pending`}>Pending</option>
-                      <option value={`Accepted`}>Accepted</option>
+                      <option value={`Hired`}>Hired</option>
                       <option value={`Rejected`}>Rejected</option>
                     </select>
                   </td>
