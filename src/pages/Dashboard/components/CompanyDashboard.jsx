@@ -1,24 +1,35 @@
-import PageHeader from "@/components/Global/PageHeader";
+import { useContext } from "react";
+import AuthContext from "@/store/auth/auth-context";
 import { Link } from "react-router-dom";
+import useFetch from "@/hooks/useFetch";
+import { formatCount } from "@/libs/utils";
+
 const CompanyDashboard = () => {
+  const { authUser } = useContext(AuthContext);
+  const {
+    data: dashboardData,
+    loading,
+    error,
+  } = useFetch(`/dashboard/company/${authUser?.company?.id}`, null);
+
+  console.log("dashboard", dashboardData?.data);
+
   return (
     <>
-      <PageHeader title="Company Dashboard" />
-
       <div className="row">
         {/* begin col-3 */}
         <div className="col-xl-3 col-md-6">
-          <div class="widget widget-stats bg-warning">
+          <div className="widget widget-stats bg-warning">
             <div className="stats-icon stats-icon-square bg-custom text-white">
               <i className="ion-ios-create"></i>
             </div>
-            <div class="stats-info">
+            <div className="stats-info">
               <h4 className="text-white">TOTAL JOB POSTINGS</h4>
-              <p>3,291,922</p>
+              <p>{formatCount(dashboardData?.data?.job_postings)}</p>
             </div>
-            <div class="stats-link">
+            <div className="stats-link">
               <Link to="/home/job-postings">
-                View Detail <i class="fa fa-arrow-alt-circle-right"></i>
+                View Detail <i className="fa fa-arrow-alt-circle-right"></i>
               </Link>
             </div>
           </div>
@@ -27,17 +38,17 @@ const CompanyDashboard = () => {
 
         {/* begin col-3 */}
         <div className="col-xl-3 col-md-6">
-          <div class="widget widget-stats bg-info">
+          <div className="widget widget-stats bg-info">
             <div className="stats-icon stats-icon-square bg-custom text-white">
               <i className="ion-ios-walk"></i>
             </div>
-            <div class="stats-info">
+            <div className="stats-info">
               <h4 className="text-white">TOTAL APPLICANTS</h4>
-              <p>3,291,922</p>
+              <p>{formatCount(dashboardData?.data?.applicants)}</p>
             </div>
-            <div class="stats-link">
+            <div className="stats-link">
               <Link to="/home/applicants">
-                View Detail <i class="fa fa-arrow-alt-circle-right"></i>
+                View Detail <i className="fa fa-arrow-alt-circle-right"></i>
               </Link>
             </div>
           </div>
@@ -46,17 +57,17 @@ const CompanyDashboard = () => {
 
         {/* begin col-3 */}
         <div className="col-xl-3 col-md-6">
-          <div class="widget widget-stats bg-danger">
+          <div className="widget widget-stats bg-danger">
             <div className="stats-icon stats-icon-square bg-custom text-white">
               <i className="ion-ios-checkmark-circle"></i>
             </div>
-            <div class="stats-info">
-              <h4 className="text-white">TOTAL ACCEPTED</h4>
-              <p>3,291,922</p>
+            <div className="stats-info">
+              <h4 className="text-white">TOTAL HIRED APPLICANTS</h4>
+              <p>{formatCount(dashboardData?.data?.accepted_applicants)}</p>
             </div>
-            <div class="stats-link">
+            <div className="stats-link">
               <Link to="/home/applicants">
-                View Detail <i class="fa fa-arrow-alt-circle-right"></i>
+                View Detail <i className="fa fa-arrow-alt-circle-right"></i>
               </Link>
             </div>
           </div>
@@ -65,17 +76,17 @@ const CompanyDashboard = () => {
 
         {/* begin col-3 */}
         <div className="col-xl-3 col-md-6">
-          <div class="widget widget-stats bg-purple">
+          <div className="widget widget-stats bg-purple">
             <div className="stats-icon stats-icon-square bg-custom text-white">
               <i className="ion-ios-close-circle"></i>
             </div>
-            <div class="stats-info">
-              <h4 className="text-white">TOTAL REJECTED</h4>
-              <p>3,291,922</p>
+            <div className="stats-info">
+              <h4 className="text-white">TOTAL REJECTED APPLICANTS</h4>
+              <p>{formatCount(dashboardData?.data?.rejected_applicants)}</p>
             </div>
-            <div class="stats-link">
+            <div className="stats-link">
               <Link to="/home/applicants">
-                View Detail <i class="fa fa-arrow-alt-circle-right"></i>
+                View Detail <i className="fa fa-arrow-alt-circle-right"></i>
               </Link>
             </div>
           </div>
