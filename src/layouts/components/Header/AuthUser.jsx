@@ -1,7 +1,12 @@
 import React from "react";
 import { logout } from "@/libs/utils";
 
-const AuthUser = ({ withClass = true, authUser }) => {
+const AuthUser = ({
+  withClass = true,
+  authUser,
+  onUpdateProfile,
+  onChangePass,
+}) => {
   const ulClass = withClass ? "profile-auth" : "";
 
   return (
@@ -39,8 +44,19 @@ const AuthUser = ({ withClass = true, authUser }) => {
           <span className="dropdown-item label label-inverse ml-3 pe-none">
             {authUser?.role?.name}
           </span>
-          <a href="javascript:;" className="dropdown-item mt-1">
+          <a
+            href="javascript:;"
+            className="dropdown-item mt-1"
+            onClick={() => onUpdateProfile(true)}
+          >
             Update Profile
+          </a>
+          <a
+            href="javascript:;"
+            className="dropdown-item mt-1"
+            onClick={() => onChangePass(true)}
+          >
+            Change Password
           </a>
           <div className="dropdown-divider"></div>
           <a href="javascript:;" className="dropdown-item" onClick={logout}>

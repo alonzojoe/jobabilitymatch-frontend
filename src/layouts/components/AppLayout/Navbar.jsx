@@ -2,11 +2,9 @@ import { Link } from "react-router-dom";
 import { logout } from "@/libs/utils";
 import MainLogo from "@/assets/images/logo-main.png";
 import MainText from "@/assets/images/logo-text.png";
-import Avatar from "@/assets/images/avatar.jpeg";
 import useToggle from "@/hooks/useToggle";
 import ChangePassword from "@/components/Auth/ChangePassword";
 import UpdateEmployer from "@/components/Form/UpdateEmployer";
-import UpdatePwd from "@/components/Form/UpdatePwd";
 import UpdateUser from "@/components/Form/UpdateUser";
 
 const Navbar = ({ authUser }) => {
@@ -19,13 +17,6 @@ const Navbar = ({ authUser }) => {
         case 3:
           return (
             <UpdateEmployer
-              authUser={authUser}
-              onClose={() => toggleUpdateProfile(false)}
-            />
-          );
-        case 2:
-          return (
-            <UpdatePwd
               authUser={authUser}
               onClose={() => toggleUpdateProfile(false)}
             />

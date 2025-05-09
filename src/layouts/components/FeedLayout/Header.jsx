@@ -9,11 +9,16 @@ import Registry from "@/components/Auth/Registry";
 import AuthUser from "@/layouts/components/Header/AuthUser";
 import useAuthSetup from "@/hooks/useAuthSetup";
 import AuthControls from "@/layouts/components/Header/AuthControls";
+import UpdatePwd from "@/components/Form/UpdatePwd";
+import ChangePassword from "@/components/Auth/ChangePassword";
 import { logout } from "@/libs/utils";
 import { Link } from "react-router-dom";
+
 const Header = ({ roles, disabilityTypes }) => {
   const [showLogin, toggleLogin] = useToggle(false);
   const [showRegistry, toggleRegistry] = useToggle(false);
+  const [updateProfile, toggleUpdateProfile] = useToggle(false);
+  const [changePass, toggleChangePass] = useToggle(false);
 
   const { authUser } = useContext(AuthContext);
 
@@ -34,6 +39,20 @@ const Header = ({ roles, disabilityTypes }) => {
           onClose={() => toggleRegistry(false)}
           roles={roles?.data}
           disabilityTypes={disabilityTypes?.data}
+        />
+      )}
+      {updateProfile && (
+        <UpdatePwd
+          authUser={authUser}
+          roles={roles?.data}
+          disabilityTypes={disabilityTypes?.data}
+          onClose={() => toggleUpdateProfile(false)}
+        />
+      )}
+      {changePass && (
+        <ChangePassword
+          authUser={authUser}
+          onClose={() => toggleChangePass(false)}
         />
       )}
       <div id="header" className="header navbar-default navbar-head">
@@ -99,8 +118,19 @@ const Header = ({ roles, disabilityTypes }) => {
                     <span className="dropdown-item label label-inverse ml-3 pe-none">
                       {authUser?.role?.name}
                     </span>
-                    <a href="javascript:;" className="dropdown-item mt-1">
+                    <a
+                      href="javascript:;"
+                      className="dropdown-item mt-1"
+                      onClick={() => toggleUpdateProfile(true)}
+                    >
                       Update Profile
+                    </a>
+                    <a
+                      href="javascript:;"
+                      className="dropdown-item mt-1"
+                      // onClick={() => toggleChangePass(true)}
+                    >
+                      Change Password
                     </a>
                     <div className="dropdown-divider"></div>
                     <a
@@ -126,7 +156,11 @@ const Header = ({ roles, disabilityTypes }) => {
 
         {/* BEGIN header-nav */}
         {authUser ? (
-          <AuthUser authUser={authUser} />
+          <AuthUser
+            authUser={authUser}
+            onUpdateProfile={toggleUpdateProfile}
+            onChangePass={toggleChangePass}
+          />
         ) : (
           <AuthControls
             type={`lg`}
