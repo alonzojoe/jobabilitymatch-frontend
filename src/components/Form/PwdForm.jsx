@@ -4,14 +4,25 @@ import Select from "react-select";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { pwdSchema } from "@/schemas";
-import { ToastMessage, handlePhoneInput, handlePwdIdNo } from "@/libs/utils";
+import {
+  ToastMessage,
+  handlePhoneInput,
+  handlePwdIdNo,
+  setLocalStorage,
+} from "@/libs/utils";
 import api from "@/services/api";
 
 const notify = new ToastMessage();
 
-const PwdForm = ({ role, roles, disabilityTypes, onClose }) => {
-  const [selectedDisabilities, setSelectedDisabilities] = useState([]);
+const PwdForm = ({ pwd = null, roles, disabilityTypes, onClose }) => {
+  console.log(pwd);
+  const [selectedDisabilities, setSelectedDisabilities] = useState(() =>
+    pwd ? pwd.disability_types : []
+  );
   const [error, setError] = useState("");
+
+  console.log("selected", selectedDisabilities);
+  console.log("selected", selectedDisabilities);
 
   const {
     register,
@@ -20,7 +31,19 @@ const PwdForm = ({ role, roles, disabilityTypes, onClose }) => {
   } = useForm({
     resolver: zodResolver(pwdSchema),
     defaultValues: {
-      role_id: role,
+      role_id: 2,
+      id: pwd?.id ?? 0,
+      firstname: pwd?.firstname ?? "",
+      lastname: pwd?.lastname ?? "",
+      middlename: pwd?.middlename ?? "",
+      birthdate: pwd?.birthdate ?? "",
+      gender: pwd?.gender ?? "",
+      address: pwd?.address ?? "",
+      phone: pwd?.phone ?? "",
+      pwd_id_no: pwd?.pwd_id_no ?? "",
+      email: pwd?.email ?? "",
+      password: pwd?.password ?? "",
+      confirmPassword: pwd?.confirmPassword ?? "",
     },
   });
 
@@ -37,10 +60,9 @@ const PwdForm = ({ role, roles, disabilityTypes, onClose }) => {
     console.log("user", user);
 
     try {
-      await api.post("/auth/register", {
-        ...user,
-      });
-      notify.notif("success", "Account created successfully");
+      pwd ? await update(user) : await save(user);
+      const msg = pwd ? "updated" : "created";
+      notify.notif("success", `Account ${msg} successfully`);
       onClose();
     } catch (error) {
       console.log(error);
@@ -55,7 +77,35 @@ const PwdForm = ({ role, roles, disabilityTypes, onClose }) => {
     console.log(user);
   };
 
+  const save = async (data) => {
+    await api.post("/auth/register", {
+      ...data,
+      role_id: 2,
+    });
+  };
+
+  const update = async (data) => {
+    await api.patch(`/user/pwd/${pwd?.id}`, {
+      ...data,
+    });
+    await updatedUser();
+  };
+
+  const updatedUser = async () => {
+    try {
+      const res = await api.post("/auth/me");
+      const { user } = res.data;
+      setLocalStorage("auth-user", user);
+      console.log("res auth me", user);
+    } catch (error) {
+      console.log("error", error?.message);
+    } finally {
+      window.location.reload();
+    }
+  };
+
   const handleChange = (selectedOptions) => {
+    console.log(selectedOptions);
     setSelectedDisabilities(selectedOptions || []);
     setError("");
   };
@@ -74,7 +124,9 @@ const PwdForm = ({ role, roles, disabilityTypes, onClose }) => {
         onSubmit={handleSubmit((data) => handleSave(data))}
       >
         <div className="row">
-          <div className="col-sm-12 col-md-6 col-lg-8">
+          <div
+            className={`col-sm-12 col-md-6 ${pwd ? "col-lg-12" : "col-lg-8"}`}
+          >
             <PageHeader title="Personal Information" />
             <div className="row mt-4">
               {/* Last Name */}
@@ -298,70 +350,75 @@ const PwdForm = ({ role, roles, disabilityTypes, onClose }) => {
             </div>
           </div>
 
-          <div className="col-sm-12 col-md-6 col-lg-4">
-            <PageHeader title="Login Credentials" />
-            <div className="row mt-4">
-              <div className="col-12 mb-2">
-                <div
-                  className={`mb-2 fv-plugins-icon-container ${
-                    errors.email ? "group-invalid" : ""
-                  }`}
-                >
-                  <label htmlFor="email" className="form-label fs-6">
-                    Email <span className="text-danger">*</span>
-                  </label>
-                  <input
-                    {...register("email")}
-                    type="text"
-                    className="form-control"
-                  />
-                  <div className="mt-1 font-weight-bold text-validation">
-                    {errors.email?.message}
+          {!pwd && (
+            <div className="col-sm-12 col-md-6 col-lg-4">
+              <PageHeader title="Login Credentials" />
+              <div className="row mt-4">
+                <div className="col-12 mb-2">
+                  <div
+                    className={`mb-2 fv-plugins-icon-container ${
+                      errors.email ? "group-invalid" : ""
+                    }`}
+                  >
+                    <label htmlFor="email" className="form-label fs-6">
+                      Email <span className="text-danger">*</span>
+                    </label>
+                    <input
+                      {...register("email")}
+                      type="text"
+                      className="form-control"
+                    />
+                    <div className="mt-1 font-weight-bold text-validation">
+                      {errors.email?.message}
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <div className="col-12 mb-2">
-                <div
-                  className={`mb-2 fv-plugins-icon-container ${
-                    errors.password ? "group-invalid" : ""
-                  }`}
-                >
-                  <label htmlFor="password" className="form-label fs-6">
-                    Password <span className="text-danger">*</span>
-                  </label>
-                  <input
-                    {...register("password")}
-                    type="password"
-                    className="form-control"
-                  />
-                  <div className="mt-1 font-weight-bold text-validation">
-                    {errors.password?.message}
+                <div className="col-12 mb-2">
+                  <div
+                    className={`mb-2 fv-plugins-icon-container ${
+                      errors.password ? "group-invalid" : ""
+                    }`}
+                  >
+                    <label htmlFor="password" className="form-label fs-6">
+                      Password <span className="text-danger">*</span>
+                    </label>
+                    <input
+                      {...register("password")}
+                      type="password"
+                      className="form-control"
+                    />
+                    <div className="mt-1 font-weight-bold text-validation">
+                      {errors.password?.message}
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <div className="col-12 mb-2">
-                <div
-                  className={`mb-2 fv-plugins-icon-container ${
-                    errors.confirmPassword ? "group-invalid" : ""
-                  }`}
-                >
-                  <label htmlFor="confirmPassword" className="form-label fs-6">
-                    Confirm Password <span className="text-danger">*</span>
-                  </label>
-                  <input
-                    {...register("confirmPassword")}
-                    type="password"
-                    className="form-control"
-                  />
-                  <div className="mt-1 font-weight-bold text-validation">
-                    {errors.confirmPassword?.message}
+                <div className="col-12 mb-2">
+                  <div
+                    className={`mb-2 fv-plugins-icon-container ${
+                      errors.confirmPassword ? "group-invalid" : ""
+                    }`}
+                  >
+                    <label
+                      htmlFor="confirmPassword"
+                      className="form-label fs-6"
+                    >
+                      Confirm Password <span className="text-danger">*</span>
+                    </label>
+                    <input
+                      {...register("confirmPassword")}
+                      type="password"
+                      className="form-control"
+                    />
+                    <div className="mt-1 font-weight-bold text-validation">
+                      {errors.confirmPassword?.message}
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
+          )}
         </div>
 
         <div className="mb-4"></div>
@@ -371,7 +428,7 @@ const PwdForm = ({ role, roles, disabilityTypes, onClose }) => {
           className="btn btn-custom d-grid w-100 waves-effect waves-light d-flex align-items-center justify-content-center gap-1"
           disabled={isLoading}
         >
-          {isLoading ? "Signing up" : "Sign Up"}
+          {pwd ? "Update Profile" : "Signing up"}
           {isLoading && (
             <div className="spinner-border text-white" role="status">
               <span className="visually-hidden"></span>

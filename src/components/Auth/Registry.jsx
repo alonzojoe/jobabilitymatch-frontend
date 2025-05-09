@@ -48,7 +48,6 @@ const Registry = ({ onClose, roles, disabilityTypes }) => {
             <AuthHeader />
             {type === 2 ? (
               <PwdForm
-                role={type}
                 roles={roles}
                 disabilityTypes={disabilityTypes}
                 onClose={onClose}

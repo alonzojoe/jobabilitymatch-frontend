@@ -42,7 +42,12 @@ const Header = ({ roles, disabilityTypes }) => {
         />
       )}
       {updateProfile && (
-        <UpdatePwd onClose={() => toggleUpdateProfile(false)} />
+        <UpdatePwd
+          authUser={authUser}
+          roles={roles?.data}
+          disabilityTypes={disabilityTypes?.data}
+          onClose={() => toggleUpdateProfile(false)}
+        />
       )}
       {changePass && (
         <ChangePassword

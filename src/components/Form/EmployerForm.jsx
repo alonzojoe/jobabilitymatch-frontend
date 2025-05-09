@@ -41,7 +41,7 @@ const EmployerForm = ({ employer = null, onClose }) => {
     };
 
     try {
-      employer ? await update(employer) : save(employer);
+      employer ? await update(employer) : await save(employer);
       const msg = employer ? "updated" : "created";
       notify.notif("success", `Employer Account ${msg} successfully`);
       onClose();
@@ -362,7 +362,7 @@ const EmployerForm = ({ employer = null, onClose }) => {
           className="btn btn-custom d-grid w-100 waves-effect waves-light d-flex align-items-center justify-content-center gap-1"
           disabled={isLoading}
         >
-          {employer ? "Update" : "Sign Up"}
+          {employer ? "Update Profile" : "Sign Up"}
           {isLoading && (
             <div className="spinner-border text-white" role="status">
               <span className="visually-hidden"></span>
