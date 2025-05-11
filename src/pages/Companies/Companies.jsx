@@ -6,13 +6,16 @@ import PageHeader from "@/components/Global/PageHeader";
 import Panel from "@/components/UI/Panel";
 import DisabilityTypeForm from "@/pages/DisabilityTypes/components/DisabilityTypeForm";
 import SearchCompany from "@/pages/Companies/components/SearchCompany";
-import DisabilityTypeList from "@/pages/DisabilityTypes/components/DisabilityTypeList";
+import CompanyList from "@/pages/Companies/components/CompanyList";
 import Pagination from "@/components/UI/Pagination";
 import { ConfirmDialog, ToastMessage } from "@/libs/utils";
 import { FaPlus } from "react-icons/fa";
 
 const initialParams = {
   name: "",
+  lastname: "",
+  firstname: "",
+  middlename: "",
   page: 1,
   rand: 0.1,
 };
@@ -25,11 +28,7 @@ const Companies = () => {
   const [params, setParams] = useState(initialParams);
   const [selected, setSelected] = useState(null);
 
-  const {
-    data: disabilityTypes,
-    loading,
-    error,
-  } = useFetch(`/disability`, params);
+  const { data: companies, loading, error } = useFetch(`/company`, params);
 
   const handleRefresh = () => {
     console.log("page refresh");
@@ -43,8 +42,14 @@ const Companies = () => {
     }));
   };
 
-  const handleSearch = (name) => {
-    setParams((prev) => ({ ...prev, name }));
+  const handleSearch = (params) => {
+    setParams((prev) => ({
+      ...prev,
+      name: params.name,
+      lastname: params.lastname,
+      firstname: params.firstname,
+      middlename: params.middlename,
+    }));
   };
 
   const handleUpdate = (disability) => {
@@ -75,7 +80,7 @@ const Companies = () => {
 
   return (
     <>
-      {showModal && (
+      {/* {showModal && (
         <DisabilityTypeForm
           selected={selected}
           onClose={() => {
@@ -84,7 +89,7 @@ const Companies = () => {
           }}
           onRefresh={handleRefresh}
         />
-      )}
+      )} */}
       <PageHeader title="Comapnies" />
       <SearchCompany onSearch={handleSearch} onRefresh={handleRefresh} />
       <div className="my-2 d-flex align-items-center justify-content-end">
@@ -99,18 +104,18 @@ const Companies = () => {
         <div className="row">
           <div className="col-12">
             <div className="table-responsive">
-              <DisabilityTypeList
+              <CompanyList
                 loading={loading}
                 error={error}
-                disabilityTypes={disabilityTypes}
+                companies={companies}
                 onUpdate={handleUpdate}
                 onDelete={handleDelete}
               />
-              {!loading && disabilityTypes?.data?.length > 0 && (
+              {!loading && companies?.data?.length > 0 && (
                 <Pagination
-                  totalRecords={disabilityTypes.total_items}
+                  totalRecords={companies.total_items}
                   currentPage={params.page}
-                  totalPages={disabilityTypes.total_pages}
+                  totalPages={companies.total_pages}
                   onPageChange={handlePageChange}
                 />
               )}

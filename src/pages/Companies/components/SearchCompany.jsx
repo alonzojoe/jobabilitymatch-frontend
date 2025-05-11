@@ -19,7 +19,7 @@ const SearchCompany = ({ onSearch, onRefresh }) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setData((prev) => ({ prev, [name]: value }));
+    setData((prev) => ({ ...prev, [name]: value }));
   };
 
   return (
@@ -98,7 +98,7 @@ const SearchCompany = ({ onSearch, onRefresh }) => {
               <button
                 className="btn btn-pink"
                 onClick={() => {
-                  setName("");
+                  setData(initialState);
                   onRefresh();
                 }}
                 type="button"
