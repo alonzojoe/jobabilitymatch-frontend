@@ -13,6 +13,7 @@ import JobApplicationProvider from "@/store/jobapplication/jobapplication-provid
 import Unauthorized from "@/pages/Unauthorized/Unauthorized";
 import NotFound from "@/pages/NotFound/NotFound";
 import Applicants from "@/pages/Applicants/Applicants";
+import Companies from "@/pages/Companies/Companies";
 
 import { Toaster } from "react-hot-toast";
 function App() {
@@ -49,6 +50,7 @@ function App() {
               <Route path="disability-types" element={<DisabilityTypes />} />
               <Route path="job-postings" element={<JobPostings />} />
               <Route path="applicants" element={<Applicants />} />
+              <Route path="companies" element={<Companies />} />
             </Route>
           </Route>
           <Route path="unauthorized" element={<Unauthorized />} />
