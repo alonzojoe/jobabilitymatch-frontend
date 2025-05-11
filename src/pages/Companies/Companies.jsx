@@ -4,7 +4,7 @@ import useFetch from "@/hooks/useFetch";
 import api from "@/services/api";
 import PageHeader from "@/components/Global/PageHeader";
 import Panel from "@/components/UI/Panel";
-import DisabilityTypeForm from "@/pages/DisabilityTypes/components/DisabilityTypeForm";
+import UpdateEmployer from "@/components/Form/UpdateEmployer";
 import SearchCompany from "@/pages/Companies/components/SearchCompany";
 import CompanyList from "@/pages/Companies/components/CompanyList";
 import Pagination from "@/components/UI/Pagination";
@@ -52,9 +52,17 @@ const Companies = () => {
     }));
   };
 
-  const handleUpdate = (disability) => {
-    console.log("update", disability);
-    setSelected(disability);
+  const handleUpdate = (company) => {
+    console.log("update", company);
+    const formattedData = {
+      ...company?.user,
+      company: {
+        id: company?.id,
+        name: company?.name,
+        address: company?.address,
+      },
+    };
+    setSelected(formattedData);
     toggleShowModal(true);
   };
 
@@ -80,16 +88,16 @@ const Companies = () => {
 
   return (
     <>
-      {/* {showModal && (
-        <DisabilityTypeForm
-          selected={selected}
+      {showModal && (
+        <UpdateEmployer
+          authUser={selected}
           onClose={() => {
             toggleShowModal(false);
             setSelected(null);
           }}
           onRefresh={handleRefresh}
         />
-      )} */}
+      )}
       <PageHeader title="Comapnies" />
       <SearchCompany onSearch={handleSearch} onRefresh={handleRefresh} />
       <div className="my-2 d-flex align-items-center justify-content-end">

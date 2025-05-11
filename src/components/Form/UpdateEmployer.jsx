@@ -1,7 +1,7 @@
 import Modal from "@/components/UI/Modal";
 import EmployerForm from "./EmployerForm";
 
-const UpdateEmployer = ({ authUser, onClose }) => {
+const UpdateEmployer = ({ authUser, onClose, onRefresh }) => {
   const employerDetails = {
     id: authUser.id,
     lastname: authUser?.lastname,
@@ -23,7 +23,11 @@ const UpdateEmployer = ({ authUser, onClose }) => {
 
   return (
     <Modal onClose={onClose}>
-      <EmployerForm employer={employerDetails} onClose={onClose} />
+      <EmployerForm
+        employer={employerDetails}
+        onClose={onClose}
+        onRefresh={onRefresh}
+      />
     </Modal>
   );
 };

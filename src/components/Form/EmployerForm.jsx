@@ -4,11 +4,12 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { employerSchema } from "@/schemas";
 import { ToastMessage, handlePhoneInput, setLocalStorage } from "@/libs/utils";
+import { getLocalStorage } from "@/libs/utils";
 import api from "@/services/api";
 
 const notify = new ToastMessage();
-
-const EmployerForm = ({ employer = null, onClose }) => {
+const authUser = getLocalStorage("auth-user");
+const EmployerForm = ({ employer = null, onClose, onRefresh = () => {} }) => {
   const {
     register,
     handleSubmit,
@@ -44,6 +45,7 @@ const EmployerForm = ({ employer = null, onClose }) => {
       employer ? await update(employer) : await save(employer);
       const msg = employer ? "updated" : "created";
       notify.notif("success", `Employer Account ${msg} successfully`);
+      onRefresh();
       onClose();
     } catch (error) {
       console.log("error", error);
@@ -72,7 +74,9 @@ const EmployerForm = ({ employer = null, onClose }) => {
       ...data,
       company_id: employer?.company_id,
     });
-    await updatedUser();
+    if (authUser?.role_id != 1) {
+      await updatedUser();
+    }
   };
 
   const updatedUser = async () => {
