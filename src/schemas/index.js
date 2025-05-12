@@ -128,6 +128,41 @@ export const postingSchema = z.object({
     .nonempty({ message: "Vacant Position/s is required" }),
 });
 
+export const adminSchema = z
+  .object({
+    lastname: z.string().trim().nonempty({ message: "Last Name is required" }),
+    firstname: z
+      .string()
+      .trim()
+      .nonempty({ message: "First Name is required" }),
+    middlename: z.string().trim().optional(),
+    birthdate: z.string().trim().nonempty({ message: "Birthdate is required" }),
+    gender: z.string().trim().nonempty({ message: "Gender is required" }),
+    address: z.string().trim().nonempty({ message: "Address is required" }),
+    phone: z.string().trim().nonempty({ message: "Phone is required" }),
+    email: z
+      .string()
+      .trim()
+      .nonempty({ message: "Email is required" })
+      .email({ message: "Please enter a valid email" }),
+    password: z
+      .string()
+      .trim()
+      .nonempty({ message: "Password is required" })
+      .min(6, { message: "Password must be at least 6 characters long" }),
+    confirmPassword: z
+      .string()
+      .trim()
+      .nonempty({ message: "Confirm password is required" })
+      .min(6, {
+        message: "Confirm password must be at least 6 characters long",
+      }),
+  })
+  .refine((val) => val.password === val.confirmPassword, {
+    message: "Passwords must match",
+    path: ["confirmPassword"],
+  });
+
 export const changePassSchema = z
   .object({
     email: z
