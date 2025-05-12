@@ -22,6 +22,9 @@ const List = ({ roles, onUpdate, isLoading, onDelete }) => {
 };
 
 const ListItem = ({ role, onUpdate, onDelete }) => {
+  const isInList = (id) => {
+    return id === 1 || id === 2 || id === 3;
+  };
   return (
     <div className="card border border">
       <div className="card-body">
@@ -33,7 +36,11 @@ const ListItem = ({ role, onUpdate, onDelete }) => {
         <div className="d-flex justify-content-between align-items-end mt-1">
           <div className="role-heading">
             <h4 className="mb-3 fs-5">{role.name}</h4>
-            <div className="cursor-pointer text-primary role-edit-modal">
+            <div
+              className={`cursor-pointer text-primary role-edit-modal ${
+                isInList(role.id) ? "pe-none opacity-3" : ""
+              }`}
+            >
               <span className="fs-6" onClick={() => onUpdate(role)}>
                 Edit Role
               </span>
@@ -41,7 +48,9 @@ const ListItem = ({ role, onUpdate, onDelete }) => {
           </div>
 
           <span
-            className="cursor-pointer text-danger"
+            className={`cursor-pointer text-danger ${
+              isInList(role.id) ? "pe-none opacity-3" : ""
+            }`}
             onClick={() => onDelete(role.id)}
           >
             <FaRegTrashAlt className="fs-5" />

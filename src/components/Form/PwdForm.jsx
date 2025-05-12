@@ -428,7 +428,7 @@ const PwdForm = ({ pwd = null, roles, disabilityTypes, onClose }) => {
           className="btn btn-custom d-grid w-100 waves-effect waves-light d-flex align-items-center justify-content-center gap-1"
           disabled={isLoading}
         >
-          {pwd ? "Update Profile" : "Signing up"}
+          {pwd ? "Update Profile" : "Sign up"}
           {isLoading && (
             <div className="spinner-border text-white" role="status">
               <span className="visually-hidden"></span>
