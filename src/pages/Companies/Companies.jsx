@@ -71,13 +71,13 @@ const Companies = () => {
       .confirm(
         "question",
         "Confirmation",
-        "Are you sure to delete this disability type?"
+        "Are you sure to delete this comany?"
       )
       .then(async (result) => {
         if (result.isConfirmed) {
-          notify.notif("success", "Disability type deleted successfully!");
+          notify.notif("success", "Company deleted successfully!");
           try {
-            await api.patch(`/disability/destroy/${id}`);
+            await api.patch(`/comany/destroy/${id}`);
             handleRefresh();
           } catch (error) {
             notify.notif("error", `Something went wrong: ${error?.message}`);

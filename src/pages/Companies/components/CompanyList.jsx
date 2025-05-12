@@ -41,13 +41,13 @@ const CompanyList = ({ loading, error, companies, onUpdate, onDelete }) => {
                   >
                     <FaEdit className="fs-6" /> Update
                   </button>
-                  <button
+                  {/* <button
                     className="btn btn-danger"
                     type="button"
                     onClick={() => onDelete(d.id)}
                   >
                     <FaTrashAlt className="fs-6" /> Delete
-                  </button>
+                  </button> */}
                 </div>
               </td>
             </tr>
