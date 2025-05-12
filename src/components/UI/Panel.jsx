@@ -11,7 +11,7 @@ const Panel = ({ title = "", children }) => {
           >
             <i className="fa fa-expand"></i>
           </a>
-          <a
+          {/* <a
             href="javascript:;"
             className="btn btn-xs btn-icon btn-circle btn-success"
             data-click="panel-reload"
@@ -31,7 +31,7 @@ const Panel = ({ title = "", children }) => {
             data-click="panel-remove"
           >
             <i className="fa fa-times"></i>
-          </a>
+          </a> */}
         </div>
       </div>
       <div className="panel-body">{children}</div>

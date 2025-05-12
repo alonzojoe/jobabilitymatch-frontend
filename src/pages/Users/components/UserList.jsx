@@ -1,36 +1,43 @@
 import { LoadingRow, ErrorRow, EmptyRow } from "@/components/Data/TableData";
 import { FaTrashAlt, FaEdit } from "react-icons/fa";
+import { formatDate } from "@/libs/utils";
 
-const CompanyList = ({ loading, error, companies, onUpdate, onDelete }) => {
+const CompanyList = ({ loading, error, users, onUpdate, onDelete }) => {
   return (
     <table className="table table-striped table-bordered table-td-valign-middle dataTable no-footer dtr-inline collapsed">
       <thead>
         <tr>
           <th className="text-center font-weight-bold fs-7">ID</th>
-          <th className="text-center font-weight-bold fs-7">Company</th>
-          <th className="text-center font-weight-bold fs-7">Emloyer</th>
-          <th className="text-center font-weight-bold fs-7">
-            Total Job Postings
-          </th>
+          <th className="text-center font-weight-bold fs-7">Full Name</th>
+          <th className="text-center font-weight-bold fs-7">Birthdate</th>
+          <th className="text-center font-weight-bold fs-7">Gender</th>
+          <th className="text-center font-weight-bold fs-7">Email</th>
+          <th className="text-center font-weight-bold fs-7">Phone Number</th>
+          <th className="text-center font-weight-bold fs-7">Role</th>
           <th className="text-center font-weight-bold fs-7">Option</th>
         </tr>
       </thead>
       <tbody>
-        {loading && <LoadingRow colSpan={5} />}
-        {error && <ErrorRow colSpan={5} />}
-        {!loading && !error && companies?.data?.length === 0 && (
-          <EmptyRow colSpan={5} />
+        {loading && <LoadingRow colSpan={7} />}
+        {error && <ErrorRow colSpan={7} />}
+        {!loading && !error && users?.data?.length === 0 && (
+          <EmptyRow colSpan={7} />
         )}
         {!loading &&
           !error &&
-          companies?.data?.length > 0 &&
-          companies.data.map((d) => (
+          users?.data?.length > 0 &&
+          users.data.map((d) => (
             <tr key={d.id}>
               <td className="text-center font-weight-bold fs-7">{d.id}</td>
-              <td className="text-center font-weight-bold fs-7">{d.name}</td>
-              <td className="text-center font-weight-bold fs-7">{`${d.user?.lastname}, ${d.user?.firstname} ${d.user?.middlename}`}</td>
+              <td className="text-center font-weight-bold fs-7">{`${d.lastname}, ${d.firstname} ${d.middlename}`}</td>
               <td className="text-center font-weight-bold fs-7">
-                {d.job_postings_count}
+                {formatDate(d.birthdate)}
+              </td>
+              <td className="text-center font-weight-bold fs-7">{d.gender}</td>
+              <td className="text-center font-weight-bold fs-7">{d.email}</td>
+              <td className="text-center font-weight-bold fs-7">{d.phone}</td>
+              <td className="text-center font-weight-bold fs-7">
+                {d?.role?.name}
               </td>
               <td className="text-center font-weight-bold fs-7">
                 <div className="d-flex justify-content-center align-items-center gap-2">

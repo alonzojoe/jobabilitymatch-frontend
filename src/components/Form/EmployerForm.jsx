@@ -36,13 +36,13 @@ const EmployerForm = ({ employer = null, onClose, onRefresh = () => {} }) => {
 
   const handleSave = async (data) => {
     console.log("data", data);
-    const employer = {
+    const employerData = {
       ...data,
       role_id: 3,
     };
 
     try {
-      employer ? await update(employer) : await save(employer);
+      employer ? await update(employerData) : await save(employerData);
       const msg = employer ? "updated" : "created";
       notify.notif("success", `Employer Account ${msg} successfully`);
       onRefresh();
