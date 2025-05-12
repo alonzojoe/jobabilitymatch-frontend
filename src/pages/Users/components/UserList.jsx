@@ -2,7 +2,7 @@ import { LoadingRow, ErrorRow, EmptyRow } from "@/components/Data/TableData";
 import { FaTrashAlt, FaEdit } from "react-icons/fa";
 import { formatDate } from "@/libs/utils";
 
-const CompanyList = ({ loading, error, users, onUpdate, onDelete }) => {
+const UserList = ({ loading, error, users, onUpdate, onDelete }) => {
   return (
     <table className="table table-striped table-bordered table-td-valign-middle dataTable no-footer dtr-inline collapsed">
       <thead>
@@ -64,4 +64,4 @@ const CompanyList = ({ loading, error, users, onUpdate, onDelete }) => {
   );
 };
 
-export default CompanyList;
+export default UserList;

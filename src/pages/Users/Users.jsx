@@ -11,10 +11,10 @@ import AdminForm from "@/components/Form/AdminForm";
 import EmployerForm from "@/components/Form/EmployerForm";
 import PwdForm from "@/components/Form/PwdForm";
 import SearchUser from "@/pages/Users/components/SearchUser";
-import CompanyList from "@/pages/Users/components/UserList";
+import UserList from "@/pages/Users/components/UserList";
 import Pagination from "@/components/UI/Pagination";
 import AuthHeader from "@/components/Auth/AuthHeader";
-import { ConfirmDialog, ToastMessage } from "@/libs/utils";
+import { ConfirmDialog, ToastMessage, formatData } from "@/libs/utils";
 import { FaPlus } from "react-icons/fa";
 import { FaRegBuilding } from "react-icons/fa";
 import { FaRegUserCircle } from "react-icons/fa";
@@ -63,18 +63,11 @@ const Users = () => {
     }));
   };
 
-  const handleUpdate = (company) => {
-    console.log("update", company);
-    const formattedData = {
-      ...company?.user,
-      company: {
-        id: company?.id,
-        name: company?.name,
-        address: company?.address,
-      },
-    };
-    setSelected(formattedData);
-    toggleShowModal(true);
+  const handleUpdate = (user) => {
+    const data = formatData(user);
+    console.log("update", data);
+    // setSelected(formattedData);
+    // toggleShowModal(true);
   };
 
   const handleDelete = (id) => {
@@ -121,7 +114,7 @@ const Users = () => {
         <div className="row">
           <div className="col-12">
             <div className="table-responsive">
-              <CompanyList
+              <UserList
                 loading={loading}
                 error={error}
                 users={users}

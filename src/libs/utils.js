@@ -79,3 +79,25 @@ export const formatCount = (value) => {
 export const formatDate = (dateVal) => {
   return moment(dateVal).format("LL");
 };
+
+export const formatData = (user) => {
+  const formattedEmployer = {
+    ...user,
+    company: {
+      id: user?.company?.id,
+      name: user?.company?.name,
+      address: user?.company?.address,
+    },
+  };
+  const formattedPWD = {
+    ...user,
+  };
+  const formattedAdmin = {
+    ...user,
+  };
+  return user.role_id == 2
+    ? formattedPWD
+    : user?.role_id == 3
+    ? formattedEmployer
+    : formattedAdmin;
+};
