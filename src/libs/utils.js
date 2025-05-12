@@ -75,3 +75,7 @@ export const isPWD = () => {
 export const formatCount = (value) => {
   return value ? value.toLocaleString() : "0";
 };
+
+export const formatDate = (dateVal) => {
+  return moment(dateVal).format("LL");
+};

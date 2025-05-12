@@ -14,10 +14,11 @@ import { ConfirmDialog, ToastMessage } from "@/libs/utils";
 import { FaPlus } from "react-icons/fa";
 
 const initialParams = {
-  name: "",
+  email: "",
   lastname: "",
   firstname: "",
   middlename: "",
+  role_id: 0,
   page: 1,
   rand: 0.1,
 };
@@ -31,7 +32,7 @@ const Users = () => {
   const [params, setParams] = useState(initialParams);
   const [selected, setSelected] = useState(null);
 
-  const { data: companies, loading, error } = useFetch(`/company`, params);
+  const { data: users, loading, error } = useFetch(`/user`, params);
 
   const handleRefresh = () => {
     console.log("page refresh");
@@ -48,10 +49,11 @@ const Users = () => {
   const handleSearch = (params) => {
     setParams((prev) => ({
       ...prev,
-      name: params.name,
+      email: params.email,
       lastname: params.lastname,
       firstname: params.firstname,
       middlename: params.middlename,
+      role_id: params.role_id,
     }));
   };
 
@@ -109,7 +111,7 @@ const Users = () => {
           onRefresh={handleRefresh}
         />
       )}
-      <PageHeader title="Comapnies" />
+      <PageHeader title="Users" />
       <SearchUser onSearch={handleSearch} onRefresh={handleRefresh} />
       <div className="my-2 d-flex align-items-center justify-content-end">
         <button
@@ -126,15 +128,15 @@ const Users = () => {
               <CompanyList
                 loading={loading}
                 error={error}
-                companies={companies}
+                users={users}
                 onUpdate={handleUpdate}
                 onDelete={handleDelete}
               />
-              {!loading && companies?.data?.length > 0 && (
+              {!loading && users?.data?.length > 0 && (
                 <Pagination
-                  totalRecords={companies.total_items}
+                  totalRecords={users.total_items}
                   currentPage={params.page}
-                  totalPages={companies.total_pages}
+                  totalPages={users.total_pages}
                   onPageChange={handlePageChange}
                 />
               )}
