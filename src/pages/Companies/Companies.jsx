@@ -4,7 +4,9 @@ import useFetch from "@/hooks/useFetch";
 import api from "@/services/api";
 import PageHeader from "@/components/Global/PageHeader";
 import Panel from "@/components/UI/Panel";
+import Modal from "@/components/UI/Modal";
 import UpdateEmployer from "@/components/Form/UpdateEmployer";
+import EmployerForm from "@/components/Form/EmployerForm";
 import SearchCompany from "@/pages/Companies/components/SearchCompany";
 import CompanyList from "@/pages/Companies/components/CompanyList";
 import Pagination from "@/components/UI/Pagination";
@@ -25,6 +27,7 @@ const notify = new ToastMessage();
 
 const Companies = () => {
   const [showModal, toggleShowModal] = useToggle(false);
+  const [register, toggleRegister] = useToggle(false);
   const [params, setParams] = useState(initialParams);
   const [selected, setSelected] = useState(null);
 
@@ -88,6 +91,14 @@ const Companies = () => {
 
   return (
     <>
+      {register && (
+        <Modal onClose={() => toggleRegister(false)}>
+          <EmployerForm
+            onClose={() => toggleRegister(false)}
+            onRefresh={handleRefresh}
+          />
+        </Modal>
+      )}
       {showModal && (
         <UpdateEmployer
           authUser={selected}
@@ -103,7 +114,7 @@ const Companies = () => {
       <div className="my-2 d-flex align-items-center justify-content-end">
         <button
           className="btn btn-primary btn-md d-flex align-items-center gap-1"
-          onClick={() => toggleShowModal(true)}
+          onClick={() => toggleRegister(true)}
         >
           <FaPlus className="fs-6" /> Add New
         </button>
