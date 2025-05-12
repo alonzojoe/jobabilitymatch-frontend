@@ -2,57 +2,52 @@ import PageHeader from "@/components/Global/PageHeader";
 import Select from "react-select";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { employerSchema } from "@/schemas";
+import { adminSchema } from "@/schemas";
 import { ToastMessage, handlePhoneInput, setLocalStorage } from "@/libs/utils";
 import { getLocalStorage } from "@/libs/utils";
 import api from "@/services/api";
 
 const notify = new ToastMessage();
 const authUser = getLocalStorage("auth-user");
-const EmployerForm = ({ employer = null, onClose, onRefresh = () => {} }) => {
+const AdminForm = ({ admin = null, onClose, onRefresh = () => {} }) => {
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting: isLoading },
   } = useForm({
-    resolver: zodResolver(employerSchema),
+    resolver: zodResolver(adminSchema),
     defaultValues: {
-      role_id: 3,
-      id: employer?.id ?? 0,
-      firstname: employer?.firstname ?? "",
-      lastname: employer?.lastname ?? "",
-      middlename: employer?.middlename ?? "",
-      birthdate: employer?.birthdate ?? "",
-      gender: employer?.gender ?? "",
-      address: employer?.address ?? "",
-      phone: employer?.phone ?? "",
-      company: employer?.company ?? "",
-      company_address: employer?.company_address ?? "",
-      email: employer?.email ?? "",
-      password: employer?.password ?? "",
-      confirmPassword: employer?.confirmPassword ?? "",
+      role_id: 1,
+      id: admin?.id ?? 0,
+      firstname: admin?.firstname ?? "",
+      lastname: admin?.lastname ?? "",
+      middlename: admin?.middlename ?? "",
+      birthdate: admin?.birthdate ?? "",
+      gender: admin?.gender ?? "",
+      address: admin?.address ?? "",
+      phone: admin?.phone ?? "",
+      email: admin?.email ?? "",
+      password: admin?.password ?? "",
+      confirmPassword: admin?.confirmPassword ?? "",
     },
   });
 
   const handleSave = async (data) => {
     console.log("data", data);
-    const employerData = {
+    const adminData = {
       ...data,
-      role_id: 3,
+      role_id: 1,
     };
 
     try {
-      employer ? await update(employerData) : await save(employerData);
-      const msg = employer ? "updated" : "created";
-      notify.notif("success", `Employer account ${msg} successfully`);
+      admin ? await update(adminData) : await save(adminData);
+      const msg = admin ? "updated" : "created";
+      notify.notif("success", `Admin account ${msg} successfully`);
       onRefresh();
       onClose();
     } catch (error) {
       console.log("error", error);
-      if (error?.response?.data?.errors?.company) {
-        const msg = error?.response?.data?.errors?.company[0];
-        notify.notif("error", `${msg}`);
-      } else if (error?.response?.data?.errors?.email) {
+      if (error?.response?.data?.errors?.email) {
         const msg = error?.response?.data?.errors?.email[0];
         notify.notif("error", `${msg}`);
       } else {
@@ -70,13 +65,13 @@ const EmployerForm = ({ employer = null, onClose, onRefresh = () => {} }) => {
   };
 
   const update = async (data) => {
-    await api.patch(`/user/employer/${employer?.id}`, {
+    await api.patch(`/user/admin/${admin?.id}`, {
       ...data,
-      company_id: employer?.company_id,
+      company_id: admin?.company_id,
     });
-    if (authUser?.role_id != 1) {
-      await updatedUser();
-    }
+    // if (authUser?.role_id != 1) {
+    //   await updatedUser();
+    // }
   };
 
   const updatedUser = async () => {
@@ -100,54 +95,11 @@ const EmployerForm = ({ employer = null, onClose, onRefresh = () => {} }) => {
       >
         <div className="row">
           <div
-            className={`col-sm-12 col-md-6 ${
-              employer ? "col-lg-12" : "col-lg-8"
-            }`}
+            className={`col-sm-12 col-md-6 ${admin ? "col-lg-12" : "col-lg-8"}`}
           >
-            <PageHeader title="Employer Information" />
+            <PageHeader title="Admin Information" />
 
             <div className="row mt-4">
-              <div className="col-sm-12 mb-2">
-                <div
-                  className={`mb-2 fv-plugins-icon-container ${
-                    errors.company ? "group-invalid" : ""
-                  }`}
-                >
-                  <label htmlFor="company" className="form-label fs-6">
-                    Company <span className="text-danger">*</span>
-                  </label>
-                  <input
-                    {...register("company")}
-                    type="text"
-                    className="form-control text-uppercase"
-                    maxLength={100}
-                  />
-                  <div className="mt-1 font-weight-bold text-validation">
-                    {errors.company?.message}
-                  </div>
-                </div>
-              </div>
-
-              <div className="col-sm-12 mb-2">
-                <div
-                  className={`mb-2 fv-plugins-icon-container ${
-                    errors.company_address ? "group-invalid" : ""
-                  }`}
-                >
-                  <label htmlFor="company_address" className="form-label fs-6">
-                    Company Address <span className="text-danger">*</span>
-                  </label>
-                  <textarea
-                    {...register("company_address")}
-                    className="form-control text-uppercase"
-                    rows={2}
-                  ></textarea>
-                  <div className="mt-1 font-weight-bold text-validation">
-                    {errors.company_address?.message}
-                  </div>
-                </div>
-              </div>
-
               <div className="col-sm-12 col-md-6 col-lg-6 mb-2">
                 <div
                   className={`mb-2 fv-plugins-icon-container ${
@@ -288,7 +240,7 @@ const EmployerForm = ({ employer = null, onClose, onRefresh = () => {} }) => {
             </div>
           </div>
 
-          {!employer && (
+          {!admin && (
             <div className="col-sm-12 col-md-6 col-lg-4">
               <PageHeader title="Login Credentials" />
               <div className="row mt-4">
@@ -366,7 +318,7 @@ const EmployerForm = ({ employer = null, onClose, onRefresh = () => {} }) => {
           className="btn btn-custom d-grid w-100 waves-effect waves-light d-flex align-items-center justify-content-center gap-1"
           disabled={isLoading}
         >
-          {employer ? "Update Profile" : "Sign Up"}
+          {admin ? "Update Profile" : "Sign Up"}
           {isLoading && (
             <div className="spinner-border text-white" role="status">
               <span className="visually-hidden"></span>
@@ -380,4 +332,4 @@ const EmployerForm = ({ employer = null, onClose, onRefresh = () => {} }) => {
   );
 };
 
-export default EmployerForm;
+export default AdminForm;

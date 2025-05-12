@@ -109,7 +109,7 @@ const PwdForm = ({ pwd = null, roles, disabilityTypes, onClose }) => {
     setSelectedDisabilities(selectedOptions || []);
     setError("");
   };
-
+  console.log("pwd roles", roles);
   const filteredRoles = roles?.filter((r) => r.id !== 1) ?? [];
 
   const mappedDisabilities =
