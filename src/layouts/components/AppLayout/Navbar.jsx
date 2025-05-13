@@ -27,6 +27,7 @@ const Navbar = ({ authUser }) => {
             <UpdateUser
               authUser={authUser}
               onClose={() => toggleUpdateProfile(false)}
+              isNavbar={true}
             />
           );
       }

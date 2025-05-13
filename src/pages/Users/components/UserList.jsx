@@ -18,10 +18,10 @@ const UserList = ({ loading, error, users, onUpdate, onDelete }) => {
         </tr>
       </thead>
       <tbody>
-        {loading && <LoadingRow colSpan={7} />}
-        {error && <ErrorRow colSpan={7} />}
+        {loading && <LoadingRow colSpan={8} />}
+        {error && <ErrorRow colSpan={8} />}
         {!loading && !error && users?.data?.length === 0 && (
-          <EmptyRow colSpan={7} />
+          <EmptyRow colSpan={8} />
         )}
         {!loading &&
           !error &&

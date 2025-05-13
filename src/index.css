@@ -778,7 +778,7 @@ div:where(.swal2-container) {
 }
 
 .rounded-custom {
-  border-radius: .375rem;
+  border-radius: .375rem !important;
 }
 
 .d-inline-block {
@@ -862,7 +862,11 @@ div:where(.swal2-container) {
 }
 
 .bcolor-custom {
-  border-color: #01004C;
+  border: 1px solid #01004C;
+}
+
+.text-custom {
+  color: #01004C !important;
 }
 
 
@@ -881,4 +885,17 @@ div:where(.swal2-container) {
 
 .opacity-3 {
   opacity: 0.8;
+}
+
+.opacity-0 {
+  opacity: 0;
+}
+
+
+.stats-link a {
+
+  background: rgba(0, 0, 58, .9) !important;
+
+  color: #fff;
+
 }

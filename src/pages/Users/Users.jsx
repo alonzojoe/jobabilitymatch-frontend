@@ -4,21 +4,13 @@ import useFetch from "@/hooks/useFetch";
 import api from "@/services/api";
 import PageHeader from "@/components/Global/PageHeader";
 import Panel from "@/components/UI/Panel";
-import Modal from "@/components/UI/Modal";
-import ModalSm from "@/components/UI/ModalSm";
-import UpdateEmployer from "@/components/Form/UpdateEmployer";
-import AdminForm from "@/components/Form/AdminForm";
-import EmployerForm from "@/components/Form/EmployerForm";
-import PwdForm from "@/components/Form/PwdForm";
 import SearchUser from "@/pages/Users/components/SearchUser";
 import UserList from "@/pages/Users/components/UserList";
 import Pagination from "@/components/UI/Pagination";
-import AuthHeader from "@/components/Auth/AuthHeader";
+import SelectType from "@/pages/Users/components/SelectType";
 import { ConfirmDialog, ToastMessage, formatData } from "@/libs/utils";
 import { FaPlus } from "react-icons/fa";
-import { FaRegBuilding } from "react-icons/fa";
-import { FaRegUserCircle } from "react-icons/fa";
-
+import UpdateFormType from "@/pages/Users/components/UpdateFormType";
 const initialParams = {
   email: "",
   lastname: "",
@@ -39,6 +31,8 @@ const Users = () => {
   const [selected, setSelected] = useState(null);
 
   const { data: users, loading, error } = useFetch(`/user`, params);
+  const { data: roles } = useFetch(`/role/all`, null);
+  const { data: disabilityTypes } = useFetch(`/disability/all`, null);
 
   const handleRefresh = () => {
     console.log("page refresh");
@@ -66,22 +60,18 @@ const Users = () => {
   const handleUpdate = (user) => {
     const data = formatData(user);
     console.log("update", data);
-    // setSelected(formattedData);
-    // toggleShowModal(true);
+    setSelected(data);
+    toggleShowModal(true);
   };
 
   const handleDelete = (id) => {
     dialog
-      .confirm(
-        "question",
-        "Confirmation",
-        "Are you sure to delete this comany?"
-      )
+      .confirm("question", "Confirmation", "Are you sure to delete this user?")
       .then(async (result) => {
         if (result.isConfirmed) {
           notify.notif("success", "Company deleted successfully!");
           try {
-            await api.patch(`/comany/destroy/${id}`);
+            await api.patch(`/user/destroy/${id}`);
             handleRefresh();
           } catch (error) {
             notify.notif("error", `Something went wrong: ${error?.message}`);
@@ -92,8 +82,21 @@ const Users = () => {
 
   return (
     <>
+      {showModal && (
+        <UpdateFormType
+          user={selected}
+          role={roles}
+          disabilityTypes={disabilityTypes}
+          onClose={() => {
+            toggleShowModal(false);
+            handleRefresh();
+          }}
+        />
+      )}
       {register && (
         <SelectType
+          roles={roles}
+          disabilityTypes={disabilityTypes}
           onClose={() => {
             toggleRegister(false);
             handleRefresh();
@@ -133,72 +136,6 @@ const Users = () => {
           </div>
         </div>
       </Panel>
-    </>
-  );
-};
-
-const SelectType = ({ onClose }) => {
-  const [type, setType] = useState(1);
-  const { data: roles } = useFetch(`/role/all`, null);
-  const { data: disabilityTypes } = useFetch(`/disability/all`, null);
-  return (
-    <>
-      {type === 1 ? (
-        <ModalSm onClose={onClose}>
-          <>
-            <AuthHeader />
-            <h3 className="mt-2 mb-3 font-weight-bold text-center">
-              Please Select
-            </h3>
-            <div className="row">
-              <div className="col-12 mb-3">
-                <div
-                  className="btn btn-primary w-100 d-flex align-items-center justify-content-center gap-2"
-                  onClick={() => setType(4)}
-                >
-                  <FaRegUserCircle className="fs-2" />
-                  <span className="fs-2">Administrator</span>
-                </div>
-              </div>
-              <div className="col-12 mb-3">
-                <div
-                  className="btn btn-custom w-100 d-flex align-items-center justify-content-center gap-2"
-                  onClick={() => setType(2)}
-                >
-                  <FaRegUserCircle className="fs-2" />
-                  <span className="fs-2">PWD</span>
-                </div>
-              </div>
-              <div className="col-12 mb-3">
-                <div
-                  className="btn btn-pink w-100 d-flex align-items-center justify-content-center gap-1"
-                  onClick={() => setType(3)}
-                >
-                  <FaRegBuilding className="fs-2" />
-                  <span className="fs-2">EMPLOYER</span>
-                </div>
-              </div>
-            </div>
-          </>
-        </ModalSm>
-      ) : (
-        <Modal onClose={onClose}>
-          <>
-            <AuthHeader />
-            {type === 2 ? (
-              <PwdForm
-                roles={roles?.data}
-                disabilityTypes={disabilityTypes?.data}
-                onClose={onClose}
-              />
-            ) : type === 3 ? (
-              <EmployerForm onClose={onClose} />
-            ) : (
-              <AdminForm onClose={onClose} />
-            )}
-          </>
-        </Modal>
-      )}
     </>
   );
 };
