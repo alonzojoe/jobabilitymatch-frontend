@@ -8,13 +8,9 @@ import SearchUser from "@/pages/Users/components/SearchUser";
 import UserList from "@/pages/Users/components/UserList";
 import Pagination from "@/components/UI/Pagination";
 import SelectType from "@/pages/Users/components/SelectType";
-import Modal from "@/components/UI/Modal";
 import { ConfirmDialog, ToastMessage, formatData } from "@/libs/utils";
 import { FaPlus } from "react-icons/fa";
-import UpdateEmployer from "@/components/Form/UpdateEmployer";
-import UpdateUser from "@/components/Form/UpdateUser";
-import UpdatePwd from "@/components/Form/UpdatePwd";
-
+import UpdateFormType from "@/pages/Users/components/UpdateFormType";
 const initialParams = {
   email: "",
   lastname: "",
@@ -70,16 +66,12 @@ const Users = () => {
 
   const handleDelete = (id) => {
     dialog
-      .confirm(
-        "question",
-        "Confirmation",
-        "Are you sure to delete this comany?"
-      )
+      .confirm("question", "Confirmation", "Are you sure to delete this user?")
       .then(async (result) => {
         if (result.isConfirmed) {
           notify.notif("success", "Company deleted successfully!");
           try {
-            await api.patch(`/comany/destroy/${id}`);
+            await api.patch(`/user/destroy/${id}`);
             handleRefresh();
           } catch (error) {
             notify.notif("error", `Something went wrong: ${error?.message}`);
@@ -91,7 +83,7 @@ const Users = () => {
   return (
     <>
       {showModal && (
-        <UpdateForm
+        <UpdateFormType
           user={selected}
           role={roles}
           disabilityTypes={disabilityTypes}
@@ -146,21 +138,6 @@ const Users = () => {
       </Panel>
     </>
   );
-};
-
-const UpdateForm = ({ user, roles, disabilityTypes, onClose }) => {
-  const role = user?.role_id;
-  if (role === 1) return <UpdateUser authUser={user} onClose={onClose} />;
-  if (role === 2)
-    return (
-      <UpdatePwd
-        authUser={user}
-        roles={roles?.data}
-        disabilityTypes={disabilityTypes?.data}
-        onClose={onClose}
-      />
-    );
-  if (role === 3) return <UpdateEmployer authUser={user} onClose={onClose} />;
 };
 
 export default Users;
