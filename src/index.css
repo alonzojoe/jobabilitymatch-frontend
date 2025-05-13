@@ -862,7 +862,11 @@ div:where(.swal2-container) {
 }
 
 .bcolor-custom {
-  border-color: #01004C;
+  border: 1px solid #01004C;
+}
+
+.text-custom {
+  color: #01004C !important;
 }
 
 

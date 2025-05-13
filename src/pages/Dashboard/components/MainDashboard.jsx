@@ -95,72 +95,95 @@ const MainDashboard = () => {
       <div className="row">
         {/* Job Postings */}
         <div className="col-xl-3 col-md-6">
-          <div className="widget widget-stats bg-warning">
-            <div className="stats-icon stats-icon-square bg-custom text-white">
-              <i className="ion-ios-create"></i>
+          <div class="widget widget-stats bg-white text-inverse shadow-lg">
+            <div class="stats-icon stats-icon-square bg-gradient-blue text-white">
+              <i class="ion-ios-person"></i>
             </div>
-            <div className="stats-info">
-              <h4 className="text-white">TOTAL USERS</h4>
-              <p>{formatCount(dashboardData?.data?.total_users)}</p>
-            </div>
-            <div className="stats-link">
-              <Link to="/home/users">
-                View Detail <i className="fa fa-arrow-alt-circle-right"></i>
-              </Link>
-            </div>
-          </div>
-        </div>
-
-        {/* Applicants */}
-        <div className="col-xl-3 col-md-6">
-          <div className="widget widget-stats bg-info">
-            <div className="stats-icon stats-icon-square bg-custom text-white">
-              <i className="ion-ios-walk"></i>
-            </div>
-            <div className="stats-info">
-              <h4 className="text-white">TOTAL COMPANIES</h4>
-              <p>{formatCount(dashboardData?.data?.total_companies)}</p>
-            </div>
-            <div className="stats-link">
-              <Link to="/home/companies">
-                View Detail <i className="fa fa-arrow-alt-circle-right"></i>
-              </Link>
+            <div class="stats-content">
+              <div class="stats-title text-inverse-lighter">Total Users</div>
+              <div class="stats-number">
+                {formatCount(dashboardData?.data?.total_users)}
+              </div>
+              <div class="stats-progress progress">
+                <div class="progress-bar" style={{ width: "100%" }}></div>
+              </div>
+              <div className="stats-link">
+                <Link to="/home/users">
+                  View Detail <i className="fa fa-arrow-alt-circle-right"></i>
+                </Link>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Hired Applicants */}
         <div className="col-xl-3 col-md-6">
-          <div className="widget widget-stats bg-danger">
-            <div className="stats-icon stats-icon-square bg-custom text-white">
-              <i className="ion-ios-checkmark-circle"></i>
+          <div class="widget widget-stats bg-white text-inverse shadow-lg">
+            <div class="stats-icon stats-icon-square bg-gradient-blue text-white">
+              <i class="ion-ios-business"></i>
             </div>
-            <div className="stats-info">
-              <h4 className="text-white">TOTAL JOB POSTINGS</h4>
-              <p>{formatCount(dashboardData?.data?.total_job_postings)}</p>
-            </div>
-            <div className="stats-link">
-              <Link to="/home/job-postings">
-                View Detail <i className="fa fa-arrow-alt-circle-right"></i>
-              </Link>
+            <div class="stats-content">
+              <div class="stats-title text-inverse-lighter">
+                Total Companies
+              </div>
+              <div class="stats-number">
+                {formatCount(dashboardData?.data?.total_companies)}
+              </div>
+              <div class="stats-progress progress">
+                <div class="progress-bar" style={{ width: "100%" }}></div>
+              </div>
+              <div className="stats-link">
+                <Link to="/home/companies">
+                  View Detail <i className="fa fa-arrow-alt-circle-right"></i>
+                </Link>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Rejected Applicants */}
         <div className="col-xl-3 col-md-6">
-          <div className="widget widget-stats bg-purple">
-            <div className="stats-icon stats-icon-square bg-custom text-white">
-              <i className="ion-ios-close-circle"></i>
+          <div class="widget widget-stats bg-white text-inverse shadow-lg">
+            <div class="stats-icon stats-icon-square bg-gradient-blue text-white">
+              <i class="ion-ios-create"></i>
             </div>
-            <div className="stats-info">
-              <h4 className="text-white">TOTAL APPLICANTS</h4>
-              <p>{formatCount(dashboardData?.data?.total_applicants)}</p>
+            <div class="stats-content">
+              <div class="stats-title text-inverse-lighter">
+                Total Job Postings
+              </div>
+              <div class="stats-number">
+                {formatCount(dashboardData?.data?.total_job_postings)}
+              </div>
+              <div class="stats-progress progress">
+                <div class="progress-bar" style={{ width: "100%" }}></div>
+              </div>
+              <div className="stats-link">
+                <Link to="/home/job-postings">
+                  View Detail <i className="fa fa-arrow-alt-circle-right"></i>
+                </Link>
+              </div>
             </div>
-            <div className="stats-link pe-none">
-              <Link className="opacity-0" to="/home/applicants">
-                View Detail <i className="fa fa-arrow-alt-circle-right"></i>
-              </Link>
+          </div>
+        </div>
+
+        <div className="col-xl-3 col-md-6">
+          <div class="widget widget-stats bg-white text-inverse shadow-lg">
+            <div class="stats-icon stats-icon-square bg-gradient-blue text-white">
+              <i class="ion-ios-walk"></i>
+            </div>
+            <div class="stats-content">
+              <div class="stats-title text-inverse-lighter">
+                Total Applicants
+              </div>
+              <div class="stats-number">
+                {formatCount(dashboardData?.data?.total_applicants)}
+              </div>
+              <div class="stats-progress progress">
+                <div class="progress-bar" style={{ width: "100%" }}></div>
+              </div>
+              <div className="stats-link pe-none opacity-0">
+                <Link to="/home/users">
+                  View Detail <i className="fa fa-arrow-alt-circle-right"></i>
+                </Link>
+              </div>
             </div>
           </div>
         </div>
