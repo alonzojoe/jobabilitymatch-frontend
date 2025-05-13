@@ -10,10 +10,9 @@ import { FaRegBuilding } from "react-icons/fa";
 import { FaRegUserCircle } from "react-icons/fa";
 import { GrUserAdmin } from "react-icons/gr";
 
-const SelectType = ({ onClose }) => {
+const SelectType = ({ roles, disabilityTypes, onClose }) => {
   const [type, setType] = useState(1);
-  const { data: roles } = useFetch(`/role/all`, null);
-  const { data: disabilityTypes } = useFetch(`/disability/all`, null);
+
   return (
     <>
       {type === 1 ? (

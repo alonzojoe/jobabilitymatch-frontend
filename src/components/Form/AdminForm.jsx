@@ -9,7 +9,12 @@ import api from "@/services/api";
 
 const notify = new ToastMessage();
 const authUser = getLocalStorage("auth-user");
-const AdminForm = ({ admin = null, onClose, onRefresh = () => {} }) => {
+const AdminForm = ({
+  admin = null,
+  onClose,
+  onRefresh = () => {},
+  isUserModule = false,
+}) => {
   const {
     register,
     handleSubmit,

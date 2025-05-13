@@ -8,8 +8,12 @@ import SearchUser from "@/pages/Users/components/SearchUser";
 import UserList from "@/pages/Users/components/UserList";
 import Pagination from "@/components/UI/Pagination";
 import SelectType from "@/pages/Users/components/SelectType";
+import Modal from "@/components/UI/Modal";
 import { ConfirmDialog, ToastMessage, formatData } from "@/libs/utils";
 import { FaPlus } from "react-icons/fa";
+import UpdateEmployer from "@/components/Form/UpdateEmployer";
+import UpdateUser from "@/components/Form/UpdateUser";
+import UpdatePwd from "@/components/Form/UpdatePwd";
 
 const initialParams = {
   email: "",
@@ -31,6 +35,8 @@ const Users = () => {
   const [selected, setSelected] = useState(null);
 
   const { data: users, loading, error } = useFetch(`/user`, params);
+  const { data: roles } = useFetch(`/role/all`, null);
+  const { data: disabilityTypes } = useFetch(`/disability/all`, null);
 
   const handleRefresh = () => {
     console.log("page refresh");
@@ -58,8 +64,8 @@ const Users = () => {
   const handleUpdate = (user) => {
     const data = formatData(user);
     console.log("update", data);
-    // setSelected(formattedData);
-    // toggleShowModal(true);
+    setSelected(data);
+    toggleShowModal(true);
   };
 
   const handleDelete = (id) => {
@@ -84,8 +90,21 @@ const Users = () => {
 
   return (
     <>
+      {showModal && (
+        <UpdateForm
+          user={selected}
+          role={roles}
+          disabilityTypes={disabilityTypes}
+          onClose={() => {
+            toggleShowModal(false);
+            handleRefresh();
+          }}
+        />
+      )}
       {register && (
         <SelectType
+          roles={roles}
+          disabilityTypes={disabilityTypes}
           onClose={() => {
             toggleRegister(false);
             handleRefresh();
@@ -127,6 +146,21 @@ const Users = () => {
       </Panel>
     </>
   );
+};
+
+const UpdateForm = ({ user, roles, disabilityTypes, onClose }) => {
+  const role = user?.role_id;
+  if (role === 1) return <UpdateUser authUser={user} onClose={onClose} />;
+  if (role === 2)
+    return (
+      <UpdatePwd
+        authUser={user}
+        roles={roles?.data}
+        disabilityTypes={disabilityTypes?.data}
+        onClose={onClose}
+      />
+    );
+  if (role === 3) return <UpdateEmployer authUser={user} onClose={onClose} />;
 };
 
 export default Users;
