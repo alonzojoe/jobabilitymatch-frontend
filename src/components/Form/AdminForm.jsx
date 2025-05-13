@@ -4,16 +4,14 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { adminSchema } from "@/schemas";
 import { ToastMessage, handlePhoneInput, setLocalStorage } from "@/libs/utils";
-import { getLocalStorage } from "@/libs/utils";
 import api from "@/services/api";
 
 const notify = new ToastMessage();
-const authUser = getLocalStorage("auth-user");
 const AdminForm = ({
   admin = null,
   onClose,
   onRefresh = () => {},
-  isUserModule = false,
+  isNavbar = false,
 }) => {
   const {
     register,
@@ -74,9 +72,9 @@ const AdminForm = ({
       ...data,
       company_id: admin?.company_id,
     });
-    // if (authUser?.role_id != 1) {
-    //   await updatedUser();
-    // }
+    if (isNavbar) {
+      await updatedUser();
+    }
   };
 
   const updatedUser = async () => {

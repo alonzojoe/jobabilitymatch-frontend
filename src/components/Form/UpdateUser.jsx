@@ -1,7 +1,7 @@
 import Modal from "@/components/UI/Modal";
 import AdminForm from "@/components/Form/AdminForm";
 
-const UpdateUser = ({ authUser, onClose }) => {
+const UpdateUser = ({ authUser, onClose, isNavbar = false }) => {
   const user = {
     id: authUser.id,
     lastname: authUser?.lastname,
@@ -17,7 +17,7 @@ const UpdateUser = ({ authUser, onClose }) => {
   };
   return (
     <Modal onClose={onClose}>
-      <AdminForm admin={user} onClose={onClose} />
+      <AdminForm admin={user} onClose={onClose} isNavbar={isNavbar} />
     </Modal>
   );
 };
