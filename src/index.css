@@ -890,3 +890,12 @@ div:where(.swal2-container) {
 .opacity-0 {
   opacity: 0;
 }
+
+
+.stats-link a {
+
+  background: rgba(0, 0, 58, .9) !important;
+
+  color: #fff;
+
+}

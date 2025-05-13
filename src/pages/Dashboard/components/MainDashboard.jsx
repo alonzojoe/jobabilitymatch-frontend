@@ -39,56 +39,51 @@ const MainDashboard = () => {
   const { authUser } = useContext(AuthContext);
   const { data: dashboardData } = useFetch(`/dashboard/admin`, null);
 
-  // console.log("dashboard", dashboardData?.data);
-  // const company = authUser?.company?.name ?? "";
+  console.log("dashboard", dashboardData?.data);
+  const company = authUser?.company?.name ?? "";
 
-  // const labels = [
-  //   "Job Postings",
-  //   "Applicants",
-  //   "Hired Applicants",
-  //   "Rejected Applicants",
-  // ];
+  const labels = ["Users", "Companies", "Job Postings", "Applicants"];
 
-  // const barChartData = {
-  //   labels,
-  //   datasets: [
-  //     {
-  //       label: "Company Statistics",
-  //       data: [
-  //         dashboardData?.data?.job_postings || 0,
-  //         dashboardData?.data?.applicants || 0,
-  //         dashboardData?.data?.accepted_applicants || 0,
-  //         dashboardData?.data?.rejected_applicants || 0,
-  //       ],
-  //       backgroundColor: ["#FF9500", "#5AC8FA", "#FF3B30", "#B503FF"],
-  //     },
-  //   ],
-  // };
+  const barChartData = {
+    labels,
+    datasets: [
+      {
+        label: "System Statistics",
+        data: [
+          dashboardData?.data?.total_users || 0,
+          dashboardData?.data?.total_companies || 0,
+          dashboardData?.data?.total_job_postings || 0,
+          dashboardData?.data?.total_applicants || 0,
+        ],
+        backgroundColor: ["#FF9500", "#5AC8FA", "#FF3B30", "#B503FF"],
+      },
+    ],
+  };
 
-  // const pieChartData = {
-  //   labels,
-  //   datasets: [
-  //     {
-  //       label: "Company Distribution",
-  //       data: [
-  //         dashboardData?.data?.job_postings || 0,
-  //         dashboardData?.data?.applicants || 0,
-  //         dashboardData?.data?.accepted_applicants || 0,
-  //         dashboardData?.data?.rejected_applicants || 0,
-  //       ],
-  //       backgroundColor: ["#FF9500", "#5AC8FA", "#FF3B30", "#B503FF"],
-  //     },
-  //   ],
-  // };
+  const pieChartData = {
+    labels,
+    datasets: [
+      {
+        label: "Data Distribution",
+        data: [
+          dashboardData?.data?.total_users || 0,
+          dashboardData?.data?.total_companies || 0,
+          dashboardData?.data?.total_job_postings || 0,
+          dashboardData?.data?.total_applicants || 0,
+        ],
+        backgroundColor: ["#FF9500", "#5AC8FA", "#FF3B30", "#B503FF"],
+      },
+    ],
+  };
 
-  // const options = {
-  //   // responsive: true,
-  //   maintainAspectRatio: false,
-  //   plugins: {
-  //     legend: { position: "top" },
-  //     title: { display: true, text: `${company} STATISTICS` },
-  //   },
-  // };
+  const options = {
+    // responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { position: "top" },
+      title: { display: true, text: `${company} STATISTICS` },
+    },
+  };
 
   return (
     <>
@@ -192,7 +187,7 @@ const MainDashboard = () => {
       {/* Panel with Chart */}
       <div className="row">
         <div className="col-sm-12 col-xl-6 col-md-6">
-          {/* <Panel title="Bar Chart Analytics">
+          <Panel title="Bar Chart Analytics">
             <div className="d-flex align-items-center justify-content-center">
               <div
                 style={{ width: "400px", height: "400px", margin: "0 auto" }}
@@ -204,10 +199,10 @@ const MainDashboard = () => {
                 />
               </div>
             </div>
-          </Panel> */}
+          </Panel>
         </div>
         <div className="col-sm-12 col-xl-6 col-md-6">
-          {/* <Panel title="Pie Chart Analytics">
+          <Panel title="Pie Chart Analytics">
             <div className="d-flex align-items-center justify-content-center">
               <div
                 style={{ width: "400px", height: "400px", margin: "0 auto" }}
@@ -215,7 +210,7 @@ const MainDashboard = () => {
                 <Pie data={pieChartData} />
               </div>
             </div>
-          </Panel> */}
+          </Panel>
         </div>
       </div>
     </>
