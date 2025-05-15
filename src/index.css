@@ -954,3 +954,9 @@ div:where(.swal2-container) {
 .dropdown-menu.dropdown-menu-right.show {
   background: #FFFFFF !important;
 }
+
+
+.page-item.active .page-link {
+  background: #01004C !important;
+  border-color: #01004C !important;
+}

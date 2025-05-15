@@ -22,6 +22,7 @@ const Feed = () => {
   const [selectedJob, setSelectedJob] = useState(null);
   const [params, setParams] = useState(initialParams);
   const jobDetailsTabRef = useRef();
+  const searchRef = useRef(null);
 
   const {
     data: jobPostings,
@@ -61,6 +62,7 @@ const Feed = () => {
           : "/posting",
     });
     setSelectedJob(null);
+    searchRef.current?.clearQuery();
   };
 
   const handlePageChange = (page) => {
@@ -68,7 +70,6 @@ const Feed = () => {
       ...prev,
       page,
     }));
-    setSelectedJob(null);
   };
 
   return (
@@ -87,7 +88,11 @@ const Feed = () => {
         </Modal>
       )}
 
-      <SearchInput onSearch={handleSearch} onReset={setSelectedJob} />
+      <SearchInput
+        ref={searchRef}
+        onSearch={handleSearch}
+        onReset={setSelectedJob}
+      />
       <JobPostingTab
         ref={jobDetailsTabRef}
         authUser={authUser}

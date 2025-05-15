@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useState, forwardRef, useImperativeHandle } from "react";
 
-const SearchInput = ({ onSearch, onReset }) => {
-  const [query, serchQuery] = useState("");
+const SearchInput = forwardRef(({ onSearch, onReset }, ref) => {
+  const [query, setSearchQuery] = useState("");
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -9,6 +9,10 @@ const SearchInput = ({ onSearch, onReset }) => {
     onReset();
     onSearch(query);
   };
+
+  useImperativeHandle(ref, () => ({
+    clearQuery: () => setSearchQuery(""),
+  }));
 
   return (
     <div className="search-container mb-5">
@@ -20,7 +24,7 @@ const SearchInput = ({ onSearch, onReset }) => {
           value={query}
           className="form-control message-input border-0 me-3 shadow-none fs-5"
           placeholder="Search job title, keywords, or company"
-          onChange={(e) => serchQuery(e.target.value)}
+          onChange={(e) => setSearchQuery(e.target.value)}
         />
         <div className="message-actions d-flex align-items-center">
           <button
@@ -36,6 +40,6 @@ const SearchInput = ({ onSearch, onReset }) => {
       </form>
     </div>
   );
-};
+});
 
 export default SearchInput;
