@@ -60,6 +60,7 @@ const Feed = () => {
           ? `/posting/recommended/${authUser.id}`
           : "/posting",
     });
+    setSelectedJob(null);
   };
 
   const handlePageChange = (page) => {
@@ -67,6 +68,7 @@ const Feed = () => {
       ...prev,
       page,
     }));
+    setSelectedJob(null);
   };
 
   return (
