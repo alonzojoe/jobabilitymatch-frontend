@@ -19,7 +19,7 @@ const Sidebar = ({ authUser }) => {
             ))}
             <li className="sidebar-items">
               <Link to="/">
-                <i className="ion-ios-create bg-dark"></i>
+                <i className="ion-ios-create bg-secondary"></i>
                 <span>View Job Postings</span>
               </Link>
             </li>

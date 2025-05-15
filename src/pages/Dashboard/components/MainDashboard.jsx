@@ -219,7 +219,7 @@ const MainDashboard = () => {
 
       <div className="row">
         <div className="col-sm-12 col-xl-6 col-md-6 mb-4">
-          <Panel title="Recently Registered Companies">
+          <Panel title="Recently Registered Users">
             <div className="row">
               <div className="col-12">
                 <div className="table-responsive">
