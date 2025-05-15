@@ -120,10 +120,10 @@ const Header = ({ roles, disabilityTypes }) => {
                         </div>
 
                         <div className="flex-grow-1">
-                          <span class="fw-medium d-block truncate-text-elipsis">
+                          <span className="fw-medium d-block truncate-text-elipsis">
                             {`${authUser?.firstname} ${authUser?.lastname}`}
                           </span>
-                          <small class="text-custom">
+                          <small className="text-custom">
                             {authUser?.role?.name}
                           </small>
                         </div>

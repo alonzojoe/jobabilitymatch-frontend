@@ -43,10 +43,10 @@ const AuthUser = ({
               </div>
 
               <div className="flex-grow-1">
-                <span class="fw-medium d-block truncate-text-elipsis">
+                <span className="fw-medium d-block truncate-text-elipsis">
                   {`${authUser?.firstname} ${authUser?.lastname}`}
                 </span>
-                <small class="text-custom">{authUser?.role?.name}</small>
+                <small className="text-custom">{authUser?.role?.name}</small>
               </div>
             </div>
           </span>
