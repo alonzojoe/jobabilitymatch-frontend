@@ -18,6 +18,12 @@ const Sidebar = ({ authUser }) => {
               <NavItem key={menu.id} menu={menu} current={pathname} />
             ))}
             <li className="sidebar-items">
+              <Link to="/">
+                <i className="ion-ios-create bg-dark"></i>
+                <span>View Job Postings</span>
+              </Link>
+            </li>
+            <li className="sidebar-items">
               <a href="javascript:;" onClick={logout}>
                 <i className="ion-ios-power bg-pink"></i>
                 <span>Logout</span>
