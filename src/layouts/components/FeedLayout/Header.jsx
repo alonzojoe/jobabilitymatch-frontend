@@ -77,22 +77,24 @@ const Header = ({ roles, disabilityTypes }) => {
                   background: "#fff",
                 }}
               >
-                <li className="dropdown">
-                  <a
-                    href="#"
-                    data-toggle="dropdown"
-                    className="dropdown-toggle icon"
-                  >
-                    <i className="ion-ios-notifications"></i>
-                    <span className="label">0</span>
-                  </a>
-                  <div className="dropdown-menu media-list dropdown-menu-right">
-                    <div className="dropdown-header">NOTIFICATIONS (0)</div>
-                    <div className="text-center width-300 p-b-10 p-t-10">
-                      No notification found
+                {authUser?.role_id === 3 && (
+                  <li className="dropdown">
+                    <a
+                      href="#"
+                      data-toggle="dropdown"
+                      className="dropdown-toggle icon"
+                    >
+                      <i className="ion-ios-notifications"></i>
+                      <span className="label">0</span>
+                    </a>
+                    <div className="dropdown-menu media-list dropdown-menu-right">
+                      <div className="dropdown-header">NOTIFICATIONS (0)</div>
+                      <div className="text-center width-300 p-b-10 p-t-10">
+                        No notification found
+                      </div>
                     </div>
-                  </div>
-                </li>
+                  </li>
+                )}
                 <li className="dropdown navbar-user">
                   <a
                     href="#"
