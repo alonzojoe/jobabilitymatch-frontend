@@ -899,3 +899,34 @@ div:where(.swal2-container) {
   color: #fff;
 
 }
+
+.sidebar-minify-btn {
+  background: #2C180B;
+}
+
+.ion-ios-arrow-back .bg-info {
+  background: #2C180B !important;
+}
+
+.sidebar .sidebar-minify-btn i {
+  background: #2C180B !important;
+  color: #fff !important;
+}
+
+.sidebar .sidebar-minify-btn i:hover {
+  color: #fff !important;
+}
+
+.page-sidebar-minified .sidebar-minify-btn {
+  background: #000000 !important;
+}
+
+/* .sidebar .nav>li>a {
+  color: #fff !important;
+}
+
+.page-sidebar-minified .sidebar-minify-btn {
+    background: rgba(255, 255, 255, .15) !important;
+    -webkit-border-radius: 40px;
+    border-radius: 40px;
+} */
