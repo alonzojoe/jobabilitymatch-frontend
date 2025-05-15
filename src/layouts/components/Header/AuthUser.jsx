@@ -25,10 +25,6 @@ const AuthUser = ({
       </li>
       <li className="dropdown navbar-user">
         <a href="#" className="dropdown-toggle" data-toggle="dropdown">
-          {/* <div className="bg-black text-grey-darker">
-                
-                 <img src={Avatar} className="rounded-circle border" />
-               </div> */}
           <div className="image image-icon bg-black text-grey-darker">
             <i className="fa fa-user"></i>
           </div>
@@ -38,11 +34,21 @@ const AuthUser = ({
           <b className="caret"></b>
         </a>
         <div className="dropdown-menu dropdown-menu-right">
-          {/* <span className="dropdown-item d-flex">
-                 <h3 className="label label-inverse">Administrator</h3>
-               </span> */}
-          <span className="dropdown-item label label-inverse ml-3 pe-none">
-            {authUser?.role?.name}
+          <span className="dropdown-item">
+            <div className="d-flex">
+              <div className="flex-shrink-0">
+                <div className="image image-icon bg-black text-grey-darker">
+                  <i className="fa fa-user"></i>
+                </div>
+              </div>
+
+              <div className="flex-grow-1">
+                <span class="fw-medium d-block truncate-text-elipsis">
+                  {`${authUser?.firstname} ${authUser?.lastname}`}
+                </span>
+                <small class="text-custom">{authUser?.role?.name}</small>
+              </div>
+            </div>
           </span>
           <a
             href="javascript:;"
