@@ -3,6 +3,7 @@ import JobApplicationContext from "@/store/jobapplication/jobapplication-context
 import SkeletonCard from "@/components/Loaders/SkeletonCard";
 import Card from "@/components/UI/Card";
 import { FaRegBookmark, FaBookmark } from "react-icons/fa6";
+import { capitalized } from "@/libs/utils";
 
 const JobPostingList = ({
   error,
@@ -44,7 +45,7 @@ const JobPostingList = ({
           <div className="cursor-pointer" onClick={() => onView(job)}>
             <div className="d-flex align-items-center justify-content-between">
               <h3 className="fs-4 font-weight-bold text-dark text-capitalize">
-                {job.title}
+                {capitalized(job.title)}
               </h3>
               <span
                 className="fs-3"
@@ -57,11 +58,11 @@ const JobPostingList = ({
             </div>
             <span className="d-block d-flex align-items-center gap-1 fs-6 text-capitalize">
               <i className="ti ti-buildings"></i>
-              {job?.company?.name}
+              {capitalized(job?.company?.name)}
             </span>
             <span className="d-block d-flex align-items-center gap-1 fs-6 text-capitalize">
               <i className="ti ti-map-pin"></i>
-              {job?.company?.address}
+              {capitalized(job?.company?.address)}
             </span>
             <h5 className="my-4">
               {job?.active === 2 ? (

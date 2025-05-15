@@ -101,3 +101,7 @@ export const formatData = (user) => {
     ? formattedEmployer
     : formattedAdmin;
 };
+
+export const capitalized = (str) => {
+  return str.toLowerCase().replace(/\b\w/g, (char) => char.toUpperCase());
+};

@@ -69,7 +69,7 @@ const Header = ({ roles, disabilityTypes }) => {
               />
             </span>
           </Link>
-          <div className="navbar-toggle profile">
+          <div className="navbar-toggle profile bg-white">
             {authUser ? (
               <ul
                 className="navbar-nav navbar-right"

@@ -942,3 +942,15 @@ div:where(.swal2-container) {
   max-width: 120.03px;
   display: inline-block;
 }
+
+.dropdown-menu {
+  background: #FFFFFF !important;
+}
+
+.header .navbar-nav>li.dropdown .dropdown-menu {
+  background: #FFFFFF !important;
+}
+
+.dropdown-menu.dropdown-menu-right.show {
+  background: #FFFFFF !important;
+}

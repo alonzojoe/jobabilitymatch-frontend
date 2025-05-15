@@ -3,7 +3,7 @@ import AuthContext from "@/store/auth/auth-context";
 import JobApplicationContext from "@/store/jobapplication/jobapplication-context";
 import Card from "@/components/UI/Card";
 import SkeletonCard from "@/components/Loaders/SkeletonCard";
-import { ConfirmDialog, ToastMessage } from "@/libs/utils";
+import { ConfirmDialog, ToastMessage, capitalized } from "@/libs/utils";
 import { FaRegBookmark, FaBookmark } from "react-icons/fa6";
 import { IoIosCloseCircle } from "react-icons/io";
 import { MdSend, MdOutlineCheck } from "react-icons/md";
@@ -68,16 +68,16 @@ const JobDetails = ({ loading, selectedJob, onSetJob }) => {
             </span>
             <div className="d-flex align-items-center justify-content-between">
               <h3 className="fs-4 font-weight-bold text-dark">
-                {selectedJob.title}
+                {capitalized(selectedJob.title)}
               </h3>
             </div>
             <span className="d-block d-flex align-items-center gap-1 fs-6">
               <i className="ti ti-buildings"></i>
-              {selectedJob?.company?.name}
+              {capitalized(selectedJob?.company?.name)}
             </span>
             <span className="d-block d-flex align-items-center gap-1 fs-6 text-capitalize">
               <i className="ti ti-map-pin"></i>
-              {selectedJob?.company?.address}
+              {capitalized(selectedJob?.company?.address)}
             </span>
             <h5 className="my-4">
               <div className="d-flex align-items-center justify-content-between">
