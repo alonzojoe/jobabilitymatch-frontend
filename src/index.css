@@ -960,3 +960,7 @@ div:where(.swal2-container) {
   background: #01004C !important;
   border-color: #01004C !important;
 }
+
+.fw-500 {
+  font-weight: 500 !important;
+}

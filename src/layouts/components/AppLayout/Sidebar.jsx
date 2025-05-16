@@ -18,13 +18,13 @@ const Sidebar = ({ authUser }) => {
               <NavItem key={menu.id} menu={menu} current={pathname} />
             ))}
             <li className="sidebar-items">
-              <Link to="/">
+              <Link to="/" className="fw-500">
                 <i className="ion-ios-create bg-secondary"></i>
                 <span>View Job Postings</span>
               </Link>
             </li>
             <li className="sidebar-items">
-              <a href="javascript:;" onClick={logout}>
+              <a href="javascript:;" className="fw-500" onClick={logout}>
                 <i className="ion-ios-power bg-pink"></i>
                 <span>Logout</span>
               </a>
@@ -57,7 +57,7 @@ const NavItem = (props) => {
 
   return (
     <li className={`sidebar-items ${menu.path === current ? "active" : ""}`}>
-      <Link to={menu.path}>
+      <Link to={menu.path} className="fw-500">
         <i className={`${menu.icon} ${menu.color}`}></i>
         <span>{menu.name}</span>
       </Link>
