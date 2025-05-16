@@ -102,7 +102,7 @@ const AdminForm = ({
           >
             <PageHeader title="Admin Information" />
 
-            <div className="row mt-4">
+            <div className="row">
               <div className="col-sm-12 col-md-6 col-lg-6 mb-2">
                 <div
                   className={`mb-2 fv-plugins-icon-container ${
@@ -246,7 +246,7 @@ const AdminForm = ({
           {!admin && (
             <div className="col-sm-12 col-md-6 col-lg-4">
               <PageHeader title="Login Credentials" />
-              <div className="row mt-4">
+              <div className="row">
                 <div className="col-12 mb-2">
                   <div
                     className={`mb-2 fv-plugins-icon-container ${

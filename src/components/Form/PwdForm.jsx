@@ -128,7 +128,7 @@ const PwdForm = ({ pwd = null, roles, disabilityTypes, onClose }) => {
             className={`col-sm-12 col-md-6 ${pwd ? "col-lg-12" : "col-lg-8"}`}
           >
             <PageHeader title="Personal Information" />
-            <div className="row mt-4">
+            <div className="row">
               {/* Last Name */}
               <div className="col-sm-12 col-md-6 col-lg-6 mb-2">
                 <div
@@ -353,7 +353,7 @@ const PwdForm = ({ pwd = null, roles, disabilityTypes, onClose }) => {
           {!pwd && (
             <div className="col-sm-12 col-md-6 col-lg-4">
               <PageHeader title="Login Credentials" />
-              <div className="row mt-4">
+              <div className="row">
                 <div className="col-12 mb-2">
                   <div
                     className={`mb-2 fv-plugins-icon-container ${

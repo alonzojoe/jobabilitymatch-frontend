@@ -106,7 +106,7 @@ const EmployerForm = ({ employer = null, onClose, onRefresh = () => {} }) => {
           >
             <PageHeader title="Employer Information" />
 
-            <div className="row mt-4">
+            <div className="row">
               <div className="col-sm-12 mb-2">
                 <div
                   className={`mb-2 fv-plugins-icon-container ${
@@ -291,7 +291,7 @@ const EmployerForm = ({ employer = null, onClose, onRefresh = () => {} }) => {
           {!employer && (
             <div className="col-sm-12 col-md-6 col-lg-4">
               <PageHeader title="Login Credentials" />
-              <div className="row mt-4">
+              <div className="row">
                 <div className="col-12 mb-2">
                   <div
                     className={`mb-2 fv-plugins-icon-container ${
