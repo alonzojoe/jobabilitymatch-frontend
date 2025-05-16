@@ -98,16 +98,18 @@ const CompanyDashboard = () => {
       <div className="row">
         {/* Job Postings */}
         <div className="col-xl-3 col-md-6">
-          <div className="widget widget-stats bg-warning">
+          <div className="widget widget-stats bg-white">
             <div className="stats-icon stats-icon-square bg-custom text-white">
               <i className="ion-ios-create"></i>
             </div>
             <div className="stats-info">
-              <h4 className="text-white">TOTAL JOB POSTINGS</h4>
-              <p>{formatCount(dashboardData?.data?.job_postings)}</p>
+              <h4 className="text-custom fw-bold">TOTAL JOB POSTINGS</h4>
+              <p className="text-custom">
+                {formatCount(dashboardData?.data?.job_postings)}
+              </p>
             </div>
             <div className="stats-link">
-              <Link to="/home/job-postings">
+              <Link to="/home/job-postings" className="fw-bold">
                 View Detail <i className="fa fa-arrow-alt-circle-right"></i>
               </Link>
             </div>
@@ -116,16 +118,18 @@ const CompanyDashboard = () => {
 
         {/* Applicants */}
         <div className="col-xl-3 col-md-6">
-          <div className="widget widget-stats bg-info">
+          <div className="widget widget-stats bg-white">
             <div className="stats-icon stats-icon-square bg-custom text-white">
               <i className="ion-ios-walk"></i>
             </div>
             <div className="stats-info">
-              <h4 className="text-white">TOTAL APPLICANTS</h4>
-              <p>{formatCount(dashboardData?.data?.applicants)}</p>
+              <h4 className="text-custom">TOTAL APPLICANTS</h4>
+              <p className="text-custom">
+                {formatCount(dashboardData?.data?.applicants)}
+              </p>
             </div>
             <div className="stats-link">
-              <Link to="/home/applicants">
+              <Link to="/home/applicants" className="fw-bold">
                 View Detail <i className="fa fa-arrow-alt-circle-right"></i>
               </Link>
             </div>
@@ -134,16 +138,18 @@ const CompanyDashboard = () => {
 
         {/* Hired Applicants */}
         <div className="col-xl-3 col-md-6">
-          <div className="widget widget-stats bg-danger">
+          <div className="widget widget-stats bg-white">
             <div className="stats-icon stats-icon-square bg-custom text-white">
               <i className="ion-ios-checkmark-circle"></i>
             </div>
             <div className="stats-info">
-              <h4 className="text-white">TOTAL HIRED APPLICANTS</h4>
-              <p>{formatCount(dashboardData?.data?.accepted_applicants)}</p>
+              <h4 className="text-custom">TOTAL HIRED APPLICANTS</h4>
+              <p className="text-custom">
+                {formatCount(dashboardData?.data?.accepted_applicants)}
+              </p>
             </div>
             <div className="stats-link">
-              <Link to="/home/applicants">
+              <Link to="/home/applicants" className="fw-bold">
                 View Detail <i className="fa fa-arrow-alt-circle-right"></i>
               </Link>
             </div>
@@ -152,16 +158,18 @@ const CompanyDashboard = () => {
 
         {/* Rejected Applicants */}
         <div className="col-xl-3 col-md-6">
-          <div className="widget widget-stats bg-purple">
+          <div className="widget widget-stats bg-white">
             <div className="stats-icon stats-icon-square bg-custom text-white">
               <i className="ion-ios-close-circle"></i>
             </div>
             <div className="stats-info">
-              <h4 className="text-white">TOTAL REJECTED APPLICANTS</h4>
-              <p>{formatCount(dashboardData?.data?.rejected_applicants)}</p>
+              <h4 className="text-custom">TOTAL REJECTED APPLICANTS</h4>
+              <p className="text-custom">
+                {formatCount(dashboardData?.data?.rejected_applicants)}
+              </p>
             </div>
             <div className="stats-link">
-              <Link to="/home/applicants">
+              <Link to="/home/applicants" className="fw-bold">
                 View Detail <i className="fa fa-arrow-alt-circle-right"></i>
               </Link>
             </div>

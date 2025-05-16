@@ -96,7 +96,7 @@ const MainDashboard = () => {
               <i className="ion-ios-person"></i>
             </div>
             <div className="stats-content">
-              <div className="stats-title text-inverse-lighter">
+              <div className="stats-title text-inverse-lighter fw-bold">
                 Total Users
               </div>
               <div className="stats-number">
@@ -106,7 +106,7 @@ const MainDashboard = () => {
                 <div className="progress-bar" style={{ width: "100%" }}></div>
               </div>
               <div className="stats-link">
-                <Link to="/home/users">
+                <Link to="/home/users" className="fw-bold">
                   View Detail <i className="fa fa-arrow-alt-circle-right"></i>
                 </Link>
               </div>
@@ -120,7 +120,7 @@ const MainDashboard = () => {
               <i className="ion-ios-business"></i>
             </div>
             <div className="stats-content">
-              <div className="stats-title text-inverse-lighter">
+              <div className="stats-title text-inverse-lighter fw-bold">
                 Total Companies
               </div>
               <div className="stats-number">
@@ -130,7 +130,7 @@ const MainDashboard = () => {
                 <div className="progress-bar" style={{ width: "100%" }}></div>
               </div>
               <div className="stats-link">
-                <Link to="/home/companies">
+                <Link to="/home/companies" className="fw-bold">
                   View Detail <i className="fa fa-arrow-alt-circle-right"></i>
                 </Link>
               </div>
@@ -144,7 +144,7 @@ const MainDashboard = () => {
               <i className="ion-ios-create"></i>
             </div>
             <div className="stats-content">
-              <div className="stats-title text-inverse-lighter">
+              <div className="stats-title text-inverse-lighter fw-bold">
                 Total Job Postings
               </div>
               <div className="stats-number">
@@ -154,7 +154,7 @@ const MainDashboard = () => {
                 <div className="progress-bar" style={{ width: "100%" }}></div>
               </div>
               <div className="stats-link">
-                <Link to="/home/job-postings">
+                <Link to="/home/job-postings" className="fw-bold">
                   View Detail <i className="fa fa-arrow-alt-circle-right"></i>
                 </Link>
               </div>
@@ -168,7 +168,7 @@ const MainDashboard = () => {
               <i className="ion-ios-walk"></i>
             </div>
             <div className="stats-content">
-              <div className="stats-title text-inverse-lighter">
+              <div className="stats-title text-inverse-lighter fw-bold">
                 Total Applicants
               </div>
               <div className="stats-number">

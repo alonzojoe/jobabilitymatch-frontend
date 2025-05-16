@@ -2,7 +2,7 @@ const Panel = ({ title = "", children }) => {
   return (
     <div className="panel panel-inverse">
       <div className="panel-heading">
-        <h4 className="panel-title">{title}</h4>
+        <h4 className="panel-title fw-bold">{title}</h4>
         <div className="panel-heading-btn">
           <a
             href="javascript:;"
