@@ -49,7 +49,7 @@ const JobPostingTab = forwardRef(({ onSelect, onRefresh, authUser }, ref) => {
           className="text-custom fs-2 cursor-pointer cst-refresh"
         />
       </div>
-    </>
+    </> 
   );
 });
 

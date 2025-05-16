@@ -335,7 +335,7 @@ const MainDashboard = () => {
         </div>
 
         <div className="col-sm-12 col-xl-6 col-md-6 mb-4">
-          <Panel title="Recently Job Postings">
+          <Panel title="Recent Job Postings">
             <div className="row">
               <div className="col-12">
                 <div className="table-responsive">
@@ -346,7 +346,7 @@ const MainDashboard = () => {
                           No.
                         </th>
                         <th className="text-center font-weight-bold fs-7">
-                          Name
+                          Job Title
                         </th>
                         {/* <th className="text-center font-weight-bold fs-7">
                           Email
@@ -395,7 +395,7 @@ const MainDashboard = () => {
         </div>
 
         <div className="col-sm-12 col-xl-6 col-md-6 mb-4">
-          <Panel title="Recently Applicants">
+          <Panel title="Recent Applicants">
             <div className="row">
               <div className="col-12">
                 <div className="table-responsive">
