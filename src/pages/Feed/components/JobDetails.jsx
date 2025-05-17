@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { Link } from "react-router-dom";
 import AuthContext from "@/store/auth/auth-context";
 import JobApplicationContext from "@/store/jobapplication/jobapplication-context";
 import Card from "@/components/UI/Card";
@@ -7,6 +8,7 @@ import { ConfirmDialog, ToastMessage, capitalized } from "@/libs/utils";
 import { FaRegBookmark, FaBookmark } from "react-icons/fa6";
 import { IoIosCloseCircle } from "react-icons/io";
 import { MdSend, MdOutlineCheck } from "react-icons/md";
+import { LuSquareArrowOutUpRight } from "react-icons/lu";
 import api from "@/services/api";
 
 const dialog = new ConfirmDialog();
@@ -71,10 +73,14 @@ const JobDetails = ({ loading, selectedJob, onSetJob }) => {
                 {capitalized(selectedJob.title)}
               </h3>
             </div>
-            <span className="d-block d-flex align-items-center gap-1 fs-6">
+            <Link
+              to={`/company/${selectedJob?.company?.name}/${selectedJob?.company?.id}`}
+              className="d-block d-flex align-items-center gap-1 fs-6"
+            >
               <i className="ti ti-buildings"></i>
-              {capitalized(selectedJob?.company?.name)}
-            </span>
+              {capitalized(selectedJob?.company?.name)}{" "}
+              <LuSquareArrowOutUpRight />
+            </Link>
             <span className="d-block d-flex align-items-center gap-1 fs-6 text-capitalize">
               <i className="ti ti-map-pin"></i>
               {capitalized(selectedJob?.company?.address)}

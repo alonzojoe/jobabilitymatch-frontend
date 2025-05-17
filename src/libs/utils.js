@@ -103,5 +103,7 @@ export const formatData = (user) => {
 };
 
 export const capitalized = (str) => {
-  return str.toLowerCase().replace(/\b\w/g, (char) => char.toUpperCase());
+  return str
+    ? str.toLowerCase().replace(/\b\w/g, (char) => char.toUpperCase())
+    : "";
 };
