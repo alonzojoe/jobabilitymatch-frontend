@@ -7,7 +7,8 @@ import Card from "@/components/UI/Card";
 import DetailsHeader from "./components/DetailsHeader";
 import AboutCompany from "./components/AboutCompany";
 import Modal from "@/components/UI/Modal";
-import JobDetails from "./components/JobDetails";
+import JobDetails from "@/pages/Feed/components/JobDetails";
+import CompanyDetailsLoader from "@/pages/Feed/components/CompanyDetailsLoader";
 const CompanyDetails = () => {
   const { id: company_id } = useParams();
   const [selectedJob, setSelectedJob] = useState(null);
@@ -15,7 +16,7 @@ const CompanyDetails = () => {
     data: details,
     loading,
     error,
-  } = useFetch(`/company/${company_id}`, null);
+  } = useFetch(`/company/${company_id}`, null, 2000);
 
   const company = details?.data;
 
@@ -39,35 +40,39 @@ const CompanyDetails = () => {
           />
         </Modal>
       )}
-      <div className="cmp-container">
-        <DetailsHeader company={company} />
-        <AboutCompany company={company} employer={employer} />
-        <div className="mt-4">
-          <h2 className="text-dark mt-5">
-            Job postings ({company?.job_postings_count})
-          </h2>
-          <div className="row mt-3">
-            <div className="col-md-12">
-              <div className="company-job-container">
-                {jobPostings.length > 0 ? (
-                  jobPostings.map((job) => (
-                    <JobItem
-                      job={job}
-                      company={company}
-                      onView={viewDetails}
-                      key={job.id}
-                    />
-                  ))
-                ) : (
-                  <div className="text-center text-custom fs-5 fw-500">
-                    No job postings yet.
-                  </div>
-                )}
+      {loading ? (
+        <CompanyDetailsLoader />
+      ) : (
+        <div className="cmp-container">
+          <DetailsHeader company={company} />
+          <AboutCompany company={company} employer={employer} />
+          <div className="mt-4">
+            <h2 className="text-dark mt-5">
+              Job postings ({company?.job_postings_count})
+            </h2>
+            <div className="row mt-3">
+              <div className="col-md-12">
+                <div className="company-job-container">
+                  {jobPostings.length > 0 ? (
+                    jobPostings.map((job) => (
+                      <JobItem
+                        job={job}
+                        company={company}
+                        onView={viewDetails}
+                        key={job.id}
+                      />
+                    ))
+                  ) : (
+                    <div className="text-center text-custom fs-5 fw-500">
+                      No job postings yet.
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
     </>
   );
 };
