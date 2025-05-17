@@ -14,6 +14,7 @@ import Unauthorized from "@/pages/Unauthorized/Unauthorized";
 import NotFound from "@/pages/NotFound/NotFound";
 import Applicants from "@/pages/Applicants/Applicants";
 import Companies from "@/pages/Companies/Companies";
+import CompanyDetails from "@/pages/Feed/CompanyDetails";
 
 import { Toaster } from "react-hot-toast";
 function App() {
@@ -41,6 +42,7 @@ function App() {
                 </JobApplicationProvider>
               }
             />
+            <Route path="company/:name/:id" element={<CompanyDetails />} />
           </Route>
           <Route element={<ProtectedRoutes />}>
             <Route path="home" element={<AppLayout />}>
