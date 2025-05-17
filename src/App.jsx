@@ -42,7 +42,14 @@ function App() {
                 </JobApplicationProvider>
               }
             />
-            <Route path="company/:name/:id" element={<CompanyDetails />} />
+            <Route
+              path="company/:name/:id"
+              element={
+                <JobApplicationProvider>
+                  <CompanyDetails />
+                </JobApplicationProvider>
+              }
+            />
           </Route>
           <Route element={<ProtectedRoutes />}>
             <Route path="home" element={<AppLayout />}>
