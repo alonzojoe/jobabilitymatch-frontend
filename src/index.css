@@ -417,6 +417,23 @@ body {
   gap: 1rem
 }
 
+/* .job-item {
+  width: 230px;
+} */
+
+.card-w {
+  min-width: 350px !important;
+  flex-grow: 0;
+}
+
+.company-job-container {
+  overflow-x: auto;
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
 @media screen and (max-width: 1024px) {
   .search-container {
     margin: 10px 4rem;
