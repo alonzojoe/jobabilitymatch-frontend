@@ -124,9 +124,8 @@ const Bookmarks = ({ onClose }) => {
         <div className="row mt-4">
           {bookmarks.length > 0 ? (
             bookmarks.map((job) => (
-              <div className="col-sm-12 col-md-6 col-lg-6">
+              <div className="col-sm-12 col-md-6 col-lg-6" key={job.id}>
                 <JobFeedItem
-                  key={job.id}
                   job={job}
                   selectedJob={selectedJob}
                   onView={onView}
