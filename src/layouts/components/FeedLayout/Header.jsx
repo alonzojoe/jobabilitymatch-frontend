@@ -2,7 +2,6 @@ import { useContext } from "react";
 import AuthContext from "@/store/auth/auth-context";
 import MainLogo from "@/assets/images/logo-main.png";
 import MainText from "@/assets/images/logo-text.png";
-import Avatar from "@/assets/images/avatar.jpeg";
 import useToggle from "@/hooks/useToggle";
 import Login from "@/components/Auth/Login";
 import Registry from "@/components/Auth/Registry";
@@ -13,6 +12,7 @@ import UpdatePwd from "@/components/Form/UpdatePwd";
 import ChangePassword from "@/components/Auth/ChangePassword";
 import { logout } from "@/libs/utils";
 import { Link } from "react-router-dom";
+import JobApplicationProvider from "@/store/jobapplication/jobapplication-provider";
 
 const Header = ({ roles, disabilityTypes }) => {
   const [showLogin, toggleLogin] = useToggle(false);
@@ -77,7 +77,7 @@ const Header = ({ roles, disabilityTypes }) => {
                   background: "#fff",
                 }}
               >
-                {authUser?.role_id === 3 && (
+                {authUser?.role_id === 2 && (
                   <li className="dropdown">
                     <a
                       href="#"
@@ -172,11 +172,13 @@ const Header = ({ roles, disabilityTypes }) => {
 
         {/* BEGIN header-nav */}
         {authUser ? (
-          <AuthUser
-            authUser={authUser}
-            onUpdateProfile={toggleUpdateProfile}
-            onChangePass={toggleChangePass}
-          />
+          <JobApplicationProvider>
+            <AuthUser
+              authUser={authUser}
+              onUpdateProfile={toggleUpdateProfile}
+              onChangePass={toggleChangePass}
+            />
+          </JobApplicationProvider>
         ) : (
           <AuthControls
             type={`lg`}
