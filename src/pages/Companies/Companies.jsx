@@ -109,7 +109,7 @@ const Companies = () => {
           onRefresh={handleRefresh}
         />
       )}
-      <PageHeader title="Comapnies" />
+      <PageHeader title="Companies" />
       <SearchCompany onSearch={handleSearch} onRefresh={handleRefresh} />
       <div className="my-2 d-flex align-items-center justify-content-end">
         <button

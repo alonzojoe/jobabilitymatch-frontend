@@ -38,7 +38,7 @@ function App() {
               path=""
               element={
                 <JobApplicationProvider>
-                  <Feed />{" "}
+                  <Feed />
                 </JobApplicationProvider>
               }
             />

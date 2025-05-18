@@ -1,11 +1,15 @@
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 
-const SkeletonCard = ({ count = 1, height = "220px" }) => {
+const SkeletonCard = ({ count = 1, height = "220px", width = "100%" }) => {
   return (
     <SkeletonTheme baseColor="#E8EAED" highlightColor="#D2D5DB">
-      <p>
-        <Skeleton height={height} className="sekeleton-class" count={count} />
-      </p>
+      <Skeleton
+        height={height}
+        width={width}
+        className="sekeleton-class"
+        count={count}
+        containerClassName="flex-1"
+      />
     </SkeletonTheme>
   );
 };

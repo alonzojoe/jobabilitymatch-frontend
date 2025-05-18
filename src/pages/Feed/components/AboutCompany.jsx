@@ -25,7 +25,7 @@ const AboutCompany = ({ company, employer }) => {
           <FaUserTie />
           {capitalized(employer)}
         </span>
-        <span className="d-block d-flex align-items-center gap-1 fs-6 text-capitalize ml-3">
+        <span className="d-block d-flex align-items-center gap-1 fs-6 ml-3">
           <MdContactPhone />
           {`${company?.user?.phone} / ${company?.user.email}`}
         </span>
