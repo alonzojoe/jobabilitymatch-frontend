@@ -21,9 +21,10 @@ const CompanyDetailsLoader = () => {
       <div className="row mt-2">
         <div className="col-md-12">
           <div className="company-job-container">
-            <SkeletonCard height="200px " width="370px" />
-            <SkeletonCard height="200px " width="370px" />
-            <SkeletonCard height="200px " width="370px" />
+            <SkeletonCard height="200px " width="300px" />
+            <SkeletonCard height="200px " width="300px" />
+            <SkeletonCard height="200px " width="300px" />
+            <SkeletonCard height="200px " width="300px" />
           </div>
         </div>
       </div>
