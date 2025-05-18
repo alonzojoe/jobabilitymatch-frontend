@@ -3,9 +3,11 @@ import { Outlet } from "react-router-dom";
 import AuthContext from "@/store/auth/auth-context";
 import Navbar from "@/layouts/components/AppLayout/Navbar";
 import Sidebar from "@/layouts/components/AppLayout/Sidebar";
+import { scrollUp } from "@/libs/utils";
 
 const AppLayout = () => {
   const { authUser } = useContext(AuthContext);
+
   return (
     <>
       <div
@@ -22,13 +24,13 @@ const AppLayout = () => {
         </div>
         {/* END #content */}
 
-        <a
-          href="javascript:;"
-          className="btn btn-icon btn-circle btn-primary btn-scroll-to-top fade"
+        <span
+          className="btn btn-scroll-up btn-circle btn-primary btn-scroll-to-top fade cursor-pointer"
           data-click="scroll-top"
+          onClick={scrollUp}
         >
           <i className="fa fa-angle-up"></i>
-        </a>
+        </span>
       </div>
     </>
   );

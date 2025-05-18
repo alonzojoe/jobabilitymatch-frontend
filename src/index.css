@@ -470,6 +470,20 @@ body {
   flex: 1;
 }
 
+.widget-stats,
+.widget.widget-stats {
+  background: #ffffff !important;
+}
+
+.btn.btn-scroll-up {
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border: none;
+  line-height: 38px;
+  text-align: center;
+  font-size: 19px;
+}
 
 @media screen and (max-width: 576px) {
   .search-container {
