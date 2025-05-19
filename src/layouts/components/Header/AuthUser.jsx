@@ -8,6 +8,7 @@ import { JobFeedItem } from "@/pages/Feed/components/JobPostingList";
 import JobApplicationContext from "@/store/jobapplication/jobapplication-context";
 import useLocalStorage from "@/hooks/useLocalStorage";
 import { getLocalStorage } from "@/libs/utils";
+import JobDetails from "@/pages/Feed/components/JobDetails";
 
 const AuthUser = ({
   withClass = true,
@@ -104,7 +105,7 @@ const AuthUser = ({
   );
 };
 
-const Bookmarks = ({ onClose }) => {
+export const Bookmarks = ({ onClose }) => {
   const [selectedJob, setSelectedJob] = useState(null);
   const [bookmarks, setBookmarks] = useLocalStorage("user-bookmark", []);
   const { addBookmark, removeBookmark } = useContext(JobApplicationContext);
@@ -125,33 +126,49 @@ const Bookmarks = ({ onClose }) => {
   console.log("Bookmarks component-re-renders", bookmarks);
 
   return (
-    <Modal onClose={onClose}>
-      <>
-        <PageHeader title={`Save Jobs (${bookmarks.length})`} />
-        <div className="row mt-4">
-          {bookmarks.length > 0 ? (
-            bookmarks.map((job) => (
-              <div className="col-sm-12 col-md-6 col-lg-6" key={job.id}>
-                <JobFeedItem
-                  job={job}
-                  selectedJob={selectedJob}
-                  onView={onView}
-                  hasBookMark={hasBookMark}
-                  removeBookmark={rmBookmark}
-                  addBookmark={addBookmark}
-                />
+    <>
+      {selectedJob && (
+        <Modal
+          higher={true}
+          isJobModal={false}
+          onClose={() => setSelectedJob(null)}
+          isHidden={true}
+        >
+          <JobDetails
+            loading={false}
+            selectedJob={selectedJob}
+            onSetJob={setSelectedJob}
+          />
+        </Modal>
+      )}
+      <Modal onClose={onClose}>
+        <>
+          <PageHeader title={`Save Jobs (${bookmarks.length})`} />
+          <div className="row mt-4">
+            {bookmarks.length > 0 ? (
+              bookmarks.map((job) => (
+                <div className="col-sm-12 col-md-6 col-lg-6" key={job.id}>
+                  <JobFeedItem
+                    job={job}
+                    selectedJob={selectedJob}
+                    onView={onView}
+                    hasBookMark={hasBookMark}
+                    removeBookmark={rmBookmark}
+                    addBookmark={addBookmark}
+                  />
+                </div>
+              ))
+            ) : (
+              <div className="col-12">
+                <div className="text-center text-custom fs-5 fw-semibold">
+                  Looks like you haven't saved any jobs.
+                </div>
               </div>
-            ))
-          ) : (
-            <div className="col-12">
-              <div className="text-center text-custom fs-5 fw-semibold">
-                Looks like you haven't saved any jobs.
-              </div>
-            </div>
-          )}
-        </div>
-      </>
-    </Modal>
+            )}
+          </div>
+        </>
+      </Modal>
+    </>
   );
 };
 

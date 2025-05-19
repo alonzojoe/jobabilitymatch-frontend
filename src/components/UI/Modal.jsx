@@ -8,9 +8,14 @@ const Modal = ({
   onClose,
   isJobModal = false,
   isHidden = false,
+  higher = false,
 }) => {
   return createPortal(
-    <div className={`cst-modal2 ${isJobModal ? "selected-job-modal" : ""}`}>
+    <div
+      className={`cst-modal2 ${higher ? "z-higher" : ""} ${
+        isJobModal ? "selected-job-modal" : ""
+      }`}
+    >
       <div className="cst-modal-body2 bg-white rounded position-relative">
         {!isHidden && (
           <span

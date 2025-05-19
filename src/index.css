@@ -21,6 +21,10 @@ body {
   align-items: center;
 }
 
+.cst-modal2.z-higher {
+  z-index: 10000 !important;
+}
+
 .cst-modal {
   position: fixed;
   background-color: rgb(0, 0, 0, 0.5);
