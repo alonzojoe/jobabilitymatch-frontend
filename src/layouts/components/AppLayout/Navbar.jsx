@@ -71,24 +71,6 @@ const Navbar = ({ authUser }) => {
         {/* END navbar-header */}
         {/* BEGIN header-nav */}
         <ul className="navbar-nav navbar-right">
-          {authUser?.role_id === 3 && (
-            <li className="dropdown">
-              <a
-                href="#"
-                data-toggle="dropdown"
-                className="dropdown-toggle icon"
-              >
-                <i className="ion-ios-notifications"></i>
-                <span className="label">0</span>
-              </a>
-              <div className="dropdown-menu media-list dropdown-menu-right">
-                <div className="dropdown-header">NOTIFICATIONS (0)</div>
-                <div className="text-center width-300 p-b-10 p-t-10">
-                  No notification found
-                </div>
-              </div>
-            </li>
-          )}
           <li className="dropdown navbar-user">
             <a href="#" className="dropdown-toggle" data-toggle="dropdown">
               <div className="image image-icon bg-black text-grey-darker">
@@ -101,7 +83,10 @@ const Navbar = ({ authUser }) => {
             </a>
             <div className="dropdown-menu dropdown-menu-right">
               <span className="dropdown-item">
-                <div className="d-flex">
+                <div
+                  className="d-flex cursor-pointer"
+                  onClick={() => toggleUpdateProfile(true)}
+                >
                   <div className="flex-shrink-0">
                     <div className="image image-icon bg-black text-grey-darker">
                       <i className="fa fa-user"></i>
@@ -116,9 +101,6 @@ const Navbar = ({ authUser }) => {
                       {authUser?.role?.name}
                     </small>
                   </div>
-                  {/* <span className="dropdown-item label label-inverse pe-none">
-                    {authUser?.role?.name}
-                  </span> */}
                 </div>
               </span>
               <a

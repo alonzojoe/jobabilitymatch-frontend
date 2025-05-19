@@ -104,80 +104,116 @@ const CompanyDashboard = () => {
           <div className="row">
             {/* Job Postings */}
             <div className="col-xl-3 col-md-6">
-              <div className="widget widget-stats bg-white">
-                <div className="stats-icon stats-icon-square bg-custom text-white">
+              <div className="widget widget-stats bg-white text-inverse shadow-lg">
+                <div className="stats-icon stats-icon-square bg-gradient-blue text-white">
                   <i className="ion-ios-create"></i>
                 </div>
-                <div className="stats-info">
-                  <h4 className="text-custom fw-bold">TOTAL JOB POSTINGS</h4>
-                  <p className="text-custom">
+                <div className="stats-content">
+                  <div className="stats-title text-inverse-lighter fw-bold">
+                    TOTAL JOB POSTINGS
+                  </div>
+                  <div className="stats-number">
                     {formatCount(dashboardData?.data?.job_postings)}
-                  </p>
-                </div>
-                <div className="stats-link">
-                  <Link to="/home/job-postings" className="fw-bold">
-                    View Detail <i className="fa fa-arrow-alt-circle-right"></i>
-                  </Link>
+                  </div>
+                  <div className="stats-progress progress">
+                    <div
+                      className="progress-bar"
+                      style={{ width: "100%" }}
+                    ></div>
+                  </div>
+                  <div className="stats-link">
+                    <Link to="/home/job-postings" className="fw-bold">
+                      View Detail{" "}
+                      <i className="fa fa-arrow-alt-circle-right"></i>
+                    </Link>
+                  </div>
                 </div>
               </div>
             </div>
 
             {/* Applicants */}
             <div className="col-xl-3 col-md-6">
-              <div className="widget widget-stats bg-white">
-                <div className="stats-icon stats-icon-square bg-custom text-white">
+              <div className="widget widget-stats bg-white text-inverse shadow-lg">
+                <div className="stats-icon stats-icon-square bg-gradient-blue text-white">
                   <i className="ion-ios-walk"></i>
                 </div>
-                <div className="stats-info">
-                  <h4 className="text-custom">TOTAL APPLICANTS</h4>
-                  <p className="text-custom">
+                <div className="stats-content">
+                  <div className="stats-title text-inverse-lighter fw-bold">
+                    TOTAL APPLICANTS
+                  </div>
+                  <div className="stats-number">
                     {formatCount(dashboardData?.data?.applicants)}
-                  </p>
-                </div>
-                <div className="stats-link">
-                  <Link to="/home/applicants" className="fw-bold">
-                    View Detail <i className="fa fa-arrow-alt-circle-right"></i>
-                  </Link>
+                  </div>
+                  <div className="stats-progress progress">
+                    <div
+                      className="progress-bar"
+                      style={{ width: "100%" }}
+                    ></div>
+                  </div>
+                  <div className="stats-link">
+                    <Link to="/home/applicants" className="fw-bold">
+                      View Detail{" "}
+                      <i className="fa fa-arrow-alt-circle-right"></i>
+                    </Link>
+                  </div>
                 </div>
               </div>
             </div>
 
             {/* Hired Applicants */}
             <div className="col-xl-3 col-md-6">
-              <div className="widget widget-stats bg-white">
-                <div className="stats-icon stats-icon-square bg-custom text-white">
+              <div className="widget widget-stats bg-white text-inverse shadow-lg">
+                <div className="stats-icon stats-icon-square bg-gradient-blue text-white">
                   <i className="ion-ios-checkmark-circle"></i>
                 </div>
-                <div className="stats-info">
-                  <h4 className="text-custom">TOTAL HIRED APPLICANTS</h4>
-                  <p className="text-custom">
+                <div className="stats-content">
+                  <div className="stats-title text-inverse-lighter fw-bold">
+                    TOTAL HIRED APPLICANTS
+                  </div>
+                  <div className="stats-number">
                     {formatCount(dashboardData?.data?.accepted_applicants)}
-                  </p>
-                </div>
-                <div className="stats-link">
-                  <Link to="/home/applicants" className="fw-bold">
-                    View Detail <i className="fa fa-arrow-alt-circle-right"></i>
-                  </Link>
+                  </div>
+                  <div className="stats-progress progress">
+                    <div
+                      className="progress-bar"
+                      style={{ width: "100%" }}
+                    ></div>
+                  </div>
+                  <div className="stats-link">
+                    <Link to="/home/applicants" className="fw-bold">
+                      View Detail{" "}
+                      <i className="fa fa-arrow-alt-circle-right"></i>
+                    </Link>
+                  </div>
                 </div>
               </div>
             </div>
 
             {/* Rejected Applicants */}
             <div className="col-xl-3 col-md-6">
-              <div className="widget widget-stats bg-white">
-                <div className="stats-icon stats-icon-square bg-custom text-white">
-                  <i className="ion-ios-close-circle"></i>
+              <div className="widget widget-stats bg-white text-inverse shadow-lg">
+                <div className="stats-icon stats-icon-square bg-gradient-blue text-white">
+                  <i className="ion-ios-checkmark-circle"></i>
                 </div>
-                <div className="stats-info">
-                  <h4 className="text-custom">TOTAL REJECTED APPLICANTS</h4>
-                  <p className="text-custom">
+                <div className="stats-content">
+                  <div className="stats-title text-inverse-lighter fw-bold">
+                    TOTAL REJECTED APPLICANTS
+                  </div>
+                  <div className="stats-number">
                     {formatCount(dashboardData?.data?.rejected_applicants)}
-                  </p>
-                </div>
-                <div className="stats-link">
-                  <Link to="/home/applicants" className="fw-bold">
-                    View Detail <i className="fa fa-arrow-alt-circle-right"></i>
-                  </Link>
+                  </div>
+                  <div className="stats-progress progress">
+                    <div
+                      className="progress-bar"
+                      style={{ width: "100%" }}
+                    ></div>
+                  </div>
+                  <div className="stats-link">
+                    <Link to="/home/applicants" className="fw-bold">
+                      View Detail{" "}
+                      <i className="fa fa-arrow-alt-circle-right"></i>
+                    </Link>
+                  </div>
                 </div>
               </div>
             </div>
@@ -253,9 +289,6 @@ const CompanyDashboard = () => {
                                   <td className="text-center font-weight-bold fs-7">
                                     {d.title}
                                   </td>
-                                  {/* <td className="text-center font-weight-bold fs-7">
-                              {d.email}
-                            </td> */}
                                   <td className="text-center font-weight-bold fs-7">
                                     {formatDateTime(d.created_at)}
                                   </td>

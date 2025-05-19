@@ -359,7 +359,7 @@ const EmployerForm = ({ employer = null, onClose, onRefresh = () => {} }) => {
           )}
         </div>
 
-        <div className="mb-4"></div>
+        <div className="mb-2"></div>
 
         <button
           type="submit"

@@ -1,12 +1,9 @@
-import { useContext, useMemo, useState } from "react";
 import { logout } from "@/libs/utils";
 import { FaBookmark } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 import useToggle from "@/hooks/useToggle";
-import Modal from "@/components/UI/Modal";
-import PageHeader from "@/components/Global/PageHeader";
-import { JobFeedItem } from "@/pages/Feed/components/JobPostingList";
-import JobApplicationContext from "@/store/jobapplication/jobapplication-context";
-import { getLocalStorage } from "@/libs/utils";
+import Bookmarks from "@/layouts/components/Header/Bookmarks/Bookmarks";
+import Notifications from "@/layouts/components/Header/Notifications/Notifications";
 
 const AuthUser = ({
   withClass = true,
@@ -19,30 +16,28 @@ const AuthUser = ({
 
   return (
     <>
-      {showModal && <Bookmarks onClose={() => toggleShowModal(false)} />}
+      {showModal && (
+        <Bookmarks
+          onClose={() => {
+            toggleShowModal(false);
+            window.location.reload();
+          }}
+        />
+      )}
       <ul className={`navbar-nav navbar-right ${ulClass}`}>
-        <li className="dropdown">
-          <a
-            href="javascript:;"
-            className="dropdown-toggle icon"
-            onClick={() => toggleShowModal(true)}
-          >
-            <FaBookmark className="fs-5" />
-          </a>
-        </li>
         {authUser?.role_id === 2 && (
-          <li className="dropdown">
-            <a href="#" data-toggle="dropdown" className="dropdown-toggle icon">
-              <i className="ion-ios-notifications"></i>
-              <span className="label">0</span>
-            </a>
-            <div className="dropdown-menu media-list dropdown-menu-right">
-              <div className="dropdown-header">NOTIFICATIONS (0)</div>
-              <div className="text-center width-300 p-b-10 p-t-10">
-                No notification found
-              </div>
-            </div>
-          </li>
+          <>
+            <li className="dropdown">
+              <a
+                href="javascript:;"
+                className="dropdown-toggle icon"
+                onClick={() => toggleShowModal(true)}
+              >
+                <FaBookmark className="fs-5" />
+              </a>
+            </li>
+            <Notifications authUser={authUser} />
+          </>
         )}
         <li className="dropdown navbar-user">
           <a href="#" className="dropdown-toggle" data-toggle="dropdown">
@@ -56,7 +51,10 @@ const AuthUser = ({
           </a>
           <div className="dropdown-menu dropdown-menu-right">
             <span className="dropdown-item">
-              <div className="d-flex">
+              <div
+                className="d-flex cursor-pointer"
+                onClick={() => onUpdateProfile(true)}
+              >
                 <div className="flex-shrink-0">
                   <div className="image image-icon bg-black text-grey-darker">
                     <i className="fa fa-user"></i>
@@ -71,20 +69,29 @@ const AuthUser = ({
                 </div>
               </div>
             </span>
-            <a
-              href="javascript:;"
-              className="dropdown-item mt-1"
-              onClick={() => onUpdateProfile(true)}
-            >
-              Update Profile
-            </a>
-            <a
-              href="javascript:;"
-              className="dropdown-item mt-1"
-              onClick={() => onChangePass(true)}
-            >
-              Change Password
-            </a>
+            {authUser?.role_id === 2 ? (
+              <>
+                <a
+                  href="javascript:;"
+                  className="dropdown-item mt-1"
+                  onClick={() => onUpdateProfile(true)}
+                >
+                  Update Profile
+                </a>
+                <a
+                  href="javascript:;"
+                  className="dropdown-item mt-1"
+                  onClick={() => onChangePass(true)}
+                >
+                  Change Password
+                </a>
+              </>
+            ) : (
+              <Link to="/home" className="dropdown-item mt-1">
+                Go to dashboard
+              </Link>
+            )}
+
             <div className="dropdown-divider"></div>
             <a href="javascript:;" className="dropdown-item" onClick={logout}>
               Log Out
@@ -93,58 +100,6 @@ const AuthUser = ({
         </li>
       </ul>
     </>
-  );
-};
-
-const Bookmarks = ({ onClose }) => {
-  const [selectedJob, setSelectedJob] = useState(null);
-  const { bookmarks, addBookmark, removeBookmark } = useContext(
-    JobApplicationContext
-  );
-
-  const hasBookMark = useMemo(() => {
-    return (job) => bookmarks?.some((b) => b.id === job?.id) || false;
-  }, [bookmarks]);
-
-  const bookMarks = () => {
-    const jobs = getLocalStorage("user-bookmark");
-    return jobs ?? [];
-  };
-
-  const onView = (job) => {
-    setSelectedJob(job);
-  };
-
-  console.log("component-re-renders", bookMarks());
-
-  return (
-    <Modal onClose={onClose}>
-      <>
-        <PageHeader title={`Save Jobs (${bookmarks.length})`} />
-        <div className="row mt-4">
-          {bookmarks.length > 0 ? (
-            bookmarks.map((job) => (
-              <div className="col-sm-12 col-md-6 col-lg-6" key={job.id}>
-                <JobFeedItem
-                  job={job}
-                  selectedJob={selectedJob}
-                  onView={onView}
-                  hasBookMark={hasBookMark}
-                  removeBookmark={removeBookmark}
-                  addBookmark={addBookmark}
-                />
-              </div>
-            ))
-          ) : (
-            <div className="col-12">
-              <div className="text-center text-custom fs-5 fw-semibold">
-                Looks like you haven't saved any jobs.
-              </div>
-            </div>
-          )}
-        </div>
-      </>
-    </Modal>
   );
 };
 

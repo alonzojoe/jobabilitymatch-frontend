@@ -1,7 +1,13 @@
 import Modal from "@/components/UI/Modal";
 import PwdForm from "@/components/Form/PwdForm";
 
-const UpdatePwd = ({ authUser, roles, disabilityTypes, onClose }) => {
+const UpdatePwd = ({
+  authUser,
+  roles,
+  disabilityTypes,
+  onClose,
+  isViewing = false,
+}) => {
   const pwd = {
     id: authUser.id,
     lastname: authUser?.lastname,
@@ -22,12 +28,13 @@ const UpdatePwd = ({ authUser, roles, disabilityTypes, onClose }) => {
   };
 
   return (
-    <Modal onClose={onClose}>
+    <Modal higher={true} onClose={onClose}>
       <PwdForm
         pwd={pwd}
         roles={roles}
         disabilityTypes={disabilityTypes}
         onClose={onClose}
+        isViewing={isViewing}
       />
     </Modal>
   );

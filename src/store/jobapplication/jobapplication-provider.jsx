@@ -16,7 +16,7 @@ const JobApplicationProvider = ({ children }) => {
       const res = await api(`/applicant/user/${authUser.id}`);
       setApplications(res.data.data);
     } catch (e) {
-      console.log("Something went wrong", e);
+      notify.notif("error", "Something went wrong.");
     }
   };
 

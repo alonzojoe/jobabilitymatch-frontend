@@ -21,6 +21,10 @@ body {
   align-items: center;
 }
 
+.cst-modal2.z-higher {
+  z-index: 10000 !important;
+}
+
 .cst-modal {
   position: fixed;
   background-color: rgb(0, 0, 0, 0.5);
@@ -1028,4 +1032,9 @@ div:where(.swal2-container) {
 
 .fw-500 {
   font-weight: 500 !important;
+}
+
+.txt-wrap {
+  white-space: normal;
+  word-break: break-word;
 }
