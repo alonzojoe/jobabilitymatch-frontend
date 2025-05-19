@@ -14,7 +14,13 @@ import api from "@/services/api";
 
 const notify = new ToastMessage();
 
-const PwdForm = ({ pwd = null, roles, disabilityTypes, onClose }) => {
+const PwdForm = ({
+  pwd = null,
+  roles,
+  disabilityTypes,
+  onClose,
+  isViewing = false,
+}) => {
   console.log(pwd);
   const [selectedDisabilities, setSelectedDisabilities] = useState(() =>
     pwd ? pwd.disability_types : []
@@ -120,7 +126,7 @@ const PwdForm = ({ pwd = null, roles, disabilityTypes, onClose }) => {
   return (
     <div>
       <form
-        className="mt-4 mb-2"
+        className={`mt-4 mb-2 ${isViewing ? "pe-none" : ""}`}
         onSubmit={handleSubmit((data) => handleSave(data))}
       >
         <div className="row">
@@ -422,19 +428,20 @@ const PwdForm = ({ pwd = null, roles, disabilityTypes, onClose }) => {
         </div>
 
         <div className="mb-2"></div>
-
-        <button
-          type="submit"
-          className="btn btn-custom d-grid w-100 waves-effect waves-light d-flex align-items-center justify-content-center gap-1"
-          disabled={isLoading}
-        >
-          {pwd ? "Update Profile" : "Sign up"}
-          {isLoading && (
-            <div className="spinner-border text-white" role="status">
-              <span className="visually-hidden"></span>
-            </div>
-          )}
-        </button>
+        {!isViewing && (
+          <button
+            type="submit"
+            className="btn btn-custom d-grid w-100 waves-effect waves-light d-flex align-items-center justify-content-center gap-1"
+            disabled={isLoading}
+          >
+            {pwd ? "Update Profile" : "Sign up"}
+            {isLoading && (
+              <div className="spinner-border text-white" role="status">
+                <span className="visually-hidden"></span>
+              </div>
+            )}
+          </button>
+        )}
 
         <input type="hidden" data-has-listeners="true" />
       </form>
