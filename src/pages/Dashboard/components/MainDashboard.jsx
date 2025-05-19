@@ -5,8 +5,7 @@ import { Link } from "react-router-dom";
 import useFetch from "@/hooks/useFetch";
 import { formatCount, formatDateTime } from "@/libs/utils";
 import { Bar, Pie } from "react-chartjs-2";
-import { formatDate } from "@/libs/utils";
-import SkeletonCard from "@/components/Loaders/SkeletonCard";
+
 import {
   Chart as ChartJS,
   CategoryScale,
