@@ -1,7 +1,7 @@
 import { logout } from "@/libs/utils";
 import { FaBookmark } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 import useToggle from "@/hooks/useToggle";
-import { FaHourglass, FaCheck, FaCalendar, FaTimes } from "react-icons/fa";
 import Bookmarks from "@/layouts/components/Header/Bookmarks/Bookmarks";
 import Notifications from "@/layouts/components/Header/Notifications/Notifications";
 
@@ -51,7 +51,10 @@ const AuthUser = ({
           </a>
           <div className="dropdown-menu dropdown-menu-right">
             <span className="dropdown-item">
-              <div className="d-flex">
+              <div
+                className="d-flex cursor-pointer"
+                onClick={() => onUpdateProfile(true)}
+              >
                 <div className="flex-shrink-0">
                   <div className="image image-icon bg-black text-grey-darker">
                     <i className="fa fa-user"></i>
@@ -66,20 +69,29 @@ const AuthUser = ({
                 </div>
               </div>
             </span>
-            <a
-              href="javascript:;"
-              className="dropdown-item mt-1"
-              onClick={() => onUpdateProfile(true)}
-            >
-              Update Profile
-            </a>
-            <a
-              href="javascript:;"
-              className="dropdown-item mt-1"
-              onClick={() => onChangePass(true)}
-            >
-              Change Password
-            </a>
+            {authUser?.role_id === 2 ? (
+              <>
+                <a
+                  href="javascript:;"
+                  className="dropdown-item mt-1"
+                  onClick={() => onUpdateProfile(true)}
+                >
+                  Update Profile
+                </a>
+                <a
+                  href="javascript:;"
+                  className="dropdown-item mt-1"
+                  onClick={() => onChangePass(true)}
+                >
+                  Change Password
+                </a>
+              </>
+            ) : (
+              <Link to="/home" className="dropdown-item mt-1">
+                Go to dashboard
+              </Link>
+            )}
+
             <div className="dropdown-divider"></div>
             <a href="javascript:;" className="dropdown-item" onClick={logout}>
               Log Out

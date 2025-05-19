@@ -10,17 +10,14 @@ import useAuthSetup from "@/hooks/useAuthSetup";
 import AuthControls from "@/layouts/components/Header/AuthControls";
 import UpdatePwd from "@/components/Form/UpdatePwd";
 import ChangePassword from "@/components/Auth/ChangePassword";
-import { logout } from "@/libs/utils";
 import { Link } from "react-router-dom";
 import JobApplicationProvider from "@/store/jobapplication/jobapplication-provider";
-import { FaBookmark } from "react-icons/fa6";
 
 const Header = ({ roles, disabilityTypes }) => {
   const [showLogin, toggleLogin] = useToggle(false);
   const [showRegistry, toggleRegistry] = useToggle(false);
   const [updateProfile, toggleUpdateProfile] = useToggle(false);
   const [changePass, toggleChangePass] = useToggle(false);
-  const [showModal, toggleShowModal] = useToggle(false);
 
   const { authUser } = useContext(AuthContext);
 
