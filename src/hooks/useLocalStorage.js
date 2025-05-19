@@ -5,7 +5,7 @@ const getLocalStorage = (key, initialValue) => {
 
   if (storedItem) return JSON.parse(storedItem);
 
-  return typeof initialValue === "function" ? initialValue() : initialValue;
+  return initialValue instanceof Function ? initialValue() : initialValue;
 };
 
 const useLocalStorage = (key, initialValue) => {
@@ -13,7 +13,7 @@ const useLocalStorage = (key, initialValue) => {
 
   useEffect(() => {
     localStorage.setItem(key, JSON.stringify(value));
-  }, [key, value]);
+  }, [value]);
 
   return [value, setValue];
 };

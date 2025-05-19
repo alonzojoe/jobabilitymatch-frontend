@@ -6,6 +6,7 @@ import Modal from "@/components/UI/Modal";
 import PageHeader from "@/components/Global/PageHeader";
 import { JobFeedItem } from "@/pages/Feed/components/JobPostingList";
 import JobApplicationContext from "@/store/jobapplication/jobapplication-context";
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { getLocalStorage } from "@/libs/utils";
 
 const AuthUser = ({
@@ -105,21 +106,20 @@ const AuthUser = ({
 
 const Bookmarks = ({ onClose }) => {
   const [selectedJob, setSelectedJob] = useState(null);
-  const { bookmarks, addBookmark, removeBookmark } = useContext(
-    JobApplicationContext
-  );
+  const [bookmarks, setBookmarks] = useLocalStorage("user-bookmark", []);
+  const { addBookmark, removeBookmark } = useContext(JobApplicationContext);
 
   const hasBookMark = useMemo(() => {
     return (job) => bookmarks?.some((b) => b.id === job?.id) || false;
   }, [bookmarks]);
 
-  const bookMarks = () => {
-    const jobs = getLocalStorage("user-bookmark");
-    return jobs ?? [];
-  };
-
   const onView = (job) => {
     setSelectedJob(job);
+  };
+
+  const rmBookmark = (jobId) => {
+    setBookmarks((prev) => prev.filter((job) => job.id !== jobId));
+    removeBookmark(jobId);
   };
 
   console.log("Bookmarks component-re-renders", bookmarks);
@@ -137,7 +137,7 @@ const Bookmarks = ({ onClose }) => {
                   selectedJob={selectedJob}
                   onView={onView}
                   hasBookMark={hasBookMark}
-                  removeBookmark={removeBookmark}
+                  removeBookmark={rmBookmark}
                   addBookmark={addBookmark}
                 />
               </div>
