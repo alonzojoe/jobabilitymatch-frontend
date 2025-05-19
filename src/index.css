@@ -1033,3 +1033,8 @@ div:where(.swal2-container) {
 .fw-500 {
   font-weight: 500 !important;
 }
+
+.txt-wrap {
+  white-space: normal;
+  word-break: break-word;
+}

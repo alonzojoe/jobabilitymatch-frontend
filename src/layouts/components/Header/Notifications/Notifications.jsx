@@ -61,8 +61,6 @@ const Notifications = ({ authUser }) => {
   const notifCount = notif?.count;
   const applicationUpdates = notifTable?.data ?? [];
 
-  console.log("applicationUpdates", applicationUpdates);
-
   return (
     <>
       {show && (
@@ -148,7 +146,7 @@ const Notifications = ({ authUser }) => {
 const renderStatus = (status) => {
   const icons = {
     Pending: { bg: "bg-warning" },
-    "For Interview": { icon: <FaCalendar />, bg: "bg-primary" },
+    "For Interview": { bg: "bg-primary" },
     Hired: { bg: "bg-success" },
     Rejected: { bg: "bg-danger" },
   };
@@ -158,9 +156,7 @@ const renderStatus = (status) => {
   };
 
   return (
-    <span className={`text-white px-3 py-2 rounded-custom ${bg}`}>
-      {status}
-    </span>
+    <h5 className={`px-3 text-white py-2 rounded-custom ${bg}`}>{status}</h5>
   );
 };
 

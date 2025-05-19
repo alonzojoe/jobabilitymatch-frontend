@@ -71,7 +71,7 @@ const Navbar = ({ authUser }) => {
         {/* END navbar-header */}
         {/* BEGIN header-nav */}
         <ul className="navbar-nav navbar-right">
-          {authUser?.role_id === 3 && (
+          {/* {authUser?.role_id === 3 && (
             <li className="dropdown">
               <a
                 href="#"
@@ -88,7 +88,7 @@ const Navbar = ({ authUser }) => {
                 </div>
               </div>
             </li>
-          )}
+          )} */}
           <li className="dropdown navbar-user">
             <a href="#" className="dropdown-toggle" data-toggle="dropdown">
               <div className="image image-icon bg-black text-grey-darker">
