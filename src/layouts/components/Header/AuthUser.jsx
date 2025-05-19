@@ -7,7 +7,6 @@ import PageHeader from "@/components/Global/PageHeader";
 import { JobFeedItem } from "@/pages/Feed/components/JobPostingList";
 import JobApplicationContext from "@/store/jobapplication/jobapplication-context";
 import useLocalStorage from "@/hooks/useLocalStorage";
-import { getLocalStorage } from "@/libs/utils";
 import JobDetails from "@/pages/Feed/components/JobDetails";
 
 const AuthUser = ({
@@ -30,28 +29,34 @@ const AuthUser = ({
         />
       )}
       <ul className={`navbar-nav navbar-right ${ulClass}`}>
-        <li className="dropdown">
-          <a
-            href="javascript:;"
-            className="dropdown-toggle icon"
-            onClick={() => toggleShowModal(true)}
-          >
-            <FaBookmark className="fs-5" />
-          </a>
-        </li>
         {authUser?.role_id === 2 && (
-          <li className="dropdown">
-            <a href="#" data-toggle="dropdown" className="dropdown-toggle icon">
-              <i className="ion-ios-notifications"></i>
-              <span className="label">0</span>
-            </a>
-            <div className="dropdown-menu media-list dropdown-menu-right">
-              <div className="dropdown-header">NOTIFICATIONS (0)</div>
-              <div className="text-center width-300 p-b-10 p-t-10">
-                No notification found
+          <>
+            <li className="dropdown">
+              <a
+                href="javascript:;"
+                className="dropdown-toggle icon"
+                onClick={() => toggleShowModal(true)}
+              >
+                <FaBookmark className="fs-5" />
+              </a>
+            </li>
+            <li className="dropdown">
+              <a
+                href="#"
+                data-toggle="dropdown"
+                className="dropdown-toggle icon"
+              >
+                <i className="ion-ios-notifications"></i>
+                <span className="label">0</span>
+              </a>
+              <div className="dropdown-menu media-list dropdown-menu-right">
+                <div className="dropdown-header">NOTIFICATIONS (0)</div>
+                <div className="text-center width-300 p-b-10 p-t-10">
+                  No notification found
+                </div>
               </div>
-            </div>
-          </li>
+            </li>
+          </>
         )}
         <li className="dropdown navbar-user">
           <a href="#" className="dropdown-toggle" data-toggle="dropdown">
