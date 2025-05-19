@@ -80,3 +80,58 @@ export const MENUS = [
     type: 3,
   },
 ];
+
+export const dummyNotifs = [
+  {
+    id: 9,
+    user_id: 2,
+    job_posting_id: 2,
+    status: "Hired",
+    active: 0,
+    created_at: "2025-05-19T02:29:02.000000Z",
+    updated_at: "2025-05-19T05:14:45.000000Z",
+    job_posting: {
+      id: 2,
+      title: "Food Crew",
+    },
+  },
+  {
+    id: 10,
+    user_id: 2,
+    job_posting_id: 3,
+    status: "Pending",
+    active: 1,
+    created_at: "2025-05-18T14:15:32.000000Z",
+    updated_at: "2025-05-18T14:15:32.000000Z",
+    job_posting: {
+      id: 3,
+      title: "Cashier",
+    },
+  },
+  {
+    id: 11,
+    user_id: 2,
+    job_posting_id: 4,
+    status: "For Interview",
+    active: 1,
+    created_at: "2025-05-17T08:30:45.000000Z",
+    updated_at: "2025-05-18T10:00:00.000000Z",
+    job_posting: {
+      id: 4,
+      title: "Sales Associate",
+    },
+  },
+  {
+    id: 12,
+    user_id: 2,
+    job_posting_id: 5,
+    status: "Rejected",
+    active: 0,
+    created_at: "2025-05-16T11:45:23.000000Z",
+    updated_at: "2025-05-19T03:20:11.000000Z",
+    job_posting: {
+      id: 5,
+      title: "Customer Support",
+    },
+  },
+];
