@@ -14,6 +14,7 @@ import { IoIosNotifications } from "react-icons/io";
 import { formatDateTime } from "@/libs/utils";
 import { FaHourglass, FaCheck, FaCalendar, FaTimes } from "react-icons/fa";
 import { dummyNotifs } from "@/constants";
+import Bookmarks from "@/layouts/components/Header/Bookmarks/Bookmarks";
 
 const renderIcon = (status) => {
   const icons = {
@@ -105,7 +106,11 @@ const AuthUser = ({
                 {notifList?.length > 0 ? (
                   <>
                     {notifList?.map((notif) => (
-                      <a href="javascript:;" className="dropdown-item media">
+                      <a
+                        href="javascript:;"
+                        className="dropdown-item media"
+                        key={notif.id}
+                      >
                         <div className="media-left">
                           {renderIcon(notif?.status)}
                         </div>
@@ -118,7 +123,7 @@ const AuthUser = ({
                             Job Title: {notif?.job_posting?.title}
                           </p>
                           <div className="text-muted fw-500">
-                            {formatDateTime(notif?.updated_at)}
+                            Received on: {formatDateTime(notif?.updated_at)}
                           </div>
                         </div>
                       </a>
@@ -184,73 +189,6 @@ const AuthUser = ({
           </div>
         </li>
       </ul>
-    </>
-  );
-};
-
-export const Bookmarks = ({ onClose }) => {
-  const [selectedJob, setSelectedJob] = useState(null);
-  const [bookmarks, setBookmarks] = useLocalStorage("user-bookmark", []);
-  const { addBookmark, removeBookmark } = useContext(JobApplicationContext);
-
-  const hasBookMark = useMemo(() => {
-    return (job) => bookmarks?.some((b) => b.id === job?.id) || false;
-  }, [bookmarks]);
-
-  const onView = (job) => {
-    setSelectedJob(job);
-  };
-
-  const rmBookmark = (jobId) => {
-    setBookmarks((prev) => prev.filter((job) => job.id !== jobId));
-    removeBookmark(jobId);
-  };
-
-  console.log("Bookmarks component-re-renders", bookmarks);
-
-  return (
-    <>
-      {selectedJob && (
-        <Modal
-          higher={true}
-          isJobModal={false}
-          onClose={() => setSelectedJob(null)}
-          isHidden={true}
-        >
-          <JobDetails
-            loading={false}
-            selectedJob={selectedJob}
-            onSetJob={setSelectedJob}
-          />
-        </Modal>
-      )}
-      <Modal onClose={onClose}>
-        <>
-          <PageHeader title={`Save Jobs (${bookmarks.length})`} />
-          <div className="row mt-4">
-            {bookmarks.length > 0 ? (
-              bookmarks.map((job) => (
-                <div className="col-sm-12 col-md-6 col-lg-6" key={job.id}>
-                  <JobFeedItem
-                    job={job}
-                    selectedJob={selectedJob}
-                    onView={onView}
-                    hasBookMark={hasBookMark}
-                    removeBookmark={rmBookmark}
-                    addBookmark={addBookmark}
-                  />
-                </div>
-              ))
-            ) : (
-              <div className="col-12">
-                <div className="text-center text-custom fs-5 fw-semibold">
-                  Looks like you haven't saved any jobs.
-                </div>
-              </div>
-            )}
-          </div>
-        </>
-      </Modal>
     </>
   );
 };

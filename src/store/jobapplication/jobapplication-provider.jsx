@@ -16,7 +16,7 @@ const JobApplicationProvider = ({ children }) => {
       const res = await api(`/applicant/user/${authUser.id}`);
       setApplications(res.data.data);
     } catch (e) {
-      console.log("Something went wrong", e);
+      notify.notif("error", "Something went wrong.");
     }
   };
 
@@ -41,8 +41,6 @@ const JobApplicationProvider = ({ children }) => {
     setBookMarks((current) => current.filter((job) => job.id !== jobId));
     notify.notif("success", "Job posting bookmark removed.");
   };
-
-  console.log("Bookmarks", bookmarks);
 
   const appData = {
     applications,
