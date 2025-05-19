@@ -19,7 +19,14 @@ const AuthUser = ({
 
   return (
     <>
-      {showModal && <Bookmarks onClose={() => toggleShowModal(false)} />}
+      {showModal && (
+        <Bookmarks
+          onClose={() => {
+            toggleShowModal(false);
+            window.location.reload();
+          }}
+        />
+      )}
       <ul className={`navbar-nav navbar-right ${ulClass}`}>
         <li className="dropdown">
           <a
@@ -115,7 +122,7 @@ const Bookmarks = ({ onClose }) => {
     setSelectedJob(job);
   };
 
-  console.log("component-re-renders", bookMarks());
+  console.log("Bookmarks component-re-renders", bookmarks);
 
   return (
     <Modal onClose={onClose}>

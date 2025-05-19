@@ -42,6 +42,8 @@ const JobApplicationProvider = ({ children }) => {
     notify.notif("success", "Job posting bookmark removed.");
   };
 
+  console.log("Bookmarks", bookmarks);
+
   const appData = {
     applications,
     refresh,
