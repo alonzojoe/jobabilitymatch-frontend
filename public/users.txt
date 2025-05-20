@@ -1,0 +1,67 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Employer
+Company: Starbucks
+email: manesecandice@gmail.com
+password: 123123
+
+Employer:
+Artista Salon
+email: duenasclaire@gmail.com
+password: 123123
+
+
+
+Employer:
+Chowking
+email: aguinaldoanne@gmail.com
+password: 123123
+
+
+Employer
+Jollibee
+email: canlaslouise@gmail.com
+password: 123123
+
+PWD
+email: delacruzjuan@gmail.com
+password: 123123
+
+PWD
+email: davidmary@gmail.com
+password: 123123
+
+
+Admin:
+email: administrator@gmail.com
+password: 123123
+
+
+
+
+
+
+
+
+
+
+
+
