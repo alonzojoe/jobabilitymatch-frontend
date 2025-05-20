@@ -1,6 +1,7 @@
 import { logout } from "@/libs/utils";
 import { FaBookmark } from "react-icons/fa6";
 import { Link } from "react-router-dom";
+import { Tooltip } from "react-tooltip";
 import useToggle from "@/hooks/useToggle";
 import Bookmarks from "@/layouts/components/Header/Bookmarks/Bookmarks";
 import Notifications from "@/layouts/components/Header/Notifications/Notifications";
@@ -31,10 +32,14 @@ const AuthUser = ({
               <a
                 href="javascript:;"
                 className="dropdown-toggle icon"
+                data-tooltip-id="bookmark-tooltip"
                 onClick={() => toggleShowModal(true)}
               >
                 <FaBookmark className="fs-5" />
               </a>
+              <Tooltip id="bookmark-tooltip" place="bottom">
+                Saved Jobs
+              </Tooltip>
             </li>
             <Notifications authUser={authUser} />
           </>

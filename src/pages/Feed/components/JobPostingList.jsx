@@ -1,8 +1,10 @@
 import { useContext, useMemo } from "react";
+import { Link } from "react-router-dom";
 import JobApplicationContext from "@/store/jobapplication/jobapplication-context";
 import SkeletonCard from "@/components/Loaders/SkeletonCard";
 import Card from "@/components/UI/Card";
 import { FaRegBookmark, FaBookmark } from "react-icons/fa6";
+import { LuSquareArrowOutUpRight } from "react-icons/lu";
 import { capitalized } from "@/libs/utils";
 
 const JobPostingList = ({
@@ -65,13 +67,16 @@ export const JobFeedItem = ({
 }) => {
   return (
     <Card key={job.id} title="Test" active={job.id === selectedJob?.id}>
-      <div className="cursor-pointer" onClick={() => onView(job)}>
+      <div className="">
         <div className="d-flex align-items-center justify-content-between">
-          <h3 className="fs-4 font-weight-bold text-dark text-capitalize">
+          <h3
+            className="fs-4 font-weight-bold text-dark text-underline text-capitalize cursor-pointer"
+            onClick={() => onView(job)}
+          >
             {capitalized(job.title)}
           </h3>
           <span
-            className="fs-3"
+            className="fs-3 cursor-pointer"
             onClick={() =>
               hasBookMark(job) ? removeBookmark(job.id) : addBookmark(job)
             }
@@ -79,15 +84,25 @@ export const JobFeedItem = ({
             {hasBookMark(job) ? <FaBookmark /> : <FaRegBookmark />}
           </span>
         </div>
-        <span className="d-block d-flex align-items-center gap-1 fs-6 text-capitalize">
+        <span
+          className="d-block d-flex align-items-center gap-1 fs-6 text-capitalize cursor-pointer"
+          onClick={() => onView(job)}
+        >
           <i className="ti ti-buildings"></i>
+
           {capitalized(job?.company?.name)}
+          <Link to={`/company/${job?.company?.name}/${job?.company?.id}`}>
+            <LuSquareArrowOutUpRight />
+          </Link>
         </span>
-        <span className="d-block d-flex align-items-center gap-1 fs-6 text-capitalize">
+        <span
+          className="d-block d-flex align-items-center gap-1 fs-6 text-capitalize cursor-pointer"
+          onClick={() => onView(job)}
+        >
           <i className="ti ti-map-pin"></i>
           {capitalized(job?.company?.address)}
         </span>
-        <h5 className="my-4">
+        <h5 className="my-4 cursor-pointer" onClick={() => onView(job)}>
           {job?.active === 2 ? (
             <span className="label label-blood text-bl fs-6">
               No longer accepting applicants
@@ -98,10 +113,16 @@ export const JobFeedItem = ({
             </span>
           )}
         </h5>
-        <div className="d-flex flex-wrap gap-2 fs-6">
+        <div
+          className="d-flex flex-wrap gap-2 fs-6 cursor-pointer"
+          onClick={() => onView(job)}
+        >
           <span className="me-2">Applicable for:</span>
           {job?.disability_types.map((disability) => (
-            <span key={disability.id} className="label label-secondary">
+            <span
+              key={disability.id}
+              className="label label-secondary cursor-pointer"
+            >
               {disability.name}
             </span>
           ))}

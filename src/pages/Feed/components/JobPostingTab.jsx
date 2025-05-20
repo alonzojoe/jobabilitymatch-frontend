@@ -1,5 +1,6 @@
 import { useEffect, useState, forwardRef, useImperativeHandle } from "react";
 import { IoIosRefreshCircle } from "react-icons/io";
+import { Tooltip } from "react-tooltip";
 
 const JobPostingTab = forwardRef(({ onSelect, onRefresh, authUser }, ref) => {
   const [tab, setTab] = useState(() => (authUser ? 2 : 1));
@@ -44,12 +45,17 @@ const JobPostingTab = forwardRef(({ onSelect, onRefresh, authUser }, ref) => {
         )}
       </div>
       <div className="d-flex justify-content-end mt-2">
-        <IoIosRefreshCircle
-          onClick={onRefresh}
-          className="text-custom fs-2 cursor-pointer cst-refresh"
-        />
+        <div data-tooltip-id="refresh-tooltip">
+          <IoIosRefreshCircle
+            onClick={onRefresh}
+            className="text-custom fs-2 cursor-pointer cst-refresh"
+          />
+        </div>
+        <Tooltip id="refresh-tooltip" place="left">
+          Refresh Feed
+        </Tooltip>
       </div>
-    </> 
+    </>
   );
 });
 
