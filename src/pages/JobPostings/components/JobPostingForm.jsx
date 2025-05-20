@@ -154,7 +154,8 @@ const JobPostingForm = ({ onClose, onRefresh, selected, disabilityTypes }) => {
                   {...register("vacant_positions")}
                   type="text"
                   className="form-control"
-                  maxLength={11}
+                  maxLength={10}
+                  onChange={handlePhoneInput}
                 />
                 <div className="mt-1 font-weight-bold text-validation">
                   {errors.vacant_positions?.message}
