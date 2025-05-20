@@ -1,14 +1,15 @@
 import { useState } from "react";
 import useFetch from "@/hooks/useFetch";
 import api from "@/services/api";
+import { Tooltip } from "react-tooltip";
 import { formatDateTime } from "@/libs/utils";
 import { IoIosNotifications } from "react-icons/io";
+import { LoadingRow } from "@/components/Data/TableData";
+import { ErrorRow } from "@/components/Data/TableData";
 import { FaHourglass, FaCheck, FaCalendar, FaTimes } from "react-icons/fa";
 import Modal from "@/components/UI/Modal";
 import PageHeader from "@/components/Global/PageHeader";
 import useToggle from "@/hooks/useToggle";
-import { LoadingRow } from "@/components/Data/TableData";
-import { ErrorRow } from "@/components/Data/TableData";
 
 const renderIcon = (status) => {
   const icons = {
@@ -84,11 +85,15 @@ const Notifications = ({ authUser }) => {
           href="#"
           data-toggle="dropdown"
           className="dropdown-toggle icon"
+          data-tooltip-id="notif-tooltip"
           onClick={handleSeen}
         >
           <i className="ion-ios-notifications"></i>
           <span className="label">{notifCount}</span>
         </a>
+        <Tooltip id="notif-tooltip" place="bottom">
+          Notifications
+        </Tooltip>
         <div className="dropdown-menu media-list dropdown-menu-right">
           <div className="dropdown-header">
             NOTIFICATIONS ({notifList?.length})
