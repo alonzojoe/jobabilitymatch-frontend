@@ -98,6 +98,7 @@ const Feed = () => {
         authUser={authUser}
         onSelect={handleSelect}
         onRefresh={handleRefresh}
+        setSelected={setSelectedJob}
       />
       <div className="mt-2">
         <div className="row">
