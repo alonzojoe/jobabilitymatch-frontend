@@ -387,7 +387,7 @@ const MainDashboard = () => {
                           Email
                         </th> */}
                             <th className="text-center font-weight-bold fs-7">
-                              Date Registered
+                              Date Posted
                             </th>
                           </tr>
                         </thead>
