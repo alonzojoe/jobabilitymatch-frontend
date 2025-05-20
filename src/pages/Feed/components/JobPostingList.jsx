@@ -84,20 +84,19 @@ export const JobFeedItem = ({
             {hasBookMark(job) ? <FaBookmark /> : <FaRegBookmark />}
           </span>
         </div>
-        {/* <span
+        <span
           className="d-block d-flex align-items-center gap-1 fs-6 text-capitalize cursor-pointer"
           onClick={() => onView(job)}
         >
           <i className="ti ti-buildings"></i>
+
           {capitalized(job?.company?.name)}
-        </span> */}
-        <Link
-          to={`/company/${selectedJob?.company?.name}/${job?.company?.id}`}
-          className="d-block d-flex align-items-center gap-1 fs-6"
-        >
-          <i className="ti ti-buildings"></i>
-          {capitalized(job?.company?.name)} <LuSquareArrowOutUpRight />
-        </Link>
+          <Link
+            to={`/company/${selectedJob?.company?.name}/${job?.company?.id}`}
+          >
+            <LuSquareArrowOutUpRight />
+          </Link>
+        </span>
         <span
           className="d-block d-flex align-items-center gap-1 fs-6 text-capitalize cursor-pointer"
           onClick={() => onView(job)}
