@@ -91,9 +91,7 @@ export const JobFeedItem = ({
           <i className="ti ti-buildings"></i>
 
           {capitalized(job?.company?.name)}
-          <Link
-            to={`/company/${selectedJob?.company?.name}/${job?.company?.id}`}
-          >
+          <Link to={`/company/${job?.company?.name}/${job?.company?.id}`}>
             <LuSquareArrowOutUpRight />
           </Link>
         </span>

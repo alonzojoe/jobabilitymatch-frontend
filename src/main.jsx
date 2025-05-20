@@ -9,9 +9,7 @@ import "@/assets/plugins/ionicons/css/ionicons.min.css";
 import "@/assets/css/spinner/spinner.css";
 import "@/index.css";
 
-//js
-import "@/assets/js/app.min.js";
-import "@/assets/js/theme/apple.js";
+//package css
 import "react-quill-new/dist/quill.snow.css";
 import "react-loading-skeleton/dist/skeleton.css";
 import "sweetalert2/dist/sweetalert2.min.css";
