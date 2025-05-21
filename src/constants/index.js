@@ -83,16 +83,16 @@ export const MENUS = [
 
 const basename = "";
 
-export const routeAdmin = MENUS.filter((menu) => menu.type === 1).map(
-  (menu) => `${basename}${menu.path}`
-);
+export const adminRoutes = MENUS.filter(
+  (menu) => menu.type === 1 && menu.path !== "/home"
+).map((menu) => `${basename}${menu.path}`);
 
-export const routeEmployer = MENUS.filter((menu) => menu.type === 3).map(
-  (menu) => `${basename}${menu.path}`
-);
+export const employerRoutes = MENUS.filter(
+  (menu) => menu.type === 3 && menu.path !== "/home"
+).map((menu) => `${basename}${menu.path}`);
 
-console.log("route admin", routeAdmin);
-console.log("route employer", routeEmployer);
+console.log("route admin", adminRoutes);
+console.log("route employer", employerRoutes);
 
 export const dummyNotifs = [
   {
