@@ -10,6 +10,8 @@ const ProtectedRoutes = () => {
     return <div className="flicker-screen"></div>;
   }
 
+  
+
   if (!authUser) {
     return (window.location.href = "/");
   }

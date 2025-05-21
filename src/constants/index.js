@@ -81,6 +81,19 @@ export const MENUS = [
   },
 ];
 
+const basename = "";
+
+export const routeAdmin = MENUS.filter((menu) => menu.type === 1).map(
+  (menu) => `${basename}${menu.path}`
+);
+
+export const routeEmployer = MENUS.filter((menu) => menu.type === 3).map(
+  (menu) => `${basename}${menu.path}`
+);
+
+console.log("route admin", routeAdmin);
+console.log("route employer", routeEmployer);
+
 export const dummyNotifs = [
   {
     id: 9,
