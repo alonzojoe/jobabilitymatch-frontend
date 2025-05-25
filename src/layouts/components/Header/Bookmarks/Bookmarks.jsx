@@ -42,7 +42,7 @@ const Bookmarks = ({ onClose }) => {
       )}
       <Modal onClose={onClose}>
         <>
-          <PageHeader title={`Save Jobs (${bookmarks.length})`} />
+          <PageHeader title={`Saved Jobs (${bookmarks.length})`} />
           <div className="row mt-4">
             {bookmarks.length > 0 ? (
               bookmarks.map((job) => (
