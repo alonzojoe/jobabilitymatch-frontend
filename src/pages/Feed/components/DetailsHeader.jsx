@@ -7,7 +7,16 @@ const DetailsHeader = ({ company }) => {
 
   return (
     <>
-      <h2 className="d-flex justify-content-between align-items-center gap-2">
+      <div className="d-flex align-items-center justify-content-end mb-3">
+        <button
+          className="btn btn-custom btn-lg d-flex align-items-center gap-2"
+          onClick={() => navigate(-1)}
+        >
+          <ImArrowLeft />
+          Back to Job Postings
+        </button>
+      </div>
+      <h2 className="d-flex align-items-center gap-2">
         <div className="d-flex align-items-center gap-2">
           <i className="ti ti-buildings" style={{ fontSize: "5rem" }}></i>
           <div>
@@ -17,13 +26,6 @@ const DetailsHeader = ({ company }) => {
             </span>
           </div>
         </div>
-        <button
-          className="btn btn-custom btn-lg d-flex align-items-center gap-2"
-          onClick={() => navigate(-1)}
-        >
-          <ImArrowLeft />
-          Back to Job Postings
-        </button>
       </h2>
 
       <div className="d-flex gap-3 mt-3">
