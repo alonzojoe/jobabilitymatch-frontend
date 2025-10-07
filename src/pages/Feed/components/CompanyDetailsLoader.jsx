@@ -3,7 +3,7 @@ import SkeletonCard from "@/components/Loaders/SkeletonCard";
 const CompanyDetailsLoader = () => {
   return (
     <div className="cmp-container">
-      <div className="d-flex align-items-center justify-content-end mb-3">
+      <div className="d-block text-end">
         <SkeletonCard height="60px" width="30%" />
       </div>
       <SkeletonCard height="80px" width="50%" />
