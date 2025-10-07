@@ -5,7 +5,9 @@ const CompanyDetailsLoader = () => {
     <div className="cmp-container">
       <div className="cmp-details-container mb-3">
         <div className="flex-1" style={{ width: "95%" }} />
-        <SkeletonCard height="35px" width="90%" />
+        <div className="text-end">
+          <SkeletonCard height="40px" width="60%" />
+        </div>
       </div>
       <SkeletonCard height="80px" width="50%" />
       <div className="mt-3">
