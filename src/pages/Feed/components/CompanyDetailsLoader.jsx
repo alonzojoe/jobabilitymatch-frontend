@@ -3,6 +3,9 @@ import SkeletonCard from "@/components/Loaders/SkeletonCard";
 const CompanyDetailsLoader = () => {
   return (
     <div className="cmp-container">
+      <div className="d-flex align-items-center justify-content-end mb-3">
+        <SkeletonCard height="60px" width="30%" />
+      </div>
       <SkeletonCard height="80px" width="50%" />
       <div className="mt-3">
         <SkeletonCard height="32.59px" width="15%" />
