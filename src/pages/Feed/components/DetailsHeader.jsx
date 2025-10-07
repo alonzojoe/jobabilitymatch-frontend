@@ -7,7 +7,7 @@ const DetailsHeader = ({ company }) => {
 
   return (
     <>
-      <div className="d-flex align-items-center justify-content-end">
+      <div className="d-flex align-items-center justify-content-end mb-3">
         <button
           className="btn btn-custom btn-lg d-flex align-items-center gap-2"
           onClick={() => navigate(-1)}
