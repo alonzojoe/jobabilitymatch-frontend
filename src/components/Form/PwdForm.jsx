@@ -13,6 +13,7 @@ import {
 } from "@/libs/utils";
 import api from "@/services/api";
 import phFlag from "@/assets/images/PH.svg";
+import bg from "@/assets/images/7933.jpg";
 
 const notify = new ToastMessage();
 
@@ -178,10 +179,19 @@ const PwdForm = ({
       value: d.id,
       label: d.name,
     })) ?? [];
+
+  const viewImage = () => {
+    const rootURL = import.meta.env.VITE_ROOT_URL;
+    const imageUrl =
+      import.meta.env.VITE_APP_ENV === "local"
+        ? `${rootURL}/storage/${pwd.pwdid_path}`
+        : pwd.pwdid_path;
+    window.open(imageUrl, "_blank");
+  };
   return (
     <div>
       <form
-        className={`mt-4 mb-2 ${isViewing ? "pe-none" : ""}`}
+        className={`mt-4 mb-2 ${isViewing ? "" : ""}`}
         onSubmit={handleSubmit((data) => handleSave(data))}
       >
         <div className="row">
@@ -381,15 +391,29 @@ const PwdForm = ({
                     htmlFor="pwdid_picture"
                     className="form-label fs-6 mr-2"
                   >
-                    {pwd ? "Update" : ""} PWD ID Picture
+                    {pwd && !isViewing ? "Update" : ""} PWD ID Picture
                   </label>
-                  <input
-                    {...register("pwdid_picture")}
-                    id="pwdid_picture"
-                    className="mt-2"
-                    type="file"
-                    accept="image/jpeg, image/jpg, image/png"
-                  />
+                  {!isViewing && (
+                    <input
+                      {...register("pwdid_picture")}
+                      id="pwdid_picture"
+                      className="mt-2"
+                      type="file"
+                      accept="image/jpeg, image/jpg, image/png"
+                    />
+                  )}
+                  {pwd && pwd.pwdid_path && (
+                    <button
+                      type="button"
+                      className={`${
+                        isViewing ? "d-block mt-1" : ""
+                      } btn btn-primary btn-sm cursor-pointer`}
+                      onClick={viewImage}
+                    >
+                      View PWD ID
+                    </button>
+                  )}
+
                   <div className="mt-1 font-weight-bold text-validation">
                     {errors.pwdid_picture?.message}
                   </div>
