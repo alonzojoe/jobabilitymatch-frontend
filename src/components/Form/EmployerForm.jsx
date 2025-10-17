@@ -4,8 +4,9 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { employerSchema } from "@/schemas";
 import { ToastMessage, handlePhoneInput, setLocalStorage } from "@/libs/utils";
-import { getLocalStorage } from "@/libs/utils";
+import { getLocalStorage, limitBirthday } from "@/libs/utils";
 import api from "@/services/api";
+import phFlag from "@/assets/images/PH.svg";
 
 const notify = new ToastMessage();
 const authUser = getLocalStorage("auth-user");
@@ -217,6 +218,7 @@ const EmployerForm = ({ employer = null, onClose, onRefresh = () => {} }) => {
                     {...register("birthdate")}
                     type="date"
                     className="form-control"
+                    max={limitBirthday()}
                   />
                   <div className="mt-1 font-weight-bold text-validation">
                     {errors.birthdate?.message}
@@ -253,13 +255,23 @@ const EmployerForm = ({ employer = null, onClose, onRefresh = () => {} }) => {
                   <label htmlFor="phone" className="form-label fs-6">
                     Phone <span className="text-danger">*</span>
                   </label>
-                  <input
-                    {...register("phone")}
-                    type="text"
-                    className="form-control"
-                    maxLength={11}
-                    onChange={handlePhoneInput}
-                  />
+                  <div
+                    className={` input-group ${
+                      errors.phone ? "group-invalid" : ""
+                    }`}
+                  >
+                    <span className="input-group-text phoneFlag d-flex align-items-center gap-1">
+                      <img src={phFlag} alt="ph" height={15} width={15} />
+                      <span>+63</span>
+                    </span>
+                    <input
+                      {...register("phone")}
+                      type="text"
+                      className="form-control"
+                      maxLength={10}
+                      onChange={handlePhoneInput}
+                    />
+                  </div>
                   <div className="mt-1 font-weight-bold text-validation">
                     {errors.phone?.message}
                   </div>
@@ -305,6 +317,7 @@ const EmployerForm = ({ employer = null, onClose, onRefresh = () => {} }) => {
                       {...register("email")}
                       type="text"
                       className="form-control"
+                      maxLength={100}
                     />
                     <div className="mt-1 font-weight-bold text-validation">
                       {errors.email?.message}

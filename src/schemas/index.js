@@ -29,7 +29,19 @@ export const pwdSchema = z
       .trim()
       .nonempty({ message: "First Name is required" }),
     middlename: z.string().trim().optional(),
-    birthdate: z.string().trim().nonempty({ message: "Birthdate is required" }),
+    birthdate: z
+      .string()
+      .trim()
+      .nonempty({ message: "Birthdate is required" })
+      .refine(
+        (date) => {
+          const selectedDate = new Date(date);
+          const maxDate = new Date();
+          maxDate.setFullYear(maxDate.getFullYear() - 18);
+          return selectedDate <= maxDate;
+        },
+        { message: "You must be at least 18 years old" }
+      ),
     gender: z.string().trim().nonempty({ message: "Gender is required" }),
     address: z.string().trim().nonempty({ message: "Address is required" }),
     phone: z.string().trim().nonempty({ message: "Phone is required" }),
@@ -37,6 +49,84 @@ export const pwdSchema = z
       .string()
       .trim()
       .nonempty({ message: "PWD ID Number is required" }),
+    pwdid_picture: z
+      .any()
+      .refine((files) => files?.[0], { message: "PWD ID picture is required" })
+      .refine((files) => files?.[0]?.size <= 2097152, {
+        message: "Image size must be less than 2MB",
+      })
+      .refine(
+        (files) =>
+          ["image/jpeg", "image/jpg", "image/png"].includes(files?.[0]?.type),
+        { message: "Only JPEG and PNG images are allowed" }
+      ),
+    role_id: z.number().min(1, "Role is required"),
+    // disability_type_ids: z
+    //   .array(z.string())
+    //   .min(1, { message: "Please select at least" }),
+    email: z
+      .string()
+      .trim()
+      .nonempty({ message: "Email is required" })
+      .email({ message: "Please enter a valid email" }),
+    password: z
+      .string()
+      .trim()
+      .nonempty({ message: "Password is required" })
+      .min(6, { message: "Password must be at least 6 characters long" }),
+    confirmPassword: z
+      .string()
+      .trim()
+      .nonempty({ message: "Confirm password is required" })
+      .min(6, {
+        message: "Confirm password must be at least 6 characters long",
+      }),
+  })
+  .refine((val) => val.password === val.confirmPassword, {
+    message: "Passwords must match",
+    path: ["confirmPassword"],
+  });
+
+export const pwdUpdateSchema = z
+  .object({
+    lastname: z.string().trim().nonempty({ message: "Last Name is required" }),
+    firstname: z
+      .string()
+      .trim()
+      .nonempty({ message: "First Name is required" }),
+    middlename: z.string().trim().optional(),
+    birthdate: z
+      .string()
+      .trim()
+      .nonempty({ message: "Birthdate is required" })
+      .refine(
+        (date) => {
+          const selectedDate = new Date(date);
+          const maxDate = new Date();
+          maxDate.setFullYear(maxDate.getFullYear() - 18);
+          return selectedDate <= maxDate;
+        },
+        { message: "You must be at least 18 years old" }
+      ),
+    gender: z.string().trim().nonempty({ message: "Gender is required" }),
+    address: z.string().trim().nonempty({ message: "Address is required" }),
+    phone: z.string().trim().nonempty({ message: "Phone is required" }),
+    pwd_id_no: z
+      .string()
+      .trim()
+      .nonempty({ message: "PWD ID Number is required" }),
+    pwdid_picture: z
+      .any()
+      .optional()
+      .refine((files) => !files?.[0] || files?.[0]?.size <= 5242880, {
+        message: "Image size must be less than 5MB",
+      })
+      .refine(
+        (files) =>
+          !files?.[0] ||
+          ["image/jpeg", "image/jpg", "image/png"].includes(files?.[0]?.type),
+        { message: "Only JPEG and PNG images are allowed" }
+      ),
     role_id: z.number().min(1, "Role is required"),
     // disability_type_ids: z
     //   .array(z.string())
@@ -88,7 +178,19 @@ export const employerSchema = z
       .trim()
       .nonempty({ message: "First Name is required" }),
     middlename: z.string().trim().optional(),
-    birthdate: z.string().trim().nonempty({ message: "Birthdate is required" }),
+    birthdate: z
+      .string()
+      .trim()
+      .nonempty({ message: "Birthdate is required" })
+      .refine(
+        (date) => {
+          const selectedDate = new Date(date);
+          const maxDate = new Date();
+          maxDate.setFullYear(maxDate.getFullYear() - 18);
+          return selectedDate <= maxDate;
+        },
+        { message: "You must be at least 18 years old" }
+      ),
     gender: z.string().trim().nonempty({ message: "Gender is required" }),
     address: z.string().trim().nonempty({ message: "Address is required" }),
     phone: z.string().trim().nonempty({ message: "Phone is required" }),
@@ -136,7 +238,19 @@ export const adminSchema = z
       .trim()
       .nonempty({ message: "First Name is required" }),
     middlename: z.string().trim().optional(),
-    birthdate: z.string().trim().nonempty({ message: "Birthdate is required" }),
+    birthdate: z
+      .string()
+      .trim()
+      .nonempty({ message: "Birthdate is required" })
+      .refine(
+        (date) => {
+          const selectedDate = new Date(date);
+          const maxDate = new Date();
+          maxDate.setFullYear(maxDate.getFullYear() - 18);
+          return selectedDate <= maxDate;
+        },
+        { message: "You must be at least 18 years old" }
+      ),
     gender: z.string().trim().nonempty({ message: "Gender is required" }),
     address: z.string().trim().nonempty({ message: "Address is required" }),
     phone: z.string().trim().nonempty({ message: "Phone is required" }),

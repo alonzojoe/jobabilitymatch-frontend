@@ -3,14 +3,17 @@ import PageHeader from "@/components/Global/PageHeader";
 import Select from "react-select";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { pwdSchema } from "@/schemas";
+import { pwdSchema, pwdUpdateSchema } from "@/schemas";
 import {
   ToastMessage,
   handlePhoneInput,
   handlePwdIdNo,
   setLocalStorage,
+  limitBirthday,
 } from "@/libs/utils";
 import api from "@/services/api";
+import phFlag from "@/assets/images/PH.svg";
+import bg from "@/assets/images/7933.jpg";
 
 const notify = new ToastMessage();
 
@@ -35,7 +38,7 @@ const PwdForm = ({
     handleSubmit,
     formState: { errors, isSubmitting: isLoading },
   } = useForm({
-    resolver: zodResolver(pwdSchema),
+    resolver: zodResolver(pwd ? pwdUpdateSchema : pwdSchema),
     defaultValues: {
       role_id: 2,
       id: pwd?.id ?? 0,
@@ -45,11 +48,12 @@ const PwdForm = ({
       birthdate: pwd?.birthdate ?? "",
       gender: pwd?.gender ?? "",
       address: pwd?.address ?? "",
-      phone: pwd?.phone ?? "",
+      phone: pwd?.phone?.toString() ?? "",
       pwd_id_no: pwd?.pwd_id_no ?? "",
       email: pwd?.email ?? "",
       password: pwd?.password ?? "",
       confirmPassword: pwd?.confirmPassword ?? "",
+      pwdid_picture: undefined,
     },
   });
 
@@ -84,16 +88,68 @@ const PwdForm = ({
   };
 
   const save = async (data) => {
-    await api.post("/auth/register", {
-      ...data,
-      role_id: 2,
+    const formData = new FormData();
+
+    formData.append("firstname", data.firstname);
+    formData.append("lastname", data.lastname);
+    formData.append("middlename", data.middlename || "");
+    formData.append("birthdate", data.birthdate);
+    formData.append("gender", data.gender);
+    formData.append("address", data.address);
+    formData.append("phone", data.phone);
+    formData.append("pwd_id_no", data.pwd_id_no);
+    formData.append("role_id", 2);
+    formData.append("email", data.email);
+    formData.append("password", data.password);
+
+    if (data.pwdid_picture?.[0]) {
+      formData.append("pwdid_picture", data.pwdid_picture[0]);
+    }
+
+    data.disability_type_ids?.forEach((id, index) => {
+      formData.append(`disability_type_ids[${index}]`, id);
+    });
+
+    await api.post("/auth/register", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
     });
   };
 
   const update = async (data) => {
-    await api.patch(`/user/pwd/${pwd?.id}`, {
-      ...data,
+    const formData = new FormData();
+
+    formData.append("firstname", data.firstname);
+    formData.append("lastname", data.lastname);
+    formData.append("middlename", data.middlename || "");
+    formData.append("birthdate", data.birthdate);
+    formData.append("gender", data.gender);
+    formData.append("address", data.address);
+    formData.append("phone", data.phone);
+    formData.append("pwd_id_no", data.pwd_id_no);
+    formData.append("email", data.email);
+
+    if (data.password) {
+      formData.append("password", data.password);
+    }
+
+    if (data.pwdid_picture?.[0]) {
+      formData.append("pwdid_picture", data.pwdid_picture[0]);
+    }
+
+    data.disability_type_ids?.forEach((id, index) => {
+      formData.append(`disability_type_ids[${index}]`, id);
     });
+
+    formData.append("_method", "PATCH");
+
+    await api.post(`/user/pwd/${pwd?.id}`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+
     await updatedUser();
   };
 
@@ -123,10 +179,19 @@ const PwdForm = ({
       value: d.id,
       label: d.name,
     })) ?? [];
+
+  const viewImage = () => {
+    const rootURL = import.meta.env.VITE_ROOT_URL;
+    const imageUrl =
+      import.meta.env.VITE_APP_ENV === "local"
+        ? `${rootURL}/storage/${pwd.pwdid_path}`
+        : pwd.pwdid_path;
+    window.open(imageUrl, "_blank");
+  };
   return (
     <div>
       <form
-        className={`mt-4 mb-2 ${isViewing ? "pe-none" : ""}`}
+        className={`mt-4 mb-2 ${isViewing ? "" : ""}`}
         onSubmit={handleSubmit((data) => handleSave(data))}
       >
         <div className="row">
@@ -205,6 +270,7 @@ const PwdForm = ({
                     {...register("birthdate")}
                     type="date"
                     className="form-control"
+                    max={limitBirthday()}
                   />
                   <div className="mt-1 font-weight-bold text-validation">
                     {errors.birthdate?.message}
@@ -234,20 +300,30 @@ const PwdForm = ({
 
               <div className="col-sm-12 col-md-6 col-lg-6 mb-2">
                 <div
-                  className={`mb-2 fv-plugins-icon-container ${
+                  className={`mb-2 fv-plugins-icon-container input-group ${
                     errors.phone ? "group-invalid" : ""
                   }`}
                 >
                   <label htmlFor="phone" className="form-label fs-6">
                     Phone <span className="text-danger">*</span>
                   </label>
-                  <input
-                    {...register("phone")}
-                    type="text"
-                    className="form-control"
-                    maxLength={11}
-                    onChange={handlePhoneInput}
-                  />
+                  <div
+                    className={` input-group ${
+                      errors.phone ? "group-invalid" : ""
+                    }`}
+                  >
+                    <span className="input-group-text phoneFlag d-flex align-items-center gap-1">
+                      <img src={phFlag} alt="ph" height={15} width={15} />
+                      <span>+63</span>
+                    </span>
+                    <input
+                      {...register("phone")}
+                      type="text"
+                      className="form-control"
+                      maxLength={10}
+                      onChange={handlePhoneInput}
+                    />
+                  </div>
                   <div className="mt-1 font-weight-bold text-validation">
                     {errors.phone?.message}
                   </div>
@@ -276,7 +352,7 @@ const PwdForm = ({
                 </div>
               </div>
 
-              <div className="col-sm-12 col-md-6 col-lg-6 mb-2">
+              {/* <div className="col-sm-12 col-md-6 col-lg-6 mb-2">
                 <div
                   className={`mb-2 fv-plugins-icon-container ${
                     errors.role_id ? "group-invalid" : ""
@@ -301,6 +377,45 @@ const PwdForm = ({
                   </select>
                   <div className="mt-1 font-weight-bold text-validation">
                     {errors.role_id?.message}
+                  </div>
+                </div>
+              </div> */}
+
+              <div className="col-sm-12 col-md-6 col-lg-6 mb-2">
+                <div
+                  className={`mb-2 fv-plugins-icon-container ${
+                    errors.pwdid_picture ? "group-invalid" : ""
+                  }`}
+                >
+                  <label
+                    htmlFor="pwdid_picture"
+                    className="form-label fs-6 mr-2"
+                  >
+                    {pwd && !isViewing ? "Update" : ""} PWD ID Picture
+                  </label>
+                  {!isViewing && (
+                    <input
+                      {...register("pwdid_picture")}
+                      id="pwdid_picture"
+                      className="mt-2"
+                      type="file"
+                      accept="image/jpeg, image/jpg, image/png"
+                    />
+                  )}
+                  {pwd && pwd.pwdid_path && (
+                    <button
+                      type="button"
+                      className={`${
+                        isViewing ? "d-block mt-1" : ""
+                      } btn btn-primary btn-sm cursor-pointer`}
+                      onClick={viewImage}
+                    >
+                      View PWD ID
+                    </button>
+                  )}
+
+                  <div className="mt-1 font-weight-bold text-validation">
+                    {errors.pwdid_picture?.message}
                   </div>
                 </div>
               </div>
@@ -373,6 +488,7 @@ const PwdForm = ({
                       {...register("email")}
                       type="text"
                       className="form-control"
+                      maxLength={100}
                     />
                     <div className="mt-1 font-weight-bold text-validation">
                       {errors.email?.message}
