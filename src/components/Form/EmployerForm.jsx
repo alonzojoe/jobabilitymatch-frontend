@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { employerSchema } from "@/schemas";
 import { ToastMessage, handlePhoneInput, setLocalStorage } from "@/libs/utils";
-import { getLocalStorage } from "@/libs/utils";
+import { getLocalStorage, limitBirthday } from "@/libs/utils";
 import api from "@/services/api";
 
 const notify = new ToastMessage();
@@ -217,6 +217,7 @@ const EmployerForm = ({ employer = null, onClose, onRefresh = () => {} }) => {
                     {...register("birthdate")}
                     type="date"
                     className="form-control"
+                    max={limitBirthday()}
                   />
                   <div className="mt-1 font-weight-bold text-validation">
                     {errors.birthdate?.message}

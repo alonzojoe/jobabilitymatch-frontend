@@ -3,7 +3,12 @@ import Select from "react-select";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { adminSchema } from "@/schemas";
-import { ToastMessage, handlePhoneInput, setLocalStorage } from "@/libs/utils";
+import {
+  ToastMessage,
+  handlePhoneInput,
+  setLocalStorage,
+  limitBirthday,
+} from "@/libs/utils";
 import api from "@/services/api";
 
 const notify = new ToastMessage();
@@ -172,6 +177,7 @@ const AdminForm = ({
                     {...register("birthdate")}
                     type="date"
                     className="form-control"
+                    max={limitBirthday()}
                   />
                   <div className="mt-1 font-weight-bold text-validation">
                     {errors.birthdate?.message}
