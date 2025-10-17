@@ -29,7 +29,19 @@ export const pwdSchema = z
       .trim()
       .nonempty({ message: "First Name is required" }),
     middlename: z.string().trim().optional(),
-    birthdate: z.string().trim().nonempty({ message: "Birthdate is required" }),
+    birthdate: z
+      .string()
+      .trim()
+      .nonempty({ message: "Birthdate is required" })
+      .refine(
+        (date) => {
+          const selectedDate = new Date(date);
+          const maxDate = new Date();
+          maxDate.setFullYear(maxDate.getFullYear() - 18);
+          return selectedDate <= maxDate;
+        },
+        { message: "You must be at least 18 years old" }
+      ),
     gender: z.string().trim().nonempty({ message: "Gender is required" }),
     address: z.string().trim().nonempty({ message: "Address is required" }),
     phone: z.string().trim().nonempty({ message: "Phone is required" }),
@@ -88,7 +100,19 @@ export const employerSchema = z
       .trim()
       .nonempty({ message: "First Name is required" }),
     middlename: z.string().trim().optional(),
-    birthdate: z.string().trim().nonempty({ message: "Birthdate is required" }),
+    birthdate: z
+      .string()
+      .trim()
+      .nonempty({ message: "Birthdate is required" })
+      .refine(
+        (date) => {
+          const selectedDate = new Date(date);
+          const maxDate = new Date();
+          maxDate.setFullYear(maxDate.getFullYear() - 18);
+          return selectedDate <= maxDate;
+        },
+        { message: "You must be at least 18 years old" }
+      ),
     gender: z.string().trim().nonempty({ message: "Gender is required" }),
     address: z.string().trim().nonempty({ message: "Address is required" }),
     phone: z.string().trim().nonempty({ message: "Phone is required" }),
@@ -136,7 +160,19 @@ export const adminSchema = z
       .trim()
       .nonempty({ message: "First Name is required" }),
     middlename: z.string().trim().optional(),
-    birthdate: z.string().trim().nonempty({ message: "Birthdate is required" }),
+    birthdate: z
+      .string()
+      .trim()
+      .nonempty({ message: "Birthdate is required" })
+      .refine(
+        (date) => {
+          const selectedDate = new Date(date);
+          const maxDate = new Date();
+          maxDate.setFullYear(maxDate.getFullYear() - 18);
+          return selectedDate <= maxDate;
+        },
+        { message: "You must be at least 18 years old" }
+      ),
     gender: z.string().trim().nonempty({ message: "Gender is required" }),
     address: z.string().trim().nonempty({ message: "Address is required" }),
     phone: z.string().trim().nonempty({ message: "Phone is required" }),
