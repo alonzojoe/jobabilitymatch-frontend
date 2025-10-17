@@ -111,3 +111,9 @@ export const capitalized = (str) => {
 export const scrollUp = () => {
   window.scrollTo({ top: 0, behavior: "smooth" });
 };
+
+export const limitBirthday = () => {
+  return new Date(new Date().setFullYear(new Date().getFullYear() - 18))
+    .toISOString()
+    .split("T")[0];
+};

@@ -9,6 +9,7 @@ import {
   handlePhoneInput,
   handlePwdIdNo,
   setLocalStorage,
+  limitBirthday,
 } from "@/libs/utils";
 import api from "@/services/api";
 
@@ -205,6 +206,7 @@ const PwdForm = ({
                     {...register("birthdate")}
                     type="date"
                     className="form-control"
+                    max={limitBirthday()}
                   />
                   <div className="mt-1 font-weight-bold text-validation">
                     {errors.birthdate?.message}
