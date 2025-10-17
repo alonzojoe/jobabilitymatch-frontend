@@ -4,7 +4,7 @@ import { IoIosCloseCircle } from "react-icons/io";
 const ModalSm = ({ title, client, children, onClose }) => {
   return createPortal(
     <div className="cst-modal2">
-      <div className="cst-modal-body5 bg-white rounded position-relative">
+      <div className="cst-modal-body5 rounded position-relative">
         <span
           onClick={onClose}
           className="position-absolute"

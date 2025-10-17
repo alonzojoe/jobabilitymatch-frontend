@@ -48,6 +48,9 @@ body {
 }
 
 .cst-modal-body5 {
+  /* background: url('/pwdbg-opc.png') no-repeat center; */
+  background-color: #ffffff;
+  background-size: cover;
   width: 40vw;
   height: fit-content;
   /* border-top: 10px solid #ffffff; */
@@ -57,7 +60,11 @@ body {
   max-height: 100vh;
 }
 
+
 .cst-modal-body2 {
+  /* background: url('/pwdbg-opc.png') no-repeat center; */
+  background-color: #ffffff;
+  background-size: cover;
   width: 70vw;
   height: fit-content;
   /* border-top: 10px solid #ffffff; */
@@ -357,7 +364,13 @@ body {
   padding-right: 0;
 }
 
+/* .page-container {
+  background: url('/pwdbg-opc.png') no-repeat center; 
+  background-color: #ffffff;
+  background-size: cover;
+}
 
+*/
 .container-xxl {
   width: 100%;
   max-width: 1440px;
