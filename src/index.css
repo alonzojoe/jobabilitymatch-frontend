@@ -372,6 +372,14 @@ body {
 
 */
 
+.eye-pw {
+  cursor: pointer;
+  position: absolute;
+  right: 10px;
+  top: 2px;
+  font-size: 18px;
+}
+
 .phoneFlag {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
