@@ -12,6 +12,7 @@ import {
   limitBirthday,
 } from "@/libs/utils";
 import api from "@/services/api";
+import phFlag from "@/assets/images/PH.svg";
 
 const notify = new ToastMessage();
 
@@ -236,20 +237,37 @@ const PwdForm = ({
 
               <div className="col-sm-12 col-md-6 col-lg-6 mb-2">
                 <div
-                  className={`mb-2 fv-plugins-icon-container ${
+                  className={`mb-2 fv-plugins-icon-container input-group ${
                     errors.phone ? "group-invalid" : ""
                   }`}
                 >
                   <label htmlFor="phone" className="form-label fs-6">
                     Phone <span className="text-danger">*</span>
                   </label>
-                  <input
-                    {...register("phone")}
-                    type="text"
-                    className="form-control"
-                    maxLength={11}
-                    onChange={handlePhoneInput}
-                  />
+                  <div
+                    className={` input-group ${
+                      errors.phone ? "group-invalid" : ""
+                    }`}
+                  >
+                    <span
+                      className="input-group-text d-flex align-items-center gap-1"
+                      style={{
+                        borderTopRightRadius: 0,
+                        borderBottomRightRadius: 0,
+                        background: "#F8F9FA",
+                      }}
+                    >
+                      <img src={phFlag} alt="ph" height={15} width={15} />
+                      <span>+63</span>
+                    </span>
+                    <input
+                      {...register("phone")}
+                      type="text"
+                      className="form-control"
+                      maxLength={10}
+                      onChange={handlePhoneInput}
+                    />
+                  </div>
                   <div className="mt-1 font-weight-bold text-validation">
                     {errors.phone?.message}
                   </div>
