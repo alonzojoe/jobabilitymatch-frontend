@@ -371,6 +371,13 @@ body {
 }
 
 */
+
+.phoneFlag {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  background: #F8F9FA;
+}
+
 .container-xxl {
   width: 100%;
   max-width: 1440px;

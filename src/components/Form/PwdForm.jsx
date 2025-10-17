@@ -249,14 +249,7 @@ const PwdForm = ({
                       errors.phone ? "group-invalid" : ""
                     }`}
                   >
-                    <span
-                      className="input-group-text d-flex align-items-center gap-1"
-                      style={{
-                        borderTopRightRadius: 0,
-                        borderBottomRightRadius: 0,
-                        background: "#F8F9FA",
-                      }}
-                    >
+                    <span className="input-group-text phoneFlag d-flex align-items-center gap-1">
                       <img src={phFlag} alt="ph" height={15} width={15} />
                       <span>+63</span>
                     </span>
