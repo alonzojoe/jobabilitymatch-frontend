@@ -277,6 +277,7 @@ const AdminForm = ({
                       {...register("email")}
                       type="text"
                       className="form-control"
+                      maxLength={100}
                     />
                     <div className="mt-1 font-weight-bold text-validation">
                       {errors.email?.message}
