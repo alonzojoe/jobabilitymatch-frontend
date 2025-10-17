@@ -16,7 +16,7 @@ const Modal = ({
         isJobModal ? "selected-job-modal" : ""
       }`}
     >
-      <div className="cst-modal-body2 bg-white rounded position-relative">
+      <div className="cst-modal-body2 rounded position-relative">
         {!isHidden && (
           <span
             onClick={onClose}

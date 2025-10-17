@@ -6,6 +6,8 @@ import { useForm } from "react-hook-form";
 import { authSchema } from "@/schemas/index";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ToastMessage } from "@/libs/utils";
+import useToggle from "@/hooks/useToggle";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const notify = new ToastMessage();
 
@@ -17,6 +19,7 @@ const Login = ({ onClose, onCreate }) => {
   } = useForm({
     resolver: zodResolver(authSchema),
   });
+  const [eyed, setEyed] = useToggle(false);
 
   const handleSignIn = async (formData) => {
     console.log(formData);
@@ -46,6 +49,8 @@ const Login = ({ onClose, onCreate }) => {
       // });
     }
   };
+
+  const Icon = eyed ? FaEyeSlash : FaEye;
 
   return (
     <ModalSm onClose={onClose}>
@@ -90,14 +95,23 @@ const Login = ({ onClose, onCreate }) => {
             <label htmlFor="password" className="form-label fs-6">
               Password
             </label>
-            <input
-              {...register("password")}
-              name="password"
-              type="password"
-              className="form-control"
-              id="password"
-              data-has-listeners="true"
-            />
+            <div
+              className={`position-relative ${
+                errors?.password ? "group-invalid" : ""
+              }`}
+            >
+              <input
+                {...register("password")}
+                name="password"
+                type={eyed ? "text" : "password"}
+                className="form-control"
+                id="password"
+                data-has-listeners="true"
+              />
+              <span className="eye-pw" onClick={() => setEyed()}>
+                <Icon />
+              </span>
+            </div>
             <div className="mt-1 font-weight-bold text-validation">
               {errors.password?.message}
             </div>

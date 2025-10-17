@@ -18,6 +18,7 @@ const UpdatePwd = ({
     address: authUser?.address,
     phone: authUser?.phone,
     pwd_id_no: authUser?.pwd_id_no,
+    pwdid_path: authUser?.pwdid_path,
     email: authUser?.email,
     disability_types: authUser?.disability_types?.map((d) => ({
       value: d.id,
