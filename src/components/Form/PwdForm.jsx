@@ -397,7 +397,7 @@ const PwdForm = ({
                     <input
                       {...register("pwdid_picture")}
                       id="pwdid_picture"
-                      className="mt-2"
+                      className="mt-2 d-block"
                       type="file"
                       accept="image/jpeg, image/jpg, image/png"
                     />
