@@ -15,11 +15,14 @@ import "react-loading-skeleton/dist/skeleton.css";
 import "sweetalert2/dist/sweetalert2.min.css";
 
 import App from "./App.jsx";
+import { PhotoProvider } from "react-photo-view";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <AuthProvider>
-      <App />
+      <PhotoProvider index={999999}>
+        <App />
+      </PhotoProvider>
     </AuthProvider>
   </StrictMode>
 );

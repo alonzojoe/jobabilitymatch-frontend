@@ -14,6 +14,9 @@ import {
 import api from "@/services/api";
 import phFlag from "@/assets/images/PH.svg";
 import bg from "@/assets/images/7933.jpg";
+import { PhotoProvider, PhotoView } from "react-photo-view";
+
+const IMAGES = [bg];
 
 const notify = new ToastMessage();
 
@@ -391,8 +394,10 @@ const PwdForm = ({
                     htmlFor="pwdid_picture"
                     className="form-label fs-6 mr-2"
                   >
-                    {pwd && !isViewing ? "Update" : ""} PWD ID Picture
+                    {pwd && !isViewing ? "Update" : ""} PWD ID Picture{" "}
+                    <span className="text-danger">*</span>
                   </label>
+
                   {!isViewing && (
                     <input
                       {...register("pwdid_picture")}
@@ -402,17 +407,17 @@ const PwdForm = ({
                       accept="image/jpeg, image/jpg, image/png"
                     />
                   )}
-                  {pwd && pwd.pwdid_path && (
-                    <button
-                      type="button"
-                      className={`${
-                        isViewing ? "d-block mt-1" : ""
-                      } btn btn-primary btn-sm cursor-pointer`}
-                      onClick={viewImage}
-                    >
-                      View PWD ID
-                    </button>
-                  )}
+                  {/* {pwd && pwd.pwdid_path && ( */}
+                  <button
+                    type="button"
+                    className={`${
+                      isViewing ? "d-block" : ""
+                    } btn btn-primary btn-sm cursor-pointer mt-1`}
+                    onClick={viewImage}
+                  >
+                    View PWD ID
+                  </button>
+                  {/* )} */}
 
                   <div className="mt-1 font-weight-bold text-validation">
                     {errors.pwdid_picture?.message}
@@ -538,6 +543,16 @@ const PwdForm = ({
                     </div>
                   </div>
                 </div>
+              </div>
+              <div className="foo">
+                {IMAGES.map((item, index) => (
+                  <PhotoView key={index} src={item}>
+                    <img
+                      src={item}
+                      style={{ height: "auto", width: "100px" }}
+                    />
+                  </PhotoView>
+                ))}
               </div>
             </div>
           )}
