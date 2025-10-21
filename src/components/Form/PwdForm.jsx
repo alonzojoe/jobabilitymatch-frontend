@@ -561,6 +561,10 @@ const PwdForm = ({
                   open={open}
                   fullscreen={{ auto }}
                   close={() => setOpen(false)}
+                  render={{
+                    buttonPrev: () => null,
+                    buttonNext: () => null,
+                  }}
                   slides={[
                     {
                       src: bg,
