@@ -14,6 +14,9 @@ import {
 import api from "@/services/api";
 import phFlag from "@/assets/images/PH.svg";
 import bg from "@/assets/images/7933.jpg";
+import Lightbox from "yet-another-react-lightbox";
+
+const IMAGES = [bg];
 
 const notify = new ToastMessage();
 
@@ -29,6 +32,7 @@ const PwdForm = ({
     pwd ? pwd.disability_types : []
   );
   const [error, setError] = useState("");
+  const [open, setOpen] = useState(false);
 
   console.log("selected", selectedDisabilities);
   console.log("selected", selectedDisabilities);
@@ -188,6 +192,17 @@ const PwdForm = ({
         : pwd.pwdid_path;
     window.open(imageUrl, "_blank");
   };
+
+  const viewImagev2 = () => {
+    const rootURL = import.meta.env.VITE_ROOT_URL;
+    const imageUrl =
+      import.meta.env.VITE_APP_ENV === "local"
+        ? `${rootURL}/storage/${pwd.pwdid_path}`
+        : pwd.pwdid_path;
+
+    return imageUrl;
+  };
+
   return (
     <div>
       <form
@@ -391,13 +406,15 @@ const PwdForm = ({
                     htmlFor="pwdid_picture"
                     className="form-label fs-6 mr-2"
                   >
-                    {pwd && !isViewing ? "Update" : ""} PWD ID Picture
+                    {pwd && !isViewing ? "Update" : ""} PWD ID Picture{" "}
+                    <span className="text-danger">*</span>
                   </label>
+
                   {!isViewing && (
                     <input
                       {...register("pwdid_picture")}
                       id="pwdid_picture"
-                      className="mt-2"
+                      className="mt-2 d-block"
                       type="file"
                       accept="image/jpeg, image/jpg, image/png"
                     />
@@ -406,8 +423,8 @@ const PwdForm = ({
                     <button
                       type="button"
                       className={`${
-                        isViewing ? "d-block mt-1" : ""
-                      } btn btn-primary btn-sm cursor-pointer`}
+                        isViewing ? "d-block" : ""
+                      } btn btn-primary btn-sm cursor-pointer mt-1`}
                       onClick={viewImage}
                     >
                       View PWD ID
@@ -538,6 +555,30 @@ const PwdForm = ({
                     </div>
                   </div>
                 </div>
+              </div>
+
+              <div className="foo">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setOpen(true);
+                  }}
+                >
+                  Test
+                </button>
+                <Lightbox
+                  open={open}
+                  close={() => setOpen(false)}
+                  render={{
+                    buttonPrev: () => null,
+                    buttonNext: () => null,
+                  }}
+                  slides={[
+                    {
+                      src: viewImagev2(),
+                    },
+                  ]}
+                />
               </div>
             </div>
           )}
