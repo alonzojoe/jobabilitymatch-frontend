@@ -13,13 +13,13 @@ import "@/index.css";
 import "react-quill-new/dist/quill.snow.css";
 import "react-loading-skeleton/dist/skeleton.css";
 import "sweetalert2/dist/sweetalert2.min.css";
-
+import "yet-another-react-lightbox/styles.css";
 import App from "./App.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <AuthProvider>
-        <App />
+      <App />
     </AuthProvider>
   </StrictMode>
 );

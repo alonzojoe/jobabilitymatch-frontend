@@ -14,6 +14,7 @@ import {
 import api from "@/services/api";
 import phFlag from "@/assets/images/PH.svg";
 import bg from "@/assets/images/7933.jpg";
+import Lightbox from "yet-another-react-lightbox";
 
 const IMAGES = [bg];
 
@@ -31,6 +32,8 @@ const PwdForm = ({
     pwd ? pwd.disability_types : []
   );
   const [error, setError] = useState("");
+  const [open, setOpen] = useState(false);
+  const [auto, setAuto] = useState(false);
 
   console.log("selected", selectedDisabilities);
   console.log("selected", selectedDisabilities);
@@ -543,16 +546,28 @@ const PwdForm = ({
                   </div>
                 </div>
               </div>
-              {/* <div className="foo">
-                {IMAGES.map((item, index) => (
-                  <PhotoView key={index} src={item}>
-                    <img
-                      src={item}
-                      style={{ height: "auto", width: "100px" }}
-                    />
-                  </PhotoView>
-                ))}
-              </div> */}
+
+              <div className="foo">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setAuto(false);
+                    setOpen(true);
+                  }}
+                >
+                  Test
+                </button>
+                <Lightbox
+                  open={open}
+                  fullscreen={{ auto }}
+                  close={() => setOpen(false)}
+                  slides={[
+                    {
+                      src: bg,
+                    },
+                  ]}
+                />
+              </div>
             </div>
           )}
         </div>
