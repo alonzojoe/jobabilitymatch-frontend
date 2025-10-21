@@ -33,7 +33,6 @@ const PwdForm = ({
   );
   const [error, setError] = useState("");
   const [open, setOpen] = useState(false);
-  const [auto, setAuto] = useState(false);
 
   console.log("selected", selectedDisabilities);
   console.log("selected", selectedDisabilities);
@@ -193,6 +192,17 @@ const PwdForm = ({
         : pwd.pwdid_path;
     window.open(imageUrl, "_blank");
   };
+
+  const viewImagev2 = () => {
+    const rootURL = import.meta.env.VITE_ROOT_URL;
+    const imageUrl =
+      import.meta.env.VITE_APP_ENV === "local"
+        ? `${rootURL}/storage/${pwd.pwdid_path}`
+        : pwd.pwdid_path;
+
+    return imageUrl;
+  };
+
   return (
     <div>
       <form
@@ -409,17 +419,17 @@ const PwdForm = ({
                       accept="image/jpeg, image/jpg, image/png"
                     />
                   )}
-                  {/* {pwd && pwd.pwdid_path && ( */}
-                  <button
-                    type="button"
-                    className={`${
-                      isViewing ? "d-block" : ""
-                    } btn btn-primary btn-sm cursor-pointer mt-1`}
-                    onClick={viewImage}
-                  >
-                    View PWD ID
-                  </button>
-                  {/* )} */}
+                  {pwd && pwd.pwdid_path && (
+                    <button
+                      type="button"
+                      className={`${
+                        isViewing ? "d-block" : ""
+                      } btn btn-primary btn-sm cursor-pointer mt-1`}
+                      onClick={viewImage}
+                    >
+                      View PWD ID
+                    </button>
+                  )}
 
                   <div className="mt-1 font-weight-bold text-validation">
                     {errors.pwdid_picture?.message}
@@ -551,7 +561,6 @@ const PwdForm = ({
                 <button
                   type="button"
                   onClick={() => {
-                    setAuto(false);
                     setOpen(true);
                   }}
                 >
@@ -559,7 +568,6 @@ const PwdForm = ({
                 </button>
                 <Lightbox
                   open={open}
-                  fullscreen={{ auto }}
                   close={() => setOpen(false)}
                   render={{
                     buttonPrev: () => null,
@@ -567,7 +575,7 @@ const PwdForm = ({
                   }}
                   slides={[
                     {
-                      src: bg,
+                      src: viewImagev2(),
                     },
                   ]}
                 />
