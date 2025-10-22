@@ -197,8 +197,8 @@ const PwdForm = ({
     const rootURL = import.meta.env.VITE_ROOT_URL;
     const imageUrl =
       import.meta.env.VITE_APP_ENV === "local"
-        ? `${rootURL}/storage/${pwd.pwdid_path}`
-        : pwd.pwdid_path;
+        ? `${rootURL}/storage/${pwd?.pwdid_path}`
+        : pwd?.pwdid_path;
 
     return imageUrl;
   };
@@ -558,14 +558,6 @@ const PwdForm = ({
               </div>
 
               <div className="foo">
-                <button
-                  type="button"
-                  onClick={() => {
-                    setOpen(true);
-                  }}
-                >
-                  Test
-                </button>
                 <Lightbox
                   open={open}
                   close={() => setOpen(false)}
