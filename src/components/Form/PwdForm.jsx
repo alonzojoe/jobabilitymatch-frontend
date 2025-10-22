@@ -558,14 +558,6 @@ const PwdForm = ({
               </div>
 
               <div className="foo">
-                <button
-                  type="button"
-                  onClick={() => {
-                    setOpen(true);
-                  }}
-                >
-                  Test
-                </button>
                 <Lightbox
                   open={open}
                   close={() => setOpen(false)}
