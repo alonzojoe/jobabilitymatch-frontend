@@ -1066,3 +1066,27 @@ div:where(.swal2-container) {
   white-space: normal;
   word-break: break-word;
 }
+
+/* Overlay */
+.canvas-page {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #3498db;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  transition: transform 0.8s ease-in-out;
+}
+
+/* Slide the overlay up off screen */
+.canvas-page.slide-up {
+  transform: translateY(-100%);
+}
+
+/* End Overlay */

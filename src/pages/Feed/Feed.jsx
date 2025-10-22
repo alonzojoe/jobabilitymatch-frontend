@@ -23,6 +23,7 @@ const Feed = () => {
   const [params, setParams] = useState(initialParams);
   const jobDetailsTabRef = useRef();
   const searchRef = useRef(null);
+  const [slideUp, setSlideUp] = useState(false);
 
   const {
     data: jobPostings,
@@ -72,8 +73,19 @@ const Feed = () => {
     }));
   };
 
+  const handleSwipe = () => {
+    setSlideUp(true);
+  };
+
   return (
     <>
+      {!authUser && (
+        <div className={`canvas-page ${slideUp ? "slide-up" : ""}`}>
+          <h1>Welcome to My Site</h1>
+          <button onClick={handleSwipe}>Enter</button>
+        </div>
+      )}
+
       {selectedJob && (
         <Modal
           isJobModal={true}
