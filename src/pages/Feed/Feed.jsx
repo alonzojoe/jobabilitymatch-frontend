@@ -9,6 +9,7 @@ import Pagination from "@/components/UI/Pagination";
 import { getLocalStorage, isPWD } from "@/libs/utils";
 import MockUpDevice from "@/assets/images/mockup-devices.png";
 import { FaArrowRight } from "react-icons/fa6";
+import { FaCheck } from "react-icons/fa";
 
 const authUser = getLocalStorage("auth-user");
 
@@ -85,7 +86,7 @@ const Feed = () => {
         <div className={`canvas-page ${slideUp ? "slide-up" : ""}`}>
           <div className="canvas-container">
             <div className="canvas-r">
-              <h1>Welcome to Jobability Match</h1>
+              <h1>Welcome to Jobability-Match</h1>
               <p>
                 A job portal for Persons with Disabilities (PWD), helping you
                 find inclusive and meaningful employment opportunities.
@@ -98,6 +99,17 @@ const Feed = () => {
                   View Opportunities
                   <FaArrowRight className="fw-bold" />
                 </button>
+              </div>
+              <div className="feature-checks">
+                <div className="check-item">
+                  <FaCheck /> <span>Inclusive jobs</span>
+                </div>
+                <div className="check-item">
+                  <FaCheck /> <span>Accessible employers</span>
+                </div>
+                <div className="check-item">
+                  <FaCheck /> <span>Career support</span>
+                </div>
               </div>
             </div>
             <div className="canvas-l">

@@ -1104,7 +1104,7 @@ div:where(.swal2-container) {
 
 .canvas-r h1 {
   color: #FFFF;
-  font-size: 4.5rem;
+  font-size: 4rem;
   font-weight: bold;
   text-shadow:
     2px 2px 0 #48444E,
@@ -1122,6 +1122,26 @@ div:where(.swal2-container) {
     4px 4px 5px rgba(0, 0, 0, 0.5);
   line-height: 1.6;
 }
+
+.feature-checks {
+  display: flex;
+  align-items: center;
+  gap: .9rem;
+  margin-top: 12px;
+  color: #f0f0f0;
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-shadow:
+    2px 2px 0 #48444E,
+    4px 4px 5px rgba(0, 0, 0, 0.5);
+}
+
+.feature-checks .check-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
 
 
 .mockup-img {
