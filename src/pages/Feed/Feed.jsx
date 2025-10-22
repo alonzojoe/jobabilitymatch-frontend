@@ -8,6 +8,7 @@ import JobPostingTab from "@/pages/Feed/components/JobPostingTab";
 import Pagination from "@/components/UI/Pagination";
 import { getLocalStorage, isPWD } from "@/libs/utils";
 import MockUpDevice from "@/assets/images/mockup-devices.png";
+import { FaArrowRight } from "react-icons/fa6";
 
 const authUser = getLocalStorage("auth-user");
 
@@ -91,10 +92,11 @@ const Feed = () => {
               </p>
               <div className="d-flex align-items-center gap-5">
                 <button
-                  className="btn py-3 px-4 fs-6 btn-maincs d-flex align-items-center"
+                  className="btn py-3 px-4 fs-6 btn-maincs d-flex align-items-center gap-2"
                   onClick={handleSwipe}
                 >
                   View Opportunities
+                  <FaArrowRight className="fw-bold" />
                 </button>
               </div>
             </div>
