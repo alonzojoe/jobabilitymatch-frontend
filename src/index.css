@@ -1080,6 +1080,7 @@ div:where(.swal2-container) {
   height: 100%;
   display: none;
   justify-content: center;
+  flex-direction: column;
   align-items: center;
   z-index: 100;
   transition: transform 0.8s ease-in-out;
@@ -1177,15 +1178,16 @@ div:where(.swal2-container) {
 .btn-maincs {
   color: #161B67;
   background-color: #FFFF;
-  border: .17rem solid #161B67;
+  border: .05rem solid #161B67;
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
-  border-radius: .5rem !important;
+  border-radius: .5=3rem !important;
 }
 
 .btn-maincs:hover {
   color: #161B67 !important;
   opacity: 0.9;
 }
+
 
 
 @media screen and (min-width: 1024px) {
