@@ -7,6 +7,7 @@ import JobDetails from "@/pages/Feed/components/JobDetails";
 import JobPostingTab from "@/pages/Feed/components/JobPostingTab";
 import Pagination from "@/components/UI/Pagination";
 import { getLocalStorage, isPWD } from "@/libs/utils";
+import MockUpDevice from "@/assets/images/mockup-devices.png";
 
 const authUser = getLocalStorage("auth-user");
 
@@ -81,8 +82,26 @@ const Feed = () => {
     <>
       {!authUser && (
         <div className={`canvas-page ${slideUp ? "slide-up" : ""}`}>
-          <h1>Welcome to My Site</h1>
-          <button onClick={handleSwipe}>Enter</button>
+          <div className="canvas-container">
+            <div className="canvas-r">
+              <h1>Welcome to Jobability Match</h1>
+              <p>
+                A job portal for Persons with Disabilities (PWD), helping you
+                find inclusive and meaningful employment opportunities.
+              </p>
+              <div className="d-flex align-items-center gap-5">
+                <button
+                  className="btn py-3 px-4 fs-6 btn-maincs d-flex align-items-center"
+                  onClick={handleSwipe}
+                >
+                  View Opportunities
+                </button>
+              </div>
+            </div>
+            <div className="canvas-l">
+              <img src={MockUpDevice} alt="mock-up" className="mockup-img" />
+            </div>
+          </div>
         </div>
       )}
 
