@@ -46,6 +46,14 @@ const PageOverlay = () => {
           <img src={MockUpDevice} alt="mock-up" className="mockup-img" />
         </div>
       </div>
+      <div className="d-flex justify-content-center align-items-center w-100 bounce-container">
+        <div className="d-flex align-items-center justify-content-center flex-column">
+          <div className="btn-arrow" onClick={handleSwipe}>
+            <MdDoubleArrow className="icn" />
+          </div>
+          <p className="p-arrow">Click to Swipe Up</p>
+        </div>
+      </div>
     </div>
   );
 };
