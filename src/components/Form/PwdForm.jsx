@@ -424,8 +424,8 @@ const PwdForm = ({
                       type="button"
                       className={`${
                         isViewing ? "d-block" : ""
-                      } btn btn-primary btn-sm cursor-pointer mt-1`}
-                      onClick={viewImage}
+                      } btn btn-primary btn-sm cursor-pointer mt-2`}
+                      onClick={() => setOpen(true)}
                     >
                       View PWD ID
                     </button>
