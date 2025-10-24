@@ -200,6 +200,8 @@ const PwdForm = ({
         ? `${rootURL}/storage/${pwd?.pwdid_path}`
         : pwd?.pwdid_path;
 
+    console.log("img url: ", imageUrl);
+
     return imageUrl;
   };
 
