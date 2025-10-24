@@ -1069,7 +1069,7 @@ div:where(.swal2-container) {
 
 /* Overlay */
 .canvas-page {
-  background: url('./pwd-bg.jpg');
+  background: url('/pwd-bg.jpg');
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
