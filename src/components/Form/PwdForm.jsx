@@ -19,7 +19,7 @@ import Lightbox from "yet-another-react-lightbox";
 const IMAGES = [bg];
 
 const notify = new ToastMessage();
-
+const ROOT_URL = import.meta.env.VITE_ROOT_URL;
 const PwdForm = ({
   pwd = null,
   roles,
@@ -185,19 +185,17 @@ const PwdForm = ({
     })) ?? [];
 
   const viewImage = () => {
-    const rootURL = import.meta.env.VITE_ROOT_URL;
     const imageUrl =
       import.meta.env.VITE_APP_ENV === "local"
-        ? `${rootURL}/storage/${pwd.pwdid_path}`
+        ? `${ROOT_URL}/storage/${pwd.pwdid_path}`
         : pwd.pwdid_path;
     window.open(imageUrl, "_blank");
   };
 
   const viewImagev2 = () => {
-    const rootURL = import.meta.env.VITE_ROOT_URL;
     const imageUrl =
       import.meta.env.VITE_APP_ENV === "local"
-        ? `${rootURL}/storage/${pwd?.pwdid_path}`
+        ? `${ROOT_URL}/storage/${pwd?.pwdid_path}`
         : pwd?.pwdid_path;
 
     console.log("img url: ", imageUrl);
@@ -569,7 +567,10 @@ const PwdForm = ({
                   }}
                   slides={[
                     {
-                      src: viewImagev2(),
+                      src:
+                        import.meta.env.VITE_APP_ENV === "local"
+                          ? `${ROOT_URL}/storage/${pwd?.pwdid_path}`
+                          : pwd?.pwdid_path,
                     },
                   ]}
                 />
