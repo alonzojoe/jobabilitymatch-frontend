@@ -208,7 +208,9 @@ const PwdForm = ({
       ? `${ROOT_URL}/storage/${pwd?.pwdid_path}`
       : pwd?.pwdid_path;
 
-  console.log("current image", currentPwdImg);
+  console.log("current pwd id image", currentPwdImg);
+
+  const imageSample = `https://res.cloudinary.com/dmtqhdwgp/image/upload/v1761294967/pwdid_pictures/npgjqtxy1575wlgedwny.png`;
 
   return (
     <div>
@@ -426,17 +428,17 @@ const PwdForm = ({
                       accept="image/jpeg, image/jpg, image/png"
                     />
                   )}
-                  {pwd && pwd.pwdid_path && (
-                    <button
-                      type="button"
-                      className={`${
-                        isViewing ? "d-block" : ""
-                      } btn btn-primary btn-sm cursor-pointer mt-2`}
-                      onClick={() => setOpen(true)}
-                    >
-                      View PWD ID
-                    </button>
-                  )}
+                  {/* {pwd && pwd.pwdid_path && ( */}
+                  <button
+                    type="button"
+                    className={`${
+                      isViewing ? "d-block" : ""
+                    } btn btn-primary btn-sm cursor-pointer mt-2`}
+                    onClick={() => setOpen(true)}
+                  >
+                    View PWD ID
+                  </button>
+                  {/* )} */}
 
                   <div className="mt-1 font-weight-bold text-validation">
                     {errors.pwdid_picture?.message}
@@ -565,19 +567,17 @@ const PwdForm = ({
               </div>
 
               <div className="foo">
-                <Lightbox
-                  open={open}
-                  close={() => setOpen(false)}
-                  render={{
-                    buttonPrev: () => null,
-                    buttonNext: () => null,
-                  }}
-                  slides={[
-                    {
-                      src: currentPwdImg,
-                    },
-                  ]}
-                />
+                {currentPwdImg && (
+                  <Lightbox
+                    open={open}
+                    close={() => setOpen(false)}
+                    render={{
+                      buttonPrev: () => null,
+                      buttonNext: () => null,
+                    }}
+                    slides={[{ src: currentPwdImg }]}
+                  />
+                )}
               </div>
             </div>
           )}
