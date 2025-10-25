@@ -203,6 +203,13 @@ const PwdForm = ({
     return imageUrl;
   };
 
+  const currentPwdImg =
+    import.meta.env.VITE_APP_ENV === "local"
+      ? `${ROOT_URL}/storage/${pwd?.pwdid_path}`
+      : pwd?.pwdid_path;
+
+  console.log("current image", currentPwdImg);
+
   return (
     <div>
       <form
@@ -567,10 +574,7 @@ const PwdForm = ({
                   }}
                   slides={[
                     {
-                      src:
-                        import.meta.env.VITE_APP_ENV === "local"
-                          ? `${ROOT_URL}/storage/${pwd?.pwdid_path}`
-                          : pwd?.pwdid_path,
+                      src: currentPwdImg,
                     },
                   ]}
                 />
