@@ -117,3 +117,7 @@ export const limitBirthday = () => {
     .toISOString()
     .split("T")[0];
 };
+
+export const hiringDateFormatter = (hiringDate) => {
+  return moment(hiringDate).format("MMM DD, YYYY");
+};

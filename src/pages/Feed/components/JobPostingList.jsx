@@ -6,6 +6,7 @@ import Card from "@/components/UI/Card";
 import { FaRegBookmark, FaBookmark } from "react-icons/fa6";
 import { LuSquareArrowOutUpRight } from "react-icons/lu";
 import { capitalized } from "@/libs/utils";
+import { hiringDateFormatter } from "@/libs/utils";
 
 const JobPostingList = ({
   error,
