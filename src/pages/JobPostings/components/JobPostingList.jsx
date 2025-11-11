@@ -62,7 +62,7 @@ const JobPostingList = ({
             </th>
             <th className="text-center font-weight-bold fs-7">Status</th>
             <th className="text-center font-weight-bold fs-7">Date Posted</th>
-            <th className="text-center font-weight-bold fs-7">Options</th>
+            <th className="text-center font-weight-bold fs-7">Action</th>
           </tr>
         </thead>
         <tbody>

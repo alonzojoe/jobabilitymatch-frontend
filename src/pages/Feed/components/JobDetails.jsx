@@ -10,6 +10,7 @@ import { IoIosCloseCircle } from "react-icons/io";
 import { MdSend, MdOutlineCheck } from "react-icons/md";
 import { LuSquareArrowOutUpRight } from "react-icons/lu";
 import api from "@/services/api";
+import { hiringDateFormatter } from "@/libs/utils";
 
 const dialog = new ConfirmDialog();
 const notify = new ToastMessage();
@@ -84,6 +85,13 @@ const JobDetails = ({ loading, selectedJob, onSetJob }) => {
             <span className="d-block d-flex align-items-center gap-1 fs-6 text-capitalize">
               <i className="ti ti-map-pin"></i>
               {capitalized(selectedJob?.company?.address)}
+            </span>
+            <span className="d-block d-flex align-items-center gap-1 fs-6 text-capitalize cursor-pointer">
+              <i className="ti ti-calendar"></i>
+              Hiring:{" "}
+              {`${hiringDateFormatter(
+                selectedJob?.hiring_from
+              )} - ${hiringDateFormatter(selectedJob?.hiring_to)}`}
             </span>
             <h5 className="my-4">
               <div className="d-flex align-items-center justify-content-between">

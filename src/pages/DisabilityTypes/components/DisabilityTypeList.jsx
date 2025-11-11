@@ -1,5 +1,5 @@
 import { LoadingRow, ErrorRow, EmptyRow } from "@/components/Data/TableData";
-import { FaTrashAlt, FaEdit } from "react-icons/fa";
+import { FaTrashAlt, FaEdit, FaArrowUp, FaArrowDown } from "react-icons/fa";
 
 const DisabilityTypeList = ({
   loading,
@@ -7,6 +7,7 @@ const DisabilityTypeList = ({
   disabilityTypes,
   onUpdate,
   onDelete,
+  onChangeStatus,
 }) => {
   return (
     <table className="table table-striped table-bordered table-td-valign-middle dataTable no-footer dtr-inline collapsed">
@@ -19,7 +20,7 @@ const DisabilityTypeList = ({
             Disablity Type
           </th>
           <th className="text-center font-weight-bold fs-7" width="30%">
-            Option
+            Action
           </th>
         </tr>
       </thead>
@@ -37,21 +38,31 @@ const DisabilityTypeList = ({
               <td className="text-center font-weight-bold fs-7">{d.id}</td>
               <td className="text-center font-weight-bold fs-7">{d.name}</td>
               <td className="text-center font-weight-bold fs-7">
-                <div className="d-flex justify-content-center align-items-center gap-2">
+                <div className="d-flex justify-content-center flex-column align-items-center gap-2">
                   <button
-                    className="btn btn-warning"
+                    className="btn btn-warning btn-sm w-100"
                     type="button"
                     onClick={() => onUpdate(d)}
                   >
                     <FaEdit className="fs-6" /> Update
                   </button>
-                  <button
-                    className="btn btn-danger"
-                    type="button"
-                    onClick={() => onDelete(d.id)}
-                  >
-                    <FaTrashAlt className="fs-6" /> Delete
-                  </button>
+                  {d.status === 1 ? (
+                    <button
+                      className="btn btn-danger btn-sm w-100"
+                      type="button"
+                      onClick={() => onChangeStatus(d.id, d.status)}
+                    >
+                      <FaArrowDown className="fs-6" /> Archive
+                    </button>
+                  ) : (
+                    <button
+                      className="btn btn-success btn-sm w-100"
+                      type="button"
+                      onClick={() => onChangeStatus(d.id, d.status)}
+                    >
+                      <FaArrowUp className="fs-6" /> Unarchive
+                    </button>
+                  )}
                 </div>
               </td>
             </tr>

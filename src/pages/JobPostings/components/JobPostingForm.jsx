@@ -9,9 +9,13 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { postingSchema } from "@/schemas";
 import { ToastMessage, handlePhoneInput } from "@/libs/utils";
+import moment from "moment";
 import api from "@/services/api";
 
 const notify = new ToastMessage();
+
+const TODAY = moment().format("YYYY-MM-DD");
+console.log(TODAY);
 
 const JobPostingForm = ({ onClose, onRefresh, selected, disabilityTypes }) => {
   const {
@@ -23,6 +27,8 @@ const JobPostingForm = ({ onClose, onRefresh, selected, disabilityTypes }) => {
     defaultValues: {
       title: selected?.title ?? "",
       vacant_positions: selected?.vacant_positions?.toString() ?? "",
+      hiring_from: selected?.hiring_from ?? TODAY,
+      hiring_to: selected?.hiring_to ?? "",
     },
   });
 
@@ -162,6 +168,55 @@ const JobPostingForm = ({ onClose, onRefresh, selected, disabilityTypes }) => {
                 </div>
               </div>
             </div>
+
+            {/* StartDateEndDate Start */}
+            <div className="col-sm-12 col-md-6 col-lg-6 mb-2">
+              <div
+                className={`mb-2 fv-plugins-icon-container ${
+                  errors.hiring_from ? "group-invalid" : ""
+                }`}
+              >
+                <label
+                  htmlFor="hiring_from"
+                  className="form-label font-weight-bold fs-6"
+                >
+                  Hiring Start Date <span className="text-danger">*</span>
+                </label>
+                <input
+                  {...register("hiring_from")}
+                  type="date"
+                  className="form-control text-uppercase"
+                />
+                <div className="mt-1 font-weight-bold text-validation">
+                  {errors.hiring_from?.message}
+                </div>
+              </div>
+            </div>
+
+            <div className="col-sm-12 col-md-6 col-lg-6 mb-2">
+              <div
+                className={`mb-2 fv-plugins-icon-container ${
+                  errors.hiring_to ? "group-invalid" : ""
+                }`}
+              >
+                <label
+                  htmlFor="hiring_to"
+                  className="form-label font-weight-bold fs-6"
+                >
+                  Hiring End Date <span className="text-danger">*</span>
+                </label>
+                <input
+                  {...register("hiring_to")}
+                  type="date"
+                  className="form-control text-uppercase"
+                />
+                <div className="mt-1 font-weight-bold text-validation">
+                  {errors.hiring_to?.message}
+                </div>
+              </div>
+            </div>
+
+            {/* StartDateEndDate End */}
 
             <div className="col-sm-12 mb-2">
               <div

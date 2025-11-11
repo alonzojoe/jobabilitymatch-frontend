@@ -222,13 +222,42 @@ export const employerSchema = z
     path: ["confirmPassword"],
   });
 
-export const postingSchema = z.object({
-  title: z.string().trim().nonempty({ message: "Job title is required" }),
-  vacant_positions: z
-    .string()
-    .trim()
-    .nonempty({ message: "Vacant Position/s is required" }),
-});
+export const postingSchema = z
+  .object({
+    title: z.string().trim().nonempty({ message: "Job title is required" }),
+    vacant_positions: z
+      .string()
+      .trim()
+      .nonempty({ message: "Vacant Position/s is required" }),
+    hiring_from: z
+      .string()
+      .trim()
+      .nonempty({ message: "Hiring start date is required" })
+      .refine(
+        (date) => {
+          const selectedDate = new Date(date);
+          const today = new Date();
+          today.setHours(0, 0, 0, 0); // Reset time to compare only dates
+          return selectedDate >= today;
+        },
+        { message: "Hiring start date cannot be in the past" }
+      ),
+    hiring_to: z
+      .string()
+      .trim()
+      .nonempty({ message: "Hiring end date is required" }),
+  })
+  .refine(
+    (data) => {
+      const fromDate = new Date(data.hiring_from);
+      const toDate = new Date(data.hiring_to);
+      return toDate >= fromDate;
+    },
+    {
+      message: "Hiring end date must be on or after the start date",
+      path: ["hiring_to"],
+    }
+  );
 
 export const adminSchema = z
   .object({

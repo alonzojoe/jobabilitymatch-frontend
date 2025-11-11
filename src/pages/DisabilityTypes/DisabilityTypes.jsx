@@ -73,6 +73,30 @@ const DisabilityTypes = () => {
       });
   };
 
+  const handleActiveInactive = (id, currentStatus) => {
+    const action = currentStatus === 1 ? "archive" : "unarchive";
+    dialog
+      .confirm(
+        "question",
+        "Confirmation",
+        `Are you sure you want to ${action} this disability type?`
+      )
+      .then(async (result) => {
+        if (result.isConfirmed) {
+          notify.notif(
+            "success",
+            `Disability type has been ${action}d successfully.`
+          );
+          try {
+            await api.patch(`/disability/status/${id}`);
+            handleRefresh();
+          } catch (error) {
+            notify.notif("error", `Something went wrong: ${error?.message}`);
+          }
+        }
+      });
+  };
+
   return (
     <>
       {showModal && (
@@ -105,6 +129,7 @@ const DisabilityTypes = () => {
                 disabilityTypes={disabilityTypes}
                 onUpdate={handleUpdate}
                 onDelete={handleDelete}
+                onChangeStatus={handleActiveInactive}
               />
               {!loading && disabilityTypes?.data?.length > 0 && (
                 <Pagination

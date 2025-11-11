@@ -89,6 +89,27 @@ const Companies = () => {
       });
   };
 
+  const handleActiveInactive = (id, currentStatus) => {
+    const action = currentStatus === 1 ? "deactivate" : "activate";
+    dialog
+      .confirm(
+        "question",
+        "Confirmation",
+        `Are you sure you want to ${action} this company?`
+      )
+      .then(async (result) => {
+        if (result.isConfirmed) {
+          notify.notif("success", `Company has been ${action}d successfully.`);
+          try {
+            await api.patch(`/company/status/${id}`);
+            handleRefresh();
+          } catch (error) {
+            notify.notif("error", `Something went wrong: ${error?.message}`);
+          }
+        }
+      });
+  };
+
   return (
     <>
       {register && (
@@ -129,6 +150,7 @@ const Companies = () => {
                 companies={companies}
                 onUpdate={handleUpdate}
                 onDelete={handleDelete}
+                onChangeStatus={handleActiveInactive}
               />
               {!loading && companies?.data?.length > 0 && (
                 <Pagination

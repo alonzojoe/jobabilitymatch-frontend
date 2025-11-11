@@ -6,6 +6,7 @@ import Card from "@/components/UI/Card";
 import { FaRegBookmark, FaBookmark } from "react-icons/fa6";
 import { LuSquareArrowOutUpRight } from "react-icons/lu";
 import { capitalized } from "@/libs/utils";
+import { hiringDateFormatter } from "@/libs/utils";
 
 const JobPostingList = ({
   error,
@@ -101,6 +102,16 @@ export const JobFeedItem = ({
         >
           <i className="ti ti-map-pin"></i>
           {capitalized(job?.company?.address)}
+        </span>
+        <span
+          className="d-block d-flex align-items-center gap-1 fs-6 text-capitalize cursor-pointer"
+          onClick={() => onView(job)}
+        >
+          <i className="ti ti-calendar"></i>
+          Hiring:{" "}
+          {`${hiringDateFormatter(job?.hiring_from)} - ${hiringDateFormatter(
+            job?.hiring_to
+          )}`}
         </span>
         <h5 className="my-4 cursor-pointer" onClick={() => onView(job)}>
           {job?.active === 2 ? (
