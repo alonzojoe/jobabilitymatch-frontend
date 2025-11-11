@@ -88,6 +88,10 @@ const JobPostings = () => {
       });
   };
 
+  const companyStatus = authUser?.company?.status;
+
+  console.log("companyStatus", companyStatus);
+
   return (
     <>
       {showModal && (
@@ -105,6 +109,7 @@ const JobPostings = () => {
       <SearchJobPosting onSearch={handleSearch} onRefresh={handleRefresh} />
       <div className="my-2 d-flex align-items-center justify-content-end">
         <button
+          disabled={companyStatus == 0}
           className="btn btn-primary btn-md d-flex align-items-center gap-1"
           onClick={() => toggleShowModal(true)}
         >
