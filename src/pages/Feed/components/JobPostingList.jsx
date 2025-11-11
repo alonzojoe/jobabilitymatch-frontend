@@ -103,6 +103,16 @@ export const JobFeedItem = ({
           <i className="ti ti-map-pin"></i>
           {capitalized(job?.company?.address)}
         </span>
+        <span
+          className="d-block d-flex align-items-center gap-1 fs-6 text-capitalize cursor-pointer"
+          onClick={() => onView(job)}
+        >
+          <i className="ti ti-calendar"></i>
+          Hiring:{" "}
+          {`${hiringDateFormatter(job?.hiring_from)} - ${hiringDateFormatter(
+            job?.hiring_to
+          )}`}
+        </span>
         <h5 className="my-4 cursor-pointer" onClick={() => onView(job)}>
           {job?.active === 2 ? (
             <span className="label label-blood text-bl fs-6">
