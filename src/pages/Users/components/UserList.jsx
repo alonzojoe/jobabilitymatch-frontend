@@ -48,7 +48,6 @@ const UserList = ({
               <td className="text-center font-weight-bold fs-7">{d.phone}</td>
               <td className="text-center font-weight-bold fs-7">
                 {d?.role?.name}
-                {d.status}
               </td>
               <td className="text-center font-weight-bold fs-7">
                 <div className="d-flex justify-content-center flex-column align-items-center gap-2">
