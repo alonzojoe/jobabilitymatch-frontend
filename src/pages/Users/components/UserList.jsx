@@ -1,8 +1,9 @@
 import { LoadingRow, ErrorRow, EmptyRow } from "@/components/Data/TableData";
 import { FaTrashAlt, FaEdit } from "react-icons/fa";
+import { MdLockReset } from "react-icons/md";
 import { formatDate } from "@/libs/utils";
 
-const UserList = ({ loading, error, users, onUpdate, onDelete }) => {
+const UserList = ({ loading, error, users, onUpdate, onDelete, onReset }) => {
   return (
     <table className="table table-striped table-bordered table-td-valign-middle dataTable no-footer dtr-inline collapsed">
       <thead>
@@ -15,6 +16,7 @@ const UserList = ({ loading, error, users, onUpdate, onDelete }) => {
           <th className="text-center font-weight-bold fs-7">Phone Number</th>
           <th className="text-center font-weight-bold fs-7">Role</th>
           <th className="text-center font-weight-bold fs-7">Option</th>
+          <th className="text-center font-weight-bold fs-7">Reset Password</th>
         </tr>
       </thead>
       <tbody>
@@ -47,6 +49,24 @@ const UserList = ({ loading, error, users, onUpdate, onDelete }) => {
                     onClick={() => onUpdate(d)}
                   >
                     <FaEdit className="fs-6" /> Update
+                  </button>
+                  {/* <button
+                    className="btn btn-danger"
+                    type="button"
+                    onClick={() => onDelete(d.id)}
+                  >
+                    <FaTrashAlt className="fs-6" /> Delete
+                  </button> */}
+                </div>
+              </td>
+              <td className="text-center font-weight-bold fs-7">
+                <div className="d-flex justify-content-center align-items-center gap-2">
+                  <button
+                    className="btn btn-custom"
+                    type="button"
+                    onClick={() => onReset(d.email)}
+                  >
+                    <MdLockReset className="fs-6" /> Reset
                   </button>
                   {/* <button
                     className="btn btn-danger"
