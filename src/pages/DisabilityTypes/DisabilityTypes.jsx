@@ -74,7 +74,7 @@ const DisabilityTypes = () => {
   };
 
   const handleActiveInactive = (id, currentStatus) => {
-    const action = currentStatus === 1 ? "archived" : "unarchived";
+    const action = currentStatus === 1 ? "archive" : "unarchive";
     dialog
       .confirm(
         "question",

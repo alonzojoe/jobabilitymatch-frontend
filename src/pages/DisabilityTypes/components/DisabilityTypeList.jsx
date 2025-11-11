@@ -52,7 +52,7 @@ const DisabilityTypeList = ({
                       type="button"
                       onClick={() => onChangeStatus(d.id, d.status)}
                     >
-                      <FaArrowDown className="fs-6" /> Archived
+                      <FaArrowDown className="fs-6" /> Archive
                     </button>
                   ) : (
                     <button
@@ -60,7 +60,7 @@ const DisabilityTypeList = ({
                       type="button"
                       onClick={() => onChangeStatus(d.id, d.status)}
                     >
-                      <FaArrowUp className="fs-6" /> Unarchived
+                      <FaArrowUp className="fs-6" /> Unarchive
                     </button>
                   )}
                 </div>
