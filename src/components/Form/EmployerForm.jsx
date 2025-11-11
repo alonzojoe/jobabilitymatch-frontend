@@ -26,7 +26,7 @@ const EmployerForm = ({ employer = null, onClose, onRefresh = () => {} }) => {
       birthdate: employer?.birthdate ?? "",
       gender: employer?.gender ?? "",
       address: employer?.address ?? "",
-      phone: employer?.phone ?? "",
+      phone: employer?.phone?.toString() ?? "",
       company: employer?.company ?? "",
       company_address: employer?.company_address ?? "",
       email: employer?.email ?? "",

@@ -34,7 +34,7 @@ const AdminForm = ({
       birthdate: admin?.birthdate ?? "",
       gender: admin?.gender ?? "",
       address: admin?.address ?? "",
-      phone: admin?.phone ?? "",
+      phone: admin?.phone?.toString() ?? "",
       email: admin?.email ?? "",
       password: admin?.password ?? "",
       confirmPassword: admin?.confirmPassword ?? "",

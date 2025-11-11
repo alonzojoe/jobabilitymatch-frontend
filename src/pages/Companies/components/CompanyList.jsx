@@ -1,7 +1,14 @@
 import { LoadingRow, ErrorRow, EmptyRow } from "@/components/Data/TableData";
-import { FaTrashAlt, FaEdit } from "react-icons/fa";
+import { FaTrashAlt, FaEdit, FaArrowUp, FaArrowDown } from "react-icons/fa";
 
-const CompanyList = ({ loading, error, companies, onUpdate, onDelete }) => {
+const CompanyList = ({
+  loading,
+  error,
+  companies,
+  onUpdate,
+  onDelete,
+  onChangeStatus,
+}) => {
   return (
     <table className="table table-striped table-bordered table-td-valign-middle dataTable no-footer dtr-inline collapsed">
       <thead>
@@ -12,7 +19,7 @@ const CompanyList = ({ loading, error, companies, onUpdate, onDelete }) => {
           <th className="text-center font-weight-bold fs-7">
             Total Job Postings
           </th>
-          <th className="text-center font-weight-bold fs-7">Option</th>
+          <th className="text-center font-weight-bold fs-7">Action</th>
         </tr>
       </thead>
       <tbody>
@@ -33,21 +40,31 @@ const CompanyList = ({ loading, error, companies, onUpdate, onDelete }) => {
                 {d.job_postings_count}
               </td>
               <td className="text-center font-weight-bold fs-7">
-                <div className="d-flex justify-content-center align-items-center gap-2">
+                <div className="d-flex justify-content-center flex-column align-items-center gap-2">
                   <button
-                    className="btn btn-warning"
+                    className="btn btn-warning btn-sm w-100"
                     type="button"
                     onClick={() => onUpdate(d)}
                   >
                     <FaEdit className="fs-6" /> Update
                   </button>
-                  {/* <button
-                    className="btn btn-danger"
-                    type="button"
-                    onClick={() => onDelete(d.id)}
-                  >
-                    <FaTrashAlt className="fs-6" /> Delete
-                  </button> */}
+                  {d.status === 1 ? (
+                    <button
+                      className="btn btn-danger btn-sm w-100"
+                      type="button"
+                      onClick={() => onChangeStatus(d.id, d.status)}
+                    >
+                      <FaArrowDown className="fs-6" /> Deactivate
+                    </button>
+                  ) : (
+                    <button
+                      className="btn btn-success btn-sm w-100"
+                      type="button"
+                      onClick={() => onChangeStatus(d.id, d.status)}
+                    >
+                      <FaArrowUp className="fs-6" /> Activate
+                    </button>
+                  )}
                 </div>
               </td>
             </tr>
