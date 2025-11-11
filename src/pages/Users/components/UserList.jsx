@@ -1,9 +1,17 @@
 import { LoadingRow, ErrorRow, EmptyRow } from "@/components/Data/TableData";
-import { FaTrashAlt, FaEdit } from "react-icons/fa";
+import { FaTrashAlt, FaEdit, FaArrowUp, FaArrowDown } from "react-icons/fa";
 import { MdLockReset } from "react-icons/md";
 import { formatDate } from "@/libs/utils";
 
-const UserList = ({ loading, error, users, onUpdate, onDelete, onReset }) => {
+const UserList = ({
+  loading,
+  error,
+  users,
+  onUpdate,
+  onDelete,
+  onReset,
+  onChangeStatus,
+}) => {
   return (
     <table className="table table-striped table-bordered table-td-valign-middle dataTable no-footer dtr-inline collapsed">
       <thead>
@@ -15,15 +23,15 @@ const UserList = ({ loading, error, users, onUpdate, onDelete, onReset }) => {
           <th className="text-center font-weight-bold fs-7">Email</th>
           <th className="text-center font-weight-bold fs-7">Phone Number</th>
           <th className="text-center font-weight-bold fs-7">Role</th>
-          <th className="text-center font-weight-bold fs-7">Option</th>
+          <th className="text-center font-weight-bold fs-7">Action</th>
           <th className="text-center font-weight-bold fs-7">Reset Password</th>
         </tr>
       </thead>
       <tbody>
-        {loading && <LoadingRow colSpan={8} />}
-        {error && <ErrorRow colSpan={8} />}
+        {loading && <LoadingRow colSpan={9} />}
+        {error && <ErrorRow colSpan={9} />}
         {!loading && !error && users?.data?.length === 0 && (
-          <EmptyRow colSpan={8} />
+          <EmptyRow colSpan={9} />
         )}
         {!loading &&
           !error &&
@@ -40,29 +48,40 @@ const UserList = ({ loading, error, users, onUpdate, onDelete, onReset }) => {
               <td className="text-center font-weight-bold fs-7">{d.phone}</td>
               <td className="text-center font-weight-bold fs-7">
                 {d?.role?.name}
+                {d.status}
               </td>
               <td className="text-center font-weight-bold fs-7">
-                <div className="d-flex justify-content-center align-items-center gap-2">
+                <div className="d-flex justify-content-center flex-column align-items-center gap-2">
                   <button
-                    className="btn btn-warning"
+                    className="btn btn-warning btn-sm w-100"
                     type="button"
                     onClick={() => onUpdate(d)}
                   >
                     <FaEdit className="fs-6" /> Update
                   </button>
-                  {/* <button
-                    className="btn btn-danger"
-                    type="button"
-                    onClick={() => onDelete(d.id)}
-                  >
-                    <FaTrashAlt className="fs-6" /> Delete
-                  </button> */}
+                  {d.status === 1 ? (
+                    <button
+                      className="btn btn-danger btn-sm w-100"
+                      type="button"
+                      onClick={() => onChangeStatus(d.id, d.status)}
+                    >
+                      <FaArrowDown className="fs-6" /> Deactivate
+                    </button>
+                  ) : (
+                    <button
+                      className="btn btn-success btn-sm w-100"
+                      type="button"
+                      onClick={() => onChangeStatus(d.id, d.status)}
+                    >
+                      <FaArrowUp className="fs-6" /> Activate
+                    </button>
+                  )}
                 </div>
               </td>
               <td className="text-center font-weight-bold fs-7">
                 <div className="d-flex justify-content-center align-items-center gap-2">
                   <button
-                    className="btn btn-custom"
+                    className="btn btn-custom w-100"
                     type="button"
                     onClick={() => onReset(d.email)}
                   >

@@ -80,6 +80,27 @@ const Users = () => {
       });
   };
 
+  const handleActiveInactive = (userID, currentStatus) => {
+    const action = currentStatus === 1 ? "deactivate" : "activate";
+    dialog
+      .confirm(
+        "question",
+        "Confirmation",
+        `Are you sure you want to ${action} this user?`
+      )
+      .then(async (result) => {
+        if (result.isConfirmed) {
+          notify.notif("success", `User has been ${action}d successfully.`);
+          try {
+            await api.patch(`/user/status/${userID}`);
+            handleRefresh();
+          } catch (error) {
+            notify.notif("error", `Something went wrong: ${error?.message}`);
+          }
+        }
+      });
+  };
+
   const handleResetPassword = (userEmail) => {
     dialog
       .confirm(
@@ -146,6 +167,7 @@ const Users = () => {
                 onUpdate={handleUpdate}
                 onDelete={handleDelete}
                 onReset={handleResetPassword}
+                onChangeStatus={handleActiveInactive}
               />
               {!loading && users?.data?.length > 0 && (
                 <Pagination
