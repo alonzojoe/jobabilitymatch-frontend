@@ -428,17 +428,17 @@ const PwdForm = ({
                       accept="image/jpeg, image/jpg, image/png"
                     />
                   )}
-                  {/* {pwd && pwd.pwdid_path && ( */}
-                  <button
-                    type="button"
-                    className={`${
-                      isViewing ? "d-block" : ""
-                    } btn btn-primary btn-sm cursor-pointer mt-2`}
-                    onClick={viewImage}
-                  >
-                    View PWD ID
-                  </button>
-                  {/* )} */}
+                  {pwd && pwd.pwdid_path && (
+                    <button
+                      type="button"
+                      className={`${
+                        isViewing ? "d-block" : ""
+                      } btn btn-primary btn-sm cursor-pointer mt-2`}
+                      onClick={viewImage}
+                    >
+                      View PWD ID
+                    </button>
+                  )}
 
                   <div className="mt-1 font-weight-bold text-validation">
                     {errors.pwdid_picture?.message}
