@@ -77,7 +77,9 @@ const JobPostingList = ({
             jobPostings.data.map((d) => (
               <tr key={d.id}>
                 <td className="text-center font-weight-bold fs-7">{d.id}</td>
-                <td className="text-center font-weight-bold fs-7">{d.title}</td>
+                <td className="text-center font-weight-bold fs-7 text-uppercase">
+                  {d.title}
+                </td>
                 <td className="text-center font-weight-bold fs-7">
                   <button
                     className="btn btn-purple"
