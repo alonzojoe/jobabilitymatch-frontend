@@ -34,8 +34,10 @@ const CompanyList = ({
           companies.data.map((d) => (
             <tr key={d.id}>
               <td className="text-center font-weight-bold fs-7">{d.id}</td>
-              <td className="text-center font-weight-bold fs-7">{d.name}</td>
-              <td className="text-center font-weight-bold fs-7">{`${d.user?.lastname}, ${d.user?.firstname} ${d.user?.middlename}`}</td>
+              <td className="text-center font-weight-bold fs-7 text-uppercase">
+                {d.name}
+              </td>
+              <td className="text-center font-weight-bold fs-7 text-uppercase">{`${d.user?.lastname}, ${d.user?.firstname} ${d.user?.middlename}`}</td>
               <td className="text-center font-weight-bold fs-7">
                 {d.job_postings_count}
               </td>
