@@ -11,10 +11,7 @@ import UpdatePwd from "@/components/Form/UpdatePwd";
 import { FaArrowUp, FaArrowDown } from "react-icons/fa";
 
 const initialParams = {
-  lastname: "",
-  firstname: "",
-  middlename: "",
-  email: "",
+  query: "",
   page: 1,
   rand: 1,
 };

@@ -4,10 +4,7 @@ import { FaSearch } from "react-icons/fa";
 import { LuRefreshCcw } from "react-icons/lu";
 
 const initialParams = {
-  lastname: "",
-  firstname: "",
-  middlename: "",
-  email: "",
+  query: "",
 };
 
 const SearchApplicants = ({ onSearch, onRefresh }) => {
@@ -34,53 +31,13 @@ const SearchApplicants = ({ onSearch, onRefresh }) => {
           <div className="col-sm-12 col-md-6 col-lg-4 mb-2">
             <div>
               <label className="form-label fs-6 mb-2 fw-semibold">
-                Last Name
+                Search Applicant:
               </label>
               <input
                 type="text"
-                name="lastname"
+                name="query"
                 className="form-control form-control-sm custom-font"
-                value={params.lastname}
-                onChange={handleChange}
-              />
-            </div>
-          </div>
-          <div className="col-sm-12 col-md-6 col-lg-4 mb-2">
-            <div>
-              <label className="form-label fs-6 mb-2 fw-semibold">
-                First Name
-              </label>
-              <input
-                type="text"
-                name="firstname"
-                className="form-control form-control-sm custom-font"
-                value={params.firstname}
-                onChange={handleChange}
-              />
-            </div>
-          </div>
-          <div className="col-sm-12 col-md-6 col-lg-4 mb-2">
-            <div>
-              <label className="form-label fs-6 mb-2 fw-semibold">
-                Middle Name
-              </label>
-              <input
-                type="text"
-                name="middlename"
-                className="form-control form-control-sm custom-font"
-                value={params.middlename}
-                onChange={handleChange}
-              />
-            </div>
-          </div>
-          <div className="col-sm-12 col-md-6 col-lg-4 mb-2">
-            <div>
-              <label className="form-label fs-6 mb-2 fw-semibold">Email</label>
-              <input
-                type="text"
-                name="email"
-                className="form-control form-control-sm custom-font"
-                value={params.email}
+                value={params.query}
                 onChange={handleChange}
               />
             </div>
