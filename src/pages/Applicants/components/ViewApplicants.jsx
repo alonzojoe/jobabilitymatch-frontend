@@ -8,6 +8,7 @@ import { ToastMessage, getLocalStorage } from "@/libs/utils";
 import useFetch from "@/hooks/useFetch";
 import api from "@/services/api";
 import UpdatePwd from "@/components/Form/UpdatePwd";
+import { FaTrashAlt, FaEdit, FaArrowUp, FaArrowDown } from "react-icons/fa";
 
 const initialParams = {
   lastname: "",
@@ -66,6 +67,8 @@ const ViewApplicants = ({ onClose, job }) => {
     setSelected(applicant);
   };
 
+  const updateStatus = async () => {};
+
   return (
     <>
       {selected && (
@@ -97,6 +100,7 @@ const ViewApplicants = ({ onClose, job }) => {
                   Date Applied
                 </th>
                 <th className="text-center font-weight-bold fs-7">Status</th>
+                <th className="text-center font-weight-bold fs-7">Action</th>
               </tr>
             </thead>
             <tbody>
@@ -137,6 +141,27 @@ const ViewApplicants = ({ onClose, job }) => {
                         <option value={`Hired`}>Hired</option>
                         <option value={`Rejected`}>Rejected</option>
                       </select>
+                    </td>
+                    <td className="text-center font-weight-bold fs-7">
+                      {d?.user?.status === 1 ? (
+                        <button
+                          className="btn btn-danger btn-sm w-100"
+                          type="button"
+                          onClick={() =>
+                            updateStatus(d?.user?.id, d?.user?.status)
+                          }
+                        >
+                          <FaArrowDown className="fs-6" /> Deactivate
+                        </button>
+                      ) : (
+                        <button
+                          className="btn btn-success btn-sm w-100"
+                          type="button"
+                          onClick={() => updateStatus(d.id, d.status)}
+                        >
+                          <FaArrowUp className="fs-6" /> Activate
+                        </button>
+                      )}
                     </td>
                   </tr>
                 ))}
