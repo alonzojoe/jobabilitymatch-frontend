@@ -25,7 +25,9 @@ const SearchUser = ({ onSearch, onRefresh }) => {
         <div className="row mb-3">
           <div className="col-sm-12 col-md-6 col-lg-4 mb-2">
             <div>
-              <label className="form-label fs-6 mb-2 fw-semibold">Search</label>
+              <label className="form-label fs-6 mb-2 fw-semibold">
+                Search Query:
+              </label>
               <input
                 type="text"
                 name="query"
