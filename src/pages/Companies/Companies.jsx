@@ -15,9 +15,7 @@ import { FaPlus } from "react-icons/fa";
 
 const initialParams = {
   name: "",
-  lastname: "",
-  firstname: "",
-  middlename: "",
+  query: "",
   page: 1,
   rand: 0.1,
 };
@@ -48,10 +46,7 @@ const Companies = () => {
   const handleSearch = (params) => {
     setParams((prev) => ({
       ...prev,
-      name: params.name,
-      lastname: params.lastname,
-      firstname: params.firstname,
-      middlename: params.middlename,
+      query: params.query,
     }));
   };
 

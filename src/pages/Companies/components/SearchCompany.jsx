@@ -4,10 +4,7 @@ import { FaSearch } from "react-icons/fa";
 import { LuRefreshCcw } from "react-icons/lu";
 
 const initialState = {
-  name: "",
-  lastname: "",
-  firstname: "",
-  middlename: "",
+  query: "",
 };
 const SearchCompany = ({ onSearch, onRefresh }) => {
   const [data, setData] = useState(initialState);
@@ -29,59 +26,18 @@ const SearchCompany = ({ onSearch, onRefresh }) => {
           <div className="col-sm-12 col-md-6 col-lg-4 mb-2">
             <div>
               <label className="form-label fs-6 mb-2 fw-semibold">
-                Company Name
+                Search Query:
               </label>
               <input
                 type="text"
-                name="name"
+                name="query"
                 className="form-control form-control-sm custom-font"
-                value={data.name}
+                value={data.query}
                 onChange={handleChange}
               />
             </div>
           </div>
-          <div className="col-sm-12 col-md-6 col-lg-4 mb-2">
-            <div>
-              <label className="form-label fs-6 mb-2 fw-semibold">
-                Employer Last Name
-              </label>
-              <input
-                type="text"
-                name="lastname"
-                className="form-control form-control-sm custom-font"
-                value={data.lastname}
-                onChange={handleChange}
-              />
-            </div>
-          </div>
-          <div className="col-sm-12 col-md-6 col-lg-4 mb-2">
-            <div>
-              <label className="form-label fs-6 mb-2 fw-semibold">
-                Employer First Name
-              </label>
-              <input
-                type="text"
-                name="firstname"
-                className="form-control form-control-sm custom-font"
-                value={data.firstname}
-                onChange={handleChange}
-              />
-            </div>
-          </div>
-          <div className="col-sm-12 col-md-6 col-lg-4 mb-2">
-            <div>
-              <label className="form-label fs-6 mb-2 fw-semibold">
-                Employer Middle Name
-              </label>
-              <input
-                type="text"
-                name="middlename"
-                className="form-control form-control-sm custom-font"
-                value={data.middlename}
-                onChange={handleChange}
-              />
-            </div>
-          </div>
+
           <div className="col-sm-12 col-md-6 col-lg-6 mb-2">
             <div
               className="d-flex gap-2 align-items-center"
