@@ -4,11 +4,7 @@ import { FaSearch } from "react-icons/fa";
 import { LuRefreshCcw } from "react-icons/lu";
 
 const initialState = {
-  email: "",
-  lastname: "",
-  firstname: "",
-  middlename: "",
-  role_id: 0,
+  query: "",
 };
 const SearchUser = ({ onSearch, onRefresh }) => {
   const [data, setData] = useState(initialState);
@@ -29,72 +25,14 @@ const SearchUser = ({ onSearch, onRefresh }) => {
         <div className="row mb-3">
           <div className="col-sm-12 col-md-6 col-lg-4 mb-2">
             <div>
-              <label className="form-label fs-6 mb-2 fw-semibold">
-                Last Name
-              </label>
+              <label className="form-label fs-6 mb-2 fw-semibold">Search</label>
               <input
                 type="text"
-                name="lastname"
+                name="query"
                 className="form-control form-control-sm custom-font"
-                value={data.lastname}
+                value={data.query}
                 onChange={handleChange}
               />
-            </div>
-          </div>
-          <div className="col-sm-12 col-md-6 col-lg-4 mb-2">
-            <div>
-              <label className="form-label fs-6 mb-2 fw-semibold">
-                First Name
-              </label>
-              <input
-                type="text"
-                name="firstname"
-                className="form-control form-control-sm custom-font"
-                value={data.firstname}
-                onChange={handleChange}
-              />
-            </div>
-          </div>
-          <div className="col-sm-12 col-md-6 col-lg-4 mb-2">
-            <div>
-              <label className="form-label fs-6 mb-2 fw-semibold">
-                Middle Name
-              </label>
-              <input
-                type="text"
-                name="middlename"
-                className="form-control form-control-sm custom-font"
-                value={data.middlename}
-                onChange={handleChange}
-              />
-            </div>
-          </div>
-          <div className="col-sm-12 col-md-6 col-lg-4 mb-2">
-            <div>
-              <label className="form-label fs-6 mb-2 fw-semibold">Email</label>
-              <input
-                type="text"
-                name="email"
-                className="form-control form-control-sm custom-font"
-                value={data.email}
-                onChange={handleChange}
-              />
-            </div>
-          </div>
-          <div className="col-sm-12 col-md-6 col-lg-4 mb-2">
-            <div>
-              <label className="form-label fs-6 mb-2 fw-semibold">Role</label>
-              <select
-                name="role_id"
-                className="form-control form-control-sm custom-font"
-                value={data.role_id}
-                onChange={handleChange}
-              >
-                <option value={0}>Please select</option>
-                <option value={1}>Administrator</option>
-                <option value={2}>PWD</option>
-                <option value={3}>Employer</option>
-              </select>
             </div>
           </div>
           <div className="col-sm-12 col-md-6 col-lg-4 mb-2">
