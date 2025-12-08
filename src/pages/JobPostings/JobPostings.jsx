@@ -13,8 +13,7 @@ import { ConfirmDialog, ToastMessage } from "@/libs/utils";
 import { FaPlus } from "react-icons/fa";
 
 const initialParams = {
-  title: "",
-  description: "",
+  query: "",
   status: 1,
   page: 1,
   rand: 0.1,

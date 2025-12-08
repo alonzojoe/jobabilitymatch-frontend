@@ -12,11 +12,7 @@ import { ConfirmDialog, ToastMessage, formatData } from "@/libs/utils";
 import { FaPlus } from "react-icons/fa";
 import UpdateFormType from "@/pages/Users/components/UpdateFormType";
 const initialParams = {
-  email: "",
-  lastname: "",
-  firstname: "",
-  middlename: "",
-  role_id: 0,
+  query: "",
   page: 1,
   rand: 0.1,
 };
@@ -49,11 +45,7 @@ const Users = () => {
   const handleSearch = (params) => {
     setParams((prev) => ({
       ...prev,
-      email: params.email,
-      lastname: params.lastname,
-      firstname: params.firstname,
-      middlename: params.middlename,
-      role_id: params.role_id,
+      query: params.query,
     }));
   };
 

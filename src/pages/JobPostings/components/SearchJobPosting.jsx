@@ -4,8 +4,7 @@ import { FaSearch } from "react-icons/fa";
 import { LuRefreshCcw } from "react-icons/lu";
 
 const initialState = {
-  title: "",
-  description: "",
+  query: "",
   active: 0,
 };
 
@@ -33,44 +32,15 @@ const SearchJobPosting = ({ onSearch, onRefresh }) => {
           <div className="col-sm-12 col-md-6 col-lg-4">
             <div>
               <label className="form-label fs-6 mb-2 fw-semibold">
-                Job Title
+                Search Query:
               </label>
               <input
                 type="text"
-                name="title"
+                name="query"
                 className="form-control form-control-sm custom-font"
-                value={params.title}
+                value={params.query}
                 onChange={handleChange}
               />
-            </div>
-          </div>
-          <div className="col-sm-12 col-md-6 col-lg-4">
-            <div>
-              <label className="form-label fs-6 mb-2 fw-semibold">
-                Job Description
-              </label>
-              <input
-                type="text"
-                name="description"
-                className="form-control form-control-sm custom-font"
-                value={params.description}
-                onChange={handleChange}
-              />
-            </div>
-          </div>
-          <div className="col-sm-12 col-md-6 col-lg-4">
-            <div>
-              <label className="form-label fs-6 mb-2 fw-semibold">Status</label>
-              <select
-                name="active"
-                className="form-control"
-                value={params.active}
-                onChange={handleChange}
-              >
-                <option value={0}>Please Select</option>
-                <option value={1}>Active</option>
-                <option value={2}>Inactive</option>
-              </select>
             </div>
           </div>
           <div className="col-sm-12 col-md-6 col-lg-4">

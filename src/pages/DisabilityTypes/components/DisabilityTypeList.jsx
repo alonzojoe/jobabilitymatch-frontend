@@ -46,7 +46,7 @@ const DisabilityTypeList = ({
                   >
                     <FaEdit className="fs-6" /> Update
                   </button>
-                  {d.status === 1 ? (
+                  {/* {d.status === 1 ? (
                     <button
                       className="btn btn-danger btn-sm w-100"
                       type="button"
@@ -62,7 +62,7 @@ const DisabilityTypeList = ({
                     >
                       <FaArrowUp className="fs-6" /> Unarchive
                     </button>
-                  )}
+                  )} */}
                 </div>
               </td>
             </tr>
