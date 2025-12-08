@@ -83,6 +83,7 @@ const DisabilityTypes = () => {
         <button
           className="btn btn-primary btn-md d-flex align-items-center gap-1"
           onClick={() => toggleShowModal(true)}
+          disabled={true}
         >
           <FaPlus className="fs-6" /> Add New
         </button>
