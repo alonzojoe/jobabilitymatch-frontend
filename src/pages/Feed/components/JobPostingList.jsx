@@ -7,6 +7,7 @@ import { FaRegBookmark, FaBookmark } from "react-icons/fa6";
 import { LuSquareArrowOutUpRight } from "react-icons/lu";
 import { capitalized } from "@/libs/utils";
 import { hiringDateFormatter } from "@/libs/utils";
+import AuthContext from "@/store/auth/auth-context";
 
 const JobPostingList = ({
   error,
@@ -66,6 +67,9 @@ export const JobFeedItem = ({
   removeBookmark,
   addBookmark,
 }) => {
+  const { authUser } = useContext(AuthContext);
+
+  const currentRole = authUser?.role_id;
   return (
     <Card key={job.id} title="Test" active={job.id === selectedJob?.id}>
       <div className="">
@@ -76,14 +80,16 @@ export const JobFeedItem = ({
           >
             {capitalized(job.title)}
           </h3>
-          <span
-            className="fs-3 cursor-pointer"
-            onClick={() =>
-              hasBookMark(job) ? removeBookmark(job.id) : addBookmark(job)
-            }
-          >
-            {hasBookMark(job) ? <FaBookmark /> : <FaRegBookmark />}
-          </span>
+          {currentRole == 2 && (
+            <span
+              className="fs-3 cursor-pointer"
+              onClick={() =>
+                hasBookMark(job) ? removeBookmark(job.id) : addBookmark(job)
+              }
+            >
+              {hasBookMark(job) ? <FaBookmark /> : <FaRegBookmark />}
+            </span>
+          )}
         </div>
         <span
           className="d-block d-flex align-items-center gap-1 fs-6 text-capitalize cursor-pointer"
